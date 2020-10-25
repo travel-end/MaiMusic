@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="loading_result_view" type="id" />
+    <item name="loading_song_view" type="id" />
+    <item name="loading_normal_view" type="id" />
+
+    <item name="frg_main_view_pager" type="id" />
+    <item name="frg_main_title_iv_list" type="id" />
+    <item name="frg_main_title_common_tab_layout" type="id" />
+    <item name="frg_main_title_iv_search" type="id" />
+
+    <item name="top_view" type="id" />
+</resources>

@@ -1,0 +1,3 @@
+1、参考playAndroid 项目的room数据库表达方式 以及build中的压缩apk方式
+2、对于本项目中的tablayout，考虑使用android自带的tablayout，因为用的东西比较简单，使用的commonTabLayout太重了
+3、考虑使用原生的statusBar，不适用ImmesionBar
