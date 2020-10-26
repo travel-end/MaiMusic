@@ -7,4 +7,12 @@
     <string name="net_error">网络错误  …</string>
     <string name="load_error">加载错误  …</string>
     <string name="loading">努力加载中  …</string>
+
+    <string name="tab_listener_song">听歌</string>
+    <string name="tab_my_save">我的收藏</string>
+    <string name="personalized_dress">个性装扮</string>
+    <string name="help_feedback">帮助与反馈</string>
+    <string name="timed_off">定时关闭</string>
+    <string name="about_me">关于我</string>
+    <string name="night_mode">夜间模式</string>
 </resources>

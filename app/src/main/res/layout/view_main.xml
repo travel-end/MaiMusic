@@ -8,13 +8,16 @@
         android:id="@id/top_view"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
-<!--    <fragment-->
-<!--        android:id="@+id/main_fragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:name="wind.widget.nav.NavHostFragment"-->
-<!--        app:defaultNavHost="true"-->
-<!--        app:navGraph="@navigation/nav_imusic"/>-->
+    <fragment
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="wind.widget.nav.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_main"/>
+    <wind.maimusic.widget.BottomPlayerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

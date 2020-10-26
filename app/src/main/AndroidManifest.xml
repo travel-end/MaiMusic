@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="wind.maimusic">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MaiApp"
         android:allowBackup="true"
@@ -14,13 +16,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
-        <activity android:name=".ui.MainActivity"
+        <service
+            android:name=".service.PlayService"
+            android:enabled="true"
+            android:exported="true" />
+        <!-- shipei全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" /> <!-- 适配华为刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" /> <!-- 适配小米刘海屏 -->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+
+        <activity
+            android:name=".ui.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.WelcomeActivity"
+        <activity
+            android:name=".ui.WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Transparent" >
+            android:theme="@style/AppTheme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

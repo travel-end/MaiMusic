@@ -1,19 +1,27 @@
 package wind.maimusic
 
+
 /**
  * @By Journey 2020/10/25
  * @Description
  */
 object Constants {
 
-
-    // 保存封面图片的路径
-    val STORAGE_IMG_FILE =
-        MaiApp.getInstance().getExternalFilesDir("").toString() + "/maimusic/image/"
-    // 保存下载歌曲的路径
-    val STORAGE_SONG_FILE =
-        MaiApp.getInstance().getExternalFilesDir("").toString() + "/maimusic/download/"
+    // 封面图片的路径
+    fun coverImgUrl():String {
+        return "${MaiApp.getInstance().getExternalFilesDir("coverImg").toString()}/maimusic/coverimg/"
+    }
+    // 下载歌曲的路径 todo 使用共享路径 保证app卸载后歌曲不会被删除
+    fun downloadSongUrl():String {
+        return "${MaiApp.getInstance().getExternalFilesDir("downloadSong").toString()}/maimusic/downloadsong/"
+    }
     // 保存歌词的路径
-    val STORAGE_LRC_FILE =
-        MaiApp.getInstance().getExternalFilesDir("").toString() + "/maimusic/lrc/"
+    fun lrcTextUrl():String {
+        return "${MaiApp.getInstance().getExternalFilesDir("lrcText").toString()}/maimusic/lrctext"
+    }
+
+    // 当前播放歌曲的路径
+    fun currentSongUrl():String {
+        return "${MaiApp.getInstance().getExternalFilesDir("song").toString()}/maimusic"
+    }
 }

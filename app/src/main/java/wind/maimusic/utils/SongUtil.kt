@@ -1,12 +1,14 @@
-package wind.widget.utils
+package wind.maimusic.utils
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import android.widget.ImageView
+import wind.maimusic.Constants
 import wind.widget.R
 import wind.widget.cost.Consts
 import wind.widget.model.Song
+import wind.widget.utils.loadImg
 import java.io.*
 import kotlin.concurrent.thread
 
@@ -19,11 +21,10 @@ object SongUtil {
      * 将一个对象写入流中 对象必须实现Serializable接口
      * 将当前的歌曲song对象存入本地
      */
-    fun saveSong(context: Context,song: Song?) {
+    fun saveSong(song: Song) {
         try {
-            if (song != null) {
                 val file =
-                    File(Consts.currentSongUrl(context))
+                    File(Constants.currentSongUrl())
                 if (!file.exists()) {
                     file.mkdirs()
                 }
@@ -33,7 +34,6 @@ object SongUtil {
                     ObjectOutputStream(FileOutputStream(songFile))
                 oos.writeObject(song) //将Person对象p写入到oos中
                 oos.close() //关闭文件流
-            }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
             Log.e("JG","写入对象error!")
@@ -43,9 +43,9 @@ object SongUtil {
         }
     }
 
-    fun getSong(context: Context): Song? {
+    fun getSong(): Song? {
         try {
-            val input = FileInputStream("${Consts.currentSongUrl(context)}/song.txt")
+            val input = FileInputStream("${Constants.currentSongUrl()}/song.txt")
             val ois = ObjectInputStream(input)
             ois.close()//todo
             return ois.readObject() as Song //返回对象
@@ -67,9 +67,9 @@ object SongUtil {
     /**
      * 将本地音乐的封面图片存入本地
      */
-    fun saveSongCover(context: Context,bitmap: Bitmap?, singer:String):Boolean {
+    fun saveSongCover(bitmap: Bitmap?, singer:String):Boolean {
         if (bitmap != null) {
-            val file = File(Consts.coverImgUrl(context))
+            val file = File(Constants.coverImgUrl())
             if (!file.exists()) {
                 file.mkdirs()
             }
@@ -100,7 +100,7 @@ object SongUtil {
     /**
      * 读取本地音乐的封面图片
      */
-    fun loadLocalSongCover(context: Context, singer: String, v: ImageView) {
+    fun loadLocalSongCover(singer: String, v: ImageView) {
         val mS:String
         mS = if (singer.contains("/")) {
             val s = singer.split("/")
@@ -108,17 +108,17 @@ object SongUtil {
         } else {
             singer.trim()
         }
-        val imgUrl = "${Consts.coverImgUrl(context)}$mS.jpg"
-//        LogUtil.e("本地音乐封面路径：$imgUrl")
+        val imgUrl = "${Constants.coverImgUrl()}$mS.jpg"
+        LogUtil.e("本地音乐封面路径：$imgUrl")
         v.loadImg(imgUrl,placeholder = R.drawable.disk,error = R.drawable.disk)
     }
 
     /**
      * 保存歌词到本地
      */
-    fun saveLrcText(context: Context,lrc:String,songName:String) {
+    fun saveLrcText(lrc:String,songName:String) {
         thread {
-            val file = File(Consts.lrcTextUrl(context))
+            val file = File(Constants.lrcTextUrl())
             if (!file.exists()) {
                 file.mkdirs()
             }
@@ -141,9 +141,9 @@ object SongUtil {
     /**
      * 读取本地歌词
      */
-    fun loadLrcText(context: Context,songName:String) :String? {
+    fun loadLrcText(songName:String) :String? {
         return try {
-            val fileReader = FileReader("${Consts.lrcTextUrl(context)}$songName.lrc")
+            val fileReader = FileReader("${Constants.lrcTextUrl()}$songName.lrc")
             val bufferReader = BufferedReader(fileReader)
             val lrc = StringBuilder()
             while(true) {

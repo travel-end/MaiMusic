@@ -8,7 +8,8 @@ import wind.widget.cost.Consts
  * @Description
  */
 object LogUtil {
-    private const val isPrintLog = BuildConfig.LOG_DEBUG
+//    private const val isPrintLog = BuildConfig.LOG_DEBUG
+    private const val isPrintLog = true
     private const val  TAG=  Consts.LOG_TAG
     fun i(msg:String) {
         if (isPrintLog) {

@@ -1,4 +1,4 @@
-package wind.widget.player
+package wind.maimusic.widget
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -11,11 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+import wind.maimusic.utils.SongUtil
 import wind.widget.R
 import wind.widget.interf.OnPlayerViewClickListener
 import wind.widget.model.Song
 import wind.widget.progressbar.NumberProgressBar
-import wind.widget.utils.SongUtil
 import wind.widget.utils.fastClickListener
 import wind.widget.utils.loadImg
 
@@ -63,14 +63,13 @@ class BottomPlayerView @JvmOverloads constructor(
             ivSongList.fastClickListener {
                 onPlayerViewClickListener?.onPlayerSongListClick(it)
             }
-            addView(playView)
         }
     }
 
-    fun setCurrentSongInfo(context: Context, song: Song) {
+    fun setCurrentSongInfo(song: Song) {
         // 本地音乐
         if (song.imgUrl == null) {
-            SongUtil.loadLocalSongCover(context, song.singer ?: "", ivSongCover)
+            SongUtil.loadLocalSongCover(song.singer ?: "", ivSongCover)
         } else {// 网络音乐
             ivSongCover.loadImg(
                 song.imgUrl ?: "",
