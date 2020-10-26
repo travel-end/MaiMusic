@@ -1,5 +1,14 @@
 package wind.maimusic.utils
 
+import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.widget.TextView
+import android.widget.Toast
+import wind.maimusic.MaiApp
+import wind.widget.utils.toIntPx
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -12,3 +21,147 @@ import java.lang.reflect.ParameterizedType
  */
 @Suppress("UNCHECKED_CAST")
 fun <T> getClass(t:Any):Class<T> = (t.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
+
+/**
+ * 获取字符串资源
+ */
+fun Int.getStringRes()=
+    MaiApp.getInstance().resources.getString(this)
+
+/**
+ * 获取颜色资源
+ */
+fun Int.getColorRes()=
+    MaiApp.getInstance().resources.getColor(this)
+
+/**
+ * 字符串不为null或者空
+ */
+fun String?.isNotNullOrEmpty():Boolean = !(this == null || this.trim().isBlank())
+
+/**
+ * 列表不为null或者空
+ */
+fun isNotNullOrEmpty(list:List<Any>?) :Boolean{
+    return !list.isNullOrEmpty()
+}
+
+/**
+ * toast
+ */
+fun CharSequence.toast(duration:Int = Toast.LENGTH_SHORT) {
+    if (this.isNotEmpty()) {
+        Toast.makeText(MaiApp.getInstance(),this,duration).show()
+    }
+}
+
+/**
+ * 加载xml布局
+ */
+fun Int.inflate(parent:ViewGroup,attachToRoot:Boolean = false) :View{
+    return LayoutInflater.from(parent.context).inflate(this,parent,attachToRoot)
+}
+
+/**
+ * 显示view
+ */
+fun View?.visible() {
+    this?.visibility = View.VISIBLE
+}
+
+/**
+ * 显示view，带有渐显得动画效果
+ */
+fun View?.visibleWithAlphaAnim(duration:Long = 500L) {
+    this?.visibility = View.VISIBLE
+    this?.startAnimation(
+        AlphaAnimation(0f,1f).apply {
+            this.duration = duration
+            fillAfter = true
+        }
+    )
+}
+
+/**
+ * 隐藏view
+ */
+fun View?.gone() {
+    this?.visibility = View.GONE
+}
+
+/**
+ * 占位隐藏view
+ */
+fun View?.invisible() {
+    this?.visibility = View.INVISIBLE
+}
+
+/**
+ * 隐藏view，带有渐隐动画效果。
+ *
+ * @param duration 毫秒，动画持续时长，默认500毫秒。
+ */
+fun View?.goneWithAlphaAnim(duration: Long = 500L) {
+    this?.visibility = View.GONE
+    this?.startAnimation(AlphaAnimation(1f, 0f).apply {
+        this.duration = duration
+        fillAfter = true
+    })
+}
+
+/**
+ * 占位隐藏view，带有渐隐动画效果。
+ *
+ * @param duration 毫秒，动画持续时长，默认500毫秒。
+ */
+fun View?.invisibleWithAlphaAnim(duration: Long = 500L) {
+    this?.visibility = View.INVISIBLE
+    this?.startAnimation(AlphaAnimation(1f, 0f).apply {
+        this.duration = duration
+        fillAfter = true
+    })
+}
+
+/**
+ * 设置TextView图标
+ *
+ * @param drawable     图标
+ * @param iconWidth    图标宽dp：默认自动根据图标大小
+ * @param iconHeight   图标高dp：默认自动根据图标大小
+ * @param direction    图标方向，0左 1上 2右 3下 默认图标位于左侧0
+ */
+fun TextView.setDrawable(drawable: Drawable?, iconWidth: Float? = null, iconHeight: Float? = null, direction: Int = 0) {
+    if (iconWidth != null && iconHeight != null) {
+        //第一个0是距左边距离，第二个0是距上边距离，iconWidth、iconHeight 分别是长宽
+        drawable?.setBounds(0, 0, iconWidth.toIntPx(), iconHeight.toIntPx())
+    }
+    when (direction) {
+        0 -> setCompoundDrawables(drawable, null, null, null)
+        1 -> setCompoundDrawables(null, drawable, null, null)
+        2 -> setCompoundDrawables(null, null, drawable, null)
+        3 -> setCompoundDrawables(null, null, null, drawable)
+        else -> throw NoSuchMethodError()
+    }
+}
+
+/**
+ * 设置TextView图标
+ *
+ * @param lDrawable     左边图标
+ * @param rDrawable     右边图标
+ * @param lIconWidth    图标宽dp：默认自动根据图标大小
+ * @param lIconHeight   图标高dp：默认自动根据图标大小
+ * @param rIconWidth    图标宽dp：默认自动根据图标大小
+ * @param rIconHeight   图标高dp：默认自动根据图标大小
+ */
+fun TextView.setDrawables(lDrawable: Drawable?, rDrawable: Drawable?, lIconWidth: Float? = null, lIconHeight: Float? = null, rIconWidth: Float? = null, rIconHeight: Float? = null) {
+    if (lIconWidth != null && lIconHeight != null) {
+        lDrawable?.setBounds(0, 0, lIconWidth.toIntPx(), lIconHeight.toIntPx())
+    }
+    if (rIconWidth != null && rIconHeight != null) {
+        rDrawable?.setBounds(0, 0, rIconWidth.toIntPx(), rIconHeight.toIntPx())
+    }
+    setCompoundDrawables(lDrawable, null, rDrawable, null)
+}
+
+
