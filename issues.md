@@ -3,7 +3,7 @@
 3、考虑使用原生的statusBar，不适用ImmesionBar
 4、写入本地的song.txt应该加密，其他的文件也是
 5、为保证用户下载的音乐在卸载app后仍然能够使用，建议使用`共享储存空间`  -->`https://developer.android.com/training/data-storage/app-specific#external`
-
+6、fragment与viewPager的懒加载和fragment的show、hide问题、fragment之间通信问题
 
 
 

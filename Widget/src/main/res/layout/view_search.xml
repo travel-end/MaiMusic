@@ -22,6 +22,8 @@
         android:hint="@string/search_hint"
         android:imeOptions="actionSearch"
         android:maxLines="1"
+        android:singleLine="true"
+        android:inputType="text"
         android:textSize="@dimen/sp_16"
         apps:scaleSize="0.4" />
 

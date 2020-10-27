@@ -1,10 +1,14 @@
 package wind.maimusic.utils
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import wind.maimusic.MaiApp
@@ -162,6 +166,29 @@ fun TextView.setDrawables(lDrawable: Drawable?, rDrawable: Drawable?, lIconWidth
         rDrawable?.setBounds(0, 0, rIconWidth.toIntPx(), rIconHeight.toIntPx())
     }
     setCompoundDrawables(lDrawable, null, rDrawable, null)
+}
+
+
+fun EditText?.showKeyBoard(context: Context) {
+    this?.let {et->
+        // 设置可获得焦点
+        et.isFocusable=true
+        et.isFocusableInTouchMode=true
+        // 获取焦点
+        et.requestFocus()
+        // 调用系统输入法
+        val imm =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
+}
+
+fun Activity.hideKeyboards() {
+    // 当前焦点的 View
+    val imm =
+        this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 }
 
 

@@ -57,9 +57,16 @@ class SearchHotViewModel:BaseViewModel() {
 //        val tag10 = TagBean()
 //        tag10.id = 9
 //        tag10.name = "雨晏ddddoooo"
-        val historyList = mutableListOf(tag1,tag2,tag3,tag4,tag5,tag6)
+        val historyList = mutableListOf<HistoryTag>().apply {
+            add(tag1)
+            add(tag2)
+            add(tag3)
+            add(tag4)
+            add(tag5)
+            add(tag6)
+        }
 //        val historyList = listOf(tag1,tag2,tag3,tag4,tag5,tag6,tag7,tag8,tag9)
-        val historyContent = SearchHistory(historyList)
+        val historyContent = SearchHistory(historyList,"历史")
         val hotSongTitle = HotSearchTitle(
             "热搜"
         )

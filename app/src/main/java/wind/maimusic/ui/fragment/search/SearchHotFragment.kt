@@ -12,13 +12,8 @@ import wind.maimusic.model.searchhot.HistoryTag
 import wind.maimusic.model.searchhot.SearchHistory
 import wind.maimusic.model.searchhot.SearchHotSong
 import wind.maimusic.model.title.HotSearchTitle
-import wind.maimusic.model.title.Title
-import wind.maimusic.ui.adapter.SearchHistoryTagAdapter
-import wind.maimusic.utils.LogUtil
 import wind.maimusic.vm.SearchHotViewModel
 import wind.widget.effcientrv.*
-import wind.widget.taglayout.core.TagFlowLayout
-import wind.widget.taglayout.listener.OnTagClickListener
 
 /**
  * @By Journey 2020/10/27
@@ -26,9 +21,8 @@ import wind.widget.taglayout.listener.OnTagClickListener
  */
 class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
     private lateinit var rvSearchHot: RecyclerView
-
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): SearchHotFragment {
             return SearchHotFragment()
         }
     }
@@ -53,23 +47,12 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
                 return@withLayoutManager layoutManager
             }
             adapter {
-//                addItem(R.layout.item_common_title) {
-//                    isForViewType { data, position -> data is Title }
-//                    bindViewHolder { data, position, holder ->
-//                        val item = data as Title
-//                        setText(R.id.item_common_title_tv, item.title)
-//                        setVisible(R.id.item_common_end_iv, true)
-//                        clicked(R.id.item_common_end_iv, View.OnClickListener {
-//
-//                        })
-//                    }
-//                }
-                //https://github.com/hymanme/TagFlowLayout
                 addItem(R.layout.item_search_hot_history) {
                     isForViewType { data, position -> data is SearchHistory }
                     bindViewHolder { data, position, holder ->
                         val item = data as SearchHistory
                         val rvContent: RecyclerView? = itemView?.findViewById(R.id.item_history_rv)
+                        setText(R.id.item_history_title_tv,item.title)
                         rvContent?.let {
                             it.setup<HistoryTag> {
                                 dataSource(item.historyList!!)
@@ -79,25 +62,13 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
                                             val d = data as HistoryTag
                                             (itemView as TextView).text = d.name
                                         }
+                                        itemClicked(View.OnClickListener {
+
+                                        })
                                     }
                                 }
                             }
                         }
-//                        tagLayout?.let { tag ->
-//                            val items = item.historyList
-//                            tag.tagListener = object : OnTagClickListener {
-//                                override fun onClick(view: View?, position: Int) {
-//                                    LogUtil.e("${items!![position].name}")
-//                                }
-//
-//                                override fun onLongClick(view: View?, position: Int) {
-//                                }
-//                            }
-////                            tag.isCanScroll = false
-//                            val tagAdapter = SearchHistoryTagAdapter(requireActivity())
-//                            tag.tagAdapter = tagAdapter
-//                            tagAdapter.addAllTags(items)
-//                        }
                     }
                 }
                 addItem(R.layout.item_common_title) {

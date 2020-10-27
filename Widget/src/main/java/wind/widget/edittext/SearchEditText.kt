@@ -24,11 +24,12 @@ class SearchEditText : AppCompatEditText {
     private var mHeight: Int = 0
     private var mBitWidth: Int = 0
     private var mBitHeight: Int = 0
-    private var showClose: Boolean = false
+    private var showClose: Boolean = false// 是否显示清除icon
     private var hideClose: Boolean = false
     private var scale: Float = 0.8.toFloat()
     private var padding: Float = 0.toFloat()
     private var mDrawWidth: Float = 0.toFloat()
+    private var onSearchEditTextListener:OnSearchEditTextListener?=null
 
     private var hasScale: Boolean = false
 
@@ -83,7 +84,9 @@ class SearchEditText : AppCompatEditText {
 
             }
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                onSearchEditTextListener?.afterTextChange(s)
+            }
         })
 
         onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
@@ -104,14 +107,20 @@ class SearchEditText : AppCompatEditText {
                 && event.y < height - padding
             ) {
                 setText("")
+                onSearchEditTextListener?.onClear()
             }
         }
         return super.onTouchEvent(event)
     }
-
+    interface OnSearchEditTextListener {
+        fun onClear()
+        fun afterTextChange(s:Editable?)
+    }
+    fun setOnSearchEditTextListener(listener:OnSearchEditTextListener) {
+        this.onSearchEditTextListener = listener
+    }
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         if (showClose && !hideClose) {
             val mSrcRect = Rect(0, 0, mBitWidth, mBitWidth)
             val mDestRect = RectF(
