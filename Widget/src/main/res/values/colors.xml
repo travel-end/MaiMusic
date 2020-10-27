@@ -6,10 +6,11 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="white">#FFFFFF</color>
-
+    <color name="colorGray">#ACABAB</color>
+    <color name="colorGrayNormal">#CAC9C9</color>
     <color name="black_33">#333333</color>
     <color name="black">#000</color>
-
+    <color name="red_FD5F5F">#FD5F5F</color>
     <color name="grayWhites">#F8F8F8</color>
     <color name="grayUnReach">#33F1F1F1</color>
     <color name="color999999">#999999</color>
@@ -19,5 +20,9 @@
     <color name="text_green_dark">#FF006E73</color>
     <color name="text_green">#25C84C</color>
     <color name="text_color_black">#202020</color>
+    <color name="primary_text">#de000000</color>
+    <color name="secondary_text">#8a000000</color>
+    <color name="tag_layout_bg">#CDF8F8F8</color>
+    <color name="dividers">#1f000000</color>
 
 </resources>

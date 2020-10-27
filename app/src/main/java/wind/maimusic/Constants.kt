@@ -24,4 +24,9 @@ object Constants {
     fun currentSongUrl():String {
         return "${MaiApp.getInstance().getExternalFilesDir("song").toString()}/maimusic"
     }
+
+    const val TYPE_SONG = "song"
+    const val TYPE_ALBUM = "album"
+
+    const val HOT_SEARCH = "hot_search"
 }

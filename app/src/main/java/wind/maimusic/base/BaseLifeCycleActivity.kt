@@ -28,7 +28,7 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     private var loadingNormalView:View?=null
 
     // 初始化viewModel
-    private lateinit var mViewModel: VM
+    protected lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()

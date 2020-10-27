@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginBottom="@dimen/dp_10"
+    tools:ignore="MissingDefaultResource">
+    <TextView
+        android:id="@+id/item_search_hot_song_tv_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:textColor="@color/red_FD5F5F"
+        android:textSize="@dimen/sp_14"
+        tools:text="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+        android:id="@+id/item_search_hot_song_tv_song_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:maxLength="9"
+        tools:text="他只是经过"
+        android:maxLines="1"
+        android:layout_marginEnd="@dimen/dp_14"
+        android:textColor="@color/black_33"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_search_hot_song_tv_index"/>
+
+    <TextView
+        android:id="@+id/item_search_hot_song_tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_4"
+        android:textColor="@color/red_FD5F5F"
+        app:layout_constraintStart_toEndOf="@id/item_search_hot_song_tv_song_name"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="14sp"
+        tools:text="热"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/item_search_hot_song_tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color999999"
+        android:textSize="@dimen/sp_12"
+        tools:text="反正听完一遍一定会常会了dsjj djls "
+        android:maxLines="1"
+        app:layout_constraintStart_toEndOf="@id/item_search_hot_song_tv_index"
+        app:layout_constraintTop_toBottomOf="@id/item_search_hot_song_tv_song_name"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_4"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

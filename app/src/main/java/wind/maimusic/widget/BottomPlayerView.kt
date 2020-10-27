@@ -39,7 +39,7 @@ class BottomPlayerView @JvmOverloads constructor(
     init {
         initView()
     }
-    private fun setOnPlayerViewClickListener(listener: OnPlayerViewClickListener) {
+    fun setOnPlayerViewClickListener(listener: OnPlayerViewClickListener) {
         onPlayerViewClickListener = listener
     }
 

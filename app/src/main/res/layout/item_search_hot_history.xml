@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<wind.widget.taglayout.core.TagFlowLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/item_tag_layout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    app:expandHint="更多"-->
+<!--    app:foldHint="收起"-->
+<!--    tools:ignore="MissingDefaultResource">-->
+
+<!--</wind.widget.taglayout.core.TagFlowLayout>-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_48"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/item_history_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="历史"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dp_16"
+        android:textColor="@color/black"
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/sp_14" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_history_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dp_58"
+        android:layout_marginEnd="@dimen/dp_52"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:overScrollMode="never"/>
+    <ImageView
+        android:id="@+id/item_history_end_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="@dimen/dp_16" />
+</FrameLayout>

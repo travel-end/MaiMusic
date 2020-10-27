@@ -3,3 +3,11 @@
 3、考虑使用原生的statusBar，不适用ImmesionBar
 4、写入本地的song.txt应该加密，其他的文件也是
 5、为保证用户下载的音乐在卸载app后仍然能够使用，建议使用`共享储存空间`  -->`https://developer.android.com/training/data-storage/app-specific#external`
+
+
+
+
+
+todo
+1、关于分区存储
+https://www.bilibili.com/video/BV1fT4y1g74Z

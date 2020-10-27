@@ -1,105 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_imusic"
-    app:startDestination="@id/iMainFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_mai_music"
+    app:startDestination="@id/main_fragment">
     <fragment
-        android:id="@+id/iMainFragment"
+        android:id="@+id/main_fragment"
         android:name="wind.maimusic.ui.fragment.MainFragment"
         android:label="MainFragment">
 
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_searchFragment"-->
-<!--            app:destination="@id/iSearchFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_localFragment"-->
-<!--            app:destination="@id/iLocalSongVpFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/search_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_recentPlayFragment"-->
-<!--            app:destination="@id/iRecentPlayFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_homeFragment_to_localFragment"-->
+        <!--            app:destination="@id/iLocalSongVpFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
 
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_loveSongFragment"-->
-<!--            app:destination="@id/iLoveSongFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_homeFragment_to_recentPlayFragment"-->
+        <!--            app:destination="@id/iRecentPlayFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
 
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_newLoveSongFragment"-->
-<!--            app:destination="@id/iNewLoveSongFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_homeFragment_to_loveSongFragment"-->
+        <!--            app:destination="@id/iLoveSongFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
 
-
-
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_downloadFragment"-->
-<!--            app:destination="@id/iDownloadFragment"-->
-<!--            app:enterAnim="@anim/slide_in_right"-->
-<!--            app:exitAnim="@anim/slide_out_left"-->
-<!--            app:popEnterAnim="@anim/slide_in_left"-->
-<!--            app:popExitAnim="@anim/slide_out_right" />-->
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/iSearchFragment"-->
-<!--        android:name="com.journey.interview.imusic.frg.search.ISearchFragment"-->
-<!--        tools:layout="@layout/imusic_search">-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_homeFragment_to_newLoveSongFragment"-->
+        <!--            app:destination="@id/iNewLoveSongFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
 
 
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/iLocalSongVpFragment"-->
-<!--        android:name="com.journey.interview.imusic.frg.local.ILocalSongVpFragment"-->
-<!--        tools:layout="@layout/imusic_act_local_song">-->
-
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/iRecentPlayFragment"-->
-<!--        android:name="com.journey.interview.imusic.frg.recentplay.IRecentPlayFragment"-->
-<!--        tools:layout="@layout/imusic_act_history">-->
-
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/iLoveSongFragment"-->
-<!--        android:name="com.journey.interview.imusic.frg.love.ILoveSongFragment"-->
-<!--        tools:layout="@layout/imusic_act_love_song">-->
-
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/iNewLoveSongFragment"-->
-<!--        android:name="com.journey.interview.imusic.frg.love.INewLoveSongFragment"-->
-<!--        tools:layout="@layout/imusic_frg_song_list">-->
-<!--        &lt;!&ndash;todo 添加一个默认的图片路径&ndash;&gt;-->
-<!--        <argument android:name="coverImgUrl"-->
-<!--            android:defaultValue=""-->
-<!--            app:argType="string" />-->
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/iDownloadFragment"-->
-<!--        android:name="com.journey.interview.imusic.frg.download.IDownloadSongVpFragment"-->
-<!--        tools:layout="@layout/imusic_act_download_vp">-->
-
+        <!--        <action-->
+        <!--            android:id="@+id/action_homeFragment_to_downloadFragment"-->
+        <!--            app:destination="@id/iDownloadFragment"-->
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@anim/slide_in_left"-->
+        <!--            app:popExitAnim="@anim/slide_out_right" />-->
     </fragment>
+
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="wind.maimusic.ui.fragment.search.SearchMainFragment"
+        tools:layout="@layout/fragment_search_main">
+        <argument
+            android:name="hot_search"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/iLocalSongVpFragment"-->
+    <!--        android:name="com.journey.interview.imusic.frg.local.ILocalSongVpFragment"-->
+    <!--        tools:layout="@layout/imusic_act_local_song">-->
+
+    <!--    </fragment>-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/iRecentPlayFragment"-->
+    <!--        android:name="com.journey.interview.imusic.frg.recentplay.IRecentPlayFragment"-->
+    <!--        tools:layout="@layout/imusic_act_history">-->
+
+    <!--    </fragment>-->
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/iLoveSongFragment"-->
+    <!--        android:name="com.journey.interview.imusic.frg.love.ILoveSongFragment"-->
+    <!--        tools:layout="@layout/imusic_act_love_song">-->
+
+    <!--    </fragment>-->
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/iNewLoveSongFragment"-->
+    <!--        android:name="com.journey.interview.imusic.frg.love.INewLoveSongFragment"-->
+    <!--        tools:layout="@layout/imusic_frg_song_list">-->
+    <!--        &lt;!&ndash;todo 添加一个默认的图片路径&ndash;&gt;-->
+    <!--        <argument android:name="coverImgUrl"-->
+    <!--            android:defaultValue=""-->
+    <!--            app:argType="string" />-->
+    <!--    </fragment>-->
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/iDownloadFragment"-->
+    <!--        android:name="com.journey.interview.imusic.frg.download.IDownloadSongVpFragment"-->
+    <!--        tools:layout="@layout/imusic_act_download_vp">-->
+
 </navigation>

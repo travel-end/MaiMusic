@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_52">
+
+    <ImageView
+        android:id="@+id/view_search_iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/dp_10"
+        android:src="@drawable/ic_arrow_left" />
+
+    <wind.widget.edittext.SearchEditText
+        android:id="@+id/view_search_et"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dp_46"
+        android:layout_marginEnd="@dimen/dp_25"
+        android:background="@android:color/transparent"
+        android:hint="@string/search_hint"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
+        android:textSize="@dimen/sp_16"
+        apps:scaleSize="0.4" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/dp_40"
+        android:layout_marginEnd="@dimen/dp_26"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@color/text_color_dark" />
+
+</FrameLayout>

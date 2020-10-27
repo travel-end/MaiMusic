@@ -3,6 +3,11 @@
     <declare-styleable name="RoundRectView">
         <attr name="roundRatio" format="float" />
     </declare-styleable>
+    <declare-styleable name="SearchEditText">
+        <attr name="clearIcon" format="reference" />
+        <attr name="scaleSize" format="float" />
+        <attr name="drawableWidth" format="dimension" />
+    </declare-styleable>
     <declare-styleable name="CommonTabLayout">
         <attr name="tl_indicator_color" />
         <attr name="tl_indicator_height" />
@@ -176,5 +181,30 @@
         <attr name="rv_ripplePadding" format="dimension" />
         <attr name="rv_zoom" format="boolean" />
         <attr name="rv_zoomScale" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="TagFlowLayout">
+        <attr name="titleText" format="reference|string" />
+        <attr name="textTitleColor" format="reference|color" />
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="backGroundColor" format="reference|color" />
+        <attr name="tagsTextSize" format="dimension" />
+        <attr name="tagsTextColor" format="reference|color" />
+        <attr name="tagsBackgroundColor" format="reference|color" />
+        <attr name="tagsBackgroundPressedColor" format="reference|color" />
+        <attr name="tagsBackgroundCorners" format="dimension" />
+        <attr name="tagsHorizontalSpace" format="dimension" />
+        <attr name="tagsVerticalSpace" format="dimension" />
+        <attr name="randomBackground" format="boolean" />
+        <attr name="foldHint" format="reference|string" />
+        <attr name="expandHint" format="reference|string" />
+        <attr name="hintTextColor" format="reference|color" />
+        <attr name="hintTextSize" format="dimension" />
+        <attr name="dividerColor" format="reference|color" />
+        <attr name="indicateImage" format="reference" />
+        <attr name="minVisibleHeight" format="dimension" />
+        <attr name="maxVisibleHeight" format="dimension" />
+        <attr name="animationDuration" format="integer" />
+
     </declare-styleable>
 </resources>
