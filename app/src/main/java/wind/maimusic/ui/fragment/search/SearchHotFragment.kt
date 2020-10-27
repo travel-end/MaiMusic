@@ -53,17 +53,17 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
                 return@withLayoutManager layoutManager
             }
             adapter {
-                addItem(R.layout.item_common_title) {
-                    isForViewType { data, position -> data is Title }
-                    bindViewHolder { data, position, holder ->
-                        val item = data as Title
-                        setText(R.id.item_common_title_tv, item.title)
-                        setVisible(R.id.item_common_end_iv, true)
-                        clicked(R.id.item_common_end_iv, View.OnClickListener {
-
-                        })
-                    }
-                }
+//                addItem(R.layout.item_common_title) {
+//                    isForViewType { data, position -> data is Title }
+//                    bindViewHolder { data, position, holder ->
+//                        val item = data as Title
+//                        setText(R.id.item_common_title_tv, item.title)
+//                        setVisible(R.id.item_common_end_iv, true)
+//                        clicked(R.id.item_common_end_iv, View.OnClickListener {
+//
+//                        })
+//                    }
+//                }
                 //https://github.com/hymanme/TagFlowLayout
                 addItem(R.layout.item_search_hot_history) {
                     isForViewType { data, position -> data is SearchHistory }

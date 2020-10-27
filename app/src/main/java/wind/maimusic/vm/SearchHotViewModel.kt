@@ -18,10 +18,10 @@ class SearchHotViewModel:BaseViewModel() {
 
     val hotSearch:MutableLiveData<MutableList<Any>> = MutableLiveData()
     fun getTempData() {
-        val historyTitle = Title(
-            "历史",
-            icon = R.drawable.delete
-        )
+//        val historyTitle = Title(
+//            "历史",
+//            icon = R.drawable.delete
+//        )
         val tag1 = HistoryTag(0,"dsd")
         val tag2 = HistoryTag(1,"dsddd")
         val tag3 = HistoryTag(2,"dsd")
@@ -82,7 +82,7 @@ class SearchHotViewModel:BaseViewModel() {
             SearchHotSong("不过人间","爱你的我头很铁",true)
         )
         val searchHot = mutableListOf<Any>()
-        searchHot.add(historyTitle)
+//        searchHot.add(historyTitle)
         searchHot.add(historyContent)
         searchHot.add(hotSongTitle)
         for (song in hotSongs) {
