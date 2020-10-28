@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_52">
+    android:layout_height="@dimen/dp_48">
 
     <ImageView
         android:id="@+id/view_search_iv_back"
@@ -33,7 +33,7 @@
         android:layout_gravity="bottom"
         android:layout_marginStart="@dimen/dp_40"
         android:layout_marginEnd="@dimen/dp_26"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_6"
         android:background="@color/text_color_dark" />
 
 </FrameLayout>

@@ -3,80 +3,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_54"
-    android:paddingEnd="@dimen/dp_16"
-    android:paddingStart="@dimen/dp_16"
+    android:layout_height="wrap_content"
     app:rv_centered="true"
     app:rv_color="@color/grayLight2"
     app:rv_rippleDuration="220">
-
-<!--    <ImageView-->
-<!--        android:id="@+id/item_search_song_list_iv_playing"-->
-<!--        android:layout_width="@dimen/dp_18"-->
-<!--        android:layout_height="@dimen/dp_22"-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:layout_marginEnd="@dimen/dp_10"-->
-<!--        android:src="@drawable/shape_horn"-->
-<!--        android:visibility="visible" />-->
-
-    <TextView
-        android:id="@+id/item_search_song_list_tv_song_name"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:textColor="@color/black2"
-        android:layout_marginTop="@dimen/dp_8"
-        android:textSize="16sp"
-        tools:text="演员" />
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingBottom="@dimen/dp_8"
+        android:paddingStart="@dimen/dp_16">
+        <TextView
+            android:id="@+id/item_search_song_list_tv_song_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/black2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="15sp"
+            tools:text="演员" />
 
-    <ImageView
-        android:id="@+id/item_search_song_list_iv_downloaded"
-        android:layout_width="@dimen/dp_16"
-        android:layout_height="@dimen/dp_14"
-        android:layout_marginEnd="@dimen/dp_4"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_8"
-        android:src="@drawable/ok"
-        android:visibility="gone" />
+        <ImageView
+            android:id="@+id/item_search_song_list_iv_downloaded"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_14"
+            android:layout_marginEnd="@dimen/dp_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_search_song_list_tv_song_name"
+            android:layout_marginTop="@dimen/dp_3"
+            android:src="@drawable/ok"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/item_search_song_list_tv_song_singer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_8"
-        android:layout_toEndOf="@id/item_search_song_list_iv_downloaded"
-        android:textColor="@color/colorPrimaryLight2"
-        android:textSize="12sp"
-        tools:text="薛之谦" />
+        <TextView
+            android:id="@+id/item_search_song_list_tv_song_singer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryLight2"
+            android:layout_marginTop="@dimen/dp_3"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/item_search_song_list_iv_downloaded"
+            app:layout_constraintTop_toBottomOf="@id/item_search_song_list_tv_song_name"
+            tools:text="薛之谦" />
 
-    <TextView
-        android:id="@+id/item_search_song_list_tv_song_album"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_6"
-        android:textColor="@color/text_color"
-        android:textSize="12sp"
-        tools:text="专辑爪机专辑"
-        android:layout_marginBottom="@dimen/dp_8"
-        android:layout_toEndOf="@id/item_search_song_list_tv_song_singer"
-        android:layout_alignParentBottom="true" />
+        <TextView
+            android:id="@+id/item_search_song_list_tv_song_album"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            android:textColor="@color/text_color"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_3"
+            android:maxLines="1"
+            android:textSize="12sp"
+            tools:text="专辑爪机专第三季度看时间但是对抗衰老但是第三季度聚少离多辑"
+            app:layout_constraintStart_toEndOf="@id/item_search_song_list_tv_song_singer"
+            app:layout_constraintTop_toBottomOf="@id/item_search_song_list_tv_song_name"
+            app:layout_constraintEnd_toStartOf="@id/item_search_song_list_iv_more"/>
 
-    <TextView
-        android:id="@+id/item_search_song_list_tv_song_lyric"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_color"
-        android:textSize="12sp"
-        android:visibility="gone"
-        tools:text="电影《精灵王座》主题曲"
-        android:layout_alignParentBottom="true" />
+        <TextView
+            android:id="@+id/item_search_song_list_tv_song_lyric"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginEnd="@dimen/dp_14"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:visibility="gone"
+            tools:text="专辑爪机专第三季度看时间但是对抗衰老但是第三季度聚少离多辑"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_search_song_list_iv_more"
+            android:layout_marginTop="@dimen/dp_3"
+            app:layout_constraintTop_toBottomOf="@id/item_search_song_list_tv_song_singer"/>
 
-    <ImageView
-        android:id="@+id/item_search_song_list_iv_more"
-        android:layout_width="@dimen/dp_21"
-        android:layout_height="@dimen/dp_21"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/more" />
+        <ImageView
+            android:id="@+id/item_search_song_list_iv_more"
+            android:layout_width="@dimen/dp_21"
+            android:layout_height="@dimen/dp_21"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/more" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </wind.widget.rippleview.RippleView>

@@ -6,21 +6,21 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/view_song_list_play_all"
+        android:id="@id/view_song_list_play_all"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_36"
+        android:layout_height="@dimen/dp_34"
         android:visibility="gone">
 
         <ImageView
-            android:id="@+id/view_song_list_iv_play_all"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
+            android:id="@id/view_song_list_iv_play_all"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/dp_14"
             android:src="@drawable/play_full" />
 
         <TextView
-            android:id="@+id/view_song_list_tv_play_all"
+            android:id="@id/view_song_list_tv_play_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

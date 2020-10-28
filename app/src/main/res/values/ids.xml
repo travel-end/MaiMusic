@@ -10,6 +10,10 @@
     <item name="frg_main_title_iv_search" type="id" />
 
     <item name="song_list_rv" type="id" />
+    <item name="view_song_list_play_all" type="id" />
+    <item name="view_song_list_iv_play_all" type="id" />
+    <item name="view_song_list_tv_play_all" type="id" />
+    <item name="view_loading_song_tv_msg" type="id"/>
 
     <item name="top_view" type="id" />
 </resources>

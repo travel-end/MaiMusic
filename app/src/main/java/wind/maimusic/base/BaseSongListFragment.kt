@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import wind.maimusic.R
 import wind.maimusic.service.PlayerService
@@ -17,7 +19,10 @@ import wind.widget.effcientrv.EfficientAdapter
  */
 abstract class BaseSongListFragment<VM:BaseViewModel> :BaseLifeCycleFragment<VM>() {
     protected var playerBinder : PlayerService.PlayerBinder?=null
-    protected var rvSongList:RecyclerView?=null
+    protected lateinit var rvSongList:RecyclerView
+    protected lateinit var flPlayAll:FrameLayout
+    protected lateinit var ivPlayAll:ImageView
+
     protected var lastPosition:Int = -1
     private val playerConnection = object :ServiceConnection {
         override fun onServiceDisconnected(p0: ComponentName?) {
@@ -41,11 +46,9 @@ abstract class BaseSongListFragment<VM:BaseViewModel> :BaseLifeCycleFragment<VM>
 
     override fun initView() {
         super.initView()
-        val rv:RecyclerView? = mRootView.findViewById(R.id.song_list_rv)
-        if (rv != null) {
-            rvSongList = rv
-        }
-
+        rvSongList = mRootView.findViewById(R.id.song_list_rv)
+        flPlayAll = mRootView.findViewById(R.id.view_song_list_play_all)
+        ivPlayAll= mRootView.findViewById(R.id.view_song_list_iv_play_all)
     }
     // 判断点击的是否为上一个点击的项目
     open fun checkPosition(position:Int,adapter:EfficientAdapter<*>?) {

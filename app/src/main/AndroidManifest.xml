@@ -17,10 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
-        <service
-            android:name=".service.PlayerService"
-            android:enabled="true"
-            android:exported="true" />
         <!-- shipei全面屏 -->
         <meta-data
             android:name="android.max_aspect"
@@ -34,7 +30,8 @@
 
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".ui.WelcomeActivity"
             android:screenOrientation="portrait"
@@ -45,6 +42,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".service.PlayerService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

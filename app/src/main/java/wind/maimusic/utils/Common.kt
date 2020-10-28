@@ -1,6 +1,7 @@
 package wind.maimusic.utils
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -189,6 +190,18 @@ fun Activity.hideKeyboards() {
     val imm =
         this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+}
+
+fun Activity.isServiceRunning(serviceName:String) :Boolean {
+    val am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    val infos = am.getRunningServices(100)
+    for (info in infos) {
+        val name = info?.service?.className
+        if (name == serviceName) {
+            return true
+        }
+    }
+    return false
 }
 
 

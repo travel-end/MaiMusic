@@ -14,7 +14,7 @@
         android:indeterminateDrawable="@drawable/loading_song">
     </ProgressBar>
     <TextView
-        android:id="@+id/view_loading_tv_msg"
+        android:id="@+id/view_loading_song_tv_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_8"

@@ -5,12 +5,10 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import wind.maimusic.Constants
 import wind.maimusic.model.*
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.*
 import wind.widget.cost.Consts
-import wind.widget.model.Song
 import java.io.IOException
 
 class PlayerService : Service() {

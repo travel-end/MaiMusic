@@ -11,6 +11,7 @@ import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
+import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.toast
 import wind.widget.utils.fastClickListener
 
@@ -83,6 +84,11 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
 
     open fun showLoadingSong(msg: String) {
         if (loadingSongView?.visibility == View.GONE) {
+            if (msg.isEmpty()) {
+                loadingSongView?.findViewById<TextView>(R.id.view_loading_song_tv_msg)?.text = R.string.loading.getStringRes()
+            } else {
+                loadingSongView?.findViewById<TextView>(R.id.view_loading_song_tv_msg)?.text = msg
+            }
             loadingSongView?.visibility = View.VISIBLE
         }
     }

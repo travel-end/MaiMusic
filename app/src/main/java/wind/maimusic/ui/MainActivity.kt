@@ -1,5 +1,7 @@
 package wind.maimusic.ui
 
+import android.content.Intent
+import android.os.Build
 import android.view.MenuItem
 import android.view.View
 import androidx.core.view.GravityCompat
@@ -9,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_main.*
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleActivity
+import wind.maimusic.service.PlayerService
 import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.NavigationManager
 import wind.maimusic.utils.inflate
@@ -27,6 +30,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     override fun initView() {
         super.initView()
         initNavigation()
+        startService()
     }
 
     override fun initAction() {
@@ -68,4 +72,15 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        // 将播放的服务提升至前台服务
+        val playIntent = Intent(this, PlayerService::class.java)
+        // 退出程序后依然能够播放
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(playIntent)
+        } else {
+            startService(playIntent)
+        }
+    }
 }

@@ -9,7 +9,9 @@ import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
 import wind.maimusic.utils.LogUtil
+import wind.maimusic.utils.hideKeyboards
 import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.showKeyBoard
 import wind.maimusic.vm.SearchMainViewModel
 import wind.widget.edittext.SearchEditText
 
@@ -34,11 +36,13 @@ class SearchMainFragment :BaseLifeCycleFragment<SearchMainViewModel>(){
 
     override fun initAction() {
         super.initAction()
+        searchEditText.showKeyBoard(requireContext())
         searchEditText.setOnSearchEditTextListener(object :SearchEditText.OnSearchEditTextListener{
             override fun onClear() {
 //                replaceFragment(SearchHotFragment.newInstance())
             }
             override fun afterTextChange(s: Editable?) {
+                requireActivity().hideKeyboards()
                 val content = s?.toString()
                 if (content.isNotNullOrEmpty()) {
                     replaceFragment(SearchVpFragment.newInstance(content!!))
@@ -47,6 +51,7 @@ class SearchMainFragment :BaseLifeCycleFragment<SearchMainViewModel>(){
         })
         searchEditText.setOnEditorActionListener { textView, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
+                requireActivity().hideKeyboards()
                 val content = textView.text.toString()
                 LogUtil.e("搜索内容：$content")
                 if (content.isNotNullOrEmpty()) {

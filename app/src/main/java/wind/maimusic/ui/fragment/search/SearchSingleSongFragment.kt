@@ -1,6 +1,7 @@
 package wind.maimusic.ui.fragment.search
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
@@ -29,7 +30,7 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
 
     override fun initView() {
         super.initView()
-        rvSongList?.setup<ListBean> {
+        rvSongList.setup<ListBean> {
             adapter {
                 addItem(R.layout.item_search_song) {
                     bindViewHolder { data, position, holder ->
@@ -42,20 +43,28 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
                                 setVisible(R.id.item_search_song_list_tv_song_lyric,true)
                                 setText(R.id.item_search_song_list_tv_song_lyric,s.lyric)
                             }
-                            if (s.songmid == SongUtil.getSong()?.songId) {
-                                lastPosition = position
-                                setTextColor(R.id.item_search_song_list_tv_song_name,R.color.colorPrimary.getColorRes())
-                                setTextColor(R.id.item_search_song_list_tv_song_singer,R.color.colorPrimary.getColorRes())
-                                setTextColor(R.id.item_search_song_list_tv_song_album,R.color.colorPrimary.getColorRes())
-                                setTextColor(R.id.item_search_song_list_tv_song_lyric,R.color.colorPrimary.getColorRes())
-                            } else {
-                                setTextColor(R.id.item_search_song_list_tv_song_name,R.color.black2.getColorRes())
-                                setTextColor(R.id.item_search_song_list_tv_song_singer,R.color.colorPrimaryLight2.getColorRes())
-                                setTextColor(R.id.item_search_song_list_tv_song_album,R.color.text_color.getColorRes())
-                                setTextColor(R.id.item_search_song_list_tv_song_lyric,R.color.text_color.getColorRes())
-                            }
+//                            if (position == lastPosition) {
+//                                setTextColor(R.id.item_search_song_list_tv_song_name,R.color.colorPrimary.getColorRes())
+//                                setTextColor(R.id.item_search_song_list_tv_song_singer,R.color.colorPrimary.getColorRes())
+//                                setTextColor(R.id.item_search_song_list_tv_song_album,R.color.colorPrimary.getColorRes())
+//                                setTextColor(R.id.item_search_song_list_tv_song_lyric,R.color.colorPrimary.getColorRes())
+//                            } else {
+//                                setTextColor(R.id.item_search_song_list_tv_song_name,R.color.black2.getColorRes())
+//                                setTextColor(R.id.item_search_song_list_tv_song_singer,R.color.colorPrimaryLight2.getColorRes())
+//                                setTextColor(R.id.item_search_song_list_tv_song_album,R.color.text_color.getColorRes())
+//                                setTextColor(R.id.item_search_song_list_tv_song_lyric,R.color.text_color.getColorRes())
+//                            }
+//
+
                             (itemView as RippleView).setOnRippleCompleteListener {
-                                checkPosition(position,adapter)
+//                                checkPosition(position,adapter)
+//                                if (position != lastPosition) {
+//                                    notifyItemChanged(position)
+//                                    lastPosition = position
+//                                    
+//                                }
+                                // TODO: 2020/10/29 to playactivity 
+                                
                                 val song= Song().apply {
                                     songId = data.songmid //004DrG5A2nm7q2
                                     singer = StringUtil.getSinger(s)// 鸾音社
@@ -75,11 +84,31 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
         }
     }
 
-
-
     override fun initData() {
         super.initData()
         searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT)?:""
+        LogUtil.e("searchText:$searchText")
+        if (searchText.isNotEmpty()) {
+            mViewModel.searchSong(searchText,1)
+        }
+    }
+
+    override fun observe() {
+        super.observe()
+        mViewModel.searchResult.observe(this,Observer{
+            it?.let {
+                val song = it.data?.song
+                if (song != null) {
+                    val songList = song.list
+                    if (isNotNullOrEmpty(songList)) {
+                        hideLoadingResultView()
+                        flPlayAll.visible()
+                        rvSongList.submitList(songList!!.toMutableList())
+                        rvSongList.visible()
+                    }
+                }
+            }
+        })
     }
 
 }
