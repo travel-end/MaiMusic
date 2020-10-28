@@ -11,6 +11,7 @@ import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
+import wind.maimusic.utils.toast
 import wind.widget.utils.fastClickListener
 
 /**
@@ -107,7 +108,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     // todo 自定义toast
     private fun showToast(msg: String) {
         if (msg.isNotEmpty()) {
-            Toast.makeText(requireContext(),msg, Toast.LENGTH_SHORT).show()
+            msg.toast()
         }
     }
 

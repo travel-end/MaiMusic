@@ -36,19 +36,19 @@ class SearchMainFragment :BaseLifeCycleFragment<SearchMainViewModel>(){
         super.initAction()
         searchEditText.setOnSearchEditTextListener(object :SearchEditText.OnSearchEditTextListener{
             override fun onClear() {
-                replaceFragment(SearchHotFragment.newInstance())
+//                replaceFragment(SearchHotFragment.newInstance())
             }
             override fun afterTextChange(s: Editable?) {
-//                val content = s?.toString()
-//                if (content.isNotNullOrEmpty()) {
-//                    replaceFragment(SearchVpFragment.newInstance(content!!))
-//                }
+                val content = s?.toString()
+                if (content.isNotNullOrEmpty()) {
+                    replaceFragment(SearchVpFragment.newInstance(content!!))
+                }
             }
         })
         searchEditText.setOnEditorActionListener { textView, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 val content = textView.text.toString()
-                LogUtil.e("$content")
+                LogUtil.e("搜索内容：$content")
                 if (content.isNotNullOrEmpty()) {
                     replaceFragment(SearchVpFragment.newInstance(content))
                 }

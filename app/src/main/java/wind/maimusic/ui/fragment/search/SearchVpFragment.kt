@@ -10,6 +10,7 @@ import wind.maimusic.utils.getStringRes
 import wind.widget.tablayout.CustomTab
 
 class SearchVpFragment:BaseVpFragment() {
+    private var searchText:String = ""
     companion object {
         fun newInstance(searchContent:String) :SearchVpFragment{
             val fragment = SearchVpFragment()
@@ -23,14 +24,15 @@ class SearchVpFragment:BaseVpFragment() {
     override fun initView() {
         mViewPager = mRootView.findViewById(R.id.frg_main_view_pager)
         mTabLayout =  mRootView.findViewById(R.id.frg_main_title_common_tab_layout)
+        searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT)?:""
     }
     override val vpFragments: Array<Fragment>
         get() = arrayOf(
-            SearchSingleSongFragment.newInstance(),
-            SearchAlbumFragment.newInstance()
+            SearchSingleSongFragment.newInstance(searchText),
+            SearchAlbumFragment.newInstance(searchText)
         )
     override val vpTabTitles = ArrayList<CustomTab>().apply {
         add(MaiTab(R.string.single_song.getStringRes()))
-        add(MaiTab(R.string.mv.getStringRes()))
+        add(MaiTab(R.string.album.getStringRes()))
     }
 }

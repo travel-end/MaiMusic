@@ -20,9 +20,10 @@
         app:tl_indicator_bounce_enable="false"
         app:tl_tab_width="@dimen/dp_100"
         app:tl_textBold="SELECT"
-        app:tl_textSelectColor="@color/black_33"
+        app:tl_textSelectColor="@color/black2"
         app:tl_textUnselectColor="@color/color999999"
-        app:tl_textsize="18sp" />
+        app:tl_indicator_height="0dp"
+        app:tl_textsize="17sp" />
 
     <ImageView
         android:id="@id/frg_main_title_iv_search"

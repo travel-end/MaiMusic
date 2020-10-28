@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "local_song")
 data class LocalSong(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var id:Int?=null,
     @ColumnInfo var songId:String?=null,
     @ColumnInfo var qqId:String?=null,

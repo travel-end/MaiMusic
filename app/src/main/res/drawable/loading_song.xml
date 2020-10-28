@@ -5,7 +5,8 @@
         android:duration="150" />
     <item
         android:drawable="@drawable/loading_two"
-        android:duration="150" />
+        android:duration="150"
+        />
     <item
         android:drawable="@drawable/loading_three"
         android:duration="150" />

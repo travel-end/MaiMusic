@@ -9,5 +9,7 @@
     <item name="frg_main_title_common_tab_layout" type="id" />
     <item name="frg_main_title_iv_search" type="id" />
 
+    <item name="song_list_rv" type="id" />
+
     <item name="top_view" type="id" />
 </resources>
