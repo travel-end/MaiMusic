@@ -106,6 +106,7 @@ object PlayServiceHelper {
     fun save2History() {
         val song = SongUtil.getSong()
         if (song != null) {
+
             val historySong = HistorySong().apply {
                 songId = song.songId
                 qqId = song.qqId

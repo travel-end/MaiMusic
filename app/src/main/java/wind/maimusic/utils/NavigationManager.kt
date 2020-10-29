@@ -3,7 +3,7 @@ package wind.maimusic.utils
 import android.util.Log
 import android.view.MenuItem
 import wind.maimusic.R
-import wind.maimusic.ui.MainActivity
+import wind.maimusic.ui.activities.MainActivity
 
 /**
  * @By Journey 2020/10/24

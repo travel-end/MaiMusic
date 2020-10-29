@@ -6,9 +6,11 @@ import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
 import wind.maimusic.model.core.ListBean
-import wind.maimusic.utils.*
+import wind.maimusic.utils.SongUtil
+import wind.maimusic.utils.StringUtil
+import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.visible
 import wind.maimusic.vm.SearchResultViewModel
-import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
 import wind.widget.model.Song
 import wind.widget.rippleview.RippleView
@@ -43,39 +45,11 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
                                 setVisible(R.id.item_search_song_list_tv_song_lyric,true)
                                 setText(R.id.item_search_song_list_tv_song_lyric,s.lyric)
                             }
-//                            if (position == lastPosition) {
-//                                setTextColor(R.id.item_search_song_list_tv_song_name,R.color.colorPrimary.getColorRes())
-//                                setTextColor(R.id.item_search_song_list_tv_song_singer,R.color.colorPrimary.getColorRes())
-//                                setTextColor(R.id.item_search_song_list_tv_song_album,R.color.colorPrimary.getColorRes())
-//                                setTextColor(R.id.item_search_song_list_tv_song_lyric,R.color.colorPrimary.getColorRes())
-//                            } else {
-//                                setTextColor(R.id.item_search_song_list_tv_song_name,R.color.black2.getColorRes())
-//                                setTextColor(R.id.item_search_song_list_tv_song_singer,R.color.colorPrimaryLight2.getColorRes())
-//                                setTextColor(R.id.item_search_song_list_tv_song_album,R.color.text_color.getColorRes())
-//                                setTextColor(R.id.item_search_song_list_tv_song_lyric,R.color.text_color.getColorRes())
-//                            }
-//
-
                             (itemView as RippleView).setOnRippleCompleteListener {
-//                                checkPosition(position,adapter)
-//                                if (position != lastPosition) {
-//                                    notifyItemChanged(position)
-//                                    lastPosition = position
-//                                    
-//                                }
-                                // TODO: 2020/10/29 to playactivity 
-                                
-                                val song= Song().apply {
-                                    songId = data.songmid //004DrG5A2nm7q2
-                                    singer = StringUtil.getSinger(s)// 鸾音社
-                                    songName = data.songname// 夜来寒雨晓来风
-                                    imgUrl = "${Consts.ALBUM_PIC}${data.albummid}${Consts.JPG}"////http://y.gtimg.cn/music/photo_new/T002R180x180M000004UvnL62KXhCQ.jpg
-                                    duration = data.interval//187  (秒)
-                                    isOnline = true
-                                    mediaId = data.strMediaMid//004DrG5A2nm7q2
-                                    albumName = data.albumname//夜来寒雨晓来风
-                                    isDownload = DownloadedUtil.isExistOfDownloadSong(data.songmid?:"")//003IHI2x3RbXLS  // 是否已经下载过了（初次搜索为false）
-                                }
+                                // TODO: 2020/10/29 to playactivity
+                                val song = SongUtil.assemblySong(s,SongUtil.SONG_ONLINE)
+                                mViewModel.getSongPlayUrl(song)
+//                                requireActivity().startActivity(Intent(requireContext(),PlayActivity::class.java))
                             }
                         }
                     }
@@ -87,7 +61,6 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
     override fun initData() {
         super.initData()
         searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT)?:""
-        LogUtil.e("searchText:$searchText")
         if (searchText.isNotEmpty()) {
             mViewModel.searchSong(searchText,1)
         }
@@ -109,6 +82,18 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
                 }
             }
         })
+        mViewModel.songPlayUrlResult.observe(this,Observer{
+            it?.let {
+                val song = it.entries.find { entry ->
+                    entry.key == "song"
+                }?.value as Song
+                val url = it.entries.find { entry ->
+                    entry.key=="url"
+                }?.value as String
+                song.url = url
+                SongUtil.saveSong(song)
+                playerBinder?.playOnline()
+            }
+        })
     }
-
 }

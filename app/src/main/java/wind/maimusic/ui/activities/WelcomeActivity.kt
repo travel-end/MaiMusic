@@ -1,4 +1,4 @@
-package wind.maimusic.ui
+package wind.maimusic.ui.activities
 
 import android.Manifest
 import android.content.Intent
@@ -26,8 +26,12 @@ class WelcomeActivity:BaseLifeCycleActivity<WelcomeViewModel>() {
     }
     override fun initData() {
         super.initData()
-        if (ContextCompat.checkSelfPermission(this,mPermission)!= PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(mPermission),mRequestCode)
+        if (ContextCompat.checkSelfPermission(this,
+                mPermission
+            )!= PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(mPermission),
+                mRequestCode
+            )
         } else {
             window.decorView.postDelayed({
                 toMain()

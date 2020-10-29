@@ -3,6 +3,13 @@
     <dimen name="lce_content_view_animation_translate_y">40dp</dimen>
     <!-- dp and sp values, must be defind in this file! -->
     <!-- view size,you can add if there is no one -->
+    <integer name="lrc_animation_duration">1000</integer>
+    <dimen name="lrc_text_size">16sp</dimen>
+    <dimen name="lrc_time_text_size">12sp</dimen>
+    <dimen name="lrc_divider_height">16dp</dimen>
+    <dimen name="lrc_timeline_height">1dp</dimen>
+    <dimen name="lrc_drawable_width">30dp</dimen>
+    <dimen name="lrc_time_width">40dp</dimen>
     <dimen name="dp_m_60">-60dp</dimen>
     <dimen name="dp_m_30">-30dp</dimen>
     <dimen name="dp_m_20">-20dp</dimen>

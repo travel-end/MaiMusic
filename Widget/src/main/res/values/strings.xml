@@ -3,5 +3,6 @@
     <string name="default_song_name">欢迎使用麦浪音乐</string>
     <string name="default_song_singer">Wind Shakes the Barley</string>
     <string name="search_hint">大家都在搜 …</string>
-
+    <string name="lrc_empty">还没发现歌词￣へ￣</string>
+    <string name="play_time_start">00:00</string>
 </resources>

@@ -34,6 +34,7 @@ class BottomPlayerView @JvmOverloads constructor(
     private lateinit var tvSongSinger: TextView
     private lateinit var ivPlayingBtn: ImageView
     private lateinit var ivSongList: ImageView
+    private var currentTime:Long = 0L
     private var onPlayerViewClickListener: OnPlayerViewClickListener? = null
 
     init {
@@ -66,7 +67,7 @@ class BottomPlayerView @JvmOverloads constructor(
         }
     }
 
-    fun setCurrentSongInfo(song: Song) {
+    fun setCurrentSong(song: Song) {
         // 本地音乐
         if (song.imgUrl == null) {
             SongUtil.loadLocalSongCover(song.singer ?: "", ivSongCover)
@@ -81,6 +82,7 @@ class BottomPlayerView @JvmOverloads constructor(
         tvSongSinger.text = song.singer
         playProgressBar.max = song.duration
         playProgressBar.progress = song.currentTime.toInt()
+        currentTime = song.currentTime
     }
 
     fun setPlayingStatus(isSelected: Boolean) {
@@ -90,6 +92,27 @@ class BottomPlayerView @JvmOverloads constructor(
     fun startCoverRotation() {
         rotationAnim.start()
     }
+
+    fun startPlay() {
+        ivPlayingBtn.isSelected = true
+        rotationAnim.start()
+    }
+
+    fun pausePlay() {
+        ivPlayingBtn.isSelected = false
+        rotationAnim.pause()
+    }
+
+    fun setCurrentProgress(progress:Int) {
+        playProgressBar.progress = progress
+    }
+
+    fun resumePlay() {
+        ivPlayingBtn.isSelected = true
+        rotationAnim.resume()
+    }
+
+    val currentProgress get() = currentTime
 
     private val rotationAnim by lazy {
         ObjectAnimator.ofFloat(ivSongCover, "rotation", 0.0f, 360.0f).apply {

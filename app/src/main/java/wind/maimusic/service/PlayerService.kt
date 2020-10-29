@@ -353,8 +353,8 @@ class PlayerService : Service() {
 
         val mp get() = mediaPlayer
 
-        // 当前播放进度（秒）
-        val playingTime get() = mediaPlayer.currentPosition / 1000
+        // 当前播放进度（ms）
+        val playingTime get() = mediaPlayer.currentPosition
     }
 
 

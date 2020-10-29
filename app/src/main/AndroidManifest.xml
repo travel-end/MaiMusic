@@ -29,11 +29,11 @@
             android:value="portrait|landscape" />
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".ui.WelcomeActivity"
+            android:name=".ui.activities.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Transparent">
             <intent-filter>
@@ -42,6 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activities.PlayActivity" />
+
         <service
             android:name=".service.PlayerService"
             android:enabled="true"

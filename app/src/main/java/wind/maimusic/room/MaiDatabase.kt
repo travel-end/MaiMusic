@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import wind.maimusic.MaiApp
 import wind.maimusic.model.*
+import wind.maimusic.model.firstmeet.FirstMeetSong
 
 /**
  * @By Journey 2020/10/28

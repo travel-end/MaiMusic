@@ -1,9 +1,12 @@
 package wind.widget.utils
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import androidx.constraintlayout.widget.Placeholder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import wind.widget.R
 
@@ -22,7 +25,7 @@ fun ImageView.loadImg(
     round: Float = 0f,
     cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL,
     placeholder: Int = R.drawable.place_holder,
-    error:Int = R.drawable.place_holder
+    error: Int = R.drawable.place_holder
 ) {
 
     if (round == 0f) {
@@ -45,4 +48,22 @@ fun ImageView.loadImg(
             .apply(option)
             .into(this)
     }
+}
+
+fun loadImg(
+    context:Context,
+    url: String,
+    placeholder: Int = R.drawable.place_holder,
+    error: Int = R.drawable.place_holder,
+    block: (resource: Drawable) -> Unit
+) {
+    Glide
+        .with(context)
+        .load(url)
+        .apply(RequestOptions.placeholderOf(placeholder).error(error))
+        .into(object : SimpleTarget<Drawable>() {
+            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                block.invoke(resource)
+            }
+        })
 }

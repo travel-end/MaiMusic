@@ -40,7 +40,7 @@
             android:id="@+id/item_search_song_list_tv_song_singer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryLight2"
+            android:textColor="@color/text_color"
             android:layout_marginTop="@dimen/dp_3"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@id/item_search_song_list_iv_downloaded"

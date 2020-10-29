@@ -43,6 +43,7 @@
         layout="@layout/view_loading_song"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
         android:visibility="gone" />
 
     <include

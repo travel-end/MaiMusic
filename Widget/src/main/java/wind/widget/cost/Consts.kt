@@ -8,24 +8,6 @@ import android.content.Context
  */
 object Consts {
     const val LOG_TAG = "maiMusic"
-//    // 封面图片的路径
-//    fun coverImgUrl(context: Context):String {
-//        return "${context.getExternalFilesDir("coverImg").toString()}/maimusic/coverimg/"
-//    }
-//    // 下载歌曲的路径 todo 使用共享路径 保证app卸载后歌曲不会被删除
-//    fun downloadSongUrl(context: Context):String {
-//        return "${context.getExternalFilesDir("downloadSong").toString()}/maimusic/downloadsong/"
-//    }
-//    // 保存歌词的路径
-//    fun lrcTextUrl(context: Context):String {
-//        return "${context.getExternalFilesDir("lrcText").toString()}/maimusic/lrctext"
-//    }
-//
-//    // 当前播放歌曲的路径
-//    fun currentSongUrl(context: Context):String {
-//        return "${context.getExternalFilesDir("song").toString()}/maimusic"
-//    }
-
     //根据歌手获取歌手图片的baseUrl
     const val SINGER_PIC_BASE_URL = "http://music.163.com/"
     const val SINGER_PIC = "api/search/get/web?csrf_token=&type=100"

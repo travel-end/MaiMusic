@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.util.Log
 import android.widget.ImageView
 import wind.maimusic.Constants
+import wind.maimusic.model.core.ListBean
+import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.widget.R
 import wind.widget.cost.Consts
 import wind.widget.model.Song
@@ -47,7 +49,6 @@ object SongUtil {
         try {
             val input = FileInputStream("${Constants.currentSongUrl()}/song.txt")
             val ois = ObjectInputStream(input)
-            ois.close()//todo
             return ois.readObject() as Song //返回对象
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -158,4 +159,56 @@ object SongUtil {
             null
         }
     }
+    fun assemblySong(s: Any,songType:Int):Song {
+        var song:Song?=null
+        when(songType) {
+            SONG_FIRST_MEET->{
+               val fmSong = s as FirstMeetSong
+                song = Song().apply {
+                    songId = fmSong.songId //004DrG5A2nm7q2
+                    singer = fmSong.singer// 鸾音社
+                    songName = fmSong.songName// 夜来寒雨晓来风
+                    imgUrl = fmSong.imgUrl
+                    duration = fmSong.duration?:0//187  (秒)
+                    isOnline = fmSong.isOnline?:false
+                    mediaId = fmSong.mediaId//004DrG5A2nm7q2
+                    albumName = fmSong.albumName//夜来寒雨晓来风
+                    isDownload =fmSong.isDownload?:false
+                }
+            }
+            SONG_LOCAL->{
+
+            }
+            SONG_HISTORY->{
+
+            }
+            SONG_DOWNLOAD->{
+
+            }
+            SONG_LOVE->{
+
+            }
+            SONG_ONLINE->{
+                val online = s as ListBean
+                song = Song().apply {
+                    songId = online.songmid //004DrG5A2nm7q2
+                    singer = StringUtil.getSinger(s)// 鸾音社
+                    songName = online.songname// 夜来寒雨晓来风
+                    imgUrl = "${Consts.ALBUM_PIC}${online.albummid}${Consts.JPG}"////http://y.gtimg.cn/music/photo_new/T002R180x180M000004UvnL62KXhCQ.jpg
+                    duration = online.interval//187  (秒)
+                    isOnline = true
+                    mediaId = online.strMediaMid//004DrG5A2nm7q2
+                    albumName = online.albumname//夜来寒雨晓来风
+                    isDownload = DownloadedUtil.isExistOfDownloadSong(online.songmid?:"")//003IHI2x3RbXLS  // 是否已经下载过了（初次搜索为false）
+                }
+            }
+        }
+        return song!!
+    }
+    const val SONG_FIRST_MEET =0
+    const val SONG_LOCAL = 1
+    const val SONG_HISTORY = 2
+    const val SONG_DOWNLOAD =3
+    const val SONG_LOVE = 4
+    const val SONG_ONLINE =5
 }
