@@ -22,6 +22,8 @@ data class FirstMeetSong(
     @ColumnInfo
     var songmid:String?=null,
     @ColumnInfo
+    var url:String?=null,
+    @ColumnInfo
     var imgUrl: String? = null,
     @ColumnInfo
     var duration: Int? = null,

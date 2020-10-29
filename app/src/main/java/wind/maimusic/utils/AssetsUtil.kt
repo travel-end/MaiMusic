@@ -77,7 +77,7 @@ object AssetsUtil {
                 builder.append(line)
             }
             val result = gson.fromJson(builder.toString(), FirstMeet::class.java)
-            LogUtil.e("查询json文件的推荐歌曲数目：${result.firstMeetList.size}")
+//            LogUtil.e("查询json文件的推荐歌曲数目：${result.firstMeetList.size}")
             result?.let {
                 val firstMeetList = it.firstMeetList
                 for (r in firstMeetList) {

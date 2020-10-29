@@ -88,6 +88,7 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
 
     open fun showLoadingNormal(msg: String) {
         if (loadingNormalView?.visibility == View.GONE) {
+            loadingNormalView?.findViewById<TextView>(R.id.view_loading_normal_tv_msg)?.text =msg
             loadingNormalView?.visibility = View.VISIBLE
         }
     }

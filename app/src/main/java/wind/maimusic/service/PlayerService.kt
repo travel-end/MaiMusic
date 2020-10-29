@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
 import wind.maimusic.model.*
+import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.*
 import wind.widget.cost.Consts
@@ -16,6 +17,7 @@ class PlayerService : Service() {
     private var historySongs: MutableList<HistorySong>? = null
     private var downloadSongs: MutableList<Downloaded>? = null
     private var loveSongs: MutableList<LoveSong>? = null
+    private var firstMeetSongs: MutableList<FirstMeetSong>? = null
     private var listType: Int = 0 // 0表示的播放的詩網絡音乐
     private var currentPosition: Int = 0
     private var isPlaying: Boolean = false
@@ -58,6 +60,11 @@ class PlayerService : Service() {
                         MaiDatabase.getDatabase().loveSongDao().findAllLoveSong().toMutableList()
                     }
                     LogUtil.e("--->onCreate loveSongs: $loveSongs")
+                }
+                Consts.LIST_TYPE_ONLINE->{
+                    firstMeetSongs = GlobalUtil.execute {
+                        MaiDatabase.getDatabase().firstMeetSongDao().findAllFirstSong().toMutableList()
+                    }
                 }
                 else -> {
 
@@ -219,11 +226,12 @@ class PlayerService : Service() {
                             setOnPreparedListener { mp ->
                                 this@PlayerService.isPlaying = true
                                 PlayServiceHelper.save2History()
+                                //
                                 if (restartTime != null && restartTime != 0) {
                                     mp.seekTo(restartTime)
                                 }
-                                mp.start()
                                 Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
+                                mp.start()
                             }
                         }
                     }
@@ -231,7 +239,6 @@ class PlayerService : Service() {
             } catch (e: Exception) {
                 "播放在线歌曲出错".toast()
             }
-
         }
 
         fun pause() {
@@ -345,8 +352,6 @@ class PlayerService : Service() {
         fun stop() {
             mediaPlayer.stop()
             isPlaying = false
-
-            // TODO: 2020/10/28 在调用stop后如果需要再次通过start进行播放，需要重新调用prepare函数
         }
 
         val playing get() = isPlaying

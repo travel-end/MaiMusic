@@ -174,6 +174,8 @@ object SongUtil {
                     mediaId = fmSong.mediaId//004DrG5A2nm7q2
                     albumName = fmSong.albumName//夜来寒雨晓来风
                     isDownload =fmSong.isDownload?:false
+                    listType = Consts.LIST_TYPE_ONLINE
+                    position = 0
                 }
             }
             SONG_LOCAL->{

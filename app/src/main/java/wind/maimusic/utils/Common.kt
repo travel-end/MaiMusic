@@ -71,7 +71,9 @@ fun Int.inflate(parent:ViewGroup,attachToRoot:Boolean = false) :View{
  * 显示view
  */
 fun View?.visible() {
-    this?.visibility = View.VISIBLE
+    if (this?.visibility == View.GONE) {
+        this.visibility = View.VISIBLE
+    }
 }
 
 /**
@@ -91,7 +93,9 @@ fun View?.visibleWithAlphaAnim(duration:Long = 500L) {
  * 隐藏view
  */
 fun View?.gone() {
-    this?.visibility = View.GONE
+    if (this?.visibility == View.VISIBLE) {
+        this.visibility = View.GONE
+    }
 }
 
 /**

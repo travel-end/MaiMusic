@@ -1,6 +1,7 @@
 package wind.maimusic.service
 
 import wind.maimusic.model.*
+import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.Bus
 import wind.maimusic.utils.GlobalUtil
@@ -77,6 +78,30 @@ object PlayServiceHelper {
         }
     }
 
+    /**
+     * 主要是保存当前播放歌曲在列表中的位置信息 此处的position是根据播放模式后增加的position
+     */
+//    fun saveFirstMeetSong(currentPosition: Int, fmSongs: MutableList<FirstMeetSong>?) {
+//        if (fmSongs != null) {
+//            val fmSong = fmSongs[currentPosition]
+//            val song = Song().apply {
+//                position = currentPosition
+//                songId = fmSong.songId
+//                songName = fmSong.songName
+//                singer = fmSong.singer
+////                url = fmSong.url
+//                imgUrl = fmSong.imgUrl
+//                listType = Consts.LIST_TYPE_FIRST_MEET
+//                isOnline = false
+//                duration = fmSong.duration?:0
+//                mediaId = fmSong.mediaId
+//                isDownload = true
+//                albumName = fmSong.albumName
+//            }
+//            SongUtil.saveSong(song)
+//        }
+//    }
+
     fun saveLoveSong(currentPosition: Int) {
         var loveSongs = GlobalUtil.execute {
             MaiDatabase.getDatabase().loveSongDao().findAllLoveSong().toMutableList()
@@ -100,7 +125,6 @@ object PlayServiceHelper {
             }
             SongUtil.saveSong(song)
         }
-
     }
 
     fun save2History() {

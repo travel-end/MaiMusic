@@ -1,13 +1,12 @@
 package wind.widget.cost
 
-import android.content.Context
 
 /**
  * @By Journey 2020/10/26
  * @Description
  */
 object Consts {
-    const val LOG_TAG = "maiMusic"
+    const val LOG_TAG = "maizi"
     //根据歌手获取歌手图片的baseUrl
     const val SINGER_PIC_BASE_URL = "http://music.163.com/"
     const val SINGER_PIC = "api/search/get/web?csrf_token=&type=100"

@@ -11,7 +11,7 @@ import wind.maimusic.model.firstmeet.FirstMeetSong
  * @By Journey 2020/10/28
  * @Description
  */
-@Database(entities = [FirstMeetSong::class,LocalSong::class,HistorySong::class,DownloadSong::class,LoveSong::class],version = 1)
+@Database(entities = [FirstMeetSong::class,LocalSong::class,HistorySong::class,DownloadSong::class,LoveSong::class],version = 1,exportSchema = false)
 abstract class MaiDatabase:RoomDatabase() {
     abstract fun firstMeetSongDao():FirstMeetSongDao
     abstract fun localSongDao():LocalSongDao

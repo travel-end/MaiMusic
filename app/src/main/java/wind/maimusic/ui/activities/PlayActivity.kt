@@ -13,7 +13,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.activity_play.*
-import kotlinx.android.synthetic.main.view_volume_bar.view.*
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleActivity
 import wind.maimusic.utils.BitmapUtil
@@ -117,7 +116,7 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
         discView = play_disk_view as DiscView// 唱碟
         discCoverView = discView.findViewById(R.id.iv_disc_background)// 唱碟封面
         lrcView = lrc_view// 歌词
-        volumeSeekBar = play_volume_bar.sb_volume// 音量
+        volumeSeekBar = findViewById(R.id.sb_volume)// 音量
         playControllerView = play_controller_view// 播放控制器
         currentSongSinger = play_tv_song_singer
         currentSongName = play_tv_song_name

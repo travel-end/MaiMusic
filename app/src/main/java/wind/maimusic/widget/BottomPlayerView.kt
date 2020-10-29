@@ -12,6 +12,8 @@ import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
 import wind.maimusic.utils.SongUtil
+import wind.maimusic.utils.gone
+import wind.maimusic.utils.visible
 import wind.widget.R
 import wind.widget.interf.OnPlayerViewClickListener
 import wind.widget.model.Song
@@ -69,7 +71,7 @@ class BottomPlayerView @JvmOverloads constructor(
 
     fun setCurrentSong(song: Song) {
         // 本地音乐
-        if (song.imgUrl == null) {
+        if (song.imgUrl == null|| !song.isOnline) {
             SongUtil.loadLocalSongCover(song.singer ?: "", ivSongCover)
         } else {// 网络音乐
             ivSongCover.loadImg(
@@ -80,8 +82,14 @@ class BottomPlayerView @JvmOverloads constructor(
         }
         tvSongName.text = song.songName
         tvSongSinger.text = song.singer
-        playProgressBar.max = song.duration
-        playProgressBar.progress = song.currentTime.toInt()
+        val duration = song.duration
+        if (duration ==0) {
+            playProgressBar.gone()
+        } else {
+            playProgressBar.visible()
+            playProgressBar.max = song.duration
+            playProgressBar.progress = song.currentTime.toInt()
+        }
         currentTime = song.currentTime
     }
 
@@ -103,7 +111,7 @@ class BottomPlayerView @JvmOverloads constructor(
         rotationAnim.pause()
     }
 
-    fun setCurrentProgress(progress:Int) {
+    fun updateProgress(progress:Int) {
         playProgressBar.progress = progress
     }
 
@@ -112,7 +120,9 @@ class BottomPlayerView @JvmOverloads constructor(
         rotationAnim.resume()
     }
 
-    val currentProgress get() = currentTime
+    val currentSongProgress get() = currentTime
+
+    val seekBarProgress get() = playProgressBar.progress
 
     private val rotationAnim by lazy {
         ObjectAnimator.ofFloat(ivSongCover, "rotation", 0.0f, 360.0f).apply {
