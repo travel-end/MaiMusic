@@ -175,6 +175,7 @@ object SongUtil {
                     albumName = fmSong.albumName//夜来寒雨晓来风
                     isDownload =fmSong.isDownload?:false
                     listType = Consts.LIST_TYPE_ONLINE
+                    onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
                     position = 0
                 }
             }

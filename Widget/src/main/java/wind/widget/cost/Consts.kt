@@ -7,15 +7,6 @@ package wind.widget.cost
  */
 object Consts {
     const val LOG_TAG = "maizi"
-    //根据歌手获取歌手图片的baseUrl
-    const val SINGER_PIC_BASE_URL = "http://music.163.com/"
-    const val SINGER_PIC = "api/search/get/web?csrf_token=&type=100"
-    // Fiddler抓包qq音乐网站后的地址
-    const val FIDDLER_BASE_QQ_URL = "https://c.y.qq.com/"
-    //获取播放地址的baseUrl
-    const val FIDDLER_BASE_SONG_URL = "https://u.y.qq.com/"
-    // 获取歌手图片需要添加user-agent的表头
-    const val HEADER_USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
 
     // 专辑照片
     const val ALBUM_PIC="http://y.gtimg.cn/music/photo_new/T002R180x180M000"
@@ -43,6 +34,10 @@ object Consts {
     const val LIST_TYPE_LOVE=3//我的收藏列表
     const val LIST_TYPE_HISTORY=4//最近播放列表
     const val LIST_TYPE_DOWNLOAD=5//下载列表
+
+    //在线音乐分类列表
+    const val ONLINE_LIST_TYPE_FIRST_MEET = 1
+
 
     const val EVENT_LIST_TYPE = "event_list_type"
 

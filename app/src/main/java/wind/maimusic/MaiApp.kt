@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.OnlineSongDatabase
 import wind.maimusic.utils.AssetsUtil
 import wind.maimusic.utils.GlobalUtil
 import wind.maimusic.utils.SpUtil
@@ -41,7 +42,7 @@ class MaiApp:MultiDexApplication() {
                 val songs =AssetsUtil.loadFirstMeetSongs()
                 if (isNotNullOrEmpty(songs)) {
                     SpUtil.saveValue(Consts.FIRST_LAUNCH,"has_launch")
-                    MaiDatabase.getDatabase().firstMeetSongDao().addFirstMeetSongList(songs!!)
+                    OnlineSongDatabase.getDatabase().firstMeetSongDao().addFirstMeetSongList(songs!!)
                 }
             }
         }

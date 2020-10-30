@@ -17,6 +17,6 @@ interface FirstMeetSongDao {
     @Query("SELECT * FROM first_meet_song WHERE id=(:id)")
     suspend fun findFirstMeetSongById(id:Int):List<FirstMeetSong>
 
-    @Delete(entity = FirstMeetSong::class)
-    suspend fun deleteAllFirstMeetSong(firstMeetSongs: List<FirstMeetSong>)
+    @Query("DELETE FROM first_meet_song")
+    suspend fun deleteAllFirstMeetSong()
 }

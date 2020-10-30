@@ -6,8 +6,8 @@
 6、fragment与viewPager的懒加载和fragment的show、hide问题、fragment之间通信问题
 7、菜鸟窝pagerRecyclerView，处理搜索页的分页问题
 8、使用JRecyclerView处理下拉刷新问题
-
-
+9、对于播放搜索音乐，下一首播放的内容，需要存储一个本地歌单来播放下一首（这种情况很少，就使用这种方式处理）
+10、使用IntentService: 用于处理后台长时间的耗时操作，如：下载文件、播放音乐
 
 
 todo

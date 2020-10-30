@@ -28,6 +28,7 @@ class Song(
     : Boolean = false,
     var listType //歌曲列表类别,0表示当前没有列表，即可能在播放网络歌曲
     : Int = 0,
+    var onlineSubjectType:Int = 0,// 网络音乐的类型
     var isDownload //是否为下载的歌曲
     : Boolean = false,
     var albumName: String? = null,

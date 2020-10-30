@@ -10,14 +10,13 @@ import wind.maimusic.model.LoveSong
 @Dao
 interface LoveSongDao {
     @Insert(entity = LoveSong::class,onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addLoveSong(loveSong: LoveSong):Long
-
+    suspend fun addToLoveSong(loveSong: LoveSong):Long
     @Delete
-    suspend fun deleteLoveSong(loveSong: LoveSong):Int
+    suspend fun deleteFromLoveSong(loveSong: LoveSong):Int
 
     @Query("SELECT * FROM love_song WHERE songId =(:songId)")
-    suspend fun findLoveSong(songId:String):List<LoveSong>
+    suspend fun findLoveSongBySongId(songId:String):List<LoveSong>
 
     @Query("SELECT * FROM love_song ORDER BY id")
-    suspend fun findAllLoveSong():List<LoveSong>
+    suspend fun findAllLoveSongs():List<LoveSong>
 }

@@ -3,6 +3,7 @@ package wind.maimusic.widget
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.animation.LinearInterpolator
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.SongUtil
 import wind.maimusic.utils.gone
 import wind.maimusic.utils.visible
@@ -117,7 +119,10 @@ class BottomPlayerView @JvmOverloads constructor(
 
     fun resumePlay() {
         ivPlayingBtn.isSelected = true
-        rotationAnim.resume()
+        LogUtil.e("Current Version:${Build.VERSION.SDK_INT}")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            rotationAnim.resume()
+        }
     }
 
     val currentSongProgress get() = currentTime

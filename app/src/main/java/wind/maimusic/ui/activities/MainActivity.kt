@@ -25,19 +25,21 @@ import wind.widget.interf.OnPlayerViewClickListener
 import wind.widget.model.Song
 import java.lang.ref.WeakReference
 
+/**
+ * 主界面
+ */
 class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationViewHeader: View
     private lateinit var navigationView: NavigationView
     private lateinit var bottomPlayerView: BottomPlayerView
-    private lateinit var updateSeekBarHandler:UpdateSeekBarProgressHandler
+    private lateinit var updateSeekBarHandler: UpdateSeekBarProgressHandler
     private var navigationManager: NavigationManager? = null
-    private var currentSong:Song?=null
-    private var flag:Boolean = false
-    private var existLivingService:Boolean = false
-    private var isRePlay:Boolean = false // 是否是退出后重新进入继续播放
-    private var currentPlayProgress:Long = 0L
+    private var currentSong: Song? = null
+    private var flag: Boolean = false
+    private var existLivingService: Boolean = false
+    private var currentPlayProgress: Long = 0L
     override fun layoutResId() = R.layout.activity_main
     override fun initView() {
         super.initView()
@@ -50,14 +52,13 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                 existLivingService = true
             }
         }
-        startService()
     }
-
+    /* 设置当前歌曲的播放信息*/
     private fun initCurrentSong() {
         currentSong = SongUtil.getSong()
         if (currentSong != null) {
+            startService()
             currentPlayProgress = currentSong!!.currentTime
-            LogUtil.e("--->mainActivity currentPlayProgress:$currentPlayProgress")
             bottomPlayerView.setCurrentSong(currentSong!!)
         } else {
             mViewModel.findFirstMeetSongs()
@@ -73,21 +74,22 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
 
     override fun initAction() {
         super.initAction()
+
+        /* 点击下方进入播放页面*/
         bottomPlayerView.setOnPlayerViewClickListener(object : OnPlayerViewClickListener {
-            /* 点击进入播放页面*/
             override fun onPlayerViewClick(view: View) {
                 val song = SongUtil.getSong()
+                // 将当前播放歌曲的状态（播放/暂停）以及进度带到playActivity页面
                 if (song != null) {
-                    val playIntent = Intent(this@MainActivity,PlayActivity::class.java)
+                    val playIntent = Intent(this@MainActivity, PlayActivity::class.java)
                     if (playerServiceBinder?.playing == true) {
-                        // 保存当前播放进度
-                        val progress = playerServiceBinder?.playingTime?:0 / 1000
+                        val progress = (playerServiceBinder?.playingTime ?: 0) / 1000// 实时进度（秒）
                         song.currentTime = progress.toLong()
                         SongUtil.saveSong(song)
-                        playIntent.putExtra(Consts.PLAY_STATUS,Consts.SONG_PLAY)
+                        playIntent.putExtra(Consts.PLAY_STATUS, Consts.SONG_PLAY)
                     } else {// 暂停
                         song.currentTime = bottomPlayerView.seekBarProgress.toLong()
-                        playIntent.putExtra(Consts.PLAY_STATUS,Consts.SONG_PAUSE)
+                        playIntent.putExtra(Consts.PLAY_STATUS, Consts.SONG_PAUSE)
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         startActivity(
@@ -100,35 +102,40 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                     }
                 }
             }
+
             /* ****播放/暂停*/
             override fun onPlayerBtnClick(view: View) {
                 when {
-                    playerServiceBinder?.playing == true->{
+                    playerServiceBinder?.playing == true -> {
                         playerServiceBinder?.pause()
                         flag = true
                     }
-                    flag->{
+                    flag -> {
                         playerServiceBinder?.resume()
                         flag = false
                     }
-                    // 退出程序后重新进入的情况（包括首次打开app）
-                     else ->{
-                         val song = SongUtil.getSong()
-                         if (song != null) {
-                             isRePlay = true
-                             if (song.isOnline) {
-                                 playerServiceBinder?.playOnline((currentPlayProgress * 1000).toInt())
-                             } else {
-                                 if (currentPlayProgress != 0L) {
-                                     playerServiceBinder?.play(song.listType,(currentPlayProgress* 1000).toInt())
-                                 } else {
-                                     playerServiceBinder?.play(song.listType)
-                                 }
-                             }
-                         }
-                     }
+                    // 退出程序后重新进入的情况（包括首次打开app） 由暂停进入播放的状态
+                    else -> {
+                        val song = SongUtil.getSong()
+                        if (song != null) {
+                            LogUtil.e("--->mainActivity currentPlayProgress:$currentPlayProgress")
+                            if (song.isOnline) {
+                                playerServiceBinder?.playOnline((currentPlayProgress * 1000).toInt())
+                            } else {
+                                if (currentPlayProgress != 0L) {
+                                    playerServiceBinder?.play(
+                                        song.listType,
+                                        (currentPlayProgress * 1000).toInt()
+                                    )
+                                } else {
+                                    playerServiceBinder?.play(song.listType)
+                                }
+                            }
+                        }
+                    }
                 }
             }
+
             /* 点击歌曲列表*/
             override fun onPlayerSongListClick(view: View) {
             }
@@ -138,47 +145,50 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     override fun observe() {
         super.observe()
         mViewModel.run {
-            firstMeetSongs.observe(this@MainActivity,Observer{
+            firstMeetSongs.observe(this@MainActivity, Observer {
                 it?.let {
                     if (it.isNotEmpty()) {
-                        isRePlay = true
                         val firstMeetSong = it[0]
-                        val song = SongUtil.assemblySong(firstMeetSong,SongUtil.SONG_FIRST_MEET)
+                        // 当前播放的是网络音乐
+                        val song = SongUtil.assemblySong(firstMeetSong, SongUtil.SONG_FIRST_MEET)
                         bottomPlayerView.setCurrentSong(song)
                         mViewModel.getSongPlayUrl(song)
                     }
                 }
             })
-            songPlayUrlResult.observe(this@MainActivity,Observer{
+            /*获取歌曲远程播放地址（只有在第一次打开app的时候调用）*/
+            songPlayUrlResult.observe(this@MainActivity, Observer {
                 it?.let {
                     val song = it.entries.find { entry ->
                         entry.key == "song"
                     }?.value as Song
                     val url = it.entries.find { entry ->
-                        entry.key=="url"
+                        entry.key == "url"
                     }?.value as String
                     song.url = url
                     currentSong = song
                     SongUtil.saveSong(song)
+                    startService()
                 }
             })
         }
-        /* *****切歌***/
-        Bus.observe<Int>(Consts.SONG_STATUS_CHANGE,this) {status->
-            when(status){
-                Consts.SONG_CHANGE ->{
-                    // TODO: 2020/10/29 如果是退出重新进的情况 只需要考虑播放 而不需要刷新bottomPlayView
+        Bus.observe<Int>(Consts.SONG_STATUS_CHANGE, this) { status ->
+            when (status) {
+                Consts.SONG_CHANGE -> {
                     currentSong = SongUtil.getSong()// 刷新当前播放的歌曲
                     if (currentSong != null) {
-                        if (!isRePlay) {
-                            bottomPlayerView.setCurrentSong(currentSong!!)
-                        }
+                        bottomPlayerView.setCurrentSong(currentSong!!)
                         bottomPlayerView.startPlay()
                         startSeekBarProgress()
+                        flag = false
                     }
                 }
-                Consts.SONG_PAUSE->bottomPlayerView.pausePlay()
-                Consts.SONG_RESUME->{
+                Consts.SONG_PAUSE -> {
+                    bottomPlayerView.pausePlay()
+                    flag = true
+                }
+                Consts.SONG_RESUME -> {
+                    flag = false
                     bottomPlayerView.resumePlay()
                     startSeekBarProgress()
                 }
@@ -214,18 +224,19 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
 
     private fun startSeekBarProgress() {
         updateSeekBarHandler.removeMessages(1)
-        updateSeekBarHandler.sendEmptyMessageDelayed(1,1000)
+        updateSeekBarHandler.sendEmptyMessageDelayed(1, 1000)
     }
 
-    private class UpdateSeekBarProgressHandler(content:MainActivity):Handler(Looper.getMainLooper()) {
+    private class UpdateSeekBarProgressHandler(content: MainActivity) :
+        Handler(Looper.getMainLooper()) {
         private val content: WeakReference<MainActivity> = WeakReference(content)
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            content.get()?.let {activity ->
+            content.get()?.let { activity ->
                 activity.run {
                     if (playerServiceBinder?.playing == true) {
-                        val progress = playerServiceBinder?.playingTime?:0
-                        bottomPlayerView.updateProgress(progress/1000)
+                        val progress = playerServiceBinder?.playingTime ?: 0
+                        bottomPlayerView.updateProgress(progress / 1000)
                         startSeekBarProgress()
                     }
                 }
@@ -243,9 +254,9 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         } else {
             startService(playIntent)
         }
-        bottomPlayerView.clearAnim()
+        bottomPlayerView.clearAnim()// 这里停掉了  再次进入如果是播放状态 需要手动调用
         val song = SongUtil.getSong()
-        song?.currentTime = ((playerServiceBinder?.playingTime?:0)/1000).toLong()
+        song?.currentTime = ((playerServiceBinder?.playingTime ?: 0) / 1000).toLong()
         if (flag) {
             song?.playStatus = Consts.SONG_PAUSE
         } else {

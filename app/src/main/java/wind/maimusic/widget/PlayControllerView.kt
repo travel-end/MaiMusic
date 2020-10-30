@@ -10,6 +10,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import wind.maimusic.R
 import wind.maimusic.utils.StringUtil
+import wind.widget.model.Song
 import wind.widget.utils.fastClickListener
 
 /**
@@ -75,8 +76,16 @@ class PlayControllerView  @JvmOverloads constructor(
         playCurrentProgress.text = StringUtil.formatProgress(playProgressBar.progress.toLong())
     }
 
-    fun setPlay() {
-        playButton.isSelected = true
+    fun setPlayBtnSelected(selected:Boolean) {
+        playButton.isSelected = selected
+    }
+
+    fun setCurrentSong(song: Song) {
+        playCurrentProgress.text = StringUtil.formatProgress(song.currentTime)
+        playTotalProgress.text = StringUtil.formatProgress(song.duration.toLong())
+        playProgressBar.max = song.duration
+        val time = if (song.currentTime < 1L) 0 else song.currentTime.toInt()
+        playProgressBar.progress = time
     }
 
     fun setOnPlayControllerViewClick(listener:OnPlayControllerViewClick) {

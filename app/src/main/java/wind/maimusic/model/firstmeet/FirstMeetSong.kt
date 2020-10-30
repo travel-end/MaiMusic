@@ -34,5 +34,7 @@ data class FirstMeetSong(
     @ColumnInfo
     var albumName: String? = null,
     @ColumnInfo
-    var isDownload: Boolean? = null
+    var isDownload: Boolean? = null,
+    @ColumnInfo
+    var listType:Int?=null
 )

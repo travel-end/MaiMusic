@@ -8,17 +8,27 @@ import android.os.IBinder
 import wind.maimusic.model.*
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.OnlineSongDatabase
 import wind.maimusic.utils.*
 import wind.widget.cost.Consts
+import wind.widget.model.Song
 import java.io.IOException
 
+/**
+ * 关于Service何时销毁
+ * StartService开启的Service，调用者退出后Service仍然存在
+ * BindService开启的Service，调用者退出后，Service随着调用者的退出销毁
+ *
+ * 即使一个Service被startService启动多次，onCreate方法也只会调用一次
+ */
 class PlayerService : Service() {
     private var localSongs: MutableList<LocalSong>? = null
     private var historySongs: MutableList<HistorySong>? = null
     private var downloadSongs: MutableList<Downloaded>? = null
     private var loveSongs: MutableList<LoveSong>? = null
     private var firstMeetSongs: MutableList<FirstMeetSong>? = null
-    private var listType: Int = 0 // 0表示的播放的詩網絡音乐
+    private var onlineSongs: MutableList<OnlineSong>? = null
+    private var listType: Int = 0
     private var currentPosition: Int = 0
     private var isPlaying: Boolean = false
     private var isPaused: Boolean = false
@@ -30,9 +40,11 @@ class PlayerService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        LogUtil.e("-------PlayService----onCreate------")
         val song = SongUtil.getSong()
-        song?.let {
-            listType = it.listType
+        LogUtil.e("-------PlayService----onCreate currentSong:$song; songName:${song?.songName}------")
+        if (song != null) {
+            listType = song.listType
             when (listType) {
                 Consts.LIST_TYPE_LOCAL -> {
                     localSongs = GlobalUtil.execute {
@@ -57,28 +69,37 @@ class PlayerService : Service() {
                 }
                 Consts.LIST_TYPE_LOVE -> {
                     loveSongs = GlobalUtil.execute {
-                        MaiDatabase.getDatabase().loveSongDao().findAllLoveSong().toMutableList()
+                        MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
                     }
                     LogUtil.e("--->onCreate loveSongs: $loveSongs")
                 }
-                Consts.LIST_TYPE_ONLINE->{
-                    firstMeetSongs = GlobalUtil.execute {
-                        MaiDatabase.getDatabase().firstMeetSongDao().findAllFirstSong().toMutableList()
+                Consts.LIST_TYPE_ONLINE -> {
+                    when (song.onlineSubjectType) {
+                        Consts.ONLINE_LIST_TYPE_FIRST_MEET -> {
+                            firstMeetSongs = GlobalUtil.execute {
+                                OnlineSongDatabase.getDatabase().firstMeetSongDao().findAllFirstSong().toMutableList()
+                            }
+                        }
+                        else->{}
                     }
                 }
                 else -> {
-
                 }
             }
+        } else {
+
         }
+
     }
 
     override fun onBind(intent: Intent): IBinder {
+        LogUtil.e("-------PlayService----onBind------")
         mediaPlayer.setOnCompletionListener {
             Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_PAUSE)
             val song = SongUtil.getSong()
             if (song != null) {
                 currentPosition = song.position
+                LogUtil.e("-------PlayService----onBind listType:$listType------")
                 when (listType) {
                     Consts.LIST_TYPE_LOCAL -> {
                         currentPosition = PlayServiceHelper.getNextSongPosition(
@@ -112,15 +133,37 @@ class PlayerService : Service() {
                         )
                         PlayServiceHelper.saveLoveSong(currentPosition)
                     }
+                    // 在线音乐
+                    Consts.LIST_TYPE_ONLINE -> {
+                        when (song.onlineSubjectType) {
+                            Consts.ONLINE_LIST_TYPE_FIRST_MEET -> {
+                                currentPosition = if (currentPosition==firstMeetSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
+                                    0
+                                } else {
+                                    PlayServiceHelper.getNextSongPosition(
+                                        currentPosition,
+                                        playMode,
+                                        firstMeetSongs?.size
+                                    )
+                                }
+                                LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                                PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                            }
+                        }
+                    }
                 }
                 if (listType != 0) {
-                    playerBinder.play(listType)
+                    if (listType == Consts.LIST_TYPE_ONLINE) {
+                        playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
+                    } else {
+                        playerBinder.play(listType)
+                    }
                 } else {
-                    playerBinder.stop()
+                    playerBinder.stop()// TODO: 2020/10/30 对于未知音乐（不在listType之内的音乐的处理）
                 }
             }
         }
-        mediaPlayer.setOnErrorListener { mediaPlayer, i, i2 ->
+        mediaPlayer.setOnErrorListener { _, i, i2 ->
             LogUtil.e("--->播放出错：setOnErrorListener:$i, $i2")
             "播放出错".toast()
             true
@@ -132,8 +175,8 @@ class PlayerService : Service() {
         fun setPlayModel(mode: Int) {
             playMode = mode
         }
-
-        fun play(type: Int, restartTime: Int? = null) {
+        // 播放下一首（包括在线音乐）、播放暂停的音乐
+        fun play(type: Int,onlineSubjectType:Int?=null, restartTime: Int? = null) {
             try {
                 listType = type
                 if (listType != 0) {
@@ -143,28 +186,38 @@ class PlayerService : Service() {
                                 MaiDatabase.getDatabase().localSongDao().findAllLocalSong()
                                     .toMutableList()
                             }
-                            LogUtil.e("--->play localsongs:$localSongs")
+//                            LogUtil.e("--->play localsongs:$localSongs")
                         }
                         Consts.LIST_TYPE_HISTORY -> {
                             // todo
                         }
                         Consts.LIST_TYPE_DOWNLOAD -> {
                             downloadSongs = DownloadedUtil.getSongFromFile()
-                            LogUtil.e("--->play downloadSongs:$downloadSongs")
+//                            LogUtil.e("--->play downloadSongs:$downloadSongs")
                         }
                         Consts.LIST_TYPE_LOVE -> {
                             loveSongs = GlobalUtil.execute {
-                                MaiDatabase.getDatabase().loveSongDao().findAllLoveSong()
+                                MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs()
                                     .toMutableList()
                             }
                             if (isNotNullOrEmpty(localSongs)) {
                                 loveSongs = PlayServiceHelper.orderLoveList(loveSongs!!)
                             }
-                            LogUtil.e("--->play loveSongs:$loveSongs")
+//                            LogUtil.e("--->play loveSongs:$loveSongs")
+                        }
+                        Consts.LIST_TYPE_ONLINE->{
+                            when(onlineSubjectType) {
+                                Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
+                                    firstMeetSongs = GlobalUtil.execute {
+                                        OnlineSongDatabase.getDatabase().firstMeetSongDao().findAllFirstSong().toMutableList()
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-                val song = SongUtil.getSong()
+                val song = SongUtil.getSong() // 根据播放模式获取的下一首音乐
+                LogUtil.e("-------PlayService PlayerBinder play imgUrl:${song?.imgUrl}")
                 if (song != null) {
                     currentPosition = song.position
                     mediaPlayer.reset()
@@ -205,6 +258,17 @@ class PlayerService : Service() {
                                 }
                             }
                         }
+                        // 播放在线音乐（只有自动播放下一曲才会执行这里  其他的是走的playOnline）
+                        Consts.LIST_TYPE_ONLINE->{
+                            when(onlineSubjectType){
+                                Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
+                                    if (isNotNullOrEmpty(firstMeetSongs)) {
+                                        val currentSongId = firstMeetSongs!![currentPosition].songId
+                                        getFirstMeetSongUrl(song,currentSongId,restartTime)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -212,7 +276,25 @@ class PlayerService : Service() {
                 "播放异常".toast()
             }
         }
+        private fun getFirstMeetSongUrl(song:Song,songId:String?,restartTime: Int?) {
+            if (songId.isNotNullOrEmpty()) {
+                val playUrl = PlayServiceHelper.getOnlineSongUrl(songId!!)
+                if (playUrl.isNullOrEmpty()) {
+                    currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,firstMeetSongs?.size)
+                    PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                    val nextSongId = firstMeetSongs!![currentPosition].songId
+                    getFirstMeetSongUrl(song,nextSongId,restartTime)
+                } else {
+                    song.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
+                    LogUtil.e("-------PlayService getFirstMeetSongUrl imgUrl:${song.imgUrl}")
+                    SongUtil.saveSong(song)
+                    mediaPlayer.setDataSource(playUrl)
+                    startPlay(restartTime)
+                }
+            }
+        }
 
+        // 播放搜索的歌曲 还有？？
         fun playOnline(restartTime: Int? = null) {
             try {
                 val song = SongUtil.getSong()
@@ -226,11 +308,13 @@ class PlayerService : Service() {
                             setOnPreparedListener { mp ->
                                 this@PlayerService.isPlaying = true
                                 PlayServiceHelper.save2History()
-                                //
                                 if (restartTime != null && restartTime != 0) {
                                     mp.seekTo(restartTime)
+                                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_RESUME)
+                                } else {
+                                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
                                 }
-                                Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
+                                // TODO: 2020/10/30 如果是由暂停进入播放的状态  发送的应该是pause 这样就不用刷新bottomPlayView左边的图片和名称了
                                 mp.start()
                             }
                         }
@@ -374,6 +458,15 @@ class PlayerService : Service() {
             mp.start()
             PlayServiceHelper.save2History()
             Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LogUtil.e("-------PlayService----onDestroy------")
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+            mediaPlayer.release()
         }
     }
 }

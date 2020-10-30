@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import wind.maimusic.Constants
+import wind.maimusic.utils.LogUtil
 import java.util.concurrent.TimeUnit
 
 
@@ -36,7 +37,7 @@ class RetrofitClient {
 
     class ILoggerInterceptor: HttpLoggingInterceptor.Logger {
         override fun log(message: String) {
-            Log.e("IMUSIC",message)
+            LogUtil.e(message)
         }
     }
 

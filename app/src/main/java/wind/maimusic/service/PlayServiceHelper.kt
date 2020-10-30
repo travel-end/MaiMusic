@@ -1,10 +1,14 @@
 package wind.maimusic.service
 
+import wind.maimusic.base.state.State
+import wind.maimusic.base.state.StateType
 import wind.maimusic.model.*
 import wind.maimusic.model.firstmeet.FirstMeetSong
+import wind.maimusic.net.RetrofitClient
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.Bus
 import wind.maimusic.utils.GlobalUtil
+import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.SongUtil
 import wind.widget.cost.Consts
 import wind.widget.model.Song
@@ -79,32 +83,32 @@ object PlayServiceHelper {
     }
 
     /**
-     * 主要是保存当前播放歌曲在列表中的位置信息 此处的position是根据播放模式后增加的position
+     * 根据当前的位置  保存当前歌曲（根据播放模式切歌）
      */
-//    fun saveFirstMeetSong(currentPosition: Int, fmSongs: MutableList<FirstMeetSong>?) {
-//        if (fmSongs != null) {
-//            val fmSong = fmSongs[currentPosition]
-//            val song = Song().apply {
-//                position = currentPosition
-//                songId = fmSong.songId
-//                songName = fmSong.songName
-//                singer = fmSong.singer
-////                url = fmSong.url
-//                imgUrl = fmSong.imgUrl
-//                listType = Consts.LIST_TYPE_FIRST_MEET
-//                isOnline = false
-//                duration = fmSong.duration?:0
-//                mediaId = fmSong.mediaId
-//                isDownload = true
-//                albumName = fmSong.albumName
-//            }
-//            SongUtil.saveSong(song)
-//        }
-//    }
+    fun saveFirstMeetSong(currentPosition: Int, fmSongs: MutableList<FirstMeetSong>?) {
+        if (fmSongs != null) {
+            val fmSong = fmSongs[currentPosition]
+            val song = Song().apply {
+                position = currentPosition
+                songId = fmSong.songId
+                songName = fmSong.songName
+                singer = fmSong.singer
+                imgUrl = fmSong.imgUrl
+                listType = Consts.LIST_TYPE_ONLINE
+                onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
+                isOnline = fmSong.isOnline?:false
+                duration = fmSong.duration ?: 0
+                mediaId = fmSong.mediaId
+                isDownload = fmSong.isDownload?:false
+                albumName = fmSong.albumName
+            }
+            SongUtil.saveSong(song)
+        }
+    }
 
     fun saveLoveSong(currentPosition: Int) {
         var loveSongs = GlobalUtil.execute {
-            MaiDatabase.getDatabase().loveSongDao().findAllLoveSong().toMutableList()
+            MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
         }
         if (loveSongs.isNotEmpty()) {
             loveSongs = orderLoveList(loveSongs)
@@ -130,7 +134,6 @@ object PlayServiceHelper {
     fun save2History() {
         val song = SongUtil.getSong()
         if (song != null) {
-
             val historySong = HistorySong().apply {
                 songId = song.songId
                 qqId = song.qqId
@@ -194,5 +197,31 @@ object PlayServiceHelper {
             loveSongList.add(tempList[i])
         }
         return loveSongList
+    }
+
+    fun getOnlineSongUrl(songId: String): String? {
+        val songUrl = "${Consts.SONG_URL_DATA_LEFT}$songId${Consts.SONG_URL_DATA_RIGHT}"
+        var playUrl: String? = null
+        GlobalUtil.execute {
+            val result = RetrofitClient.instance.songUrlApiService.getSongUrl(songUrl)
+            if (result.code == 0) {
+                val sipList = result.req_0?.data?.sip
+                var sip = ""
+                if (sipList != null) {
+                    if (sipList.isNotEmpty()) {
+                        sip = sipList[0]
+                    }
+                }
+                val purlList = result.req_0?.data?.midurlinfo
+                var pUrl: String? = ""
+                if (purlList != null) {
+                    if (purlList.isNotEmpty()) {
+                        pUrl = purlList[0].purl
+                    }
+                }
+                playUrl = "$sip$pUrl"
+            }
+        }
+        return playUrl
     }
 }

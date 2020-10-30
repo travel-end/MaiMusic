@@ -10,6 +10,7 @@ import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.OnlineSongDatabase
 import wind.maimusic.utils.LogUtil
 import wind.widget.cost.Consts
 import wind.widget.model.Song
@@ -20,7 +21,7 @@ class MainViewModel:BaseViewModel() {
     fun findFirstMeetSongs() {
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
-                MaiDatabase.getDatabase().firstMeetSongDao().findAllFirstSong()
+                OnlineSongDatabase.getDatabase().firstMeetSongDao().findAllFirstSong()
             }
             firstMeetSongs.value = result
         }
