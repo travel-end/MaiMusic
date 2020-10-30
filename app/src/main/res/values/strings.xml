@@ -22,4 +22,8 @@
     <string name="album">专辑</string>
     <string name="play_all">播放全部</string>
     <string name="query_lrc">查找歌词中…</string>
+    <string name="like">喜欢</string>
+    <string name="download">下载</string>
+    <string name="collect">收藏</string>
+    <string name="about">关于</string>
 </resources>
