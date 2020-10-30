@@ -71,7 +71,7 @@ class PlayControllerView  @JvmOverloads constructor(
         }
     }
 
-    fun updatePlay(progress:Int) {
+    fun updatePlayProgress(progress:Int) {
         playProgressBar.progress = progress
         playCurrentProgress.text = StringUtil.formatProgress(playProgressBar.progress.toLong())
     }
@@ -92,6 +92,8 @@ class PlayControllerView  @JvmOverloads constructor(
         this.onControllerViewClickListener = listener
     }
     val progressSeekBar get() = playProgressBar
+
+    val tvCurrentProgress get() = playCurrentProgress
 
     interface OnPlayControllerViewClick {
         fun onClickPlayMode(v:View)

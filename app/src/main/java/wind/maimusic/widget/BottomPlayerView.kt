@@ -119,7 +119,7 @@ class BottomPlayerView @JvmOverloads constructor(
 
     fun resumePlay() {
         ivPlayingBtn.isSelected = true
-        LogUtil.e("Current Version:${Build.VERSION.SDK_INT}")
+//        LogUtil.e("Current Version:${Build.VERSION.SDK_INT}")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             rotationAnim.resume()
         }

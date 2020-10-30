@@ -8,7 +8,7 @@ import wind.maimusic.model.core.ListBean
  */
 object StringUtil {
     fun formatSinger(singer:String):String {
-        return if (singer.contains("/")) singer.split("/")[0] else singer.trim()
+        return if (singer.contains("/")) singer.split("/")[0].trim() else singer.trim()
     }
     fun formatProgress(time:Long):String {//263593
         val min = "${time / 60}"

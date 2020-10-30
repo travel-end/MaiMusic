@@ -16,7 +16,6 @@ object Consts {
 
     //根据qq音乐的mid获取歌词
     const val ONLINE_SONG_LRC = "https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?format=json&nobase64=1"
-    const val SONG_ID_UNFIND = "暂无歌词"
     // 播放顺序
     const val KEY_PLAY_MODE = "play_mode"
     const val PLAY_ORDER = 0 // 顺序播放

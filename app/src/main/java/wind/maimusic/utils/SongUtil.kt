@@ -124,7 +124,7 @@ object SongUtil {
                 file.mkdirs()
             }
             val name = if (songName.isBlank()) {
-                "maimusic"
+                "maizi"
             } else {
                 songName
             }
@@ -142,7 +142,7 @@ object SongUtil {
     /**
      * 读取本地歌词
      */
-    fun loadLrcText(songName:String) :String? {
+    fun loadLocalLrcText(songName:String) :String? {
         return try {
             val fileReader = FileReader("${Constants.lrcTextUrl()}$songName.lrc")
             val bufferReader = BufferedReader(fileReader)

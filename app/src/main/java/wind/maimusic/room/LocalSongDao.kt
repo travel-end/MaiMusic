@@ -30,4 +30,8 @@ interface LocalSongDao {
 
     @Query("SELECT * FROM local_song ORDER BY id")
     suspend fun findAllLocalSong():List<LocalSong>
+
+    // 更新本地音乐的封面图片
+    @Query("UPDATE local_song  SET pic=(:pic) WHERE songId=(:songId)")
+    suspend fun updateLocalSongCoverBySongId(pic:String,songId:String)
 }
