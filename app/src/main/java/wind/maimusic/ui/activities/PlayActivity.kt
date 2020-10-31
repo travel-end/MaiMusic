@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
@@ -48,7 +49,7 @@ import kotlin.concurrent.thread
 
 /**
  * @By Journey 2020/10/29
- * @Description
+ * @Description 播放音乐界面
  */
 class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
     private lateinit var discView: DiscView
@@ -62,6 +63,9 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
     private lateinit var currentSongSinger: TextView
     private lateinit var currentSongName: TextView
     private lateinit var ivPlayModel: ImageView
+    private lateinit var ivDownload:ImageView
+    private lateinit var ivCollect:ImageView
+    private lateinit var ivSurround:ImageView
     private lateinit var lLLrcContainer: LinearLayout
     private lateinit var lLFunction: LinearLayout
     private lateinit var audioManager: AudioManager
@@ -71,15 +75,17 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
     private var currentSong: Song? = null
     private var hideAlphaAnim: ObjectAnimator? = null
     private var showAlphaAnim: ObjectAnimator? = null
+//    private var loadingSongAnim:ValueAnimator?=null
     private var discCoverBitmap: Bitmap? = null
     private var playMode: Int = Consts.PLAY_ORDER
     private var playType: Int = 0
     private var isOnlineSong: Boolean = false
     private var isDraggingSeekBar: Boolean = false
-    private var hasInitLrc:Boolean = false
+    private var lrcStatus:Int = 1 // 1 即将去查找歌词 2 已经确定是否有歌词 3歌曲正在加载中 不能查看歌词
     private var pauseProgress:Int = 0
     private var hasDragSeekBarOnPause:Boolean = false
     private var flag:Boolean = false
+    private var isLoveSong:Boolean = false
     override fun layoutResId() = R.layout.activity_play
     override fun initStatusBar() {
         ImmersionBar
@@ -136,15 +142,17 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
                         }
                     }
                 } else {// 获取在线歌词
-                    if (hasInitLrc) {
+                    if (lrcStatus == 2) {// 歌词已经查找到了
                         switchCoverLrc(false)
-                    } else {// 获取在线歌词
+                    } else if (lrcStatus == 1) {// 获取在线歌词
                         val songId = currentSong?.songId
                         lrcView.setLabel(R.string.query_lrc.getStringRes())
                         switchCoverLrc(false)
                         if (songId.isNotNullOrEmpty()) {
                             mViewModel.getOnlineLyric(songId!!,Consts.SONG_LOCAL,currentSong?.songName?:"maizi")
                         }
+                    } else if (lrcStatus ==3) {// 当前歌曲正在初始化（加载中）
+                        lrcView.setLabel(R.string.query_lrc.getStringRes())
                     }
                 }
             }
@@ -152,14 +160,14 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
         playControllerView.setOnPlayControllerViewClick(object :PlayControllerView.OnPlayControllerViewClick{
             override fun onClickPlayMode(v: View) {
             }
-
             /*上一首音乐*/
             override fun onClickPreviousSong(v: View) {
+                setDiscViewDefaultCover()
+//                startSeekBarLoading()
                 playerServiceBinder?.last()
                 playControllerView.setPlayBtnSelected(true)
                 discView.last()
             }
-
             /*播放 or 暂停*/
             override fun onClickPlayButton(v: View) {
                 when{
@@ -198,19 +206,18 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
                     }
                 }
             }
-
             /*下一首音乐*/
             override fun onClickNextSong(v: View) {
+                setDiscViewDefaultCover()
+//                startSeekBarLoading()
                 playerServiceBinder?.next()
                 playControllerView.setPlayBtnSelected(playerServiceBinder?.playing == true)
                 discView.next()
             }
-
             /*进度条开始拖动时候调用*/
             override fun onSeekBarStartDrag(seekBar: SeekBar?) {
                 isDraggingSeekBar = true
             }
-
             /* 进度条停止拖动的时候调用*/
             override fun onSeekBarStopDrag(seekBar: SeekBar?) {
                 seekBar?.let {sb->
@@ -245,6 +252,30 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
                 }
             }
         })
+        /* 喜欢该音乐*/
+        ivLoveSong.fastClickListener {
+            addLoveSongAnim?.start()
+            if (isLoveSong) {
+                it.isSelected = false
+                mViewModel.deleteFromLove(currentSong?.songId)
+            } else {
+                it.isSelected = true
+                mViewModel.add2LoveSong(currentSong)
+            }
+            isLoveSong = !isLoveSong
+        }
+        /*播放顺序模式*/
+        ivPlayModel.fastClickListener {
+            switchPlayMode()
+        }
+        /* 下载音乐*/
+        ivDownload.fastClickListener {
+            if (playType == Consts.LIST_TYPE_LOCAL) {
+                R.string.local_no_need_download.getStringRes().toast()
+            } else {
+
+            }
+        }
     }
 
     override fun observe() {
@@ -254,17 +285,17 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
             onlineLyric.observe(this@PlayActivity,Observer{
                 if (it != null) {
                     if (it.lyric.isNotNullOrEmpty()) {
-                        hasInitLrc = true
+                        lrcStatus = 2
                         lrcView.loadLrc(it.lyric)
                         if (!isOnlineSong) {
                             switchCoverLrc(false)
                         }
                     } else {
-                        hasInitLrc = true
+                        lrcStatus = 2
                         lrcView.setLabel(R.string.lrc_empty.getStringRes())
                     }
                 } else {
-                    hasInitLrc = true
+                    lrcStatus = 2
                     lrcView.setLabel(R.string.lrc_empty.getStringRes())
                 }
             })
@@ -292,9 +323,76 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
                 }
                 getOnlineLyric(it,Consts.SONG_LOCAL,currentSong?.songName?:"maizi")
             })
+            /*查询/添加/删除喜欢的音乐*/
+            handleLoveSong.observe(this@PlayActivity,Observer{
+                it?.let {
+                    when(it) {
+                        PlayViewModel.is_love -> ivLoveSong.isSelected = true
+                        PlayViewModel.add_to_love->Bus.post(Consts.ADD_TO_LOVE,true)
+                        PlayViewModel.delete_from_love->Bus.post(Consts.ADD_TO_LOVE,false)
+                    }
+                }
+            })
+        }
+        Bus.observe<Int>(Consts.SONG_STATUS_CHANGE,this) {
+            when(it) {
+                Consts.SONG_CHANGE->{
+                    lrcStatus = 1// 歌曲已经就绪 可以查找歌词
+                    currentSong = SongUtil.getSong()
+                    discView.play()
+//                    loadingSongAnim?.cancel()
+                    currentSong?.let { song->
+                        currentSongSinger.text=song.singer
+                        currentSongName.text = song.songName
+                        playControllerView.setCurrentSong(song)
+                        updatePlayProgress()
+                        playerServiceBinder?.mp?.setOnBufferingUpdateListener { _, percent ->
+                            seekBar.secondaryProgress = percent *(seekBar.progress)
+                        }
+                        mViewModel.findIsLoveSong(song.songId)
+                        if (song.isOnline) setNetImgCover(song.imgUrl!!) else setLocalSongCover(song.singer?:"maizi")
+                    }
+                }
+                /* 当前歌曲播放完毕*/
+                Consts.SONG_COMPLETE ->{
+//                    startSeekBarLoading()
+                    discView.pause()
+                    switchCoverLrc(true)
+                    showAlphaAnim?.start()
+                    lrcStatus = 3
+                    setDiscViewDefaultCover()
+//                    playerServiceBinder?.pause()
+                    updateProgressHandler.removeMessages(0)
+//                    flag = true
+                }
+            }
         }
     }
 
+//    private fun startSeekBarLoading() {
+//        val drawable = seekBar.thumb
+//        clearLoadingAnim()
+//        if (loadingSongAnim == null) {
+//            loadingSongAnim = ValueAnimator.ofFloat(10f,255f).apply {
+//                repeatMode = ValueAnimator.REVERSE
+//                duration=800
+//                startDelay=150
+//                repeatCount=-1
+//                addUpdateListener {anim->
+//                    val value = anim.animatedValue as Float
+//                    drawable?.alpha = value.toInt()
+//                }
+//            }
+//        }
+//        loadingSongAnim?.start()
+//    }
+
+    /* 设置唱碟封面为默认图片（在切歌的时候起到过渡作用）*/
+    private fun setDiscViewDefaultCover() {
+        setDiscViewCover(BitmapFactory.decodeResource(resources, R.drawable.disk))
+    }
+
+    /* 初始化界面歌曲信息和组件*/
     private fun initPlayUi() {
         currentSong = SongUtil.getSong()
         currentSong?.run {
@@ -313,7 +411,7 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
 
     /* 初始化播放模式*/
     private fun initPlayMode() {
-        playMode = mViewModel.getPlayMode()
+        playMode = mViewModel.pm
         playerServiceBinder?.setPlayModel(playMode)
         ivPlayModel.setImageLevel(playMode)
     }
@@ -323,9 +421,11 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
         /* true:支持手動拖动 回调：滚动至某处，点击左边播放按钮时触发*/
         lrcView.setDraggable(true) { _, time ->
             playerServiceBinder?.mp?.seekTo(time.toInt())
-            playerServiceBinder?.resume()
-            updatePlayProgress()
-            playControllerView.setPlayBtnSelected(true)
+            if (playerServiceBinder?.playing == false) {
+                playerServiceBinder?.resume()
+                updatePlayProgress()
+                playControllerView.setPlayBtnSelected(true)
+            }
             true
         }
         /* 点击歌词*/
@@ -346,6 +446,28 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
             discView.gone()
             lLFunction.gone()
         }
+    }
+    /* 切换播放顺序模式*/
+    private fun switchPlayMode() {
+        var mode = mViewModel.pm
+        var modeText:String?=null
+        when(mode){
+            Consts.PLAY_ORDER->{
+                mode = Consts.PLAY_RANDOM
+                modeText = R.string.random_play.getStringRes()
+            }
+            Consts.PLAY_RANDOM->{
+                mode = Consts.PLAY_SINGER
+                modeText = R.string.single_play.getStringRes()
+            }
+            Consts.PLAY_SINGER->{
+                mode = Consts.PLAY_ORDER
+                modeText = R.string.order_play.getStringRes()
+            }
+        }
+        modeText?.toast()
+        mViewModel.setPlayMode(mode)
+        initPlayMode()
     }
 
     /* 初始化音量设置*/
@@ -369,7 +491,7 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
 
     override fun serviceConnection() {
         super.serviceConnection()
-        playMode = mViewModel.getPlayMode()
+        playMode = mViewModel.pm
         playerServiceBinder?.setPlayModel(playMode)
         val song = SongUtil.getSong()
         if (song != null) {
@@ -389,13 +511,14 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
                 seekBar.secondaryProgress = song.duration
                 setLocalSongCover(song.singer?:"maizi")
             }
+            mViewModel.findIsLoveSong(song.songId)
         }
         playerServiceBinder?.mp?.setOnBufferingUpdateListener { _, percent ->
-            seekBar.secondaryProgress =
-                percent * seekBar.progress
+            seekBar.secondaryProgress = percent * seekBar.progress
         }
     }
 
+    /*初始化页面组件*/
     private fun intiWidget() {
         playRootLayout = play_root_layout//背景
         discView = play_disk_view as DiscView// 唱碟
@@ -403,6 +526,9 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
         lrcView = lrc_view// 歌词
         volumeSeekBar = findViewById(R.id.sb_volume)// 音量
         ivPlayModel = findViewById(R.id.iv_mode) // 播放模式
+        ivDownload = findViewById(R.id.play_iv_download) // 下载音乐
+        ivCollect = findViewById(R.id.play_iv_collect)
+        ivSurround = findViewById(R.id.play_iv_surround)
         playControllerView = play_controller_view// 播放控制器
         currentSongSinger = play_tv_song_singer
         currentSongName = play_tv_song_name
@@ -444,6 +570,7 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
     /* 设置播放背景为封面模糊图片*/
     private fun setPlayBackground(bitmap: Bitmap) {
         thread {
+            // TODO: 2020/10/31 这里的模糊效果并不是很好 有优化的空间
             val drawable = BitmapUtil.getForegroundDrawable(this, bitmap)
             runOnUiThread {
                 playRootLayout.setBgForeground(drawable)
@@ -557,9 +684,39 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
 
     override fun onDestroy() {
         super.onDestroy()
+        /*停止计时*/
         updateProgressHandler.removeMessages(0)
         updateProgressHandler.removeCallbacksAndMessages(null)
+        /*解绑广播*/
         unregisterReceiver(volumeReceiver)
-
+        val song = SongUtil.getSong()
+        if (flag) {
+            song?.playStatus = Consts.SONG_PAUSE
+        } else {
+            song?.playStatus = Consts.SONG_PLAY
+        }
+        SongUtil.saveSong(song)
+        if (hideAlphaAnim?.isRunning == true) {
+            hideAlphaAnim?.cancel()
+            hideAlphaAnim = null
+        }
+        if (showAlphaAnim?.isRunning == true) {
+            showAlphaAnim?.cancel()
+            showAlphaAnim = null
+        }
+        if (addLoveSongAnim?.isRunning == true) {
+            addLoveSongAnim?.cancel()
+            addLoveSongAnim = null
+        }
+//        if (loadingSongAnim?.isRunning == true) {
+//            loadingSongAnim?.cancel()
+//            loadingSongAnim = null
+//        }
     }
+//    private fun clearLoadingAnim() {
+//        if (loadingSongAnim?.isRunning == true) {
+//            loadingSongAnim?.cancel()
+//            loadingSongAnim = null
+//        }
+//    }
 }

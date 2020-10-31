@@ -27,6 +27,8 @@ object Consts {
     const val SONG_PAUSE = 1
     const val SONG_RESUME = 2// ->song start
     const val SONG_CHANGE = 3
+    const val SONG_COMPLETE = 4
+
     // 播放列表
     const val LIST_TYPE_LOCAL=1//本地列表
     const val LIST_TYPE_ONLINE=2//专辑列表

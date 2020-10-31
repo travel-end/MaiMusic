@@ -1,8 +1,6 @@
 package wind.maimusic.utils
 
-import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import android.widget.ImageView
 import wind.maimusic.Constants
 import wind.maimusic.model.core.ListBean
@@ -23,8 +21,9 @@ object SongUtil {
      * 将一个对象写入流中 对象必须实现Serializable接口
      * 将当前的歌曲song对象存入本地
      */
-    fun saveSong(song: Song) {
+    fun saveSong(song: Song?) {
         try {
+            if (song != null) {
                 val file =
                     File(Constants.currentSongUrl())
                 if (!file.exists()) {
@@ -36,12 +35,13 @@ object SongUtil {
                     ObjectOutputStream(FileOutputStream(songFile))
                 oos.writeObject(song) //将Person对象p写入到oos中
                 oos.close() //关闭文件流
+            }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-            Log.e("JG","写入对象error!")
+            LogUtil.e("------SongUtil saveSong error:${e.message}----")
         } catch (e: IOException) {
             e.printStackTrace()
-            Log.e("JG","写入对象error!")
+            LogUtil.e("------SongUtil saveSong error:${e.message}----")
         }
     }
 
@@ -52,14 +52,14 @@ object SongUtil {
             return ois.readObject() as Song //返回对象
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
-            Log.e("JG","读取对象error!")
+            LogUtil.e("------SongUtil getSong no local song:${e.message}----")
             return null
         } catch (e: IOException) {
-            Log.e("JG","读取对象error!")
+            LogUtil.e("------SongUtil getSong no local song:${e.message}----")
             e.printStackTrace()
             return null
         } catch (e: ClassNotFoundException) {
-            Log.e("JG","读取对象error!")
+            LogUtil.e("------SongUtil getSong no local song:${e.message}----")
             e.printStackTrace()
             return null
         }

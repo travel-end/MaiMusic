@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import wind.maimusic.R
 import wind.maimusic.base.BaseViewModel
+import wind.maimusic.model.LoveSong
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.model.core.OnlineSongLrc
 import wind.maimusic.room.MaiDatabase
@@ -22,46 +23,71 @@ import wind.widget.model.Song
  * @Description
  */
 class PlayViewModel : BaseViewModel() {
-    val isLoveSong:MutableLiveData<Boolean> = MutableLiveData()
+    val handleLoveSong:MutableLiveData<Int> = MutableLiveData()
     val onlineLyric:MutableLiveData<OnlineSongLrc?> = MutableLiveData()
     val localCoverImg:MutableLiveData<String> = MutableLiveData()
-
     val matchSongError:MutableLiveData<String?> = MutableLiveData()
     val matchSongRight:MutableLiveData<String> = MutableLiveData()
-
     val matchSongRightAgain:MutableLiveData<String> = MutableLiveData()
-
-    // 非网络音乐匹配到的网络音乐songId
-    val localNetSongId: MutableLiveData<String> = MutableLiveData()
-
-    fun getSingerName(song: Song): String? {
-        val singer = song.singer
-        if (singer != null) {
-            return if (singer.contains("/")) {
-                val s = singer.split("/")
-                s[0].trim()
-            } else {
-                singer.trim()
-            }
-        }
-        return null
+    companion object {
+        const val is_love = 0
+        const val add_to_love =1
+        const val delete_from_love = 2
     }
 
-
+    /*设置播放模式*/
     fun setPlayMode(mode: Int) {
         SpUtil.saveValue(Consts.KEY_PLAY_MODE, mode)
     }
 
-    fun getPlayMode(): Int {
-        return SpUtil.getInt(Consts.KEY_PLAY_MODE, Consts.PLAY_ORDER)
-    }
+    /*播放顺序模式*/
+    val pm get() = SpUtil.getInt(Consts.KEY_PLAY_MODE, Consts.PLAY_ORDER)
 
-    fun findIsLoveSong() {
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs()
+    /* 查询是否为喜欢的音乐*/
+    fun findIsLoveSong(songId: String?) {
+        if (songId.isNotNullOrEmpty()) {
+            viewModelScope.launch {
+                val result = withContext(Dispatchers.IO) {
+                    MaiDatabase.getDatabase().loveSongDao().findLoveSongBySongId(songId!!)
+                }
+                if (result.isNotEmpty()) {
+                    handleLoveSong.value = is_love
+                }
             }
-            isLoveSong.value = result.isNotEmpty()
+        }
+    }
+    /* 添加至我的喜欢*/
+    fun add2LoveSong(song:Song?) {
+        if (song != null) {
+            val loveSong = LoveSong(
+                songId = song.songId,
+                mediaId = song.mediaId,
+                qqId = song.qqId,
+                name = song.songName,
+                singer = song.singer,
+                url = song.url,
+                pic = song.imgUrl,
+                duration = song.duration,
+                isOnline = song.isOnline,
+                isDownload = song.isDownload
+            )
+            viewModelScope.launch {
+                val result = MaiDatabase.getDatabase().loveSongDao().addToLoveSong(loveSong)
+                if (result != 0L) {
+                    handleLoveSong.value = add_to_love
+                }
+            }
+        }
+    }
+    /*删除我的喜欢*/
+    fun deleteFromLove(songId: String?) {
+        if (songId != null) {
+            viewModelScope.launch {
+                val result = MaiDatabase.getDatabase().loveSongDao().deleteSongBySongId(songId)
+                if (result != 0) {
+                    handleLoveSong.value = delete_from_love
+                }
+            }
         }
     }
 

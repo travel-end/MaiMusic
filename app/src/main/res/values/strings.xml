@@ -26,4 +26,9 @@
     <string name="download">下载</string>
     <string name="collect">收藏</string>
     <string name="about">关于</string>
+    <string name="order_play">顺序播放</string>
+    <string name="random_play">随机播放</string>
+    <string name="single_play">单曲循环</string>
+    <string name="local_no_need_download">~~本地歌曲，无需下载~~</string>
+    <string name="song_has_download">歌曲已经下载啦~~ (*^▽^*) </string>
 </resources>

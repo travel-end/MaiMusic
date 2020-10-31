@@ -147,7 +147,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/play_btn_add"
+                        android:id="@+id/play_iv_collect"
                         android:layout_width="@dimen/dp_22"
                         android:layout_height="@dimen/dp_22"
                         android:src="@drawable/selector_collect_song" />
@@ -166,7 +166,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/play_iv_pl"
+                        android:id="@+id/play_iv_surround"
                         android:layout_width="@dimen/dp_22"
                         android:layout_height="@dimen/dp_22"
                         android:src="@drawable/temp_other" />

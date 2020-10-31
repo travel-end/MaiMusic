@@ -40,7 +40,6 @@ class PlayerService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        LogUtil.e("-------PlayService----onCreate------")
         val song = SongUtil.getSong()
         LogUtil.e("-------PlayService----onCreate currentSong:$song; songName:${song?.songName}------")
         if (song != null) {
@@ -83,19 +82,16 @@ class PlayerService : Service() {
                         else->{}
                     }
                 }
-                else -> {
-                }
+                else -> {}
             }
-        } else {
-
         }
-
     }
 
     override fun onBind(intent: Intent): IBinder {
         LogUtil.e("-------PlayService----onBind------")
         mediaPlayer.setOnCompletionListener {
-            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_PAUSE)
+//            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_PAUSE)
+            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_COMPLETE)// 歌曲播放完毕 在播放页面监听
             val song = SongUtil.getSong()
             if (song != null) {
                 currentPosition = song.position
@@ -381,15 +377,36 @@ class PlayerService : Service() {
                         )
                         PlayServiceHelper.saveLoveSong(currentPosition)
                     }
+                    Consts.LIST_TYPE_ONLINE ->{
+                        when(song.onlineSubjectType) {
+                            Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
+                                currentPosition = if (currentPosition==firstMeetSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
+                                    0
+                                } else {
+                                    PlayServiceHelper.getNextSongPosition(
+                                        currentPosition,
+                                        playMode,
+                                        firstMeetSongs?.size
+                                    )
+                                }
+                                LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                                PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                            }
+                        }
+                    }
                 }
                 if (listType != 0) {
-                    play(listType)
+                    if (listType == Consts.LIST_TYPE_ONLINE) {
+                        playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
+                    } else {
+                        playerBinder.play(listType)
+                    }
                 }
             }
         }
 
         fun last() {
-            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_RESUME)
+            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_RESUME)// 通知首页的状态改变
             val song = SongUtil.getSong()
             if (song != null) {
                 currentPosition = song.position
@@ -426,9 +443,31 @@ class PlayerService : Service() {
                         )
                         PlayServiceHelper.saveLoveSong(currentPosition)
                     }
+                    Consts.LIST_TYPE_ONLINE ->{
+                        when(song.onlineSubjectType) {
+                            Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
+                                currentPosition = if (currentPosition==0 && playMode == Consts.PLAY_ORDER) {
+                                    firstMeetSongs!!.size-1
+                                } else {
+                                    PlayServiceHelper.getLastSongPosition(
+                                        currentPosition,
+                                        playMode,
+                                        firstMeetSongs?.size
+                                    )
+                                }
+                                LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                                PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                            }
+                        }
+                    }
+
                 }
                 if (listType != 0) {
-                    play(listType)
+                    if (listType == Consts.LIST_TYPE_ONLINE) {
+                        playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
+                    } else {
+                        playerBinder.play(listType)
+                    }
                 }
             }
         }

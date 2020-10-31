@@ -14,9 +14,14 @@ interface LoveSongDao {
     @Delete
     suspend fun deleteFromLoveSong(loveSong: LoveSong):Int
 
+    @Query("DELETE FROM love_song WHERE songId=(:songId)")
+    suspend fun deleteSongBySongId(songId: String):Int
+
     @Query("SELECT * FROM love_song WHERE songId =(:songId)")
     suspend fun findLoveSongBySongId(songId:String):List<LoveSong>
 
     @Query("SELECT * FROM love_song ORDER BY id")
     suspend fun findAllLoveSongs():List<LoveSong>
+
+
 }
