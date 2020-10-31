@@ -95,7 +95,7 @@ class BottomPlayerView @JvmOverloads constructor(
         currentTime = song.currentTime
     }
 
-    fun setPlayingStatus(isSelected: Boolean) {
+    fun setPlayBtnSelected(isSelected: Boolean) {
         ivPlayingBtn.isSelected = isSelected
     }
 
@@ -104,8 +104,10 @@ class BottomPlayerView @JvmOverloads constructor(
     }
 
     fun startPlay() {
-        ivPlayingBtn.isSelected = true
         rotationAnim.start()
+        if (!ivPlayingBtn.isSelected) {
+            ivPlayingBtn.isSelected = true
+        }
     }
 
     fun pausePlay() {
@@ -119,10 +121,7 @@ class BottomPlayerView @JvmOverloads constructor(
 
     fun resumePlay() {
         ivPlayingBtn.isSelected = true
-//        LogUtil.e("Current Version:${Build.VERSION.SDK_INT}")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            rotationAnim.resume()
-        }
+        rotationAnim.resume()
     }
 
     val currentSongProgress get() = currentTime

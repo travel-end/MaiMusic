@@ -306,10 +306,11 @@ class PlayerService : Service() {
                                 PlayServiceHelper.save2History()
                                 if (restartTime != null && restartTime != 0) {
                                     mp.seekTo(restartTime)
-                                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_RESUME)
+//                                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_RESUME)
                                 } else {
-                                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
+
                                 }
+                                Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
                                 // TODO: 2020/10/30 如果是由暂停进入播放的状态  发送的应该是pause 这样就不用刷新bottomPlayView左边的图片和名称了
                                 mp.start()
                             }

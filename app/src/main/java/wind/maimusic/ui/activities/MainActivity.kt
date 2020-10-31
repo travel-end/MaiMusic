@@ -118,6 +118,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                     else -> {
                         val song = SongUtil.getSong()
                         if (song != null) {
+                            bottomPlayerView.setPlayBtnSelected(true)
                             LogUtil.e("--->mainActivity currentPlayProgress:$currentPlayProgress")
                             if (song.isOnline) {
                                 playerServiceBinder?.playOnline((currentPlayProgress * 1000).toInt())
@@ -178,7 +179,8 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                     currentSong = SongUtil.getSong()// 刷新当前播放的歌曲
                     if (currentSong != null) {
                         bottomPlayerView.setCurrentSong(currentSong!!)
-                        bottomPlayerView.startPlay()
+//                        bottomPlayerView.startPlay()
+                        bottomPlayerView.startCoverRotation()
                         startSeekBarProgress()
                         flag = false
                     }
@@ -262,9 +264,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         } else {
             song?.playStatus = Consts.SONG_PLAY
         }
-        if (song != null) {
-            SongUtil.saveSong(song)
-        }
+        SongUtil.saveSong(song)
         updateSeekBarHandler.removeMessages(1)
         updateSeekBarHandler.removeCallbacksAndMessages(null)
     }
