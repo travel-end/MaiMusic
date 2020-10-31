@@ -4,14 +4,14 @@ import android.os.AsyncTask
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import wind.maimusic.Constants
-import wind.maimusic.model.DownloadSong
+import wind.maimusic.model.download.DownloadSong
 import wind.widget.cost.Consts
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.io.RandomAccessFile
 
-class DownloadTask(private val listener:DownloadListener) :AsyncTask<DownloadSong,DownloadSong,Int>(){
+class DownloadTask(private val listener:DownloadListener) :AsyncTask<DownloadSong, DownloadSong,Int>(){
     private var mIsCancel :Boolean = false
     private var mIsPause:Boolean = false
     private var lastProgress:Long=0L

@@ -1,6 +1,6 @@
 package wind.maimusic.download
 
-import wind.maimusic.model.DownloadSong
+import wind.maimusic.model.download.DownloadSong
 
 
 interface DownloadListener {

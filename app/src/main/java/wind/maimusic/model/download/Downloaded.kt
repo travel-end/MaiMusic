@@ -1,4 +1,4 @@
-package wind.maimusic.model
+package wind.maimusic.model.download
 
 data class Downloaded(
     var id:Long?=null,

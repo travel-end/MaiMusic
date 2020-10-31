@@ -10,6 +10,7 @@ import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.R
+import wind.maimusic.service.DownloadService
 import wind.maimusic.service.PlayerService
 
 /**
@@ -18,7 +19,9 @@ import wind.maimusic.service.PlayerService
  */
 abstract class BaseActivity:AppCompatActivity() {
     protected var playerServiceBinder:PlayerService.PlayerBinder?=null
+    protected var downloadServiceBinder:DownloadService.DownloadBinder?=null
     private var isBindService:Boolean = false
+    private var isDownloadServiceBind:Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId())
@@ -67,6 +70,11 @@ abstract class BaseActivity:AppCompatActivity() {
         isBindService = true
     }
 
+    open fun bindDownloadService() {
+        val downloadIntent = Intent(this,DownloadService::class.java)
+        bindService(downloadIntent,downloadConnection,Context.BIND_AUTO_CREATE)
+    }
+
     open fun serviceConnection() {
 
     }
@@ -80,11 +88,27 @@ abstract class BaseActivity:AppCompatActivity() {
             serviceConnection()
         }
     }
+    private val downloadConnection = object :ServiceConnection {
+        override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
+            downloadServiceBinder = p1 as DownloadService.DownloadBinder
+        }
+
+        override fun onServiceDisconnected(p0: ComponentName?) {
+            onDownloadServiceConnection()
+        }
+    }
+
+    open fun onDownloadServiceConnection() {
+
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         if (isBindService) {
             unbindService(playerConnection)
+        }
+        if (isDownloadServiceBind) {
+            unbindService(downloadConnection)
         }
     }
 }

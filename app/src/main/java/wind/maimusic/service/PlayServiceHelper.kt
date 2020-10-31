@@ -1,14 +1,12 @@
 package wind.maimusic.service
 
-import wind.maimusic.base.state.State
-import wind.maimusic.base.state.StateType
 import wind.maimusic.model.*
+import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.net.RetrofitClient
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.Bus
 import wind.maimusic.utils.GlobalUtil
-import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.SongUtil
 import wind.widget.cost.Consts
 import wind.widget.model.Song

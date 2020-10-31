@@ -1,7 +1,7 @@
 package wind.maimusic.utils
 
 import wind.maimusic.Constants
-import wind.maimusic.model.Downloaded
+import wind.maimusic.model.download.Downloaded
 import java.io.File
 
 /**

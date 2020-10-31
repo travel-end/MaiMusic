@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
 import wind.maimusic.model.*
+import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.room.OnlineSongDatabase

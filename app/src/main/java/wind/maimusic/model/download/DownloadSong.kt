@@ -1,4 +1,4 @@
-package wind.maimusic.model
+package wind.maimusic.model.download
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

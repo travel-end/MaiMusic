@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import wind.maimusic.MaiApp
 import wind.maimusic.model.*
+import wind.maimusic.model.download.DownloadSong
 import wind.maimusic.model.firstmeet.FirstMeetSong
 
 /**
