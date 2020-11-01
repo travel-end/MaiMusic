@@ -15,9 +15,12 @@ interface HistorySongDao {
     @Delete(entity = HistorySong::class)
     suspend fun deleteHistorySong(historySong: HistorySong):Int
 
-    @Query("SELECT * FROM history_song ORDER BY id")
+    @Query("SELECT * FROM history_song ORDER BY id DESC")// 倒叙
     suspend fun findAllHistorySong():List<HistorySong>
 
     @Query("DELETE FROM history_song")
     suspend fun deleteAllHistorySong():Int
+
+//    @Query("DELETE FROM history_song LIMIT 1")
+//    suspend fun deleteFirst():Int
 }

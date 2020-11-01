@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         tools:text="扫描音乐"
-        android:textSize="16sp"
-        android:layout_marginEnd="@dimen/dp_14"
+        android:textSize="14sp"
+        android:layout_marginEnd="@dimen/dp_18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

@@ -8,17 +8,18 @@
         android:id="@id/fl_play_all"
         layout="@layout/view_play_all"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_50"
         android:visibility="gone" />
     <include
         android:id="@id/loading_song_view"
         layout="@layout/view_loading_song"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_40"
         android:visibility="gone" />
 
     <include
+        android:id="@id/loading_result_view"
         layout="@layout/view_loading_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

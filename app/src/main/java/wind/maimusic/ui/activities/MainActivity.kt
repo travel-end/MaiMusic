@@ -38,6 +38,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     private var navigationManager: NavigationManager? = null
     private var currentSong: Song? = null
     private var flag: Boolean = false
+    private var playing:Boolean = false
     private var existLivingService: Boolean = false
     private var currentPlayProgress: Long = 0L
     override fun layoutResId() = R.layout.activity_main
@@ -47,6 +48,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         initCurrentSong()
         if (isServiceRunning(PlayerService::class.java.name)) {
             val playStatus = currentSong?.playStatus
+            LogUtil.e("------MainActivity ----isServiceRunning playStatus:$playStatus")
             if (playStatus != null && playStatus == Consts.SONG_PLAY) {
                 bottomPlayerView.startPlay()
                 existLivingService = true
@@ -151,7 +153,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                     if (it.isNotEmpty()) {
                         val firstMeetSong = it[0]
                         // 当前播放的是网络音乐
-                        val song = SongUtil.assemblySong(firstMeetSong, SongUtil.SONG_FIRST_MEET)
+                        val song = SongUtil.assemblySong(firstMeetSong, Consts.ONLINE_LIST_TYPE_FIRST_MEET)
                         bottomPlayerView.setCurrentSong(song)
                         mViewModel.getSongPlayUrl(song)
                     }
@@ -179,18 +181,18 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                     currentSong = SongUtil.getSong()// 刷新当前播放的歌曲
                     if (currentSong != null) {
                         bottomPlayerView.setCurrentSong(currentSong!!)
-//                        bottomPlayerView.startPlay()
-                        bottomPlayerView.startCoverRotation()
+                        bottomPlayerView.startPlay()
+//                        bottomPlayerView.startCoverRotation()
                         startSeekBarProgress()
-                        flag = false
+                        playing = true
                     }
                 }
                 Consts.SONG_PAUSE -> {
+                    playing = false
                     bottomPlayerView.pausePlay()
-                    flag = true
                 }
                 Consts.SONG_RESUME -> {
-                    flag = false
+                    playing = true
                     bottomPlayerView.resumePlay()
                     startSeekBarProgress()
                 }
@@ -259,10 +261,17 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         bottomPlayerView.clearAnim()// 这里停掉了  再次进入如果是播放状态 需要手动调用
         val song = SongUtil.getSong()
         song?.currentTime = ((playerServiceBinder?.playingTime ?: 0) / 1000).toLong()
-        if (flag) {
-            song?.playStatus = Consts.SONG_PAUSE
-        } else {
+//        if (flag) {
+//            song?.playStatus = Consts.SONG_PAUSE
+//        } else {
+//            song?.playStatus = Consts.SONG_PLAY
+//        }
+
+        /* 记录播放的状态*/   // flag  false
+        if (playing) {
             song?.playStatus = Consts.SONG_PLAY
+        } else {
+            song?.playStatus = Consts.SONG_PAUSE
         }
         SongUtil.saveSong(song)
         updateSeekBarHandler.removeMessages(1)

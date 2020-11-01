@@ -3,6 +3,8 @@ package wind.maimusic.utils
 import android.graphics.Bitmap
 import android.widget.ImageView
 import wind.maimusic.Constants
+import wind.maimusic.model.HistorySong
+import wind.maimusic.model.LocalSong
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.widget.R
@@ -159,10 +161,10 @@ object SongUtil {
             null
         }
     }
-    fun assemblySong(s: Any,songType:Int):Song {
+    fun assemblySong(s: Any,songType:Int,pos:Int=0):Song {
         var song:Song?=null
         when(songType) {
-            SONG_FIRST_MEET->{
+            Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
                val fmSong = s as FirstMeetSong
                 song = Song().apply {
                     songId = fmSong.songId //004DrG5A2nm7q2
@@ -176,22 +178,44 @@ object SongUtil {
                     isDownload =fmSong.isDownload?:false
                     listType = Consts.LIST_TYPE_ONLINE
                     onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
-                    position = 0
+                    position = pos
                 }
             }
-            SONG_LOCAL->{
+            Consts.LIST_TYPE_LOCAL->{
+                val localSong = s as LocalSong
+                song = Song().apply {
+                    songName = localSong.name
+                    singer = localSong.singer
+                    url = localSong.url
+                    duration = localSong.duration?.toInt() ?: 0
+                    position = pos
+                    isOnline = false
+                    songId = localSong.songId
+                    listType = Consts.LIST_TYPE_LOCAL
+                }
+            }
+            Consts.LIST_TYPE_HISTORY->{
+                val historySong = s as HistorySong
+                song = Song().apply {
+                    songId = historySong.songId
+                    songName = historySong.name
+                    singer = historySong.singer
+                    isOnline = historySong.isOnline
+                    url = historySong.url
+                    imgUrl = historySong.pic
+                    position = pos
+                    duration = historySong.duration?:0
+                    listType = Consts.LIST_TYPE_HISTORY
+                    mediaId = historySong.mediaId
+                }
+            }
+            Consts.LIST_TYPE_DOWNLOAD->{
 
             }
-            SONG_HISTORY->{
+            Consts.LIST_TYPE_LOVE->{
 
             }
-            SONG_DOWNLOAD->{
-
-            }
-            SONG_LOVE->{
-
-            }
-            SONG_ONLINE->{
+            Consts.LIST_TYPE_ONLINE->{
                 val online = s as ListBean
                 song = Song().apply {
                     songId = online.songmid //004DrG5A2nm7q2
@@ -208,10 +232,10 @@ object SongUtil {
         }
         return song!!
     }
-    const val SONG_FIRST_MEET =0
-    const val SONG_LOCAL = 1
-    const val SONG_HISTORY = 2
-    const val SONG_DOWNLOAD =3
-    const val SONG_LOVE = 4
-    const val SONG_ONLINE =5
+//    const val SONG_FIRST_MEET =0
+//    const val SONG_LOCAL = 1
+//    const val SONG_HISTORY = 2
+//    const val SONG_DOWNLOAD =3
+//    const val SONG_LOVE = 4
+//    const val SONG_ONLINE =5
 }

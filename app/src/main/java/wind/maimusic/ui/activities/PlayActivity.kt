@@ -690,11 +690,14 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
         /*解绑广播*/
         unregisterReceiver(volumeReceiver)
         val song = SongUtil.getSong()
-        if (flag) {
-            song?.playStatus = Consts.SONG_PAUSE
-        } else {
-            song?.playStatus = Consts.SONG_PLAY
-        }
+//        if (flag) {
+//            song?.playStatus = Consts.SONG_PAUSE
+//        } else {
+//            song?.playStatus = Consts.SONG_PLAY
+//        }
+//        if (flag) {
+//            song?.playStatus = Consts.SONG_PLAY
+//        }
         SongUtil.saveSong(song)
         if (hideAlphaAnim?.isRunning == true) {
             hideAlphaAnim?.cancel()

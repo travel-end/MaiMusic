@@ -36,9 +36,11 @@
     <string name="local_no_need_download">~~本地歌曲，无需下载~~</string>
     <string name="song_has_download">歌曲已经下载啦~~ (*^▽^*) </string>
     <string name="local_music">本地音乐</string>
+    <string name="scan_music">扫描音乐</string>
     <string name="has_downloaded">已下载</string>
     <string name="recent_play">最近播放</string>
     <string name="recent_read">最近阅读</string>
+    <string name="clear_all">全部清除</string>
     <string name="my_love">我喜欢的音乐</string>
     <string name="poetry_love">我喜欢的诗词</string>
     <string name="poetry_note">诗词笔记</string>

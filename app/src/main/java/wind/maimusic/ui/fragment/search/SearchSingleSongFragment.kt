@@ -11,6 +11,7 @@ import wind.maimusic.utils.StringUtil
 import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.utils.visible
 import wind.maimusic.vm.SearchResultViewModel
+import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
 import wind.widget.model.Song
 import wind.widget.rippleview.RippleView
@@ -30,8 +31,7 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
 
     override fun layoutResId()=R.layout.fragment_search_single_song
 
-    override fun initView() {
-        super.initView()
+    override fun setRvContent() {
         rvSongList.setup<ListBean> {
             adapter {
                 addItem(R.layout.item_search_song) {
@@ -47,9 +47,8 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
                             }
                             (itemView as RippleView).setOnRippleCompleteListener {
                                 // TODO: 2020/10/29 to playactivity
-                                val song = SongUtil.assemblySong(s,SongUtil.SONG_ONLINE)
+                                val song = SongUtil.assemblySong(s,Consts.LIST_TYPE_ONLINE)
                                 mViewModel.getSongPlayUrl(song)
-//                                requireActivity().startActivity(Intent(requireContext(),PlayActivity::class.java))
                             }
                         }
                     }
@@ -96,4 +95,5 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
             }
         })
     }
+    override fun songListType()=0
 }

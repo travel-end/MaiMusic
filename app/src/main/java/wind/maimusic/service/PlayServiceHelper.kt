@@ -28,7 +28,6 @@ object PlayServiceHelper {
                 songName = localSong.name
                 singer = localSong.singer
                 url = localSong.url
-                listType = Consts.LIST_TYPE_DOWNLOAD
                 isOnline = false
                 duration = localSong.duration?.toInt() ?: 0
                 qqId = localSong.qqId
@@ -144,12 +143,13 @@ object PlayServiceHelper {
                 duration = song.duration
                 mediaId = song.mediaId
             }
-            val saveResult = GlobalUtil.async {
-                MaiDatabase.getDatabase().historySongDao().addHistorySong(historySong)
-            }
-            if (saveResult != null && saveResult != 0L) {
-                Bus.post(Consts.EVENT_LIST_TYPE, Consts.LIST_TYPE_HISTORY)
-                // todo 如果最近播放的曲目>100 将第一个删除
+            val historyDao = MaiDatabase.getDatabase().historySongDao()
+            GlobalUtil.async {
+                historyDao.addHistorySong(historySong)
+                val historySongs = historyDao.findAllHistorySong()
+                if (historySongs.size > Consts.HISTORY_MAX_SIZE) {
+//                    historyDao.deleteFirst()
+                }
             }
         }
     }

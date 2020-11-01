@@ -14,6 +14,7 @@ import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.PhoneUtil
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.toast
 
 class LocalSongViewModel:BaseViewModel() {
     val scanMusic:MutableLiveData<MutableList<LocalSong>> = MutableLiveData()
@@ -23,13 +24,11 @@ class LocalSongViewModel:BaseViewModel() {
     /* 扫描本地音乐*/
     fun scanLocalMusic() {
         val rawSongs = PhoneUtil.scanLocalSong()
+        scanMusic.value = rawSongs?.toMutableList()
         if (isNotNullOrEmpty(rawSongs)) {
-            scanMusic.value = rawSongs?.toMutableList()
             request {
                 MaiDatabase.getDatabase().localSongDao().addLocalSongs(rawSongs!!)
             }
-        } else {
-            loadStatus.value = State(StateType.EMPTY,msg = R.string.no_local_music.getStringRes())
         }
     }
 

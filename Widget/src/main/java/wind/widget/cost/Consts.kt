@@ -37,7 +37,9 @@ object Consts {
     const val LIST_TYPE_DOWNLOAD=5//下载列表
 
     //在线音乐分类列表
-    const val ONLINE_LIST_TYPE_FIRST_MEET = 1
+    const val ONLINE_LIST_TYPE_FIRST_MEET = 6
+    const val POETRY_TYPE_RECENT_READ = 7
+    const val POETRY_TYPE_LOVED = 7
 
 
     const val EVENT_LIST_TYPE = "event_list_type"

@@ -10,7 +10,6 @@
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/colorPrimary"
         android:indeterminateDrawable="@drawable/anim_loading_normal">
     </ProgressBar>
     <TextView

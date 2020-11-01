@@ -50,14 +50,14 @@ class PlayerService : Service() {
                     localSongs = GlobalUtil.execute {
                         MaiDatabase.getDatabase().localSongDao().findAllLocalSong().toMutableList()
                     }
-                    LogUtil.e("--->onCreate localSongs: $localSongs")
+//                    LogUtil.e("--->onCreate localSongs: $localSongs")
                 }
                 Consts.LIST_TYPE_HISTORY -> {
                     historySongs = GlobalUtil.execute {
                         MaiDatabase.getDatabase().historySongDao().findAllHistorySong()
                             .toMutableList()
                     }
-                    LogUtil.e("--->onCreate historySongs: $historySongs")
+//                    LogUtil.e("--->onCreate historySongs: $historySongs")
                     SongUtil.getSong()?.let { s ->
                         s.position = 0
                         SongUtil.saveSong(s)
@@ -65,13 +65,13 @@ class PlayerService : Service() {
                 }
                 Consts.LIST_TYPE_DOWNLOAD -> {
                     downloadSongs = DownloadedUtil.getSongFromFile()
-                    LogUtil.e("--->onCreate downloadSongs: $downloadSongs")
+//                    LogUtil.e("--->onCreate downloadSongs: $downloadSongs")
                 }
                 Consts.LIST_TYPE_LOVE -> {
                     loveSongs = GlobalUtil.execute {
                         MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
                     }
-                    LogUtil.e("--->onCreate loveSongs: $loveSongs")
+//                    LogUtil.e("--->onCreate loveSongs: $loveSongs")
                 }
                 Consts.LIST_TYPE_ONLINE -> {
                     when (song.onlineSubjectType) {
