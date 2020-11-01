@@ -4,40 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <FrameLayout
-        android:id="@id/view_song_list_play_all"
+    <include
+        android:id="@id/fl_play_all"
+        layout="@layout/view_play_all"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_34"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@id/view_song_list_iv_play_all"
-            android:layout_width="@dimen/dp_28"
-            android:layout_height="@dimen/dp_28"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_14"
-            android:src="@drawable/play_full" />
-
-        <TextView
-            android:id="@id/view_song_list_tv_play_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_54"
-            android:text="@string/play_all"
-            android:textColor="@color/text_color_black"
-            android:textSize="15sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:src="@drawable/list"
-            android:visibility="gone" />
-    </FrameLayout>
-
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
     <include
         android:id="@id/loading_song_view"
         layout="@layout/view_loading_song"

@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import wind.maimusic.Constants
 import wind.maimusic.model.download.DownloadSong
+import wind.maimusic.utils.DownloadedUtil
 import wind.widget.cost.Consts
 import java.io.File
 import java.io.IOException
@@ -37,7 +38,7 @@ class DownloadTask(private val listener:DownloadListener) :AsyncTask<DownloadSon
 
                 // 实际文件长度
                 val contentLength = getContentLength(downloadUrl?:"")
-                val fileName = DownloadUtil.getSaveSongFile(
+                val fileName = DownloadedUtil.getSaveSongFile(
                     downloadSong.singer?:"",
                     downloadSong.songName?:"",
                     downloadSong.duration?.toLong()?:0L,

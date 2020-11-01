@@ -15,6 +15,12 @@
     <item name="view_song_list_iv_play_all" type="id" />
     <item name="view_song_list_tv_play_all" type="id" />
     <item name="view_loading_song_tv_msg" type="id"/>
+    <item name="fl_play_all" type="id" />
 
     <item name="top_view" type="id" />
+
+    <item name="title_iv_back" type="id" />
+    <item name="title_tv" type="id" />
+    <item name="title_tv_fun" type="id" />
+    <item name="tv_download_all" type="id" />
 </resources>

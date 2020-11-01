@@ -27,10 +27,10 @@ class MainFragment :BaseVpFragment(){
         super.initAction()
         mTitleSearch.fastClickListener {
             val bundle = Bundle()
-            bundle.putString(Constants.HOT_SEARCH,"昨夜雨疏风骤")
+            bundle.putString(Constants.HOT_SEARCH,"昨夜雨疏风骤，浓睡不消残酒")
             Navigation
                 .findNavController(it)
-                .navigate(R.id.action_mainFragment_to_searchFragment,bundle)
+                .navigate(R.id.to_search_main_fragment,bundle)
         }
     }
 }

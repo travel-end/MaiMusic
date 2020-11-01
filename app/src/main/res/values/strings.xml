@@ -10,7 +10,8 @@
     <string name="unknow_error">未知错误  …</string>
 
     <string name="tab_listener_song">听歌</string>
-    <string name="tab_my_save">我的收藏</string>
+    <string name="tab_my_save">收藏</string>
+    <string name="tab_discover">发现</string>
     <string name="personalized_dress">个性装扮</string>
     <string name="help_feedback">帮助与反馈</string>
     <string name="timed_off">定时关闭</string>
@@ -21,7 +22,10 @@
     <string name="mv">MV</string>
     <string name="album">专辑</string>
     <string name="play_all">播放全部</string>
+    <string name="download_all">全部下载</string>
     <string name="query_lrc">查找歌词中…</string>
+    <string name="read_history">最近阅读</string>
+    <string name="go_to_login">去登录</string>
     <string name="like">喜欢</string>
     <string name="download">下载</string>
     <string name="collect">收藏</string>
@@ -31,4 +35,16 @@
     <string name="single_play">单曲循环</string>
     <string name="local_no_need_download">~~本地歌曲，无需下载~~</string>
     <string name="song_has_download">歌曲已经下载啦~~ (*^▽^*) </string>
+    <string name="local_music">本地音乐</string>
+    <string name="has_downloaded">已下载</string>
+    <string name="recent_play">最近播放</string>
+    <string name="recent_read">最近阅读</string>
+    <string name="my_love">我喜欢的音乐</string>
+    <string name="poetry_love">我喜欢的诗词</string>
+    <string name="poetry_note">诗词笔记</string>
+    <string name="poetry_directory">为你喜欢的诗词创建一个目录吧</string>
+    <string name="create_song_list">创建歌单</string>
+    <string name="collect_song_list">收藏歌单</string>
+    <string name="no_collect_song_list">还没有收藏的歌单啦</string>
+    <string name="no_local_music">还没有发现本地音乐啦</string>
 </resources>

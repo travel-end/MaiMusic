@@ -10,7 +10,7 @@
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/fruit_common" />
+        android:src="@drawable/temp_empty" />
 
     <TextView
         android:id="@+id/view_empty_tv_msg"
@@ -19,6 +19,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dp_14"
         tools:text="@string/empty"
-        android:textColor="@color/text_color_dark"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/sp_14" />
 </LinearLayout>
