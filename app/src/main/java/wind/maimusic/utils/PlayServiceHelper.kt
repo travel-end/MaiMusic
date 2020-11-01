@@ -1,13 +1,10 @@
-package wind.maimusic.service
+package wind.maimusic.utils
 
 import wind.maimusic.model.*
 import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.net.RetrofitClient
 import wind.maimusic.room.MaiDatabase
-import wind.maimusic.utils.Bus
-import wind.maimusic.utils.GlobalUtil
-import wind.maimusic.utils.SongUtil
 import wind.widget.cost.Consts
 import wind.widget.model.Song
 
@@ -108,7 +105,8 @@ object PlayServiceHelper {
             MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
         }
         if (loveSongs.isNotEmpty()) {
-            loveSongs = orderLoveList(loveSongs)
+            loveSongs =
+                orderLoveList(loveSongs)
             val loveSong = loveSongs[currentPosition]
             val song = Song().apply {
                 position = currentPosition
