@@ -12,12 +12,13 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.RandomAccessFile
 
+/**
+ * 下载任务
+ */
 class DownloadTask(private val listener:DownloadListener) :AsyncTask<DownloadSong, DownloadSong,Int>(){
     private var mIsCancel :Boolean = false
     private var mIsPause:Boolean = false
     private var lastProgress:Long=0L
-
-
     override fun doInBackground(vararg params: DownloadSong?): Int {
         var inputStream:InputStream?=null
         var raf : RandomAccessFile?=null
@@ -29,13 +30,11 @@ class DownloadTask(private val listener:DownloadListener) :AsyncTask<DownloadSon
                 var downloadedLength =0L
                 val downloadUrl = song.url
                 val downloadFile = File(Constants.downloadSongUrl())
-//                Log.e("JG","文件下载储存路径：${Constant.STORAGE_SONG_FILE}")
                 if (!downloadFile.exists()) {
                     downloadFile.mkdirs()
                 }
                 //传过来的下载地址
                 // http://ws.stream.qqmusic.qq.com/C400001DI2Jj3Jqve9.m4a?guid=358840384&vkey=2B9BF114492F203C3943D8AE38C83DD8FEEA5E628B18F7F4455CA9B5059040266D74EBD43E09627AA4419D379B6A9E1FC1E5D2104AC7BB50&uin=0&fromtag=66
-
                 // 实际文件长度
                 val contentLength = getContentLength(downloadUrl?:"")
                 val fileName = DownloadedUtil.getSaveSongFile(

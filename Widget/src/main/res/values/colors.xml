@@ -9,6 +9,7 @@
     <color name="white">#FFFFFF</color>
     <color name="colorGray">#ACABAB</color>
     <color name="colorGrayNormal">#CAC9C9</color>
+    <color name="colorGrayNormal2">#BADDDDDD</color>
     <color name="black_33">#333333</color>
     <color name="black">#000000</color>
     <color name="black2">#252424</color>
@@ -36,4 +37,7 @@
     <color name="lrc_timeline_color">#809E9E9E</color>
     <color name="lrc_time_text_color">#809E9E9E</color>
     <color name="black_50p">#80000000</color>
+    <color name="black_40p">#40000000</color>
+    <color name="black_60p">#60000000</color>
+    <color name="black_30p">#30000000</color>
 </resources>

@@ -273,7 +273,11 @@ class PlayActivity : BaseLifeCycleActivity<PlayViewModel>() {
             if (playType == Consts.LIST_TYPE_LOCAL) {
                 R.string.local_no_need_download.getStringRes().toast()
             } else {
-
+                val downloadSong = mViewModel.getDownloadSong(currentSong)
+                downloadSong?.let {
+                    bindDownloadService()
+                    downloadServiceBinder?.startDownload(it)
+                }
             }
         }
     }

@@ -16,21 +16,21 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-                <action
-                    android:id="@+id/to_local_song_fragment"
-                    app:destination="@id/local_song_fragment"
-                    app:enterAnim="@anim/slide_in_right"
-                    app:exitAnim="@anim/slide_out_left"
-                    app:popEnterAnim="@anim/slide_in_left"
-                    app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/to_local_song_fragment"
+            app:destination="@id/local_song_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
-                <action
-                    android:id="@+id/to_recent_read_fragment"
-                    app:destination="@id/recent_read_fragment"
-                    app:enterAnim="@anim/slide_in_right"
-                    app:exitAnim="@anim/slide_out_left"
-                    app:popEnterAnim="@anim/slide_in_left"
-                    app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/to_recent_read_fragment"
+            app:destination="@id/recent_read_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/to_recent_listen_fragment"
             app:destination="@id/recent_listen_fragment"
@@ -41,7 +41,7 @@
 
         <action
             android:id="@+id/to_downloaded_fragment"
-            app:destination="@id/downloaded_fragment"
+            app:destination="@id/downloaded_vp_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -74,44 +74,48 @@
             app:argType="string" />
     </fragment>
 
-        <fragment
-            android:id="@+id/local_song_fragment"
-            android:name="wind.maimusic.ui.fragment.local.LocalSongFragment"
-            tools:layout="@layout/fragment_local">
-        </fragment>
+    <fragment
+        android:id="@+id/local_song_fragment"
+        android:name="wind.maimusic.ui.fragment.local.LocalSongFragment"
+        tools:layout="@layout/fragment_local">
 
-        <fragment
-            android:id="@+id/recent_listen_fragment"
-            android:name="wind.maimusic.ui.fragment.history.RecentListenFragment"
-            tools:layout="@layout/fragment_recent_listener">
-        </fragment>
+    </fragment>
+
+    <fragment
+        android:id="@+id/recent_listen_fragment"
+        android:name="wind.maimusic.ui.fragment.history.RecentListenFragment"
+        tools:layout="@layout/fragment_recent_listener">
+
+    </fragment>
     <fragment
         android:id="@+id/recent_read_fragment"
         android:name="wind.maimusic.ui.fragment.history.RecentReadFragment"
         tools:layout="@layout/fragment_recent_read">
+
     </fragment>
 
-        <fragment
-            android:id="@+id/downloaded_fragment"
-            android:name="wind.maimusic.ui.fragment.downloaded.DownedSongFragment"
-            tools:layout="@layout/fragment_downloaded">
+    <fragment
+        android:id="@+id/downloaded_vp_fragment"
+        android:name="wind.maimusic.ui.fragment.downloaded.DownloadedVpFragment"
+        tools:layout="@layout/fragment_download_vp">
 
-        </fragment>
+    </fragment>
 
-        <fragment
-            android:id="@+id/loved_song_fragment"
-            android:name="wind.maimusic.ui.fragment.love.LovedSongFragment"
-            tools:layout="@layout/fragment_loved_song">
-                    <argument android:name="coverImgUrl"
-                        android:defaultValue=""
-                        app:argType="string" />
-        </fragment>
+    <fragment
+        android:id="@+id/loved_song_fragment"
+        android:name="wind.maimusic.ui.fragment.love.LovedSongFragment"
+        tools:layout="@layout/fragment_md_style_song_list">
+        <!--                    <argument android:name="coverImgUrl"-->
+        <!--                        android:defaultValue=""-->
+        <!--                        app:argType="string" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/loved_poetry_fragment"
         android:name="wind.maimusic.ui.fragment.love.LovePoetryFragment"
         tools:layout="@layout/fragment_loved_poetry">
-        <argument android:name="poetry_coverImgUrl"
+        <argument
+            android:name="poetry_coverImgUrl"
             android:defaultValue=""
             app:argType="string" />
     </fragment>

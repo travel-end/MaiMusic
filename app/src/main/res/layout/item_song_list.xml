@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_50"
+    android:layout_height="@dimen/dp_58"
     android:paddingStart="@dimen/dp_17"
     android:paddingEnd="@dimen/dp_17"
     app:rv_centered="true"
@@ -27,8 +27,8 @@
         android:layout_toEndOf="@id/item_song_list_iv_playing"
         android:maxLines="1"
         android:textColor="@color/black2"
-        android:layout_marginTop="@dimen/dp_8"
-        android:textSize="16sp"
+        android:layout_marginTop="@dimen/dp_7"
+        android:textSize="15sp"
         tools:text="演员" />
 
     <ImageView
@@ -38,7 +38,7 @@
         android:layout_marginEnd="@dimen/dp_4"
         android:layout_toEndOf="@id/item_song_list_iv_playing"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_7"
+        android:layout_marginBottom="@dimen/dp_9"
         android:src="@drawable/ok"
         android:visibility="gone" />
 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_7"
+        android:layout_marginBottom="@dimen/dp_9"
         android:layout_toEndOf="@id/item_song_list_iv_downloaded"
         android:textColor="@color/text_color"
         android:textSize="12sp"
@@ -60,4 +60,10 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:src="@drawable/more" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorGrayNormal2"
+        android:layout_alignParentBottom="true" />
+
 </wind.widget.rippleview.RippleView>

@@ -23,7 +23,11 @@
     <string name="album">专辑</string>
     <string name="play_all">播放全部</string>
     <string name="download_all">全部下载</string>
-    <string name="query_lrc">查找歌词中…</string>
+    <string name="start_download">开始下载 …</string>
+    <string name="in_download_queue">已经加入下载队列 …</string>
+    <string name="download_failed">下载失败</string>
+    <string name="download_music">下载音乐</string>
+    <string name="query_lrc">查找歌词中 …</string>
     <string name="read_history">最近阅读</string>
     <string name="go_to_login">去登录</string>
     <string name="like">喜欢</string>
@@ -37,7 +41,9 @@
     <string name="song_has_download">歌曲已经下载啦~~ (*^▽^*) </string>
     <string name="local_music">本地音乐</string>
     <string name="scan_music">扫描音乐</string>
+    <string name="one_key_delete">一键删除</string>
     <string name="has_downloaded">已下载</string>
+    <string name="downloading">下载中</string>
     <string name="recent_play">最近播放</string>
     <string name="recent_read">最近阅读</string>
     <string name="clear_all">全部清除</string>

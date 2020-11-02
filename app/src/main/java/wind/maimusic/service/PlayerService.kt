@@ -197,9 +197,9 @@ class PlayerService : Service() {
                                 MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs()
                                     .toMutableList()
                             }
-                            if (isNotNullOrEmpty(localSongs)) {
-                                loveSongs = PlayServiceHelper.orderLoveList(loveSongs!!)
-                            }
+//                            if (isNotNullOrEmpty(localSongs)) {
+//                                loveSongs = PlayServiceHelper.orderLoveList(loveSongs!!)
+//                            }
 //                            LogUtil.e("--->play loveSongs:$loveSongs")
                         }
                         Consts.LIST_TYPE_ONLINE->{

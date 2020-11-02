@@ -10,6 +10,7 @@ import wind.maimusic.base.BaseViewModel
 import wind.maimusic.model.LoveSong
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.model.core.OnlineSongLrc
+import wind.maimusic.model.download.DownloadSong
 import wind.maimusic.room.MaiDatabase
 import wind.maimusic.utils.SongUtil
 import wind.maimusic.utils.SpUtil
@@ -197,5 +198,22 @@ class PlayViewModel : BaseViewModel() {
         request {
             MaiDatabase.getDatabase().localSongDao().updateLocalSongCoverBySongId(pic,songId)
         }
+    }
+
+    /* 组装下载音乐的信息*/
+    fun getDownloadSong(song:Song?):DownloadSong? {
+        if (song != null) {
+            return DownloadSong().apply {
+                singer = song.singer
+                progress = 0
+                songId = song.songId
+                url = song.url
+                pic = song.imgUrl
+                songName = song.songName
+                duration = song.duration
+                albumName = song.albumName
+            }
+        }
+        return null
     }
 }

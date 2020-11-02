@@ -8,6 +8,9 @@ import wind.maimusic.base.BaseLifeCycleFragment
 import wind.maimusic.vm.FavoritesViewModel
 import wind.widget.utils.fastClickListener
 
+/**
+ * 我的收藏
+ */
 class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
     companion object {
         fun newInstance():Fragment{

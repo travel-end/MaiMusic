@@ -1,6 +1,7 @@
 package wind.maimusic.ui.fragment.search
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import wind.maimusic.Constants
 import wind.maimusic.R

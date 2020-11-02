@@ -5,6 +5,7 @@ import android.widget.ImageView
 import wind.maimusic.Constants
 import wind.maimusic.model.HistorySong
 import wind.maimusic.model.LocalSong
+import wind.maimusic.model.LoveSong
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.widget.R
@@ -70,17 +71,17 @@ object SongUtil {
     /**
      * 将本地音乐的封面图片存入本地
      */
-    fun saveSongCover(bitmap: Bitmap?, singer:String):Boolean {
+    fun saveSongCover(bitmap: Bitmap?, singer: String): Boolean {
         if (bitmap != null) {
             val file = File(Constants.coverImgUrl())
             if (!file.exists()) {
                 file.mkdirs()
             }
-            val singerImgFile = File(file,"$singer.jpg")
-            var fos : FileOutputStream?=null
+            val singerImgFile = File(file, "$singer.jpg")
+            var fos: FileOutputStream? = null
             try {
                 fos = FileOutputStream(singerImgFile)
-                bitmap.compress(Bitmap.CompressFormat.JPEG,100,fos)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
                 fos.flush()
                 return true
             } catch (e: FileNotFoundException) {
@@ -104,7 +105,7 @@ object SongUtil {
      * 读取本地音乐的封面图片
      */
     fun loadLocalSongCover(singer: String, v: ImageView) {
-        val mS:String
+        val mS: String
         mS = if (singer.contains("/")) {
             val s = singer.split("/")
             s[0].trim()
@@ -113,13 +114,13 @@ object SongUtil {
         }
         val imgUrl = "${Constants.coverImgUrl()}$mS.jpg"
         LogUtil.e("本地音乐封面路径：$imgUrl")
-        v.loadImg(imgUrl,placeholder = R.drawable.disk,error = R.drawable.disk)
+        v.loadImg(imgUrl, placeholder = R.drawable.disk, error = R.drawable.disk)
     }
 
     /**
      * 保存歌词到本地
      */
-    fun saveLrcText(lrc:String,songName:String) {
+    fun saveLrcText(lrc: String, songName: String) {
         thread {
             val file = File(Constants.lrcTextUrl())
             if (!file.exists()) {
@@ -130,7 +131,7 @@ object SongUtil {
             } else {
                 songName
             }
-            val lrcFile = File(file,"$name.lrc")
+            val lrcFile = File(file, "$name.lrc")
             try {
                 val fileWriter = FileWriter(lrcFile)
                 fileWriter.write(lrc)
@@ -144,12 +145,12 @@ object SongUtil {
     /**
      * 读取本地歌词
      */
-    fun loadLocalLrcText(songName:String) :String? {
+    fun loadLocalLrcText(songName: String): String? {
         return try {
             val fileReader = FileReader("${Constants.lrcTextUrl()}$songName.lrc")
             val bufferReader = BufferedReader(fileReader)
             val lrc = StringBuilder()
-            while(true) {
+            while (true) {
                 val s = bufferReader.readLine() ?: break
                 lrc.append(s).append("\n")
             }
@@ -161,27 +162,28 @@ object SongUtil {
             null
         }
     }
-    fun assemblySong(s: Any,songType:Int,pos:Int=0):Song {
-        var song:Song?=null
-        when(songType) {
-            Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
-               val fmSong = s as FirstMeetSong
+
+    fun assemblySong(s: Any, songType: Int, pos: Int = 0): Song {
+        var song: Song? = null
+        when (songType) {
+            Consts.ONLINE_LIST_TYPE_FIRST_MEET -> {
+                val fmSong = s as FirstMeetSong
                 song = Song().apply {
                     songId = fmSong.songId //004DrG5A2nm7q2
                     singer = fmSong.singer// 鸾音社
                     songName = fmSong.songName// 夜来寒雨晓来风
                     imgUrl = fmSong.imgUrl
-                    duration = fmSong.duration?:0//187  (秒)
-                    isOnline = fmSong.isOnline?:false
+                    duration = fmSong.duration ?: 0//187  (秒)
+                    isOnline = fmSong.isOnline ?: false
                     mediaId = fmSong.mediaId//004DrG5A2nm7q2
                     albumName = fmSong.albumName//夜来寒雨晓来风
-                    isDownload =fmSong.isDownload?:false
+                    isDownload = fmSong.isDownload ?: false
                     listType = Consts.LIST_TYPE_ONLINE
                     onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
                     position = pos
                 }
             }
-            Consts.LIST_TYPE_LOCAL->{
+            Consts.LIST_TYPE_LOCAL -> {
                 val localSong = s as LocalSong
                 song = Song().apply {
                     songName = localSong.name
@@ -194,7 +196,7 @@ object SongUtil {
                     listType = Consts.LIST_TYPE_LOCAL
                 }
             }
-            Consts.LIST_TYPE_HISTORY->{
+            Consts.LIST_TYPE_HISTORY -> {
                 val historySong = s as HistorySong
                 song = Song().apply {
                     songId = historySong.songId
@@ -204,38 +206,48 @@ object SongUtil {
                     url = historySong.url
                     imgUrl = historySong.pic
                     position = pos
-                    duration = historySong.duration?:0
+                    duration = historySong.duration ?: 0
                     listType = Consts.LIST_TYPE_HISTORY
                     mediaId = historySong.mediaId
                 }
             }
-            Consts.LIST_TYPE_DOWNLOAD->{
+            Consts.LIST_TYPE_DOWNLOAD -> {
 
             }
-            Consts.LIST_TYPE_LOVE->{
-
+            Consts.LIST_TYPE_LOVE -> {
+                val love = s as LoveSong
+                song  = Song().apply {
+                    songId = love.songId
+                    qqId = love.qqId
+                    songName = love.name
+                    singer = love.singer
+                    isOnline = love.isOnline ?: false
+                    url = love.url
+                    imgUrl = love.pic
+                    position = pos
+                    duration = love.duration ?: 0
+                    listType = Consts.LIST_TYPE_LOVE
+                    mediaId = love.mediaId
+                }
             }
-            Consts.LIST_TYPE_ONLINE->{
+            Consts.LIST_TYPE_ONLINE -> {
                 val online = s as ListBean
                 song = Song().apply {
                     songId = online.songmid //004DrG5A2nm7q2
                     singer = StringUtil.getSinger(s)// 鸾音社
                     songName = online.songname// 夜来寒雨晓来风
-                    imgUrl = "${Consts.ALBUM_PIC}${online.albummid}${Consts.JPG}"////http://y.gtimg.cn/music/photo_new/T002R180x180M000004UvnL62KXhCQ.jpg
+                    imgUrl =
+                        "${Consts.ALBUM_PIC}${online.albummid}${Consts.JPG}"////http://y.gtimg.cn/music/photo_new/T002R180x180M000004UvnL62KXhCQ.jpg
                     duration = online.interval//187  (秒)
                     isOnline = true
                     mediaId = online.strMediaMid//004DrG5A2nm7q2
                     albumName = online.albumname//夜来寒雨晓来风
-                    isDownload = DownloadedUtil.isExistOfDownloadSong(online.songmid?:"")//003IHI2x3RbXLS  // 是否已经下载过了（初次搜索为false）
+                    isDownload = DownloadedUtil.hasDownloadedSong(
+                        online.songmid ?: ""
+                    )//003IHI2x3RbXLS  // 是否已经下载过了（初次搜索为false）
                 }
             }
         }
         return song!!
     }
-//    const val SONG_FIRST_MEET =0
-//    const val SONG_LOCAL = 1
-//    const val SONG_HISTORY = 2
-//    const val SONG_DOWNLOAD =3
-//    const val SONG_LOVE = 4
-//    const val SONG_ONLINE =5
 }

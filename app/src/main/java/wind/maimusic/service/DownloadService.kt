@@ -38,9 +38,9 @@ class DownloadService : Service() {
                 LogUtil.e("------DownloadService DownloadBinder startDownload error:${e.message}")
             }
             if (downloadTask != null) {
-                "已加入下载队列".toast()
+                R.string.in_download_queue.getStringRes().toast()
             } else {
-                "开始下载".toast()
+                R.string.start_download.getStringRes().toast()
                 start()
             }
         }
@@ -82,14 +82,15 @@ class DownloadService : Service() {
                 }
                 LogUtil.e("------DownloadService start downloadList:$songList; list.size:${songList?.size}")
                 if (isNotNullOrEmpty(songList)) {
+                    /*当前下载的歌曲*/
                     val currentDownloadSong = songList!![0]
                     currentDownloadSong.status = Consts.DOWNLOAD_READY
                     Bus.post(Consts.DOWNLOAD_EVENT, DownloadEvent(downloadStatus = Consts.TYPE_DOWNLOADING,downloadSong = currentDownloadSong))
                     downloadUrl = currentDownloadSong.url
                     downloadTask = DownloadTask(downloadListener)
                     downloadTask?.execute(currentDownloadSong)
+                    notificationManager.notify(1, getNotification("正在下载: ${currentDownloadSong.songName ?: "麦浪音乐"}", 0))
                 }
-
             }
         }
     }
@@ -114,8 +115,8 @@ class DownloadService : Service() {
                 operateDb(downloadSong)
                 start()
                 stopForeground(true)
-                if (downloadQueue.isEmpty()) notificationManager.notify(1, getNotification("下载成功啦~", -1))
             }
+            if (downloadQueue.isEmpty()) notificationManager.notify(1, getNotification("下载成功啦~", -1))
         }
 
         override fun hasDownloaded() {
@@ -126,7 +127,7 @@ class DownloadService : Service() {
             downloadTask = null
             stopForeground(true)
             notificationManager.notify(1,getNotification("下载失败",-1))
-            "下载失败".toast()
+            R.string.download_failed.getStringRes().toast()
         }
 
         override fun onPaused() {
@@ -148,9 +149,7 @@ class DownloadService : Service() {
         }
 
         override fun onStart() {
-            TODO("Not yet implemented")
         }
-
     }
 
     private fun operateDb(downloadSong: DownloadSong) {
@@ -220,5 +219,11 @@ class DownloadService : Service() {
             }
             return builder.build()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        downloadTask = null
+        downloadQueue.clear()
     }
 }

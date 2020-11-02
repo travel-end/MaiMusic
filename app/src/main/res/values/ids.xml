@@ -23,4 +23,18 @@
     <item name="title_tv" type="id" />
     <item name="title_tv_fun" type="id" />
     <item name="tv_download_all" type="id" />
+
+    <item name="md_song_list_iv_large_cover" type="id" />
+    <item name="md_song_list_iv_small_cover" type="id" />
+    <item name="md_song_list_tv_author" type="id" />
+    <item name="md_song_list_btn_collect" type="id" />
+    <item name="md_song_list_tv_tab_a" type="id" />
+    <item name="md_song_list_tv_tab_b" type="id" />
+    <item name="md_song_list_appbar_layout" type="id" />
+    <item name="md_song_list_toolbar" type="id" />
+    <item name="md_song_list_tv_name" type="id" />
+    <item name="md_song_list_tv_title_name" type="id" />
+    <item name="md_song_list_iv_title_back" type="id" />
+    <item name="md_song_list_tv_description" type="id" />
+
 </resources>

@@ -31,15 +31,16 @@ object Consts {
 
     // 播放列表
     const val LIST_TYPE_LOCAL=1//本地列表
-    const val LIST_TYPE_ONLINE=2//专辑列表
+    const val LIST_TYPE_ONLINE=2//在线音乐列表
     const val LIST_TYPE_LOVE=3//我的收藏列表
     const val LIST_TYPE_HISTORY=4//最近播放列表
     const val LIST_TYPE_DOWNLOAD=5//下载列表
 
     //在线音乐分类列表
-    const val ONLINE_LIST_TYPE_FIRST_MEET = 6
-    const val POETRY_TYPE_RECENT_READ = 7
-    const val POETRY_TYPE_LOVED = 7
+    const val ONLINE_LIST_TYPE_FIRST_MEET = 6// 首次使用app推荐歌单
+    const val POETRY_TYPE_RECENT_READ = 7//
+    const val POETRY_TYPE_LOVED = 8// 喜欢的音乐
+    const val ONLINE_LIST_TYPE_DAILY_RECOMMEND = 9// 每日推荐
 
 
     const val EVENT_LIST_TYPE = "event_list_type"

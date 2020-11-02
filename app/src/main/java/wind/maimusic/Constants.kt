@@ -1,5 +1,7 @@
 package wind.maimusic
 
+import wind.widget.cost.Consts
+
 
 /**
  * @By Journey 2020/10/25
@@ -43,7 +45,9 @@ object Constants {
     fun currentSongUrl():String {
         return "${MaiApp.getInstance().getExternalFilesDir("song").toString()}/maimusic"
     }
-
     const val HOT_SEARCH = "hot_search"
     const val KEY_SEARCH_CONTENT= "key_search_content"
+    const val TOOLBAR_MAX_OFFSET = 150
+    const val TEMP_SONG_COVER = "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg"
+    const val TEMP_SONG_COVER2 = "${Consts.ALBUM_PIC}001Jegbz00ePg5${Consts.JPG}"
 }

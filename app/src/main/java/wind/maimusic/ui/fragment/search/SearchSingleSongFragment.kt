@@ -16,38 +16,46 @@ import wind.widget.effcientrv.*
 import wind.widget.model.Song
 import wind.widget.rippleview.RippleView
 
-class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
-    private var searchText:String = ""
+/**
+ * 歌曲搜索结果（单曲）
+ */
+class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
+    private var searchText: String = ""
     companion object {
-        fun newInstance(searchText:String):SearchSingleSongFragment {
+        fun newInstance(searchText: String): SearchSingleSongFragment {
             val fragment = SearchSingleSongFragment()
             val bundle = Bundle().apply {
-                putString(Constants.KEY_SEARCH_CONTENT,searchText)
+                putString(Constants.KEY_SEARCH_CONTENT, searchText)
             }
             fragment.arguments = bundle
             return fragment
         }
     }
 
-    override fun layoutResId()=R.layout.fragment_search_single_song
-
+    override fun layoutResId() = R.layout.fragment_search_single_song
     override fun setRvContent() {
         rvSongList.setup<ListBean> {
             adapter {
                 addItem(R.layout.item_search_song) {
-                    bindViewHolder { data, position, holder ->
-                        data?.let {s->
-                            setText(R.id.item_search_song_list_tv_song_name,s.songname)
-                            setText(R.id.item_search_song_list_tv_song_singer,StringUtil.getSinger(s))
-                            setText(R.id.item_search_song_list_tv_song_album,s.albumname)
-                            setVisible(R.id.item_search_song_list_iv_downloaded,false) // TODO: 2020/10/28
+                    bindViewHolder { data, _, _ ->
+                        data?.let { s ->
+                            setText(R.id.item_search_song_list_tv_song_name, s.songname)
+                            setText(
+                                R.id.item_search_song_list_tv_song_singer,
+                                StringUtil.getSinger(s)
+                            )
+                            setText(R.id.item_search_song_list_tv_song_album, s.albumname)
+                            setVisible(
+                                R.id.item_search_song_list_iv_downloaded,
+                                false
+                            ) // TODO: 2020/10/28
                             if (s.lyric.isNotNullOrEmpty()) {
-                                setVisible(R.id.item_search_song_list_tv_song_lyric,true)
-                                setText(R.id.item_search_song_list_tv_song_lyric,s.lyric)
+                                setVisible(R.id.item_search_song_list_tv_song_lyric, true)
+                                setText(R.id.item_search_song_list_tv_song_lyric, s.lyric)
                             }
                             (itemView as RippleView).setOnRippleCompleteListener {
                                 // TODO: 2020/10/29 to playactivity
-                                val song = SongUtil.assemblySong(s,Consts.LIST_TYPE_ONLINE)
+                                val song = SongUtil.assemblySong(s, Consts.LIST_TYPE_ONLINE)
                                 mViewModel.getSongPlayUrl(song)
                             }
                         }
@@ -59,15 +67,15 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
 
     override fun initData() {
         super.initData()
-        searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT)?:""
+        searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT) ?: ""
         if (searchText.isNotEmpty()) {
-            mViewModel.searchSong(searchText,1)
+            mViewModel.searchSong(searchText, 1)
         }
     }
 
     override fun observe() {
         super.observe()
-        mViewModel.searchResult.observe(this,Observer{
+        mViewModel.searchResult.observe(this, Observer {
             it?.let {
                 val song = it.data?.song
                 if (song != null) {
@@ -81,13 +89,13 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
                 }
             }
         })
-        mViewModel.songPlayUrlResult.observe(this,Observer{
+        mViewModel.songPlayUrlResult.observe(this, Observer {
             it?.let {
                 val song = it.entries.find { entry ->
                     entry.key == "song"
                 }?.value as Song
                 val url = it.entries.find { entry ->
-                    entry.key=="url"
+                    entry.key == "url"
                 }?.value as String
                 song.url = url
                 SongUtil.saveSong(song)
@@ -95,5 +103,6 @@ class SearchSingleSongFragment:BaseSongListFragment<SearchResultViewModel>() {
             }
         })
     }
-    override fun songListType()=0
+
+    override fun songListType() = 0
 }

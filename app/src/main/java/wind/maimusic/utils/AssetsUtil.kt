@@ -1,6 +1,5 @@
 package wind.maimusic.utils
 
-import android.util.Log
 import com.google.gson.Gson
 import wind.maimusic.MaiApp
 import wind.maimusic.model.firstmeet.FirstMeet
@@ -91,7 +90,7 @@ object AssetsUtil {
                         mediaId = r.strMediaMid
                         songmid = r.songmid
                         albumName = r.albumname
-                        isDownload = DownloadedUtil.isExistOfDownloadSong(r.songmid?:"")//003IHI2x3RbXLS
+                        isDownload = DownloadedUtil.hasDownloadedSong(r.songmid?:"")//003IHI2x3RbXLS
                     }
                     list.add(song)
                 }
