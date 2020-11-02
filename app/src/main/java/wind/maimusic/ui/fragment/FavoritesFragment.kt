@@ -1,6 +1,7 @@
 package wind.maimusic.ui.fragment
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_collect.*
 import wind.maimusic.R
@@ -18,6 +19,24 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
         }
     }
     override fun layoutResId()=R.layout.fragment_collect
+
+    override fun initData() {
+        super.initData()
+        mViewModel.getSongNums()
+    }
+
+    override fun observe() {
+        super.observe()
+        mViewModel.songNums.observe(this,Observer{
+            it?.let {
+                val loved = it[0]
+                if (loved!= null) {
+                    collect_tv_loved_songs.text = "${loved}首"
+                }
+            }
+            
+        })
+    }
 
     override fun initAction() {
         super.initAction()
