@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
+import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.model.HistorySong
@@ -24,10 +25,7 @@ import wind.maimusic.model.LoveSong
 import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.songlist.SongListTop
 import wind.maimusic.service.PlayerService
-import wind.maimusic.utils.SongUtil
-import wind.maimusic.utils.getColorRes
-import wind.maimusic.utils.gone
-import wind.maimusic.utils.visible
+import wind.maimusic.utils.*
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
 import wind.widget.utils.fastClickListener
@@ -75,6 +73,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var songSinger: String? = null
     private var songId: String? = null
     private var isDownloaded: Boolean = false
+    private var canRefresh:Boolean = true
     /*点击改变item状态的标志*/
     private var lastPosition: Int = -1
     /*需要操作layoutManager的地方调用*/
@@ -82,12 +81,10 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private val playerConnection = object : ServiceConnection {
         override fun onServiceDisconnected(p0: ComponentName?) {
         }
-
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             playerBinder = service as PlayerService.PlayerBinder
             onBindConnection()
         }
-
     }
 
     open fun onBindConnection() {
@@ -299,9 +296,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             tvSongListAuthor?.text = info.songListAuthor
             tvSongListTagA?.text = info.songListTagA
             tvSongListTagB?.text = info.songListTagB
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {// android 6.0
-//                ivSongListLargeCover?.foreground?.alpha = 20
-//            }
+            tvSongListTitleName?.text = info.songListName
             ivSongListLargeCover?.loadImg(
                 url = info.songListCoverImgUrl?:"",
                 placeholder = R.drawable.place_holder_half_translate,
@@ -318,29 +313,47 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private fun initToolBar() {
         val alphaMaxOffset = Constants.TOOLBAR_MAX_OFFSET.toFloat().toIntPx()
         toolBar?.background?.alpha = 0
+        tvSongListTitleName?.alpha = 0f
         appBarLayout?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             if (verticalOffset > -alphaMaxOffset) {
                 toolBar?.background?.alpha = 255 * -verticalOffset / alphaMaxOffset
-                tvSongListTitleName.gone()
+//                LogUtil.e("alpha:${(-verticalOffset.toFloat() / 600)}, verticalOffset:$verticalOffset")
+                var textAlpha = -verticalOffset.toFloat() / 1000
+                if (textAlpha > 1) {
+                    textAlpha = 1.00f
+                }
+                tvSongListTitleName?.alpha = textAlpha
                 canRefresh = true
                 if (canRefresh) {
                     canRefresh = false
-                    ivSongListTitleBack?.setImageBitmap(BitmapFactory.decodeResource(resources,R.drawable.ic_arrow_left_white))
+                    ivSongListTitleBack?.setImageResource(R.drawable.ic_arrow_left_white)
                 }
             } else {
                 canRefresh = true
                 if (canRefresh) {
                     canRefresh = false
-                    tvSongListTitleName.visible()
                     toolBar?.background?.alpha = 255
-                    tvSongListTitleName?.text = songListTop?.songListName
-                    tvSongListTitleName?.setTextColor(R.color.text_color.getColorRes())
-                    ivSongListTitleBack?.setImageBitmap(BitmapFactory.decodeResource(resources,R.drawable.ic_arrow_left))
+                    tvSongListTitleName?.alpha = 1.0f
+                    ivSongListTitleBack?.setImageResource(R.drawable.ic_arrow_left)
                 }
             }
         })
     }
-    private var canRefresh:Boolean = true
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        ImmersionBar.setTitleBar(this,toolBar)
+//    }
+//
+//    override fun initStatusBar() {
+//        super.initStatusBar()
+//        ImmersionBar
+//            .with(this)
+//            .statusBarColorTransformEnable(false)
+//            .keyboardEnable(false)
+//            .navigationBarColor(R.color.colorPrimary)
+//            .init()
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -24,6 +24,7 @@ abstract class BaseFragment:Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        initStatusBar()
         initView()
         initData()
         initAction()
@@ -35,6 +36,9 @@ abstract class BaseFragment:Fragment() {
 
     }
     open fun initAction() {
+
+    }
+    open fun initStatusBar() {
 
     }
 }

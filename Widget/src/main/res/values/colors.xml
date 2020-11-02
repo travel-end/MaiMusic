@@ -38,6 +38,6 @@
     <color name="lrc_time_text_color">#809E9E9E</color>
     <color name="black_50p">#80000000</color>
     <color name="black_40p">#40000000</color>
-    <color name="black_60p">#60000000</color>
+    <color name="black_60p">#70000000</color>
     <color name="black_30p">#30000000</color>
 </resources>
