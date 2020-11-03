@@ -55,4 +55,8 @@
     <string name="collect_song_list">收藏歌单</string>
     <string name="no_collect_song_list">还没有收藏的歌单啦</string>
     <string name="no_local_music">还没有发现本地音乐啦</string>
+    <string name="daily_recommend">每日推荐</string>
+    <string name="singer">歌手</string>
+    <string name="hot_songs">热歌精选</string>
+    <string name="song_style">我的风格</string>
 </resources>

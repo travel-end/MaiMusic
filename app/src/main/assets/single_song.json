@@ -1,0 +1,74 @@
+{
+  "singleSongList": [
+    {
+      "songName": "穿越时空的爱恋",
+      "singer": "singer1",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc1"
+    },
+    {
+      "songName": "nam2",
+      "singer": "singer2",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc2"
+    },
+    {
+      "songName": "nam3",
+      "singer": "singer3",
+      "album": "",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/07/190/200708083832442_none_4481.jpg",
+      "desc": "desc3"
+    },
+    {
+      "songName": "nam4",
+      "singer": "singer4",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc4"
+    },
+    {
+      "songName": "nam5",
+      "singer": "singer5",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc5"
+    },
+    {
+      "songName": "nam6",
+      "singer": "singer6",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc6"
+    },
+    {
+      "songName": "霉霉的歌",
+      "singer": "哥哥啊",
+      "album": "",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/07/190/200708083832442_none_4481.jpg",
+      "desc": ""
+    },
+    {
+      "songName": "南极星",
+      "singer": "孙燕姿",
+      "album": "",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/10/293/201019090529735_none_9118.jpg",
+      "desc": ""
+    },
+    {
+      "songName": "来自天堂的魔鬼",
+      "singer": "邓紫棋",
+      "album": "",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/07/190/200708083832442_none_4481.jpg",
+      "desc": ""
+    },
+    {
+      "songName": "走着走着就散了",
+      "singer": "庄心妍",
+      "album": "",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/09/268/200924173151781_none_9104.jpg",
+      "desc": ""
+    }
+  ]
+}

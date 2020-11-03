@@ -9,7 +9,13 @@ import androidx.core.content.ContextCompat
 import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleActivity
+import wind.maimusic.room.database.OnlineSongDatabase
+import wind.maimusic.utils.AssetsUtil
+import wind.maimusic.utils.GlobalUtil
+import wind.maimusic.utils.SpUtil
+import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.vm.WelcomeViewModel
+import wind.widget.cost.Consts
 
 /**
  * @By Journey 2020/10/25
@@ -35,10 +41,11 @@ class WelcomeActivity:BaseLifeCycleActivity<WelcomeViewModel>() {
         } else {
             window.decorView.postDelayed({
                 toMain()
-            },1200)
+            },800)
         }
     }
     private fun toMain() {
+        initDatabase()
         startActivity(
             Intent(this,
             MainActivity::class.java)
@@ -56,6 +63,19 @@ class WelcomeActivity:BaseLifeCycleActivity<WelcomeViewModel>() {
             } else {
                 Toast.makeText(this, "拒绝该权限无法使用该程序", Toast.LENGTH_SHORT).show()
                 finish()
+            }
+        }
+    }
+
+    private fun initDatabase(){
+        if (SpUtil.getString(Consts.FIRST_LAUNCH).isEmpty()) {
+            GlobalUtil.execute {
+                val songs = AssetsUtil.loadFirstMeetSongs()
+                if (isNotNullOrEmpty(songs)) {
+                    OnlineSongDatabase.getDatabase().firstMeetSongDao().addFirstMeetSongList(songs!!)
+                }
+                AssetsUtil.initAppData()
+                SpUtil.saveValue(Consts.FIRST_LAUNCH,"has_launch")
             }
         }
     }

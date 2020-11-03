@@ -4,7 +4,8 @@ import com.google.gson.Gson
 import wind.maimusic.MaiApp
 import wind.maimusic.model.firstmeet.FirstMeet
 import wind.maimusic.model.firstmeet.FirstMeetSong
-import wind.maimusic.model.listensong.ListenSong
+import wind.maimusic.model.listensong.*
+import wind.maimusic.room.database.OnlineSongDatabase
 import wind.widget.cost.Consts
 import java.io.BufferedReader
 import java.io.IOException
@@ -69,6 +70,23 @@ object AssetsUtil {
         }
         return null
     }
+
+    fun initAppData() {
+        GlobalUtil.async {
+            val dbDao = OnlineSongDatabase.getDatabase()
+            val bannerJson = readAssetsJson("banner.json")
+            val banner = gson.fromJson(bannerJson,Banner::class.java)
+            val songListCover = gson.fromJson(readAssetsJson("song_list_cover.json"), SongListCovers::class.java)
+            val singleSong = gson.fromJson(readAssetsJson("single_song.json"), SingleSongList::class.java)
+            val poetrySong = gson.fromJson(readAssetsJson("poetry_song.json"),PoetrySongList::class.java)
+            dbDao.listenBannerDao().addListenBanners(banner.bannerList)
+            dbDao.songListCoverDao().addSongCovers(songListCover.listCovers)
+            dbDao.singleSongDao().addSingleSongs(singleSong.singleSongList)
+            dbDao.poetrySongDao().addPoetrySongs(poetrySong.poetrySongList)
+
+        }
+    }
+
 
     /**
      * 度json 数组
