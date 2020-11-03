@@ -1,0 +1,53 @@
+{
+  "id": 0,
+  "bannerList": [
+    {
+      "imgUrl": "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89",
+      "title": "banner1",
+      "desc": "desc1",
+      "type": 1
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89",
+      "title": "banner2",
+      "desc": "desc2",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89",
+      "title": "banner3",
+      "desc": "desc3",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89",
+      "title": "banner4",
+      "desc": "desc4",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89",
+      "title": "banner5",
+      "desc": "desc5",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/UKCmRxElL_gbL60VW7qgqA==/109951165433266585.jpg?imageView&quality=89",
+      "title": "banner6",
+      "desc": "desc6",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/UKCmRxElL_gbL60VW7qgqA==/109951165433266585.jpg?imageView&quality=89",
+      "title": "banner7",
+      "desc": "desc7",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89",
+      "title": "banner8",
+      "desc": "desc8",
+      "type": ""
+    }
+  ]
+}

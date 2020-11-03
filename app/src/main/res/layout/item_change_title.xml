@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_52"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginEnd="@dimen/dp_14"
+    android:layout_marginStart="@dimen/dp_14"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/find_tv_title_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="嘻嘻哈哈"
+        android:textStyle="bold"
+        android:textColor="@color/black_33"
+        android:layout_gravity="center_vertical"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/find_change_second_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:textColor="@color/text_color"
+        tools:text="换一批"
+        android:layout_gravity="center_vertical|end"
+        android:drawablePadding="@dimen/dp_6"
+        app:drawableStartCompat="@drawable/refresh" />
+
+</FrameLayout>

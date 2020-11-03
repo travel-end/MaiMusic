@@ -37,4 +37,5 @@
     <item name="md_song_list_iv_title_back" type="id" />
     <item name="md_song_list_tv_description" type="id" />
 
+    <item name="rv_listen" type="id" />
 </resources>

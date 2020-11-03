@@ -1,11 +1,7 @@
 package wind.maimusic
 
 import androidx.multidex.MultiDexApplication
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import wind.maimusic.room.MaiDatabase
-import wind.maimusic.room.OnlineSongDatabase
+import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.AssetsUtil
 import wind.maimusic.utils.GlobalUtil
 import wind.maimusic.utils.SpUtil

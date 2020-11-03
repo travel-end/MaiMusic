@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_14"
+    android:layout_marginTop="@dimen/dp_4"
+    android:layout_marginEnd="@dimen/dp_14"
+    android:layout_marginBottom="@dimen/dp_4">
+
+    <ImageView
+        android:id="@+id/single_song_iv_cover"
+        android:layout_width="@dimen/dp_62"
+        android:layout_height="@dimen/dp_62"
+        android:scaleType="centerCrop"
+        android:src="@drawable/temp_rect_cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/single_song_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:textColor="@color/text_color"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/single_song_iv_cover"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="没有历有" />
+
+    <TextView
+        android:id="@+id/single_song_tv_singer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_12"
+        android:textColor="@color/color999999"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/single_song_tv_name"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="没有历有" />
+
+    <TextView
+        android:id="@+id/single_song_tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_4"
+        android:maxLines="1"
+        android:textColor="@color/text_color"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/single_song_iv_cover"
+        app:layout_constraintTop_toBottomOf="@id/single_song_tv_name"
+        tools:text="再遇见你的那一刻 好汉众星介于尘土" />
+
+    <ImageView
+        android:id="@+id/single_song_iv_to_play"
+        android:layout_width="@dimen/dp_46"
+        android:layout_height="@dimen/dp_46"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:src="@drawable/play_btn_play_pause_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

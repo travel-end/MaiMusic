@@ -20,7 +20,7 @@ class LovedSongFragment : BaseSongListFragment<LoveSongViewModel>() {
             "我喜欢的音乐",
             "我喜欢你，像风走了八千里，不问归期",
             "By Journey - Travel end -",
-            Constants.TEMP_SONG_COVER2,
+            Constants.TEMP_SONG_COVER3_BIG,
             "喜欢",
             "清凉"
         )

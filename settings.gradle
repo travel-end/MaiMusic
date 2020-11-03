@@ -1,3 +1,2 @@
 rootProject.name = "MaiMusic"
-include ':Widget'
-include ':app'
+include ':app',':Widget'

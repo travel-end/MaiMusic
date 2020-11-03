@@ -32,7 +32,7 @@
         android:textColor="@color/text_color"
         android:layout_marginEnd="@dimen/dp_16"
         tools:text="查看更多"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_gravity="center_vertical|end"
         app:drawableEndCompat="@drawable/ic_arrow_right" />
 </FrameLayout>

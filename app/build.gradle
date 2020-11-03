@@ -18,18 +18,28 @@ android {
         multiDexEnabled=true
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../mai/mai-music.jks")
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
-            zipAlignEnabled true
-            shrinkResources true
+//            zipAlignEnabled true
+//            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "LOG_DEBUG", "false"
         }
         debug {
             minifyEnabled false
-            zipAlignEnabled false
-            shrinkResources false
+//            zipAlignEnabled false
+//            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "LOG_DEBUG", "true"
         }
@@ -60,8 +70,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
-//    implementation 'androidx.paging:paging-runtime:2.1.1'
-//    implementation 'androidx.paging:paging-common:2.1.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'

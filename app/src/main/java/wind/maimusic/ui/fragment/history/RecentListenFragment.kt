@@ -8,9 +8,11 @@ import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.utils.visible
 import wind.maimusic.vm.RecentListenViewModel
 import wind.widget.cost.Consts
+import wind.widget.effcientrv.EfficientAdapter
 import wind.widget.effcientrv.submitList
 
 class RecentListenFragment:BaseSongListFragment<RecentListenViewModel>() {
+    private var listenAdapter:EfficientAdapter<Any>?=null
     override fun layoutResId()=R.layout.fragment_recent_listener
     override fun initView() {
         super.initView()

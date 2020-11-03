@@ -1,4 +1,4 @@
-package wind.maimusic.room
+package wind.maimusic.room.database
 
 import androidx.room.Database
 import androidx.room.Room
@@ -7,6 +7,10 @@ import wind.maimusic.MaiApp
 import wind.maimusic.model.*
 import wind.maimusic.model.download.DownloadSong
 import wind.maimusic.model.firstmeet.FirstMeetSong
+import wind.maimusic.room.DownloadSongDao
+import wind.maimusic.room.HistorySongDao
+import wind.maimusic.room.LocalSongDao
+import wind.maimusic.room.LoveSongDao
 
 /**
  * @By Journey 2020/10/28
@@ -26,7 +30,8 @@ abstract class MaiDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: MaiDatabase? = null
         fun getDatabase(): MaiDatabase {
-            val tempInstance = INSTANCE
+            val tempInstance =
+                INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }

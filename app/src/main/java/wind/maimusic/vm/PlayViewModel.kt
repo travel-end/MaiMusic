@@ -11,7 +11,7 @@ import wind.maimusic.model.LoveSong
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.model.core.OnlineSongLrc
 import wind.maimusic.model.download.DownloadSong
-import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.utils.SongUtil
 import wind.maimusic.utils.SpUtil
 import wind.maimusic.utils.getStringRes

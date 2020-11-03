@@ -1,4 +1,4 @@
-package wind.maimusic.room
+package wind.maimusic.room.database
 
 import androidx.room.Database
 import androidx.room.Room
@@ -6,6 +6,8 @@ import androidx.room.RoomDatabase
 import wind.maimusic.MaiApp
 import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.firstmeet.FirstMeetSong
+import wind.maimusic.room.FirstMeetSongDao
+import wind.maimusic.room.OnlineSongDao
 
 /**
  * @By Journey 2020/10/30
@@ -16,13 +18,14 @@ import wind.maimusic.model.firstmeet.FirstMeetSong
  */
 @Database(entities = [FirstMeetSong::class,OnlineSong::class],version = 1,exportSchema = false)
 abstract class OnlineSongDatabase:RoomDatabase() {
-    abstract fun firstMeetSongDao():FirstMeetSongDao
-    abstract fun onlineSongDao():OnlineSongDao
+    abstract fun firstMeetSongDao(): FirstMeetSongDao
+    abstract fun onlineSongDao(): OnlineSongDao
     companion object {
         @Volatile
         private var INSTANCE: OnlineSongDatabase? = null
         fun getDatabase(): OnlineSongDatabase {
-            val tempInstance = INSTANCE
+            val tempInstance =
+                INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }

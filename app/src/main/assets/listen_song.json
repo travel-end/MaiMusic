@@ -1,0 +1,308 @@
+{
+  "id": 0,
+  "bannerList": [
+    {
+      "imgUrl": "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89",
+      "title": "banner1",
+      "desc": "desc1",
+      "type": 1
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89",
+      "title": "banner2",
+      "desc": "desc2",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89",
+      "title": "banner3",
+      "desc": "desc3",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89",
+      "title": "banner4",
+      "desc": "desc4",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89",
+      "title": "banner5",
+      "desc": "desc5",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/UKCmRxElL_gbL60VW7qgqA==/109951165433266585.jpg?imageView&quality=89",
+      "title": "banner6",
+      "desc": "desc6",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/UKCmRxElL_gbL60VW7qgqA==/109951165433266585.jpg?imageView&quality=89",
+      "title": "banner7",
+      "desc": "desc7",
+      "type": ""
+    },
+    {
+      "imgUrl": "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89",
+      "title": "banner8",
+      "desc": "desc8",
+      "type": ""
+    }
+  ],
+  "tabMenuList": [
+    {
+      "imgUrl": "",
+      "menuName": "每日推荐",
+      "cover": 0
+    },
+    {
+      "imgUrl": "",
+      "menuName": "热歌精选",
+      "cover": 0
+    },
+    {
+      "imgUrl": "",
+      "menuName": "歌单",
+      "cover": 0
+    },
+    {
+      "imgUrl": "",
+      "menuName": "歌手",
+      "cover": 0
+    },
+    {
+      "imgUrl": "",
+      "menuName": "风格",
+      "cover": 0
+    }
+  ],
+  "songListTitle": {
+    "title": "精选歌单",
+    "text": "",
+    "icon": 0
+  },
+  "songList": [
+    {
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "listName": "list1",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg",
+      "listName": "list2",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "listName": "list3",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg",
+      "listName": "list4",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "listName": "list5",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "",
+      "listName": "",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "",
+      "listName": "",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "",
+      "listName": "",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "",
+      "listName": "",
+      "desc": "",
+      "type": 0
+    },
+    {
+      "cover": "",
+      "listName": "",
+      "desc": "",
+      "type": 0
+    }
+  ],
+  "singleSongTitle": {
+    "title": "单曲推荐",
+    "text": "",
+    "icon": 0
+  },
+  "singleSongList": [
+    {
+      "songName": "穿越时空的爱恋",
+      "singer": "singer1",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc1"
+    },
+    {
+      "songName": "nam2",
+      "singer": "singer2",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc2"
+    },
+    {
+      "songName": "nam3",
+      "singer": "singer3",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc3"
+    },
+    {
+      "songName": "nam4",
+      "singer": "singer4",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc4"
+    },
+    {
+      "songName": "nam5",
+      "singer": "singer5",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc5"
+    },
+    {
+      "songName": "nam6",
+      "singer": "singer6",
+      "album": "",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "desc6"
+    },
+    {
+      "songName": "",
+      "singer": "",
+      "album": "",
+      "cover": "",
+      "desc": ""
+    },
+    {
+      "songName": "",
+      "singer": "",
+      "album": "",
+      "cover": "",
+      "desc": ""
+    },
+    {
+      "songName": "",
+      "singer": "",
+      "album": "",
+      "cover": "",
+      "desc": ""
+    },
+    {
+      "songName": "",
+      "singer": "",
+      "album": "",
+      "cover": "",
+      "desc": ""
+    }
+  ],
+  "poetrySongTitle": {
+    "title": "诗＆歌",
+    "text": "",
+    "icon": 0
+  },
+  "poetrySongList": [
+    {
+      "name": "poetry1",
+      "singer": "singer1",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry2",
+      "singer": "singer2",
+      "cover": "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry3",
+      "singer": "singer3",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry4",
+      "singer": "singer4",
+      "cover": "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry5",
+      "singer": "singer5",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry6",
+      "singer": "singer6",
+      "cover": "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry7",
+      "singer": "singer7",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "",
+      "singer": "",
+      "cover": "",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "",
+      "singer": "",
+      "cover": "",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "",
+      "singer": "",
+      "cover": "",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "",
+      "singer": "",
+      "cover": "",
+      "desc": "",
+      "isLoved": false
+    }
+  ]
+}

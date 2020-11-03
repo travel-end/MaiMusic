@@ -7,14 +7,13 @@ import android.graphics.BitmapFactory
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import wind.maimusic.R
 import wind.maimusic.download.DownloadListener
 import wind.maimusic.download.DownloadTask
 import wind.maimusic.model.download.DownloadEvent
 import wind.maimusic.model.download.DownloadSong
-import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.ui.activities.MainActivity
 import wind.maimusic.utils.*
 import wind.widget.cost.Consts

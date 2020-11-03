@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.model.LoveSong
-import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.database.MaiDatabase
 
 class LoveSongViewModel:BaseViewModel() {
 

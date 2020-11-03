@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import wind.maimusic.MaiApp
 import wind.maimusic.model.firstmeet.FirstMeet
 import wind.maimusic.model.firstmeet.FirstMeetSong
+import wind.maimusic.model.listensong.ListenSong
 import wind.widget.cost.Consts
 import java.io.BufferedReader
 import java.io.IOException
@@ -42,9 +43,10 @@ object AssetsUtil {
     /**
      * 读取一条json
      */
-    fun readAssetsJson(jsonName:String):String? {
+    @Throws(Exception::class)
+    private fun readAssetsJson(jsonName:String):String? {
         val builder = StringBuilder()
-        return try {
+//        return try {
             val inputReader =
                 InputStreamReader(MaiApp.getInstance().applicationContext.resources.assets.open(jsonName))
             val bufReader = BufferedReader(inputReader)
@@ -53,11 +55,19 @@ object AssetsUtil {
             while (bufReader.readLine().also { line = it } != null) {
                 builder.append(line)
             }
-            builder.toString()
-        } catch (e:Exception) {
-            e.printStackTrace()
-            null
+            return builder.toString()
+//        } catch (e:Exception) {
+//            e.printStackTrace()
+//            null
+//        }
+    }
+
+    fun loadListenSongData() :ListenSong?{
+        val jsonData = readAssetsJson("listen_song.json")
+        if (jsonData != null) {
+            return gson.fromJson(jsonData,ListenSong::class.java)
         }
+        return null
     }
 
     /**

@@ -9,8 +9,7 @@ import wind.maimusic.base.BaseViewModel
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.model.firstmeet.FirstMeetSong
-import wind.maimusic.room.MaiDatabase
-import wind.maimusic.room.OnlineSongDatabase
+import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.LogUtil
 import wind.widget.cost.Consts
 import wind.widget.model.Song

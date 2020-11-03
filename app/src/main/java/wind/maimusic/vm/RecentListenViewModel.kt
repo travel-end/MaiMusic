@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.model.HistorySong
-import wind.maimusic.room.MaiDatabase
+import wind.maimusic.room.database.MaiDatabase
 
 class RecentListenViewModel:BaseViewModel() {
     val recentListenSongs :MutableLiveData<List<HistorySong>> = MutableLiveData()

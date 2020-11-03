@@ -8,8 +8,8 @@ import android.os.IBinder
 import wind.maimusic.model.*
 import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.firstmeet.FirstMeetSong
-import wind.maimusic.room.MaiDatabase
-import wind.maimusic.room.OnlineSongDatabase
+import wind.maimusic.room.database.MaiDatabase
+import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.*
 import wind.widget.cost.Consts
 import wind.widget.model.Song
