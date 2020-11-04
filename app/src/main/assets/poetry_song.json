@@ -76,6 +76,83 @@
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/04/118/20042709003179_none_4696.jpg",
       "desc": "爱真的需要勇气 才能够给应对流言蜚语 只要你一个眼神肯定.......",
       "isLoved": false
+    },
+    {
+      "name": "poetry1",
+      "singer": "singer1",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry2",
+      "singer": "singer2",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry3",
+      "singer": "singer3",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry4",
+      "singer": "singer4",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/04/118/20042709003179_none_4696.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry5",
+      "singer": "singer5",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry6",
+      "singer": "花粥",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/09/265/200921142614451_none_6075.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "poetry7",
+      "singer": "singer7",
+      "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "大阪",
+      "singer": "陈粒",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/10/301/201027102030831_none_4944.jpg",
+      "desc": "ddddddd",
+      "isLoved": false
+    },
+    {
+      "name": "小半",
+      "singer": "陈粒",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/10/301/201027102030831_none_4944.jpg",
+      "desc": "waahhahah",
+      "isLoved": false
+    },
+    {
+      "name": "勇气",
+      "singer": "梁静茹",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/04/118/20042709003179_none_4696.jpg",
+      "desc": "",
+      "isLoved": false
+    },
+    {
+      "name": "勇气",
+      "singer": "梁静茹",
+      "cover": "https://cdnmusic.migu.cn/tycms_picture/20/04/118/20042709003179_none_4696.jpg",
+      "desc": "爱真的需要勇气 才能够给应对流言蜚语 只要你一个眼神肯定.......",
+      "isLoved": false
     }
   ]
 }

@@ -16,6 +16,12 @@ class ListenSongViewModel : BaseViewModel() {
     val listData: MutableLiveData<MutableList<Any>> = MutableLiveData()
 
     val data = mutableListOf<Any>()
+    companion object {
+        const val INIT_BANNER = 3
+        const val INIT_SONG_LIST=5
+        const val INIT_SINGLE_SONG = 3
+        const val INIT_POETRY_SONG= 11
+    }
 
     fun initListenData() {
         data.clear()
