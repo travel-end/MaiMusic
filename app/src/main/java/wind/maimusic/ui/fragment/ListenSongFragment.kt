@@ -20,12 +20,9 @@ import wind.maimusic.model.title.PoetrySongTitle
 import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.ui.activities.TestActivity
 import wind.maimusic.utils.inflate
-import wind.maimusic.utils.toast
 import wind.maimusic.vm.ListenSongViewModel
-import wind.widget.effcientrv.EfficientAdapter
-import wind.widget.effcientrv.addItem
-import wind.widget.effcientrv.efficientAdapter
-import wind.widget.effcientrv.setText
+import wind.maimusic.widget.MaiRefreshView
+import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
 import wind.widget.utils.fastClickListener
@@ -45,7 +42,7 @@ import wind.widget.utils.loadImg
  */
 class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
     private lateinit var rvListenSong: JRecycleView
-    private var listenSongAdapter: EfficientAdapter<Any>? = null
+    private var rawAdapter: EfficientAdapter<Any>? = null
     private var jAdapter:JRefreshAndLoadMoreAdapter?=null
     override fun layoutResId() = R.layout.fragment_listen_song
 
@@ -62,11 +59,11 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         lm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 /*position-1:去除刷新头*/
-                return if (listenSongAdapter?.getItem(position-1) is TabMenu) 1 else 5
+                return if (rawAdapter?.getItem(position-1) is TabMenu) 1 else 5
             }
         }
         rvListenSong.layoutManager = lm
-        listenSongAdapter = efficientAdapter<Any> {
+        rawAdapter = efficientAdapter<Any> {
             addItem(R.layout.item_horiz_rv) {
                 isForViewType { data, position -> data is Banner }
                 bindViewHolder { data, position, holder ->
@@ -106,6 +103,9 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             .build()
                     val menu = data as TabMenu
                     setText(R.id.item_tab_menu_name, menu.menuName)
+                    itemClicked(View.OnClickListener {
+
+                    })
                 }
             }
             addItem(R.layout.item_common_title) {
@@ -197,13 +197,14 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         }
 //            .attach(rvListenSong)
         // JRecyclerView
-        jAdapter = JRefreshAndLoadMoreAdapter(requireContext(),listenSongAdapter).apply {
-            setOnRefreshListener {
-                "刷新完成".toast()
+        jAdapter = JRefreshAndLoadMoreAdapter(requireContext(),rawAdapter).apply {
+//            setOnRefreshListener {
+//                "刷新完成".toast()
 //                setLoadComplete()
-            }
+//            }
         }
         jAdapter?.setIsOpenLoadMore(false)
+//        jAdapter?.refreshLoadView = MaiRefreshView(requireContext())
         rvListenSong.adapter = jAdapter
     }
 
@@ -216,7 +217,8 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         super.observe()
         mViewModel.listData.observe(this, Observer {
             it?.let {
-                listenSongAdapter?.submitList(it)
+//                rawAdapter?.submitList(it)
+                rawAdapter?.items = it
                 jAdapter?.notifyDataSetChanged()
             }
         })

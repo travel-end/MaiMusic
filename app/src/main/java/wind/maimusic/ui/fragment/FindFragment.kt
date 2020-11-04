@@ -1,4 +1,15 @@
 package wind.maimusic.ui.fragment
 
-class FindFragment {
+import androidx.fragment.app.Fragment
+import wind.maimusic.R
+import wind.maimusic.base.BaseLifeCycleFragment
+import wind.maimusic.vm.FindPoetryViewModel
+
+class FindFragment :BaseLifeCycleFragment<FindPoetryViewModel>(){
+    override fun layoutResId()=R.layout.fragment_find
+    companion object {
+        fun newInstance():Fragment {
+            return FindFragment()
+        }
+    }
 }

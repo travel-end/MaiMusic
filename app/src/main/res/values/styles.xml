@@ -13,4 +13,7 @@
     <style name="clubToolbar" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">0dp</item>
     </style>
+    <style name="tabLayoutTextSize">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

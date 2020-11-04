@@ -3,16 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <include
-        android:id="@+id/main_title"
-        layout="@layout/view_frg_main_title" />
-
+        layout="@layout/view_main_title" />
     <androidx.viewpager2.widget.ViewPager2
         android:id="@id/frg_main_view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
-
 </LinearLayout>

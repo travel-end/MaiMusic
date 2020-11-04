@@ -71,6 +71,7 @@ object AssetsUtil {
         return null
     }
 
+    // TODO: 2020/11/4 assets下的数据只在第一次登录的时候使用，考虑将其放到app之外
     fun initAppData() {
         GlobalUtil.async {
             val dbDao = OnlineSongDatabase.getDatabase()

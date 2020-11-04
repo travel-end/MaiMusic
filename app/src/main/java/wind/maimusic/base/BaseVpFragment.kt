@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import wind.maimusic.R
 import wind.widget.tablayout.CommonTabLayout
 import wind.widget.tablayout.CustomTab
@@ -20,6 +21,10 @@ abstract class BaseVpFragment : BaseFragment() {
     protected lateinit var mTitleList: ImageView
     protected lateinit var mTitleSearch: ImageView
     protected lateinit var mTabLayout: CommonTabLayout
+
+    /*2020/1104 使用tabLayout与viewPager搭配*/
+//    protected lateinit var mTb:TabLayout
+
     override fun initView() {
         mViewPager = mRootView.findViewById(R.id.frg_main_view_pager)
         mTitleList = mRootView.findViewById(R.id.frg_main_title_iv_list)

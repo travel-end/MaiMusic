@@ -54,4 +54,10 @@ object Constants {
 
     const val TEMP_BANNER1 = "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89"
     const val TEMP_BANNER2 = "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89"
+
+    /*歌单类型*/
+    const val ST_DAILY_RECOMMEND = 0// 每日推荐
+    const val ST_ANTIQUITY_1 = 1 // 古风1
+    const val ST_ANTIQUITY_2 = 2// 古风2
+    const val ST_ANTIQUITY_3 = 3// 古风3
 }

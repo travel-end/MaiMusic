@@ -38,4 +38,8 @@
     <item name="md_song_list_tv_description" type="id" />
 
     <item name="rv_listen" type="id" />
+
+    <item name="main_title_tab_layout" type="id" />
+    <item name="main_title_search" type="id" />
+    <item name="main_title_list" type="id" />
 </resources>
