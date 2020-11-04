@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/dp_16"
         android:textColor="@color/black"
         android:layout_gravity="center_vertical"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_17" />
     <ImageView
         android:id="@+id/item_common_end_iv"
         android:layout_width="wrap_content"

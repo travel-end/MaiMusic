@@ -17,12 +17,13 @@ class ListenSongViewModel : BaseViewModel() {
 
     val data = mutableListOf<Any>()
     companion object {
-        const val INIT_BANNER = 3
+        const val INIT_BANNER = 5
         const val INIT_SONG_LIST=5
         const val INIT_SINGLE_SONG = 3
         const val INIT_POETRY_SONG= 11
     }
 
+    // TODO: 2020/11/4 添加参数 用于刷新 每个歌单封面类加个字段对应到这个歌单的内容（所有歌曲） 用于数据库的查询条件
     fun initListenData() {
         data.clear()
         val dbDao = OnlineSongDatabase.getDatabase()

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_18"
         android:layout_marginEnd="@dimen/dp_14"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_14"
         android:orientation="vertical">
         <TextView
             android:id="@+id/find_sp_tv_title"
@@ -54,7 +54,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_14"
+            android:layout_marginTop="@dimen/dp_10"
             android:orientation="horizontal">
         <TextView
             android:id="@+id/poetry_song_tv_desc"
