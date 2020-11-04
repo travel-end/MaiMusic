@@ -40,4 +40,6 @@
     <color name="black_40p">#40000000</color>
     <color name="black_60p">#70000000</color>
     <color name="black_30p">#30000000</color>
+    <color name="j_recycle_text_color">#bfbfbf</color>
+    <color name="j_recycle_balling_color">#bfbfbf</color>
 </resources>

@@ -48,6 +48,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.PlayActivity" />
+        <activity android:name=".ui.activities.TestActivity" />
 
         <service
             android:name=".service.PlayerService"

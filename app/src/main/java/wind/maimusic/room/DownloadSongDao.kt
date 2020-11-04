@@ -23,7 +23,7 @@ interface DownloadSongDao {
     @Query("SELECT * FROM down_song WHERE songId=(:songId)")
     suspend fun findDownloadedSongBySongId(songId: String): List<DownloadSong>
 
-    @Query("SELECT id FROM down_song WHERE songId=(:songId)")
+    @Query("SELECT * FROM down_song WHERE songId=(:songId)")
     suspend fun findIdBySongId(songId: String): List<DownloadSong>
 
     @Query("SELECT * FROM down_song WHERE id>(:id)")

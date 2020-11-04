@@ -8,7 +8,7 @@
     android:layout_marginBottom="@dimen/dp_20"
     android:layout_marginStart="@dimen/dp_14"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/dp_12"
+    app:cardCornerRadius="@dimen/dp_10"
     app:cardElevation="0dp">
 
     <ImageView

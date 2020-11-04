@@ -21,37 +21,46 @@ import wind.widget.cost.Consts
  * @By Journey 2020/10/25
  * @Description
  */
-class WelcomeActivity:BaseLifeCycleActivity<WelcomeViewModel>() {
+class WelcomeActivity : BaseLifeCycleActivity<WelcomeViewModel>() {
     companion object {
         const val mPermission = Manifest.permission.WRITE_EXTERNAL_STORAGE
         const val mRequestCode = 10
     }
-    override fun layoutResId()= R.layout.activity_welcome
+
+    override fun layoutResId() = R.layout.activity_welcome
     override fun initStatusBar() {
         ImmersionBar.with(this).transparentBar().init()
     }
+
     override fun initData() {
         super.initData()
-        if (ContextCompat.checkSelfPermission(this,
+        initDatabase()
+        if (ContextCompat.checkSelfPermission(
+                this,
                 mPermission
-            )!= PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(mPermission),
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(mPermission),
                 mRequestCode
             )
         } else {
             window.decorView.postDelayed({
                 toMain()
-            },800)
+            }, 800)
         }
     }
+
     private fun toMain() {
-        initDatabase()
         startActivity(
-            Intent(this,
-            MainActivity::class.java)
+            Intent(
+                this,
+                MainActivity::class.java
+            )
         )
         finish()
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -67,16 +76,10 @@ class WelcomeActivity:BaseLifeCycleActivity<WelcomeViewModel>() {
         }
     }
 
-    private fun initDatabase(){
+    private fun initDatabase() {
         if (SpUtil.getString(Consts.FIRST_LAUNCH).isEmpty()) {
-            GlobalUtil.execute {
-                val songs = AssetsUtil.loadFirstMeetSongs()
-                if (isNotNullOrEmpty(songs)) {
-                    OnlineSongDatabase.getDatabase().firstMeetSongDao().addFirstMeetSongList(songs!!)
-                }
-                AssetsUtil.initAppData()
-                SpUtil.saveValue(Consts.FIRST_LAUNCH,"has_launch")
-            }
+            AssetsUtil.initAppData()
+            SpUtil.saveValue(Consts.FIRST_LAUNCH, "has_launch")
         }
     }
 }

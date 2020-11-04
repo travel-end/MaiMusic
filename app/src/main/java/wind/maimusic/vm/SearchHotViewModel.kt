@@ -1,14 +1,11 @@
 package wind.maimusic.vm
 
 import androidx.lifecycle.MutableLiveData
-import wind.maimusic.R
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.model.searchhot.HistoryTag
 import wind.maimusic.model.searchhot.SearchHistory
 import wind.maimusic.model.searchhot.SearchHotSong
 import wind.maimusic.model.title.HotSearchTitle
-import wind.maimusic.model.title.Title
-import wind.widget.taglayout.TagBean
 
 /**
  * @By Journey 2020/10/27
