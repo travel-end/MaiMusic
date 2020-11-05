@@ -73,7 +73,6 @@ object Consts {
     // 普通事件传递
     const val EVENT_REFRESH_LOCAL_SONG = 0
     const val EVENT_APP = "event_app"
-    const val FIRST_LAUNCH = "first_launch"
     const val EVENT_OPEN_DRAWER = 0
     const val EVENT_REFRESH_HOME_DATA= 1
 

@@ -16,6 +16,7 @@ import wind.maimusic.model.searchhot.HistoryTag
 import wind.maimusic.model.title.HotSearchTitle
 import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.model.title.Title
+import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.inflate
 import wind.maimusic.utils.toast
 import wind.maimusic.widget.MaiRefreshView
@@ -23,6 +24,7 @@ import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
 import wind.widget.jrecyclerview.config.JRecycleConfig
+import java.util.*
 
 /**
  * @By Journey 2020/11/4
@@ -60,6 +62,10 @@ class TestActivity : AppCompatActivity() {
 //            }
 //        }
         initData2()
+
+        val c= Calendar.getInstance()
+        val l = c.get(Calendar.DAY_OF_MONTH)
+        LogUtil.e("DAY_OF_YEAR:$l")
 
         impl2()
 
@@ -183,12 +189,5 @@ class TestActivity : AppCompatActivity() {
             }
         }
 //            .attach(rv)
-    }
-
-    fun testList() {
-        val list = mutableListOf<String>()
-        for (i in 0..10) {
-            list.add("zz$i")
-        }
     }
 }

@@ -14,6 +14,6 @@ interface SongCoverDao {
     @Query("SELECT * FROM song_list_cover WHERE id <= (:utilId) ORDER BY id")
     suspend fun getStartListCovers(utilId:Int):List<SongListCover>
 
-    @Query("SELECT * FROM song_list_cover WHERE id BETWEEN (:start) AND (:end) ORDER BY id")
-    suspend fun getRangeSongListCovers(start:Int,end:Int):List<SongListCover>
+    @Query("SELECT * FROM song_list_cover ORDER BY RANDOM() LIMIT (:count)")
+    suspend fun getRandomListCovers(count:Int):List<SongListCover>
 }

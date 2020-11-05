@@ -19,9 +19,10 @@ import wind.maimusic.model.title.ListenSongListTitle
 import wind.maimusic.model.title.PoetrySongTitle
 import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.ui.activities.TestActivity
+import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.inflate
+import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.vm.ListenSongViewModel
-import wind.maimusic.widget.MaiRefreshView
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
@@ -148,6 +149,10 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             val cover = listCovers[position]
                             holder.coverIv.loadImg(cover.cover)
                             holder.coverName.text = cover.listName
+                            holder.itemView.fastClickListener {
+                                LogUtil.e("歌单类型：${cover.type}")
+                                mViewModel.findSongListByType(cover.type)
+                            }
                         }
                     }
                 }
@@ -202,10 +207,10 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
 //            .attach(rvListenSong)
         // JRecyclerView
         jAdapter = JRefreshAndLoadMoreAdapter(requireContext(), rawAdapter).apply {
-//            setOnRefreshListener {
-//                "刷新完成".toast()
-//                setLoadComplete()
-//            }
+            setOnRefreshListener {
+                mViewModel.getListenData()
+                jAdapter?.setRefreshComplete()
+            }
         }
         jAdapter?.setIsOpenLoadMore(false)
 //        jAdapter?.refreshLoadView = MaiRefreshView(requireContext())
@@ -214,7 +219,9 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
 
     override fun initData() {
         super.initData()
-        mViewModel.initListenData()
+//        if (isNewDay()) {
+            mViewModel.getListenData()
+//        }
     }
 
     override fun observe() {
@@ -224,6 +231,11 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
 //                rawAdapter?.submitList(it)
                 rawAdapter?.items = it
                 jAdapter?.notifyDataSetChanged()
+            }
+        })
+        mViewModel.specialSongList.observe(this,Observer{
+            LogUtil.e("specialSongList$it")
+            if (isNotNullOrEmpty(it)) {
             }
         })
     }

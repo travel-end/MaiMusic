@@ -85,4 +85,9 @@ object Constants {
     const val ST_TAG2 = "民谣"
     const val ST_TAG3 = "轻音乐"
     const val ST_TAG4 = "安静"
+
+
+
+    const val FIRST_LAUNCH = "first_launch"
+    const val DAY_OF_WEEK ="day_of_week"
 }

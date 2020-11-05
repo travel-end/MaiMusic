@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.gyf.immersionbar.ImmersionBar
+import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleActivity
 import wind.maimusic.room.database.OnlineSongDatabase
@@ -77,9 +78,9 @@ class WelcomeActivity : BaseLifeCycleActivity<WelcomeViewModel>() {
     }
 
     private fun initDatabase() {
-        if (SpUtil.getString(Consts.FIRST_LAUNCH).isEmpty()) {
+        if (SpUtil.getString(Constants.FIRST_LAUNCH).isEmpty()) {
             AssetsUtil.initAppData()
-            SpUtil.saveValue(Consts.FIRST_LAUNCH, "has_launch")
+            SpUtil.saveValue(Constants.FIRST_LAUNCH, "has_launch")
         }
     }
 }
