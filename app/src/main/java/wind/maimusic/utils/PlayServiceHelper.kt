@@ -79,7 +79,7 @@ object PlayServiceHelper {
     /**
      * 根据当前的位置  保存当前歌曲（根据播放模式切歌）
      */
-    fun saveCurrentLaunchSong(currentPosition: Int, launchSongs: MutableList<OnlineSong>?) {
+    fun saveCurrentOnlineSong(currentPosition: Int, subjectType:Int,launchSongs: MutableList<OnlineSong>?) {
         if (launchSongs != null) {
             val launchSong = launchSongs[currentPosition]
             val song = Song().apply {
@@ -89,7 +89,7 @@ object PlayServiceHelper {
                 singer = launchSong.singer
                 imgUrl = launchSong.imgUrl
                 listType = Consts.LIST_TYPE_ONLINE
-                onlineSubjectType = Consts.ONLINE_FIRST_LAUNCH
+                onlineSubjectType = subjectType
                 isOnline = launchSong.isOnline?:false
                 duration = launchSong.duration ?: 0
                 mediaId = launchSong.mediaId
@@ -99,6 +99,10 @@ object PlayServiceHelper {
             SongUtil.saveSong(song)
         }
     }
+
+
+
+
 
     fun saveLoveSong(currentPosition: Int) {
         var loveSongs = GlobalUtil.execute {

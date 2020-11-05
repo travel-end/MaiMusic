@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.Navigation
 import wind.maimusic.Constants
 import wind.maimusic.MaiApp
+import wind.maimusic.R
 import wind.widget.utils.toIntPx
 import java.lang.reflect.ParameterizedType
 import java.util.*
@@ -208,6 +211,15 @@ fun Activity.isServiceRunning(serviceName:String) :Boolean {
         }
     }
     return false
+}
+
+// fragment导航
+fun View?.toSongList(songListType:Int) {
+    if (this != null) {
+        val bundle = Bundle()
+        bundle.putString(Constants.SONG_LIST_TYPE,songListType.toString())
+        Navigation.findNavController(this).navigate(R.id.to_song_list_fragment,bundle)
+    }
 }
 
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.model.OnlineSong
@@ -23,10 +24,6 @@ class ListenSongViewModel : BaseViewModel() {
     val data = mutableListOf<Any>()
 
     companion object {
-        const val PAGE_SIZE_BANNER = 4
-        const val PAGE_SIZE_SONG_LIST = 5
-        const val PAGE_SIZE_SINGLE_SONG = 3
-        const val PAGE_SIZE_POETRY_SONG = 11
     }
 
     // TODO: 2020/11/4 添加参数 用于刷新 每个歌单封面类加个字段对应到这个歌单的内容（所有歌曲） 用于数据库的查询条件
@@ -34,16 +31,16 @@ class ListenSongViewModel : BaseViewModel() {
         data.clear()
         val dbDao = OnlineSongDatabase.getDatabase()
         viewModelScope.launch {
-            val randomBanner = dbDao.listenBannerDao().getRangeBanners(0,PAGE_SIZE_BANNER)
+            val randomBanner = dbDao.listenBannerDao().getRangeBanners(0,Constants.PAGE_SIZE_BANNER)
             val banner = Banner(randomBanner)
             data.add(banner)
             data.add(TabMenu("", R.string.daily_recommend.getStringRes(), 0))
             data.add(TabMenu("", R.string.song_list.getStringRes(), 0))
             data.add(TabMenu("", R.string.singer.getStringRes(), 0))
             data.add(TabMenu("", R.string.hot_songs.getStringRes(), 0))
-            data.add(TabMenu("", R.string.song_style.getStringRes(), 0))
+            data.add(TabMenu("", R.string.book_recommend.getStringRes(), 0))
             data.add(ListenSongListTitle(title = "你的精选歌单", text = "查看更多"))
-            val randomSongList = dbDao.songListCoverDao().getRandomListCovers(PAGE_SIZE_SONG_LIST)
+            val randomSongList = dbDao.songListCoverDao().getRandomListCovers(Constants.PAGE_SIZE_SONG_LIST_COVER)
             data.add(SongListCovers(randomSongList))
             data.add(
                 SingleSongTitle(
@@ -51,7 +48,7 @@ class ListenSongViewModel : BaseViewModel() {
                     text = R.string.change_range.getStringRes()
                 )
             )
-            val dailySingleSong = dbDao.onlineSongDao().findRandomSingSong(PAGE_SIZE_SINGLE_SONG)
+            val dailySingleSong = dbDao.onlineSongDao().findRandomSingleSong(Constants.PAGE_SIZE_SINGLE_SONG)
             for (song in dailySingleSong) {
                 val singleSong = SingleSong().apply {
                     id = song.id ?: 0
@@ -64,7 +61,7 @@ class ListenSongViewModel : BaseViewModel() {
             }
             data.add(PoetrySongTitle(title = R.string.poetry_and_song.getStringRes()))
             val poetrySongList =
-                dbDao.onlineSongDao().findOnlinePoetrySong(PAGE_SIZE_POETRY_SONG - 4)
+                dbDao.onlineSongDao().findOnlinePoetrySong(Constants.PAGE_SIZE_POETRY_SONG)
             for (song in poetrySongList) {
                 val poetrySong = PoetrySong().apply {
                     id = song.id ?: 0

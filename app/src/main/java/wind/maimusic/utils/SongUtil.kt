@@ -184,6 +184,23 @@ object SongUtil {
                     position = pos
                 }
             }
+            Constants.ST_DAILY_RECOMMEND->{
+                val recommendSong = s as OnlineSong
+                song = Song().apply {
+                    songId = recommendSong.songId //004DrG5A2nm7q2
+                    singer = recommendSong.singer// 鸾音社
+                    songName = recommendSong.name// 夜来寒雨晓来风
+                    imgUrl = recommendSong.imgUrl
+                    duration = recommendSong.duration ?: 0//187  (秒)
+                    isOnline = recommendSong.isOnline
+                    mediaId = recommendSong.mediaId//004DrG5A2nm7q2
+                    albumName = recommendSong.albumName//夜来寒雨晓来风
+                    isDownload = recommendSong.isDownload
+                    listType = Consts.LIST_TYPE_ONLINE
+                    onlineSubjectType = Constants.ST_DAILY_RECOMMEND
+                    position = pos
+                }
+            }
             Consts.LIST_TYPE_LOCAL -> {
                 val localSong = s as LocalSong
                 song = Song().apply {

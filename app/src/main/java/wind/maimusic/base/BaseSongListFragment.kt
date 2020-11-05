@@ -22,6 +22,7 @@ import wind.maimusic.R
 import wind.maimusic.model.HistorySong
 import wind.maimusic.model.LocalSong
 import wind.maimusic.model.LoveSong
+import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.songlist.SongListTop
 import wind.maimusic.service.PlayerService
@@ -55,7 +56,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
 
     private var ivSongListTitleBack:ImageView?=null
     /*歌单顶部信息*/
-    protected var songListTop:SongListTop?=null
+//    protected var songListTop:SongListTop?=null
     /*必须组件*/
     protected lateinit var ivPlayAll: ImageView
     protected lateinit var tvDownloadAll: TextView
@@ -66,6 +67,8 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     protected var recentListenSongs = mutableListOf<HistorySong>()
     protected var downloadedSongs = mutableListOf<Downloaded>()
     protected var lovedSongs = mutableListOf<LoveSong>()
+    protected var onlineSongs = mutableListOf<OnlineSong>()
+
     /*当前播放的曲目*/
     private var currentSong: Any? = null
     /*当前播放的曲目信息*/
@@ -141,9 +144,6 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         flPlayAll = mRootView.findViewById(R.id.fl_play_all)
         tvDownloadAll = mRootView.findViewById(R.id.tv_download_all)
         layoutManager = LinearLayoutManager(requireContext())
-        initSongListInfo()
-        /*设置歌单的顶部信息*/
-        initSongListTop()
         /*默认的recyclerView*/
         setRvContent()
     }
@@ -260,6 +260,13 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 songId = data.songId
                 isDownloaded = data.isDownload ?: false
             }
+            Constants.ST_DAILY_RECOMMEND->{
+                data as OnlineSong
+                songName = data.name
+                songSinger = data.singer
+                songId = data.songId
+                isDownloaded = data.isDownload
+            }
         }
     }
 
@@ -269,6 +276,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             Consts.LIST_TYPE_HISTORY -> currentSong = recentListenSongs[position]
             Consts.LIST_TYPE_DOWNLOAD -> currentSong = downloadedSongs[position]
             Consts.LIST_TYPE_LOVE -> currentSong = lovedSongs[position]
+            Constants.ST_DAILY_RECOMMEND->currentSong = onlineSongs[position]
         }
     }
 
@@ -284,12 +292,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     open fun downloadAll() {
     }
     /*初始化歌单数据 由继承的类实现 对于Md类型歌单必须实现这个方法*/
-    open fun initSongListInfo() {
-
-    }
-
-    /*初始化歌单数据 赋值*/
-    private fun initSongListTop() {
+    open fun initSongListInfo(songListTop: SongListTop?) {
         songListTop?.let {info->
             tvSongListName?.text = info.songListName
             tvSongListDescription?.text = info.songListDescription
@@ -308,6 +311,11 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             )
         }
     }
+
+    /*初始化歌单数据 赋值*/
+//    private fun setSongListTop() {
+//
+//    }
 
     /*监听md toolBar透明度的变化*/
     private fun initToolBar() {

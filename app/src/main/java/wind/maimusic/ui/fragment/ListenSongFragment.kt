@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
 import wind.maimusic.model.listensong.*
@@ -22,6 +23,7 @@ import wind.maimusic.ui.activities.TestActivity
 import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.inflate
 import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.toSongList
 import wind.maimusic.vm.ListenSongViewModel
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
@@ -109,7 +111,12 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     val menu = data as TabMenu
                     setText(R.id.item_tab_menu_name, menu.menuName)
                     itemClicked(View.OnClickListener {
-
+//                        LogUtil.e("pos:$position")
+                        when(position) {
+                            1->{//每日推荐
+                                it.toSongList(Constants.ST_DAILY_RECOMMEND)
+                            }
+                        }
                     })
                 }
             }

@@ -46,6 +46,7 @@ object Constants {
         return "${MaiApp.getInstance().getExternalFilesDir("song").toString()}/maimusic"
     }
     const val HOT_SEARCH = "hot_search"
+    const val SONG_LIST_TYPE = "song_list_type"
     const val KEY_SEARCH_CONTENT= "key_search_content"
     const val TOOLBAR_MAX_OFFSET = 150
     const val TEMP_SONG_COVER1_NORMAL = "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg"
@@ -60,7 +61,9 @@ object Constants {
      * 每首歌对应两个歌单名称，比如'旧梦一场' 对应华语热歌和网络热歌
      */
     const val ST_DEFAULT= 0//默认的歌单 对于一些没有mainType和secondType的都放到默认歌单中
-    const val ST_DAILY_RECOMMEND = 1// 每日推荐
+    const val ST_DAILY_RECOMMEND = 21// 每日推荐
+    const val ST_DAILY_HOT_SONG = 20
+
     const val ST_ANTIQUITY_1 = 2 // 古风1
     const val ST_ANTIQUITY_2 = 3// 古风2
     const val ST_ANTIQUITY_3 = 4// 古风3
@@ -87,7 +90,22 @@ object Constants {
     const val ST_TAG4 = "安静"
 
 
+    const val PAGE_SIZE_BANNER = 4
+    const val PAGE_SIZE_SONG_LIST_COVER = 5
+    const val PAGE_SIZE_SINGLE_SONG = 3
+    const val PAGE_SIZE_POETRY_SONG = 6
+    const val PAGE_SIZE_DAILY_RECOMMEND = 6
+    const val PAGE_SIZE_RECOMMEND_BOOK = 2
 
     const val FIRST_LAUNCH = "first_launch"
     const val DAY_OF_WEEK ="day_of_week"
+    const val THE_DAY_STEP = "the_day_step"
+
+    /*每日可变的数据 保持一天都不变的数据 过了当天就更换*/
+    const val DAILY_BANNER = 0
+    const val DAILY_RECOMMEND_SONG =1
+    const val DAILY_HOT_SONG = 2
+    const val DAILY_RECOMMEND_BOOK = 3
+    const val DAILY_LIST_COVER = 4
+    const val DAILY_POETRY_SONG = 5
 }

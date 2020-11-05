@@ -12,10 +12,10 @@
         <action
             android:id="@+id/to_search_main_fragment"
             app:destination="@id/search_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/alpha_in"
+            app:exitAnim="@anim/alpha_out"
+            app:popEnterAnim="@anim/alpha_in"
+            app:popExitAnim="@anim/alpha_out" />
         <action
             android:id="@+id/to_local_song_fragment"
             app:destination="@id/local_song_fragment"
@@ -62,6 +62,15 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/to_song_list_fragment"
+            app:destination="@id/song_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -120,5 +129,15 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/song_list_fragment"
+        android:name="wind.maimusic.ui.fragment.songlist.SongListFragment"
+        tools:layout="@layout/fragment_md_style_song_list">
+        <argument
+            android:name="song_list_type"
+            android:defaultValue=""
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>

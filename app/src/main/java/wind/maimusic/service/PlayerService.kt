@@ -5,9 +5,12 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import wind.maimusic.model.*
+import wind.maimusic.Constants
+import wind.maimusic.model.HistorySong
+import wind.maimusic.model.LocalSong
+import wind.maimusic.model.LoveSong
+import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.download.Downloaded
-import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.*
@@ -30,7 +33,7 @@ class PlayerService : Service() {
 
     private var launchSongs: MutableList<OnlineSong>? = null
 
-//    private var onlineSongs: MutableList<OnlineSong>? = null
+    private var onlineSongs: MutableList<OnlineSong>? = null
     private var listType: Int = 0
     private var currentPosition: Int = 0
     private var isPlaying: Boolean = false
@@ -76,6 +79,12 @@ class PlayerService : Service() {
                         Consts.ONLINE_FIRST_LAUNCH -> {
                             launchSongs = GlobalUtil.execute {
                                 OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
+                            }
+                        }
+                        Constants.ST_DAILY_RECOMMEND->{
+                            val startIndex = DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
+                            onlineSongs = GlobalUtil.execute {
+                                OnlineSongDatabase.getDatabase().onlineSongDao().findRangeOnlineSongs(startIndex,Constants.PAGE_SIZE_DAILY_RECOMMEND).toMutableList()
                             }
                         }
                         else->{}
@@ -133,6 +142,7 @@ class PlayerService : Service() {
                     Consts.LIST_TYPE_ONLINE -> {
                         when (song.onlineSubjectType) {
                             Consts.ONLINE_FIRST_LAUNCH -> {
+                                // TODO: 2020/11/5 放到一个方法里面去 上面的也是跟这个一样的逻辑
                                 currentPosition = if (currentPosition==launchSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
                                     0
                                 } else {
@@ -143,7 +153,21 @@ class PlayerService : Service() {
                                     )
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,launchSongs)
+                            }
+                            Constants.ST_DAILY_RECOMMEND->{
+                                currentPosition = if (currentPosition==onlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
+                                    0
+                                } else {
+                                    PlayServiceHelper.getNextSongPosition(
+                                        currentPosition,
+                                        playMode,
+                                        onlineSongs?.size
+                                    )
+                                }
+                                LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Constants.ST_DAILY_RECOMMEND,onlineSongs)
+
                             }
                         }
                     }
@@ -202,6 +226,12 @@ class PlayerService : Service() {
                                         OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
                                     }
                                 }
+                                Constants.ST_DAILY_RECOMMEND->{
+                                    val startIndex = DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
+                                    onlineSongs = GlobalUtil.execute {
+                                        OnlineSongDatabase.getDatabase().onlineSongDao().findRangeOnlineSongs(startIndex,Constants.PAGE_SIZE_DAILY_RECOMMEND).toMutableList()
+                                    }
+                                }
                             }
                         }
                     }
@@ -254,7 +284,13 @@ class PlayerService : Service() {
                                 Consts.ONLINE_FIRST_LAUNCH->{
                                     if (isNotNullOrEmpty(launchSongs)) {
                                         val currentSongId = launchSongs!![currentPosition].songId
-                                        getOnlineSongPlayUrl(song,currentSongId,restartTime)
+                                        getOnlineSongPlayUrl(song,currentSongId,Consts.ONLINE_FIRST_LAUNCH,restartTime)
+                                    }
+                                }
+                                Constants.ST_DAILY_RECOMMEND->{
+                                    if (isNotNullOrEmpty(onlineSongs)) {
+                                        val currentSongId = onlineSongs!![currentPosition].songId
+                                        getOnlineSongPlayUrl(song,currentSongId,Constants.ST_DAILY_RECOMMEND,restartTime)
                                     }
                                 }
                             }
@@ -266,14 +302,14 @@ class PlayerService : Service() {
                 "播放异常".toast()
             }
         }
-        private fun getOnlineSongPlayUrl(song:Song,songId:String?,restartTime: Int?) {
+        private fun getOnlineSongPlayUrl(song:Song,songId:String?,subjectType:Int,restartTime: Int?) {
             if (songId.isNotNullOrEmpty()) {
                 val playUrl = PlayServiceHelper.getOnlineSongUrl(songId!!)
                 if (playUrl.isNullOrEmpty()) {
                     currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,launchSongs?.size)
-                    PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
+                    PlayServiceHelper.saveCurrentOnlineSong(currentPosition,subjectType,launchSongs)
                     val nextSongId = launchSongs!![currentPosition].songId
-                    getOnlineSongPlayUrl(song,nextSongId,restartTime)
+                    getOnlineSongPlayUrl(song,nextSongId,subjectType,restartTime)
                 } else {
                     song.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
                     LogUtil.e("-------PlayService getFirstMeetSongUrl imgUrl:${song.imgUrl}")
@@ -382,7 +418,7 @@ class PlayerService : Service() {
                                     )
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,launchSongs)
                             }
                         }
                     }
@@ -448,7 +484,7 @@ class PlayerService : Service() {
                                     )
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,launchSongs)
                             }
                         }
                     }

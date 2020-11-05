@@ -14,17 +14,7 @@ import wind.widget.effcientrv.submitList
 class LovedSongFragment : BaseSongListFragment<LoveSongViewModel>() {
     override fun layoutResId() = R.layout.fragment_md_style_song_list
     override fun songListType() = Consts.LIST_TYPE_LOVE
-    override fun initSongListInfo() {
-        super.initSongListInfo()
-        songListTop = SongListTop(
-            "我喜欢的音乐",
-            "我喜欢你，像风走了八千里，不问归期",
-            "By Journey - Travel end -",
-            Constants.TEMP_SONG_COVER1_NORMAL,
-            "喜欢",
-            "清凉"
-        )
-    }
+
     override fun initData() {
         super.initData()
         mViewModel.findAllLovedSongs()
@@ -34,10 +24,26 @@ class LovedSongFragment : BaseSongListFragment<LoveSongViewModel>() {
         super.observe()
         mViewModel.lovedSongs.observe(this,Observer{
             if (isNotNullOrEmpty(it)) {
-                rvSongList.submitList(it!!)
+                lovedSongs.clear()
+                lovedSongs.addAll(it)
+                initSongListInfo(getListTop(it[0].pic))
+                rvSongList.submitList(lovedSongs)
                 rvSongList.visible()
                 flPlayAll.visible()
+            } else {
+                initSongListInfo(getListTop())
             }
         })
     }
+    private fun getListTop(imgUrl:String?=null):SongListTop {
+        return SongListTop(
+            "我喜欢的音乐",
+            "我喜欢你，像风走了八千里，不问归期",
+            "By Journey - Travel end -",
+            imgUrl ?: Constants.TEMP_SONG_COVER1_NORMAL,
+            "喜欢",
+            "清凉"
+        )
+    }
+
 }

@@ -34,7 +34,10 @@ interface OnlineSongDao {
     suspend fun deleteAllOnlineSongs()
 
     @Query("SELECT * FROM online_song ORDER BY RANDOM() LIMIT (:count)")
-    suspend fun findRandomSingSong(count: Int): List<OnlineSong>
+    suspend fun findRandomSingleSong(count: Int): List<OnlineSong>
+
+    @Query("SELECT * FROM online_song WHERE id BETWEEN(:startIndex) AND (:endIndex) ORDER BY id")
+    suspend fun findRangeOnlineSongs(startIndex:Int,endIndex:Int):List<OnlineSong>
 
     @Query("SELECT * FROM online_song WHERE mainType=(:type) ORDER BY id")
     suspend fun findOnlineSongByMainType(type: Int): List<OnlineSong>
