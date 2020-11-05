@@ -11,9 +11,6 @@ interface SongCoverDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE, entity = SongListCover::class)
     suspend fun addSongCovers(songCovers:List<SongListCover>)
 
-//    @Query("SELECT * FROM song_list_cover WHERE id >= (SELECT floor(RAND() * (SELECT MAX(id) FROM song_list_cover))) ORDER BY id LIMIT 6")
-//    suspend fun getRandomCovers():List<SongListCover>
-
     @Query("SELECT * FROM song_list_cover WHERE id <= (:utilId) ORDER BY id")
     suspend fun getStartListCovers(utilId:Int):List<SongListCover>
 

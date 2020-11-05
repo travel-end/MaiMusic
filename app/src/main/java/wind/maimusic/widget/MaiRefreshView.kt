@@ -3,6 +3,7 @@ package wind.maimusic.widget
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import wind.maimusic.R
@@ -59,7 +60,8 @@ class MaiRefreshView @JvmOverloads constructor(
     }
 
     override fun initView(context: Context?): View {
-        val mLoadView = R.layout.view_mai_refresh.inflate(this)
+//        mLoadView = R.layout.view_mai_refresh.inflate(this) as FrameLayout
+        mLoadView = LayoutInflater.from(context).inflate(R.layout.view_mai_refresh,this,false) as FrameLayout
         this.mIvMaiRefreshView = mLoadView.findViewById(R.id.iv_mai_refresh)
         this.mIvMaiRefreshView?.setBackgroundResource(R.drawable.temp_pull)
         return mLoadView

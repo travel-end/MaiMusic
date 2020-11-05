@@ -140,7 +140,10 @@ data class ListBean (
     var switchX:Int = 0,
     var t :Int= 0,
     var tag:Int = 0,
-    var type:Int = 0,
     var ver:Int = 0,
-    var singer: List<SingerBean>? = null
+    var singer: List<SingerBean>? = null,
+    var mainType:Int = 0,
+    var secondType:Int = 0,
+    var isPoetrySong:Int=0,
+    var poetrySongId:Int=0
 )

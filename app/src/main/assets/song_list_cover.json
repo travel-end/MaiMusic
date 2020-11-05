@@ -3,63 +3,165 @@
   "listCovers": [
     {
       "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
-      "listName": "list1",
+      "listName": "默认歌单",
       "desc": "",
-      "type": 0
+      "type": 0,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1021/AS9b631a8fddf7ccc36362b6925a9b4f1e.jpg",
-      "listName": "list2",
+      "listName": "每日推荐",
       "desc": "",
-      "type": 0
+      "type": 1,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
-      "listName": "list3",
+      "listName": "TEMP_古风1",
       "desc": "",
-      "type": 0
+      "type": 2,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1021/AS9b631a8fddf7ccc36362b6925a9b4f1e.jpg",
-      "listName": "list4",
+      "listName": "TEMP_古风2",
       "desc": "",
-      "type": 0
+      "type": 3,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
-      "listName": "list5",
+      "listName": "TEMP_古风3",
       "desc": "",
-      "type": 0
+      "type": 4,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1021/AS9b631a8fddf7ccc36362b6925a9b4f1e.jpg",
-      "listName": "入我相思门",
+      "listName": "TEMP_民谣1",
       "desc": "",
-      "type": 0
+      "type": 5,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "知我相思苦",
+      "listName": "TEMP_民谣2",
       "desc": "",
-      "type": 0
+      "type": 6,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "cogdj9",
+      "listName": "TEMP_民谣3",
       "desc": "",
-      "type": 0
+      "type": 7,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "silst1",
+      "listName": "TEMP_华语精选1",
       "desc": "",
-      "type": 0
+      "type": 8,
+      "tag1": 0,
+      "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "list10",
+      "listName": "TEMP_华语精选2",
       "desc": "",
-      "type": 0
+      "type": 9,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_华语精选3",
+      "desc": "",
+      "type": 10,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_网络热歌1",
+      "desc": "",
+      "type": 11,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_网络热歌2",
+      "desc": "",
+      "type": 12,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_日语歌单1",
+      "desc": "",
+      "type": 13,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "http://p4.music.126.net/GZOREpr6EzppJg7K9-Rn1w==/109951164196347576.jpg?param=50y50",
+      "listName": "TEMP_日语歌单2",
+      "desc": "",
+      "type": 14,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_英语歌单1",
+      "desc": "",
+      "type": 15,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_英语歌单2",
+      "desc": "",
+      "type": 16,
+      "tag1": 0,
+      "tag2": 0
+    },
+    {
+      "cover": "http://p1.music.126.net/slpd09Tf5Ju82Mv-h8MP4w==/3440371884651965.jpg?param=40y40",
+      "listName": "TEMP_英语歌单3",
+      "desc": "",
+      "type": 17,
+      "tag1": 0,
+      "tag2": 0
+    }
+  ,
+    {
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
+      "listName": "TEMP_经典老歌1",
+      "desc": "",
+      "type": 18,
+      "tag1": 0,
+      "tag2": 0
+    }
+  ,
+    {
+      "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
+      "listName": "TEMP_经典老歌2",
+      "desc": "",
+      "type": 19,
+      "tag1": 0,
+      "tag2": 0
     }
   ]
 }

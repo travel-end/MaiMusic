@@ -79,22 +79,22 @@ object PlayServiceHelper {
     /**
      * 根据当前的位置  保存当前歌曲（根据播放模式切歌）
      */
-    fun saveFirstMeetSong(currentPosition: Int, fmSongs: MutableList<FirstMeetSong>?) {
-        if (fmSongs != null) {
-            val fmSong = fmSongs[currentPosition]
+    fun saveCurrentLaunchSong(currentPosition: Int, launchSongs: MutableList<OnlineSong>?) {
+        if (launchSongs != null) {
+            val launchSong = launchSongs[currentPosition]
             val song = Song().apply {
                 position = currentPosition
-                songId = fmSong.songId
-                songName = fmSong.songName
-                singer = fmSong.singer
-                imgUrl = fmSong.imgUrl
+                songId = launchSong.songId
+                songName = launchSong.name
+                singer = launchSong.singer
+                imgUrl = launchSong.imgUrl
                 listType = Consts.LIST_TYPE_ONLINE
-                onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
-                isOnline = fmSong.isOnline?:false
-                duration = fmSong.duration ?: 0
-                mediaId = fmSong.mediaId
-                isDownload = fmSong.isDownload?:false
-                albumName = fmSong.albumName
+                onlineSubjectType = Consts.ONLINE_FIRST_LAUNCH
+                isOnline = launchSong.isOnline?:false
+                duration = launchSong.duration ?: 0
+                mediaId = launchSong.mediaId
+                isDownload = launchSong.isDownload?:false
+                albumName = launchSong.albumName
             }
             SongUtil.saveSong(song)
         }

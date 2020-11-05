@@ -38,7 +38,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     private var navigationManager: NavigationManager? = null
     private var currentSong: Song? = null
     private var flag: Boolean = false
-    private var playing:Boolean = false
+    private var playing: Boolean = false
     private var existLivingService: Boolean = false
     private var currentPlayProgress: Long = 0L
     override fun layoutResId() = R.layout.activity_main
@@ -55,6 +55,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
             }
         }
     }
+
     /* 设置当前歌曲的播放信息*/
     private fun initCurrentSong() {
         currentSong = SongUtil.getSong()
@@ -63,7 +64,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
             currentPlayProgress = currentSong!!.currentTime
             bottomPlayerView.setCurrentSong(currentSong!!)
         } else {
-            mViewModel.findFirstMeetSongs()
+            mViewModel.findLaunchSong()
         }
     }
 
@@ -148,15 +149,12 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     override fun observe() {
         super.observe()
         mViewModel.run {
-            firstMeetSongs.observe(this@MainActivity, Observer {
+            launchSong.observe(this@MainActivity, Observer {
                 it?.let {
-                    if (it.isNotEmpty()) {
-                        val firstMeetSong = it[0]
-                        // 当前播放的是网络音乐
-                        val song = SongUtil.assemblySong(firstMeetSong, Consts.ONLINE_LIST_TYPE_FIRST_MEET)
-                        bottomPlayerView.setCurrentSong(song)
-                        mViewModel.getSongPlayUrl(song)
-                    }
+                    // 当前播放的是网络音乐
+                    val song = SongUtil.assemblySong(it, Consts.ONLINE_FIRST_LAUNCH)
+                    bottomPlayerView.setCurrentSong(song)
+                    mViewModel.getSongPlayUrl(song)
                 }
             })
             /*获取歌曲远程播放地址（只有在第一次打开app的时候调用）*/

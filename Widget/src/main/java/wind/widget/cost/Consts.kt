@@ -37,7 +37,7 @@ object Consts {
     const val LIST_TYPE_DOWNLOAD=5//下载列表
 
     //在线音乐分类列表
-    const val ONLINE_LIST_TYPE_FIRST_MEET = 6// 首次使用app推荐歌单
+    const val ONLINE_FIRST_LAUNCH = 6// 首次使用app推荐歌单
     const val POETRY_TYPE_RECENT_READ = 7//
     const val POETRY_TYPE_LOVED = 8// 喜欢的音乐
     const val ONLINE_LIST_TYPE_DAILY_RECOMMEND = 9// 每日推荐

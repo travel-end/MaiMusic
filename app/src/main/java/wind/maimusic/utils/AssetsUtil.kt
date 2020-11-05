@@ -2,9 +2,12 @@ package wind.maimusic.utils
 
 import com.google.gson.Gson
 import wind.maimusic.MaiApp
+import wind.maimusic.model.OnlineSong
+import wind.maimusic.model.OnlineSongList
 import wind.maimusic.model.firstmeet.FirstMeet
 import wind.maimusic.model.firstmeet.FirstMeetSong
-import wind.maimusic.model.listensong.*
+import wind.maimusic.model.listensong.Banner
+import wind.maimusic.model.listensong.SongListCovers
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.widget.cost.Consts
 import java.io.BufferedReader
@@ -47,7 +50,6 @@ object AssetsUtil {
     @Throws(Exception::class)
     private fun readAssetsJson(jsonName: String): String? {
         val builder = StringBuilder()
-//        return try {
         val inputReader =
             InputStreamReader(MaiApp.getInstance().applicationContext.resources.assets.open(jsonName))
         val bufReader = BufferedReader(inputReader)
@@ -57,47 +59,60 @@ object AssetsUtil {
             builder.append(line)
         }
         return builder.toString()
-//        } catch (e:Exception) {
-//            e.printStackTrace()
-//            null
-//        }
     }
 
-    fun loadListenSongData(): ListenSong? {
-        val jsonData = readAssetsJson("listen_song.json")
-        if (jsonData != null) {
-            return gson.fromJson(jsonData, ListenSong::class.java)
-        }
-        return null
-    }
-
-    // TODO: 2020/11/4 assets下的数据只在第一次登录的时候使用，考虑将其放到app之外
+    // TODO: 2020/11/4 assets下的数据只在第一次登录的时候使用，考虑将其放到app之外（或者转移数据库）
     fun initAppData() {
-        GlobalUtil.async {
+        GlobalUtil.execute { // TODO: 2020/11/5 分两步：先同步存储首页的数据，为了能更快的进入首页，然后后面的大数据使用异步存储
             val dbDao = OnlineSongDatabase.getDatabase()
-            val songs = loadFirstMeetSongs()
-            if (isNotNullOrEmpty(songs)) {
-                dbDao.firstMeetSongDao().addFirstMeetSongList(songs!!)
+            try {
+                /*储存的banner*/
+                val banner = gson.fromJson(readAssetsJson("banner.json"), Banner::class.java)
+                /*储存的歌单封面*/
+                val songListCover = gson.fromJson(readAssetsJson("song_list_cover.json"), SongListCovers::class.java)
+                dbDao.listenBannerDao().addListenBanners(banner.bannerList)
+                dbDao.songListCoverDao().addSongCovers(songListCover.listCovers)
+                /*所有在线音乐（app推荐）*/
+                val dbSongList = mutableListOf<OnlineSong>()
+                val onlineSongList = gson.fromJson(readAssetsJson("song_list.json"),OnlineSongList::class.java)
+                if (onlineSongList != null) {
+                    dbSongList.clear()
+                    val songList = onlineSongList.maiMusicSongList
+                    for (bean in songList) {
+                        val onlineSong = OnlineSong().apply {
+                            songId = bean.songmid
+                            singer = StringUtil.getSinger(bean)
+                            name = bean.songname
+                            imgUrl = "${Consts.ALBUM_PIC}${bean.albummid}${Consts.JPG}"
+                            duration = bean.interval
+                            isOnline = true
+                            mediaId = bean.strMediaMid
+                            songmid = bean.songmid
+                            albumName = bean.albumname
+                            isDownload = DownloadedUtil.hasDownloadedSong(bean.songmid ?: "")//003IHI2x3RbXLS
+                            mainType = bean.mainType
+                            secondType = bean.secondType
+                            isPoetrySong = bean.isPoetrySong
+                            poetrySongId = bean.poetrySongId
+                        }
+                        dbSongList.add(onlineSong)
+                    }
+                    dbDao.onlineSongDao().addOnlineSongs(dbSongList)
+                }
+            } catch (e:IOException) {
+                e.printStackTrace()
+                LogUtil.e("-----AssetsUtil-----initAppData IOException:${e.message}")
+            } catch (e:Exception) {
+                e.printStackTrace()
+                LogUtil.e("-----AssetsUtil-----initAppData Exception:${e.message}")
             }
-            val bannerJson = readAssetsJson("banner.json")
-            val banner = gson.fromJson(bannerJson, Banner::class.java)
-            val songListCover =
-                gson.fromJson(readAssetsJson("song_list_cover.json"), SongListCovers::class.java)
-            val singleSong =
-                gson.fromJson(readAssetsJson("single_song.json"), SingleSongList::class.java)
-            val poetrySong =
-                gson.fromJson(readAssetsJson("poetry_song.json"), PoetrySongList::class.java)
-            dbDao.listenBannerDao().addListenBanners(banner.bannerList)
-            dbDao.songListCoverDao().addSongCovers(songListCover.listCovers)
-            dbDao.singleSongDao().addSingleSongs(singleSong.singleSongList)
-            dbDao.poetrySongDao().addPoetrySongs(poetrySong.poetrySongList)
         }
     }
 
     /**
      * 度json 数组
      */
-    fun loadFirstMeetSongs(): MutableList<FirstMeetSong>? {
+    private fun loadFirstMeetSongs(): MutableList<FirstMeetSong>? {
         val builder = StringBuilder()
         val list = mutableListOf<FirstMeetSong>()
         try {

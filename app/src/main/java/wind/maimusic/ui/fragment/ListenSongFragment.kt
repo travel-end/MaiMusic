@@ -43,7 +43,7 @@ import wind.widget.utils.loadImg
 class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
     private lateinit var rvListenSong: JRecycleView
     private var rawAdapter: EfficientAdapter<Any>? = null
-    private var jAdapter:JRefreshAndLoadMoreAdapter?=null
+    private var jAdapter: JRefreshAndLoadMoreAdapter? = null
     override fun layoutResId() = R.layout.fragment_listen_song
 
     companion object {
@@ -59,7 +59,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         lm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 /*position-1:去除刷新头*/
-                return if (rawAdapter?.getItem(position-1) is TabMenu) 1 else 5
+                return if (rawAdapter?.getItem(position - 1) is TabMenu) 1 else 5
             }
         }
         rvListenSong.layoutManager = lm
@@ -87,8 +87,12 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                                 holder.bannerIv.loadImg(banner.imgUrl, 8f)
                                 holder.bannerTvName.text = banner.title
                                 holder.itemView.fastClickListener {
-                                    requireActivity().startActivity(Intent(requireContext(),
-                                        TestActivity::class.java))
+                                    requireActivity().startActivity(
+                                        Intent(
+                                            requireContext(),
+                                            TestActivity::class.java
+                                        )
+                                    )
                                 }
                             }
                         }
@@ -162,7 +166,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     data?.let {
                         val singleSong = it as SingleSong
                         holder.itemView?.findViewById<ImageView>(R.id.single_song_iv_cover)
-                            ?.loadImg(singleSong.cover)
+                            ?.loadImg(singleSong.cover?:"")
                         setText(R.id.single_song_tv_name, singleSong.songName)
                         setText(R.id.single_song_tv_singer, singleSong.singer)
                         setText(R.id.single_song_tv_desc, singleSong.desc)
@@ -187,7 +191,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             itemView?.findViewById<ShapeableImageView>(R.id.find_sp_iv_icon)
                         leftIv?.shapeAppearanceModel = ShapeAppearanceModel.Builder()
                             .setAllCornerSizes(ShapeAppearanceModel.PILL).build()
-                        leftIv?.loadImg(poetrySong.cover)
+                        leftIv?.loadImg(poetrySong.cover?:"")
                         setText(R.id.find_sp_tv_title, poetrySong.name)
                         setText(R.id.find_tv_sp_author, poetrySong.singer)
                         setText(R.id.poetry_song_tv_desc, poetrySong.desc)
@@ -197,7 +201,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         }
 //            .attach(rvListenSong)
         // JRecyclerView
-        jAdapter = JRefreshAndLoadMoreAdapter(requireContext(),rawAdapter).apply {
+        jAdapter = JRefreshAndLoadMoreAdapter(requireContext(), rawAdapter).apply {
 //            setOnRefreshListener {
 //                "刷新完成".toast()
 //                setLoadComplete()
@@ -224,12 +228,12 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         })
     }
 
-    inner class BannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class BannerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bannerIv: ImageView = itemView.findViewById(R.id.item_banner_iv)
         val bannerTvName: TextView = itemView.findViewById(R.id.item_banner_tv_name)
     }
 
-    inner class SongListCoverViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SongListCoverViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coverIv: ImageView = itemView.findViewById(R.id.item_song_list_iv_cover)
         val coverName: TextView = itemView.findViewById(R.id.item_song_list_tv_desc)
     }

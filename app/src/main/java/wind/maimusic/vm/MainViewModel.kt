@@ -8,6 +8,7 @@ import kotlinx.coroutines.withContext
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
+import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.LogUtil
@@ -15,14 +16,17 @@ import wind.widget.cost.Consts
 import wind.widget.model.Song
 
 class MainViewModel:BaseViewModel() {
-    val firstMeetSongs :MutableLiveData<List<FirstMeetSong>> = MutableLiveData()
+    val launchSong :MutableLiveData<OnlineSong> = MutableLiveData()
     val songPlayUrlResult : MutableLiveData<Map<String, Any>> = MutableLiveData()
-    fun findFirstMeetSongs() {
+    fun findLaunchSong() {
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
-                OnlineSongDatabase.getDatabase().firstMeetSongDao().findAllFirstSong()
+                OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSong()
             }
-            firstMeetSongs.value = result
+            LogUtil.e("-----MainViewModel findLaunchSong result:$result")
+            if (result.isNotEmpty()) {
+                launchSong.value = result[0]
+            }
         }
     }
 

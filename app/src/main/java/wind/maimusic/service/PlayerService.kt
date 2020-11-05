@@ -27,8 +27,10 @@ class PlayerService : Service() {
     private var historySongs: MutableList<HistorySong>? = null
     private var downloadSongs: MutableList<Downloaded>? = null
     private var loveSongs: MutableList<LoveSong>? = null
-    private var firstMeetSongs: MutableList<FirstMeetSong>? = null
-    private var onlineSongs: MutableList<OnlineSong>? = null
+
+    private var launchSongs: MutableList<OnlineSong>? = null
+
+//    private var onlineSongs: MutableList<OnlineSong>? = null
     private var listType: Int = 0
     private var currentPosition: Int = 0
     private var isPlaying: Boolean = false
@@ -50,14 +52,12 @@ class PlayerService : Service() {
                     localSongs = GlobalUtil.execute {
                         MaiDatabase.getDatabase().localSongDao().findAllLocalSong().toMutableList()
                     }
-//                    LogUtil.e("--->onCreate localSongs: $localSongs")
                 }
                 Consts.LIST_TYPE_HISTORY -> {
                     historySongs = GlobalUtil.execute {
                         MaiDatabase.getDatabase().historySongDao().findAllHistorySong()
                             .toMutableList()
                     }
-//                    LogUtil.e("--->onCreate historySongs: $historySongs")
                     SongUtil.getSong()?.let { s ->
                         s.position = 0
                         SongUtil.saveSong(s)
@@ -65,19 +65,17 @@ class PlayerService : Service() {
                 }
                 Consts.LIST_TYPE_DOWNLOAD -> {
                     downloadSongs = DownloadedUtil.getSongFromFile()
-//                    LogUtil.e("--->onCreate downloadSongs: $downloadSongs")
                 }
                 Consts.LIST_TYPE_LOVE -> {
                     loveSongs = GlobalUtil.execute {
                         MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
                     }
-//                    LogUtil.e("--->onCreate loveSongs: $loveSongs")
                 }
                 Consts.LIST_TYPE_ONLINE -> {
                     when (song.onlineSubjectType) {
-                        Consts.ONLINE_LIST_TYPE_FIRST_MEET -> {
-                            firstMeetSongs = GlobalUtil.execute {
-                                OnlineSongDatabase.getDatabase().firstMeetSongDao().findAllFirstSong().toMutableList()
+                        Consts.ONLINE_FIRST_LAUNCH -> {
+                            launchSongs = GlobalUtil.execute {
+                                OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
                             }
                         }
                         else->{}
@@ -90,6 +88,7 @@ class PlayerService : Service() {
 
     override fun onBind(intent: Intent): IBinder {
         LogUtil.e("-------PlayService----onBind------")
+        /*音乐播放完毕*/
         mediaPlayer.setOnCompletionListener {
 //            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_PAUSE)
             Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_COMPLETE)// 歌曲播放完毕 在播放页面监听
@@ -133,18 +132,18 @@ class PlayerService : Service() {
                     // 在线音乐
                     Consts.LIST_TYPE_ONLINE -> {
                         when (song.onlineSubjectType) {
-                            Consts.ONLINE_LIST_TYPE_FIRST_MEET -> {
-                                currentPosition = if (currentPosition==firstMeetSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
+                            Consts.ONLINE_FIRST_LAUNCH -> {
+                                currentPosition = if (currentPosition==launchSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
                                     0
                                 } else {
                                     PlayServiceHelper.getNextSongPosition(
                                         currentPosition,
                                         playMode,
-                                        firstMeetSongs?.size
+                                        launchSongs?.size
                                     )
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                                PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
                             }
                         }
                     }
@@ -183,30 +182,24 @@ class PlayerService : Service() {
                                 MaiDatabase.getDatabase().localSongDao().findAllLocalSong()
                                     .toMutableList()
                             }
-//                            LogUtil.e("--->play localsongs:$localSongs")
                         }
                         Consts.LIST_TYPE_HISTORY -> {
                             // todo
                         }
                         Consts.LIST_TYPE_DOWNLOAD -> {
                             downloadSongs = DownloadedUtil.getSongFromFile()
-//                            LogUtil.e("--->play downloadSongs:$downloadSongs")
                         }
                         Consts.LIST_TYPE_LOVE -> {
                             loveSongs = GlobalUtil.execute {
                                 MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs()
                                     .toMutableList()
                             }
-//                            if (isNotNullOrEmpty(localSongs)) {
-//                                loveSongs = PlayServiceHelper.orderLoveList(loveSongs!!)
-//                            }
-//                            LogUtil.e("--->play loveSongs:$loveSongs")
                         }
                         Consts.LIST_TYPE_ONLINE->{
                             when(onlineSubjectType) {
-                                Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
-                                    firstMeetSongs = GlobalUtil.execute {
-                                        OnlineSongDatabase.getDatabase().firstMeetSongDao().findAllFirstSong().toMutableList()
+                                Consts.ONLINE_FIRST_LAUNCH->{
+                                    launchSongs = GlobalUtil.execute {
+                                        OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
                                     }
                                 }
                             }
@@ -258,10 +251,10 @@ class PlayerService : Service() {
                         // 播放在线音乐（只有自动播放下一曲才会执行这里  其他的是走的playOnline）
                         Consts.LIST_TYPE_ONLINE->{
                             when(onlineSubjectType){
-                                Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
-                                    if (isNotNullOrEmpty(firstMeetSongs)) {
-                                        val currentSongId = firstMeetSongs!![currentPosition].songId
-                                        getFirstMeetSongUrl(song,currentSongId,restartTime)
+                                Consts.ONLINE_FIRST_LAUNCH->{
+                                    if (isNotNullOrEmpty(launchSongs)) {
+                                        val currentSongId = launchSongs!![currentPosition].songId
+                                        getOnlineSongPlayUrl(song,currentSongId,restartTime)
                                     }
                                 }
                             }
@@ -273,14 +266,14 @@ class PlayerService : Service() {
                 "播放异常".toast()
             }
         }
-        private fun getFirstMeetSongUrl(song:Song,songId:String?,restartTime: Int?) {
+        private fun getOnlineSongPlayUrl(song:Song,songId:String?,restartTime: Int?) {
             if (songId.isNotNullOrEmpty()) {
                 val playUrl = PlayServiceHelper.getOnlineSongUrl(songId!!)
                 if (playUrl.isNullOrEmpty()) {
-                    currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,firstMeetSongs?.size)
-                    PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
-                    val nextSongId = firstMeetSongs!![currentPosition].songId
-                    getFirstMeetSongUrl(song,nextSongId,restartTime)
+                    currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,launchSongs?.size)
+                    PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
+                    val nextSongId = launchSongs!![currentPosition].songId
+                    getOnlineSongPlayUrl(song,nextSongId,restartTime)
                 } else {
                     song.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
                     LogUtil.e("-------PlayService getFirstMeetSongUrl imgUrl:${song.imgUrl}")
@@ -307,9 +300,6 @@ class PlayerService : Service() {
                                 PlayServiceHelper.save2History()
                                 if (restartTime != null && restartTime != 0) {
                                     mp.seekTo(restartTime)
-//                                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_RESUME)
-                                } else {
-
                                 }
                                 Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
                                 // TODO: 2020/10/30 如果是由暂停进入播放的状态  发送的应该是pause 这样就不用刷新bottomPlayView左边的图片和名称了
@@ -381,18 +371,18 @@ class PlayerService : Service() {
                     }
                     Consts.LIST_TYPE_ONLINE ->{
                         when(song.onlineSubjectType) {
-                            Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
-                                currentPosition = if (currentPosition==firstMeetSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
+                            Consts.ONLINE_FIRST_LAUNCH->{
+                                currentPosition = if (currentPosition==launchSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
                                     0
                                 } else {
                                     PlayServiceHelper.getNextSongPosition(
                                         currentPosition,
                                         playMode,
-                                        firstMeetSongs?.size
+                                        launchSongs?.size
                                     )
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                                PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
                             }
                         }
                     }
@@ -447,18 +437,18 @@ class PlayerService : Service() {
                     }
                     Consts.LIST_TYPE_ONLINE ->{
                         when(song.onlineSubjectType) {
-                            Consts.ONLINE_LIST_TYPE_FIRST_MEET->{
+                            Consts.ONLINE_FIRST_LAUNCH->{
                                 currentPosition = if (currentPosition==0 && playMode == Consts.PLAY_ORDER) {
-                                    firstMeetSongs!!.size-1
+                                    launchSongs!!.size-1
                                 } else {
                                     PlayServiceHelper.getLastSongPosition(
                                         currentPosition,
                                         playMode,
-                                        firstMeetSongs?.size
+                                        launchSongs?.size
                                     )
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveFirstMeetSong(currentPosition,firstMeetSongs)
+                                PlayServiceHelper.saveCurrentLaunchSong(currentPosition,launchSongs)
                             }
                         }
                     }

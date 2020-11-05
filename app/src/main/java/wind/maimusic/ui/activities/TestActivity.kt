@@ -18,6 +18,7 @@ import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.model.title.Title
 import wind.maimusic.utils.inflate
 import wind.maimusic.utils.toast
+import wind.maimusic.widget.MaiRefreshView
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
@@ -82,6 +83,7 @@ class TestActivity : AppCompatActivity() {
 //                jAdapter?.setRefreshComplete()
 //            },2000)
 //        }
+        jAdapter?.refreshLoadView = MaiRefreshView(baseContext)
         rv.adapter = jAdapter
 
         adapter?.submitList(data2)
@@ -181,5 +183,12 @@ class TestActivity : AppCompatActivity() {
             }
         }
 //            .attach(rv)
+    }
+
+    fun testList() {
+        val list = mutableListOf<String>()
+        for (i in 0..10) {
+            list.add("zz$i")
+        }
     }
 }

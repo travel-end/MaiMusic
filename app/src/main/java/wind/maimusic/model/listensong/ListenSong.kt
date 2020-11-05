@@ -58,47 +58,51 @@ data class SongListCover(
     @ColumnInfo
     val desc:String = "",
     @ColumnInfo
-    val type:Int
+    val type:Int,
+    @ColumnInfo
+    val tag1:Int,
+    @ColumnInfo
+    val tag2:Int
 )
 
 data class SongListCovers(
     val listCovers:List<SongListCover>
 )
 
-@Entity(tableName = "single_song")
+//@Entity(tableName = "single_song")
 data class SingleSong(
-    @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    @ColumnInfo
-    val songName:String = "",
-    @ColumnInfo
-    val singer:String = "",
-    @ColumnInfo
-    val album:String = "",
-    @ColumnInfo
-    val cover:String = "",
-    @ColumnInfo
-    val desc:String = ""
+//    @PrimaryKey(autoGenerate = true)
+    var id:Int?=0,
+//    @ColumnInfo
+    var songName:String? = "",
+//    @ColumnInfo
+    var singer:String? = "",
+//    @ColumnInfo
+    var album:String? = "",
+//    @ColumnInfo
+    var cover:String? = "",
+//    @ColumnInfo
+    var desc:String? = ""
 )
 
 data class SingleSongList(
     val singleSongList: List<SingleSong>
 )
 
-@Entity(tableName = "poetry_song")
+//@Entity(tableName = "poetry_song")
 data class PoetrySong(
-    @PrimaryKey(autoGenerate = true)
-    val id:Int,
-    @ColumnInfo
-    val name:String = "",
-    @ColumnInfo
-    val singer:String = "",
-    @ColumnInfo
-    val cover:String = "",
-    @ColumnInfo
-    val desc:String = "",
-    @ColumnInfo
-    val isLoved:Boolean = false
+//    @PrimaryKey(autoGenerate = true)
+    var id:Int?=0,
+//    @ColumnInfo
+    var name:String? = "",
+//    @ColumnInfo
+    var singer:String? = "",
+//    @ColumnInfo
+    var cover:String? = "",
+//    @ColumnInfo
+    var desc:String? = "",
+//    @ColumnInfo
+    var isLoved:Boolean = false
 )
 data class PoetrySongList(
     val poetrySongList: List<PoetrySong>

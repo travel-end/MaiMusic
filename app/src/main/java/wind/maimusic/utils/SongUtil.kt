@@ -6,6 +6,7 @@ import wind.maimusic.Constants
 import wind.maimusic.model.HistorySong
 import wind.maimusic.model.LocalSong
 import wind.maimusic.model.LoveSong
+import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.widget.R
@@ -166,20 +167,20 @@ object SongUtil {
     fun assemblySong(s: Any, songType: Int, pos: Int = 0): Song {
         var song: Song? = null
         when (songType) {
-            Consts.ONLINE_LIST_TYPE_FIRST_MEET -> {
-                val fmSong = s as FirstMeetSong
+            Consts.ONLINE_FIRST_LAUNCH -> {
+                val launchSong = s as OnlineSong
                 song = Song().apply {
-                    songId = fmSong.songId //004DrG5A2nm7q2
-                    singer = fmSong.singer// 鸾音社
-                    songName = fmSong.songName// 夜来寒雨晓来风
-                    imgUrl = fmSong.imgUrl
-                    duration = fmSong.duration ?: 0//187  (秒)
-                    isOnline = fmSong.isOnline ?: false
-                    mediaId = fmSong.mediaId//004DrG5A2nm7q2
-                    albumName = fmSong.albumName//夜来寒雨晓来风
-                    isDownload = fmSong.isDownload ?: false
+                    songId = launchSong.songId //004DrG5A2nm7q2
+                    singer = launchSong.singer// 鸾音社
+                    songName = launchSong.name// 夜来寒雨晓来风
+                    imgUrl = launchSong.imgUrl
+                    duration = launchSong.duration ?: 0//187  (秒)
+                    isOnline = launchSong.isOnline
+                    mediaId = launchSong.mediaId//004DrG5A2nm7q2
+                    albumName = launchSong.albumName//夜来寒雨晓来风
+                    isDownload = launchSong.isDownload
                     listType = Consts.LIST_TYPE_ONLINE
-                    onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
+                    onlineSubjectType = Consts.ONLINE_FIRST_LAUNCH
                     position = pos
                 }
             }
@@ -212,7 +213,6 @@ object SongUtil {
                 }
             }
             Consts.LIST_TYPE_DOWNLOAD -> {
-
             }
             Consts.LIST_TYPE_LOVE -> {
                 val love = s as LoveSong
@@ -231,20 +231,30 @@ object SongUtil {
                 }
             }
             Consts.LIST_TYPE_ONLINE -> {
-                val online = s as ListBean
+                val online = s as OnlineSong
                 song = Song().apply {
-                    songId = online.songmid //004DrG5A2nm7q2
-                    singer = StringUtil.getSinger(s)// 鸾音社
-                    songName = online.songname// 夜来寒雨晓来风
-                    imgUrl =
-                        "${Consts.ALBUM_PIC}${online.albummid}${Consts.JPG}"////http://y.gtimg.cn/music/photo_new/T002R180x180M000004UvnL62KXhCQ.jpg
-                    duration = online.interval//187  (秒)
+//                    songId = fmSong.songId //004DrG5A2nm7q2
+//                    singer = fmSong.singer// 鸾音社
+//                    songName = fmSong.songName// 夜来寒雨晓来风
+//                    imgUrl = fmSong.imgUrl
+//                    duration = fmSong.duration ?: 0//187  (秒)
+//                    isOnline = fmSong.isOnline ?: false
+//                    mediaId = fmSong.mediaId//004DrG5A2nm7q2
+//                    albumName = fmSong.albumName//夜来寒雨晓来风
+//                    isDownload = fmSong.isDownload ?: false
+//                    listType = Consts.LIST_TYPE_ONLINE
+//                    onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
+//                    position = pos
+                    songId = online.songId //004DrG5A2nm7q2
+                    singer = online.singer// 鸾音社
+                    songName = online.name// 夜来寒雨晓来风
+                    imgUrl =online.imgUrl
+                    duration = online.duration?:0//187  (秒)
                     isOnline = true
-                    mediaId = online.strMediaMid//004DrG5A2nm7q2
-                    albumName = online.albumname//夜来寒雨晓来风
-                    isDownload = DownloadedUtil.hasDownloadedSong(
-                        online.songmid ?: ""
-                    )//003IHI2x3RbXLS  // 是否已经下载过了（初次搜索为false）
+                    mediaId = online.mediaId//004DrG5A2nm7q2
+                    albumName = online.albumName//夜来寒雨晓来风
+                    isDownload = online.isDownload
+                    listType = Consts.LIST_TYPE_ONLINE
                 }
             }
         }
