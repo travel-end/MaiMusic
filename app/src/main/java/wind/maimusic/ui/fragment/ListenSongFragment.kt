@@ -20,10 +20,7 @@ import wind.maimusic.model.title.ListenSongListTitle
 import wind.maimusic.model.title.PoetrySongTitle
 import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.ui.activities.TestActivity
-import wind.maimusic.utils.LogUtil
-import wind.maimusic.utils.inflate
-import wind.maimusic.utils.isNotNullOrEmpty
-import wind.maimusic.utils.toSongList
+import wind.maimusic.utils.*
 import wind.maimusic.vm.ListenSongViewModel
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
@@ -113,7 +110,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     itemClicked(View.OnClickListener {
                         when(position) {
                             1->{//每日推荐
-                                it.toSongList(Constants.ST_DAILY_RECOMMEND)
+                                it.toSongListFrg(Constants.ST_DAILY_RECOMMEND)
                             }
                         }
                     })

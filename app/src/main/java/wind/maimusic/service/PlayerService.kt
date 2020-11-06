@@ -30,9 +30,7 @@ class PlayerService : Service() {
     private var historySongs: MutableList<HistorySong>? = null
     private var downloadSongs: MutableList<Downloaded>? = null
     private var loveSongs: MutableList<LoveSong>? = null
-
     private var launchSongs: MutableList<OnlineSong>? = null
-
     private var onlineSongs: MutableList<OnlineSong>? = null
     private var listType: Int = 0
     private var currentPosition: Int = 0
@@ -43,7 +41,6 @@ class PlayerService : Service() {
     private val mediaPlayer by lazy {
         MediaPlayer()
     }
-
     override fun onCreate() {
         super.onCreate()
         val song = SongUtil.getSong()
@@ -230,6 +227,7 @@ class PlayerService : Service() {
                                     onlineSongs = GlobalUtil.execute {
                                         OnlineSongDatabase.getDatabase().onlineSongDao().findRangeOnlineSongs(startIndex,Constants.PAGE_SIZE_DAILY_RECOMMEND).toMutableList()
                                     }
+                                    LogUtil.e("-------PlayService PlayerBinder play onlineSongs:$onlineSongs")
                                 }
                             }
                         }
@@ -327,7 +325,6 @@ class PlayerService : Service() {
                     getOnlineSongPlayUrl(song,nextSongId,subjectType,restartTime)
                 } else {
                     song.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
-//                    LogUtil.e("-------PlayService getFirstMeetSongUrl imgUrl:${song.imgUrl}")
                     SongUtil.saveSong(song)
                     mediaPlayer.setDataSource(playUrl)
                     startPlay(restartTime)

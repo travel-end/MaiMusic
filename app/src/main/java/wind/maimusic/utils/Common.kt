@@ -218,6 +218,7 @@ fun Activity.isServiceRunning(serviceName:String) :Boolean {
     return false
 }
 
+/*去播放页面*/
 fun Activity.toPlayAct(playStatus:Int) {
     val playIntent = Intent(this, PlayActivity::class.java)
     playIntent.putExtra(Consts.PLAY_STATUS, playStatus)
@@ -232,12 +233,22 @@ fun Activity.toPlayAct(playStatus:Int) {
     }
 }
 
-// fragment导航
-fun View?.toSongList(songListType:Int) {
+/*去歌单页面*/
+fun View?.toSongListFrg(songListType:Int) {
     if (this != null) {
         val bundle = Bundle()
         bundle.putString(Constants.SONG_LIST_TYPE,songListType.toString())
         Navigation.findNavController(this).navigate(R.id.to_song_list_fragment,bundle)
+    }
+}
+
+fun View?.nav(id:Int,bundle: Bundle?=null) {
+    if (this != null) {
+        if (bundle!= null) {
+            Navigation.findNavController(this).navigate(id,bundle)
+        } else {
+            Navigation.findNavController(this).navigate(id)
+        }
     }
 }
 

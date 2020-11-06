@@ -58,7 +58,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var ivSongListTitleBack: ImageView? = null
 
     /*歌单顶部信息*/
-    protected var songListTop: SongListTop? = null
+    private var songListTop: SongListTop? = null
 
     /*必须组件*/
     protected lateinit var ivPlayAll: ImageView
@@ -155,7 +155,6 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         /*默认的recyclerView*/
         setRvContent()
     }
-
     open fun setRvContent() {
         rvSongList.setHasFixedSize(true)
         rvSongList.setup<Any> {
@@ -186,15 +185,10 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                                     lastPosition = position
                                 }
                                 notifyItemChanged(position)
-                                setCurrentSong(position)
-                                SongUtil.saveSong(
-                                    SongUtil.assemblySong(
-                                        currentSong!!,
-                                        songListType(),
-                                        position
-                                    )
-                                )
-                                playerBinder?.play(songListType())
+                                setCurrentSong(position)// 设置当前点击的歌曲
+                                val s = SongUtil.assemblySong(currentSong!!, songListType(), position)
+                                SongUtil.saveSong(s)
+                                playerBinder?.play(s.listType,songListType())
                             })
                         }
                     }
@@ -337,7 +331,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             Constants.ST_DAILY_RECOMMEND -> {
                 songListTop = SongListTop(
                     "每日推荐",
-                    "入我相思门，知我相思苦。\n 早知如此绊人心，何如当初莫相识",
+                    "入我相思门，知我相思苦。早知如此绊人心，何如当初莫相识",
                     "By suo luo -",
                     if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl,
                     "推荐",

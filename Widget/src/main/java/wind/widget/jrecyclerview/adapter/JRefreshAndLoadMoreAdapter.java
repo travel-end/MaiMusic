@@ -61,6 +61,27 @@ public class JRefreshAndLoadMoreAdapter extends JBaseRecycleAdapter<RecyclerView
 
     }
 
+//    public JRefreshAndLoadMoreAdapter(Context context) {
+//        if (mRefreshLoadView == null) {
+//            if (JRecycleViewManager.getInstance().getRefreshLoadView() == null) {
+//                mRefreshLoadView = new OrdinaryRefreshLoadView(context);
+//            } else {
+//                mRefreshLoadView = JRecycleViewManager.getInstance().getRefreshLoadView();
+//            }
+//        }
+//        if (mLoadMoreView == null) {
+//            if (JRecycleViewManager.getInstance().getLoadMoreView() == null) {
+//                mLoadMoreView = new OrdinaryLoadMoreView(context);
+//            } else {
+//                mLoadMoreView = JRecycleViewManager.getInstance().getLoadMoreView();
+//            }
+//        }
+//    }
+//
+//    public void setRawAdapter(RecyclerView.Adapter adapter) {
+//        mRealAdapter = adapter;
+//    }
+
     /**
      * 是否开启下拉刷新
      *

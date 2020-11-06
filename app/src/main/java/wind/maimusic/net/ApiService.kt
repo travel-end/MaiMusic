@@ -1,6 +1,7 @@
 package wind.maimusic.net
 
 import retrofit2.http.*
+import wind.maimusic.Constants
 import wind.maimusic.model.core.*
 
 /**
@@ -10,9 +11,9 @@ import wind.maimusic.model.core.*
 interface ApiService {
     /**
      * 搜索歌曲：https://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=2&n=2&w=周杰伦&format=json
-     * n为一页30首
+     * n为一页?首
      */
-    @GET("soso/fcgi-bin/client_search_cp?n=30&format=json")
+    @GET("soso/fcgi-bin/client_search_cp?n=${Constants.SEARCH_SONG_PAGE_SIZE}&format=json")
     suspend fun search(@Query("w") searchContent:String,@Query("p") offSet:Int): SearchSong
 
     /**

@@ -11,6 +11,7 @@ import wind.maimusic.utils.*
 import wind.maimusic.vm.SearchResultViewModel
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
+import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
 import wind.widget.model.Song
 import wind.widget.rippleview.RippleView
 
@@ -19,6 +20,11 @@ import wind.widget.rippleview.RippleView
  */
 class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
     private var searchText: String = ""
+    private var rawAdapter: EfficientAdapter<ListBean>? = null
+    private var jAdapter: JRefreshAndLoadMoreAdapter? = null
+    private var pageOffset: Int = 1
+    private var dataList = mutableListOf<ListBean>()
+
     companion object {
         fun newInstance(searchText: String): SearchSingleSongFragment {
             val fragment = SearchSingleSongFragment()
@@ -32,42 +38,48 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
 
     override fun layoutResId() = R.layout.fragment_search_single_song
     override fun setRvContent() {
-        rvSongList.setup<ListBean> {
-            adapter {
-                addItem(R.layout.item_search_song) {
-                    bindViewHolder { data, _, _ ->
-                        data?.let { s ->
-                            setText(R.id.item_search_song_list_tv_song_name, s.songname)
-                            setText(
-                                R.id.item_search_song_list_tv_song_singer,
-                                StringUtil.getSinger(s)
-                            )
-                            setText(R.id.item_search_song_list_tv_song_album, s.albumname)
-                            setVisible(
-                                R.id.item_search_song_list_iv_downloaded,
-                                false
-                            ) // TODO: 2020/10/28
-                            if (s.lyric.isNotNullOrEmpty()) {
-                                setVisible(R.id.item_search_song_list_tv_song_lyric, true)
-                                setText(R.id.item_search_song_list_tv_song_lyric, s.lyric)
-                            }
-                            (itemView as RippleView).setOnRippleCompleteListener {
-                                (requireActivity() as MainActivity).showLoadingNormal("")
-                                val song = SongUtil.assemblySong(s, Consts.ONLINE_SEARCH)
-                                mViewModel.getSongPlayUrl(song)
-                            }
+        rawAdapter = efficientAdapter {
+            addItem(R.layout.item_search_song) {
+                bindViewHolder { data, _, _ ->
+                    data?.let { s ->
+                        setText(R.id.item_search_song_list_tv_song_name, s.songname)
+                        setText(
+                            R.id.item_search_song_list_tv_song_singer,
+                            StringUtil.getSinger(s)
+                        )
+                        setText(R.id.item_search_song_list_tv_song_album, s.albumname)
+                        setVisible(
+                            R.id.item_search_song_list_iv_downloaded,
+                            false
+                        ) // TODO: 2020/10/28
+                        if (s.lyric.isNotNullOrEmpty()) {
+                            setVisible(R.id.item_search_song_list_tv_song_lyric, true)
+                            setText(R.id.item_search_song_list_tv_song_lyric, s.lyric)
+                        }
+                        (itemView as RippleView).setOnRippleCompleteListener {
+                            (requireActivity() as MainActivity).showLoadingNormal("")
+                            val song = SongUtil.assemblySong(s, Consts.ONLINE_SEARCH)
+                            mViewModel.getSongPlayUrl(song)
                         }
                     }
                 }
             }
         }
+        jAdapter = JRefreshAndLoadMoreAdapter(requireContext(), rawAdapter)
+        jAdapter?.setIsOpenRefresh(false)
+        jAdapter?.setOnLoadMoreListener {
+            LogUtil.e("--setOnLoadMoreListener--")
+            pageOffset += 1
+            mViewModel.searchSong(searchText, pageOffset)
+        }
+        rvSongList.adapter = jAdapter
     }
 
     override fun initData() {
         super.initData()
         searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT) ?: ""
         if (searchText.isNotEmpty()) {
-            mViewModel.searchSong(searchText, 1)
+            mViewModel.searchSong(searchText, pageOffset)
         }
     }
 
@@ -80,8 +92,21 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
                     val songList = song.list
                     if (isNotNullOrEmpty(songList)) {
                         hideLoadingResultView()
+                        val size = songList!!.size
                         flPlayAll.visible()
-                        rvSongList.submitList(songList!!.toMutableList())
+                        dataList.addAll(songList)
+                        LogUtil.e("----SearchSingleSongFragment observe dataList size--:${dataList.size}")
+                        if (pageOffset == 1) {
+                            rawAdapter?.items = dataList
+                            jAdapter?.notifyDataSetChanged()
+                        } else {
+                            jAdapter?.setLoadComplete()
+                            if (size == 0) {
+                                jAdapter?.setNoMore()
+                            } else {
+                                jAdapter?.notifyItemRangeInserted(jAdapter?.getRealPosition(size)!!, size)
+                            }
+                        }
                         rvSongList.visible()
                     }
                 }

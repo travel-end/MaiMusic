@@ -18,14 +18,18 @@ import wind.widget.effcientrv.submitList
 class SongListFragment : BaseSongListFragment<SongListViewModel>() {
     private var listType: Int = 0
     override fun songListType() = listType
+    override fun initView() {
+        listType = arguments?.getString(Constants.SONG_LIST_TYPE)?.toInt() ?: 0
+        super.initView()
+    }
     override fun layoutResId() = R.layout.fragment_md_style_song_list
     override fun initData() {
-        listType = arguments?.getString(Constants.SONG_LIST_TYPE)?.toInt() ?: 0
         if (listType != 0) {
             mViewModel.getOnlineSongs(listType)
         }
         super.initData()
     }
+
     override fun observe() {
         super.observe()
         mViewModel.onlineSongs.observe(this, Observer {
