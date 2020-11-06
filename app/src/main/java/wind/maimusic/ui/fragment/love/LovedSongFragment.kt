@@ -26,24 +26,12 @@ class LovedSongFragment : BaseSongListFragment<LoveSongViewModel>() {
             if (isNotNullOrEmpty(it)) {
                 lovedSongs.clear()
                 lovedSongs.addAll(it)
-                initSongListInfo(getListTop(it[0].pic))
                 rvSongList.submitList(lovedSongs)
                 rvSongList.visible()
                 flPlayAll.visible()
-            } else {
-                initSongListInfo(getListTop())
             }
+            setSongListTop(Consts.LIST_TYPE_LOVE)
         })
-    }
-    private fun getListTop(imgUrl:String?=null):SongListTop {
-        return SongListTop(
-            "我喜欢的音乐",
-            "我喜欢你，像风走了八千里，不问归期",
-            "By Journey - Travel end -",
-            imgUrl ?: Constants.TEMP_SONG_COVER1_NORMAL,
-            "喜欢",
-            "清凉"
-        )
     }
 
 }

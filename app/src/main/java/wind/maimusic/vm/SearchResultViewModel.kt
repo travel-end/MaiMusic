@@ -17,7 +17,7 @@ import wind.widget.model.Song
 
 class SearchResultViewModel:BaseViewModel() {
     val searchResult: MutableLiveData<SearchSong> = MutableLiveData()
-    val songPlayUrlResult : MutableLiveData<Map<String, Any>> = MutableLiveData()
+    val songPlayUrlResult : MutableLiveData<Map<String, Any>?> = MutableLiveData()
     /**
      * 关键词搜索
      */
@@ -64,6 +64,7 @@ class SearchResultViewModel:BaseViewModel() {
                         }
                     }
                     if (pUrl.isNullOrEmpty()) {
+                        songPlayUrlResult.value = null
                         loadStatus.value = State(StateType.SHOW_TOAST,"暂时没有播放权限~")
                     } else {
                         val pair="song" to song
@@ -73,10 +74,12 @@ class SearchResultViewModel:BaseViewModel() {
                         songPlayUrlResult.value = map
                     }
                 } else {
+                    songPlayUrlResult.value = null
                     loadStatus.value = State(StateType.SHOW_TOAST,"${it.code} :获取不到歌曲播放地址")
                 }
             }.onFailure {
                 handleException(it, State(StateType.SHOW_TOAST,msg = it.message?:"未知错误"))
+                songPlayUrlResult.value = null
             }
         }
     }

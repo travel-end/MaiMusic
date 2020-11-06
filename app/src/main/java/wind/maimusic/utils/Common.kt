@@ -2,8 +2,11 @@ package wind.maimusic.utils
 
 import android.app.Activity
 import android.app.ActivityManager
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +20,8 @@ import androidx.navigation.Navigation
 import wind.maimusic.Constants
 import wind.maimusic.MaiApp
 import wind.maimusic.R
+import wind.maimusic.ui.activities.PlayActivity
+import wind.widget.cost.Consts
 import wind.widget.utils.toIntPx
 import java.lang.reflect.ParameterizedType
 import java.util.*
@@ -211,6 +216,20 @@ fun Activity.isServiceRunning(serviceName:String) :Boolean {
         }
     }
     return false
+}
+
+fun Activity.toPlayAct(playStatus:Int) {
+    val playIntent = Intent(this, PlayActivity::class.java)
+    playIntent.putExtra(Consts.PLAY_STATUS, playStatus)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        startActivity(
+            playIntent,
+            ActivityOptions.makeSceneTransitionAnimation(this)
+                .toBundle()
+        )
+    } else {
+        startActivity(playIntent)
+    }
 }
 
 // fragment导航

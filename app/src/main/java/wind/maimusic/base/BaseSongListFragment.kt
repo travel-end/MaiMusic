@@ -39,6 +39,7 @@ import wind.widget.utils.toIntPx
  */
 abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<VM>() {
     protected var playerBinder: PlayerService.PlayerBinder? = null
+
     /*非必须组件*/
     private var ivBack: ImageView? = null
     private var tvTitle: TextView? = null
@@ -49,19 +50,22 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var tvSongListDescription: TextView? = null
     private var ivSongListSmallCover: ImageView? = null
     private var ivSongListLargeCover: ImageView? = null
-    private var tvSongListAuthor:TextView?=null
-    private var tvSongListTitleName:TextView?=null
-    private var tvSongListTagA:TextView?=null
-    private var tvSongListTagB:TextView?=null
+    private var tvSongListAuthor: TextView? = null
+    private var tvSongListTitleName: TextView? = null
+    private var tvSongListTagA: TextView? = null
+    private var tvSongListTagB: TextView? = null
 
-    private var ivSongListTitleBack:ImageView?=null
+    private var ivSongListTitleBack: ImageView? = null
+
     /*歌单顶部信息*/
-//    protected var songListTop:SongListTop?=null
+    protected var songListTop: SongListTop? = null
+
     /*必须组件*/
     protected lateinit var ivPlayAll: ImageView
     protected lateinit var tvDownloadAll: TextView
     protected lateinit var flPlayAll: FrameLayout
     protected lateinit var rvSongList: RecyclerView
+
     /*歌单分类列表*/
     protected var localSongs = mutableListOf<LocalSong>()
     protected var recentListenSongs = mutableListOf<HistorySong>()
@@ -71,19 +75,23 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
 
     /*当前播放的曲目*/
     private var currentSong: Any? = null
+
     /*当前播放的曲目信息*/
     private var songName: String? = null
     private var songSinger: String? = null
     private var songId: String? = null
     private var isDownloaded: Boolean = false
-    private var canRefresh:Boolean = true
+    private var canRefresh: Boolean = true
+
     /*点击改变item状态的标志*/
     private var lastPosition: Int = -1
+
     /*需要操作layoutManager的地方调用*/
     protected lateinit var layoutManager: LinearLayoutManager
     private val playerConnection = object : ServiceConnection {
         override fun onServiceDisconnected(p0: ComponentName?) {
         }
+
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             playerBinder = service as PlayerService.PlayerBinder
             onBindConnection()
@@ -260,7 +268,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 songId = data.songId
                 isDownloaded = data.isDownload ?: false
             }
-            Constants.ST_DAILY_RECOMMEND->{
+            Constants.ST_DAILY_RECOMMEND -> {
                 data as OnlineSong
                 songName = data.name
                 songSinger = data.singer
@@ -276,7 +284,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             Consts.LIST_TYPE_HISTORY -> currentSong = recentListenSongs[position]
             Consts.LIST_TYPE_DOWNLOAD -> currentSong = downloadedSongs[position]
             Consts.LIST_TYPE_LOVE -> currentSong = lovedSongs[position]
-            Constants.ST_DAILY_RECOMMEND->currentSong = onlineSongs[position]
+            Constants.ST_DAILY_RECOMMEND -> currentSong = onlineSongs[position]
         }
     }
 
@@ -291,9 +299,10 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     /*全部下载*/
     open fun downloadAll() {
     }
+
     /*初始化歌单数据 由继承的类实现 对于Md类型歌单必须实现这个方法*/
-    open fun initSongListInfo(songListTop: SongListTop?) {
-        songListTop?.let {info->
+    private fun initSongListInfo() {
+        songListTop?.let { info ->
             tvSongListName?.text = info.songListName
             tvSongListDescription?.text = info.songListDescription
             tvSongListAuthor?.text = info.songListAuthor
@@ -301,21 +310,43 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             tvSongListTagB?.text = info.songListTagB
             tvSongListTitleName?.text = info.songListName
             ivSongListLargeCover?.loadImg(
-                url = info.songListCoverImgUrl?:"",
+                url = info.songListCoverImgUrl ?: "",
                 placeholder = R.drawable.place_holder_half_translate,
                 error = R.drawable.place_holder_half_translate
             )
             ivSongListSmallCover?.loadImg(
-                url = info.songListCoverImgUrl?:"",
+                url = info.songListCoverImgUrl ?: "",
                 round = 6f
             )
         }
     }
 
     /*初始化歌单数据 赋值*/
-//    private fun setSongListTop() {
-//
-//    }
+    open fun setSongListTop(songListType: Int) {
+        when (songListType) {
+            Consts.LIST_TYPE_LOVE -> {
+                songListTop = SongListTop(
+                    "我喜欢的音乐",
+                    "我喜欢你，像风走了八千里，不问归期",
+                    "By Journey - Travel end -",
+                    if (lovedSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else lovedSongs[0].pic,
+                    "喜欢",
+                    "清凉"
+                )
+            }
+            Constants.ST_DAILY_RECOMMEND -> {
+                songListTop = SongListTop(
+                    "每日推荐",
+                    "入我相思门，知我相思苦。\n 早知如此绊人心，何如当初莫相识",
+                    "By suo luo -",
+                    if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl,
+                    "推荐",
+                    "清新"
+                )
+            }
+        }
+        initSongListInfo()
+    }
 
     /*监听md toolBar透明度的变化*/
     private fun initToolBar() {

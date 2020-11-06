@@ -11,6 +11,7 @@ import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
+import wind.maimusic.widget.FloatDialog
 import wind.widget.utils.fastClickListener
 
 /**
@@ -25,7 +26,7 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     private var loadingSongView: View?=null
 
     // 普通加载的view
-    private var loadingNormalView:View?=null
+    private var loadingNormalDialog: FloatDialog?=null
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
@@ -60,15 +61,15 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     private fun initStatusView() {
         val resultView: View? = findViewById(R.id.loading_result_view)
         val songView: View? = findViewById(R.id.loading_song_view)
-        val normalView: View? = findViewById(R.id.loading_normal_view)
+//        val normalView: View? = findViewById(R.id.loading_normal_view)
         if (resultView != null) {
             loadingResultView = resultView
         }
         if (songView != null) {
             loadingSongView = songView
         }
-        if (normalView != null) {
-            loadingNormalView = normalView
+        if (loadingNormalDialog == null) {
+            loadingNormalDialog = FloatDialog(this)
         }
     }
 
@@ -87,9 +88,10 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     }
 
     open fun showLoadingNormal(msg: String) {
-        if (loadingNormalView?.visibility == View.GONE) {
-            loadingNormalView?.findViewById<TextView>(R.id.view_loading_normal_tv_msg)?.text =msg
-            loadingNormalView?.visibility = View.VISIBLE
+        if (loadingNormalDialog!=null) {
+            if (!loadingNormalDialog!!.isShowing) {
+                loadingNormalDialog!!.show()
+            }
         }
     }
 
@@ -100,8 +102,10 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     }
 
     open fun dismissLoadingNormal() {
-        if (loadingNormalView?.visibility == View.VISIBLE) {
-            loadingNormalView?.visibility = View.GONE
+        if (loadingNormalDialog!=null) {
+            if (loadingNormalDialog!!.isShowing) {
+                loadingNormalDialog!!.dismiss()
+            }
         }
     }
 

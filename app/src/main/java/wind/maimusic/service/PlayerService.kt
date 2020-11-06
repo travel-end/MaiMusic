@@ -76,12 +76,12 @@ class PlayerService : Service() {
                 }
                 Consts.LIST_TYPE_ONLINE -> {
                     when (song.onlineSubjectType) {
-                        Consts.ONLINE_FIRST_LAUNCH -> {
+                        Consts.ONLINE_FIRST_LAUNCH -> {// 首次使用app
                             launchSongs = GlobalUtil.execute {
                                 OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
                             }
                         }
-                        Constants.ST_DAILY_RECOMMEND->{
+                        Constants.ST_DAILY_RECOMMEND->{// 每日推荐歌曲
                             val startIndex = DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
                             onlineSongs = GlobalUtil.execute {
                                 OnlineSongDatabase.getDatabase().onlineSongDao().findRangeOnlineSongs(startIndex,Constants.PAGE_SIZE_DAILY_RECOMMEND).toMutableList()
@@ -167,7 +167,6 @@ class PlayerService : Service() {
                                 }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
                                 PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Constants.ST_DAILY_RECOMMEND,onlineSongs)
-
                             }
                         }
                     }
@@ -293,12 +292,28 @@ class PlayerService : Service() {
                                         getOnlineSongPlayUrl(song,currentSongId,Constants.ST_DAILY_RECOMMEND,restartTime)
                                     }
                                 }
+                                Consts.ONLINE_SEARCH->{
+                                    val nextSearchSong = GlobalUtil.execute {
+                                        OnlineSongDatabase.getDatabase().onlineSongDao().findRandomSingleSong()
+                                    }
+                                    val nextSong = PlayServiceHelper.transferOnlineSong(nextSearchSong, Consts.ONLINE_SEARCH)
+                                    LogUtil.e("nextSearchSong$nextSearchSong")
+                                    if (nextSong!= null) {
+                                        val playUrl = PlayServiceHelper.getOnlineSongUrl(nextSong.songId!!)
+                                        if (playUrl.isNotNullOrEmpty()) {
+                                            nextSong.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
+                                            SongUtil.saveSong(nextSong)
+                                            mediaPlayer.setDataSource(playUrl)
+                                            startPlay(restartTime)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             } catch (e: Exception) {
-                LogUtil.e("play exception:${e.message}")
+                LogUtil.e("-----PlayerService---PlayerBinder ---play exception:${e.message}")
                 "播放异常".toast()
             }
         }
@@ -312,7 +327,7 @@ class PlayerService : Service() {
                     getOnlineSongPlayUrl(song,nextSongId,subjectType,restartTime)
                 } else {
                     song.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
-                    LogUtil.e("-------PlayService getFirstMeetSongUrl imgUrl:${song.imgUrl}")
+//                    LogUtil.e("-------PlayService getFirstMeetSongUrl imgUrl:${song.imgUrl}")
                     SongUtil.saveSong(song)
                     mediaPlayer.setDataSource(playUrl)
                     startPlay(restartTime)

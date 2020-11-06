@@ -1,6 +1,5 @@
 package wind.maimusic.ui.activities
 
-import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
@@ -77,32 +76,23 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
 
     override fun initAction() {
         super.initAction()
-
         /* 点击下方进入播放页面*/
         bottomPlayerView.setOnPlayerViewClickListener(object : OnPlayerViewClickListener {
             override fun onPlayerViewClick(view: View) {
                 val song = SongUtil.getSong()
                 // 将当前播放歌曲的状态（播放/暂停）以及进度带到playActivity页面
                 if (song != null) {
-                    val playIntent = Intent(this@MainActivity, PlayActivity::class.java)
+                    val playStatus:Int
                     if (playerServiceBinder?.playing == true) {
                         val progress = (playerServiceBinder?.playingTime ?: 0) / 1000// 实时进度（秒）
                         song.currentTime = progress.toLong()
-                        SongUtil.saveSong(song)
-                        playIntent.putExtra(Consts.PLAY_STATUS, Consts.SONG_PLAY)
+                        playStatus = Consts.SONG_PLAY
                     } else {// 暂停
                         song.currentTime = bottomPlayerView.seekBarProgress.toLong()
-                        playIntent.putExtra(Consts.PLAY_STATUS, Consts.SONG_PAUSE)
+                        playStatus = Consts.SONG_PAUSE
                     }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        startActivity(
-                            playIntent,
-                            ActivityOptions.makeSceneTransitionAnimation(this@MainActivity)
-                                .toBundle()
-                        )
-                    } else {
-                        startActivity(playIntent)
-                    }
+                    SongUtil.saveSong(song)
+                    toPlayAct(playStatus)
                 }
             }
 

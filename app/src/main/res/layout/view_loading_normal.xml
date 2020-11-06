@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/dp_140"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:background="@drawable/shape_translate_rect_bg"
+    android:orientation="vertical">
 
     <ProgressBar
+        android:id="@+id/loading_view_progress_bar"
         style="?android:attr/progressBarStyleSmall"
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_20"
         android:indeterminateDrawable="@drawable/meituan_refreshing_anim">
     </ProgressBar>
     <TextView
-        android:id="@+id/view_loading_normal_tv_msg"
+        android:id="@+id/loading_view_tv_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_8"
-        android:textColor="@color/text_color"
-        tools:text="@string/loading" />
+        android:textColor="@color/white"
+        android:text="@string/loading"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"/>
 </LinearLayout>

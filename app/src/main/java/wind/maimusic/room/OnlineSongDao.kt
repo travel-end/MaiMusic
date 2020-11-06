@@ -36,6 +36,9 @@ interface OnlineSongDao {
     @Query("SELECT * FROM online_song ORDER BY RANDOM() LIMIT (:count)")
     suspend fun findRandomSingleSong(count: Int): List<OnlineSong>
 
+    @Query("SELECT * FROM online_song ORDER BY RANDOM() LIMIT 1")
+    suspend fun findRandomSingleSong(): OnlineSong?
+
     @Query("SELECT * FROM online_song WHERE id BETWEEN(:startIndex) AND (:endIndex) ORDER BY id")
     suspend fun findRangeOnlineSongs(startIndex:Int,endIndex:Int):List<OnlineSong>
 
@@ -49,7 +52,7 @@ interface OnlineSongDao {
     suspend fun findOnlinePoetrySong(count: Int): List<OnlineSong>
 
     @Query("SELECT * FROM online_song WHERE id=1")
-    suspend fun findLaunchSong(): List<OnlineSong>
+    suspend fun findLaunchSong(): OnlineSong?
 
     @Query("SELECT * FROM online_song ORDER BY id LIMIT 0,10")
     suspend fun findLaunchSongs(): List<OnlineSong>

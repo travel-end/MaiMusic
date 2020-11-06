@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
+import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.getClass
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.toast
+import wind.maimusic.widget.FloatDialog
 import wind.widget.utils.fastClickListener
 
 /**
@@ -27,7 +29,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private var loadingSongView: View?=null
 
     // 普通加载的view
-    private var loadingNormalView:View?=null
+    private var loadingNormalDialog:FloatDialog?=null
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
@@ -62,15 +64,15 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private fun initStatusView() {
         val resultView: View? = mRootView.findViewById(R.id.loading_result_view)
         val songView: View? = mRootView.findViewById(R.id.loading_song_view)
-        val normalView: View? = mRootView.findViewById(R.id.loading_normal_view)
+//        val normalView: View? = mRootView.findViewById(R.id.loading_normal_view)
         if (resultView != null) {
             loadingResultView = resultView
         }
         if (songView != null) {
             loadingSongView = songView
         }
-        if (normalView != null) {
-            loadingNormalView = normalView
+        if (loadingNormalDialog == null) {
+            loadingNormalDialog = FloatDialog(requireContext())
         }
     }
 
@@ -94,8 +96,10 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     }
 
     open fun showLoadingNormal(msg: String) {
-        if (loadingNormalView?.visibility == View.GONE) {
-            loadingNormalView?.visibility = View.VISIBLE
+        if (loadingNormalDialog!=null) {
+            if (loadingNormalDialog?.isShowing==false) {
+                loadingNormalDialog!!.show()
+            }
         }
     }
 
@@ -106,8 +110,10 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     }
 
     open fun dismissLoadingNormal() {
-        if (loadingNormalView?.visibility == View.VISIBLE) {
-            loadingNormalView?.visibility = View.GONE
+        if (loadingNormalDialog!=null) {
+            if (loadingNormalDialog!!.isShowing) {
+                loadingNormalDialog!!.dismiss()
+            }
         }
     }
 

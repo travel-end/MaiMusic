@@ -2,7 +2,6 @@ package wind.maimusic.utils
 
 import wind.maimusic.model.*
 import wind.maimusic.model.download.Downloaded
-import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.net.RetrofitClient
 import wind.maimusic.room.database.MaiDatabase
 import wind.widget.cost.Consts
@@ -100,9 +99,23 @@ object PlayServiceHelper {
         }
     }
 
-
-
-
+    fun transferOnlineSong(onlineSong:OnlineSong?,subjectType:Int):Song? {
+        if (onlineSong!= null) {
+            return Song().apply {
+                songId = onlineSong.songId
+                singer = onlineSong.singer
+                songName = onlineSong.name
+                imgUrl =onlineSong.imgUrl
+                duration = onlineSong.duration?:0
+                isOnline = true
+                listType =Consts.LIST_TYPE_ONLINE
+                onlineSubjectType = subjectType
+                mediaId = onlineSong.mediaId
+                isDownload =onlineSong.isDownload
+            }
+        }
+        return null
+    }
 
     fun saveLoveSong(currentPosition: Int) {
         var loveSongs = GlobalUtil.execute {

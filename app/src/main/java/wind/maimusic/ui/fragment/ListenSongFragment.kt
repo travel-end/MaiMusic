@@ -111,7 +111,6 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     val menu = data as TabMenu
                     setText(R.id.item_tab_menu_name, menu.menuName)
                     itemClicked(View.OnClickListener {
-//                        LogUtil.e("pos:$position")
                         when(position) {
                             1->{//每日推荐
                                 it.toSongList(Constants.ST_DAILY_RECOMMEND)
@@ -157,7 +156,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             holder.coverIv.loadImg(cover.cover)
                             holder.coverName.text = cover.listName
                             holder.itemView.fastClickListener {
-                                LogUtil.e("歌单类型：${cover.type}")
+//                                LogUtil.e("歌单类型：${cover.type}")
                                 mViewModel.findSongListByType(cover.type)
                             }
                         }
@@ -241,7 +240,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
             }
         })
         mViewModel.specialSongList.observe(this,Observer{
-            LogUtil.e("specialSongList$it")
+//            LogUtil.e("specialSongList$it")
             if (isNotNullOrEmpty(it)) {
             }
         })

@@ -6,10 +6,8 @@ import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
 import wind.maimusic.model.core.ListBean
-import wind.maimusic.utils.SongUtil
-import wind.maimusic.utils.StringUtil
-import wind.maimusic.utils.isNotNullOrEmpty
-import wind.maimusic.utils.visible
+import wind.maimusic.ui.activities.MainActivity
+import wind.maimusic.utils.*
 import wind.maimusic.vm.SearchResultViewModel
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
@@ -54,8 +52,8 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
                                 setText(R.id.item_search_song_list_tv_song_lyric, s.lyric)
                             }
                             (itemView as RippleView).setOnRippleCompleteListener {
-                                // TODO: 2020/10/29 to playactivity
-                                val song = SongUtil.assemblySong(s, Consts.LIST_TYPE_ONLINE)
+                                (requireActivity() as MainActivity).showLoadingNormal("")
+                                val song = SongUtil.assemblySong(s, Consts.ONLINE_SEARCH)
                                 mViewModel.getSongPlayUrl(song)
                             }
                         }
@@ -90,6 +88,7 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
             }
         })
         mViewModel.songPlayUrlResult.observe(this, Observer {
+            (requireActivity() as MainActivity).dismissLoadingNormal()
             it?.let {
                 val song = it.entries.find { entry ->
                     entry.key == "song"
@@ -100,6 +99,7 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
                 song.url = url
                 SongUtil.saveSong(song)
                 playerBinder?.playOnline()
+                requireActivity().toPlayAct(Consts.SONG_PLAY)
             }
         })
     }

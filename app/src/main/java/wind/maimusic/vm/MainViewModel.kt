@@ -24,9 +24,7 @@ class MainViewModel:BaseViewModel() {
                 OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSong()
             }
             LogUtil.e("-----MainViewModel findLaunchSong result:$result")
-            if (result.isNotEmpty()) {
-                launchSong.value = result[0]
-            }
+            launchSong.value = result
         }
     }
 
@@ -72,5 +70,4 @@ class MainViewModel:BaseViewModel() {
             loadStatus.value = State(StateType.DISMISSING_NORMAL)
         }
     }
-
 }

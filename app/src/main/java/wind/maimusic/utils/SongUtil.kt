@@ -250,18 +250,6 @@ object SongUtil {
             Consts.LIST_TYPE_ONLINE -> {
                 val online = s as OnlineSong
                 song = Song().apply {
-//                    songId = fmSong.songId //004DrG5A2nm7q2
-//                    singer = fmSong.singer// 鸾音社
-//                    songName = fmSong.songName// 夜来寒雨晓来风
-//                    imgUrl = fmSong.imgUrl
-//                    duration = fmSong.duration ?: 0//187  (秒)
-//                    isOnline = fmSong.isOnline ?: false
-//                    mediaId = fmSong.mediaId//004DrG5A2nm7q2
-//                    albumName = fmSong.albumName//夜来寒雨晓来风
-//                    isDownload = fmSong.isDownload ?: false
-//                    listType = Consts.LIST_TYPE_ONLINE
-//                    onlineSubjectType = Consts.ONLINE_LIST_TYPE_FIRST_MEET
-//                    position = pos
                     songId = online.songId //004DrG5A2nm7q2
                     singer = online.singer// 鸾音社
                     songName = online.name// 夜来寒雨晓来风
@@ -272,6 +260,22 @@ object SongUtil {
                     albumName = online.albumName//夜来寒雨晓来风
                     isDownload = online.isDownload
                     listType = Consts.LIST_TYPE_ONLINE
+                }
+            }
+            Consts.ONLINE_SEARCH->{
+                val searchSong = s as ListBean
+                song = Song().apply {
+                    songId = searchSong.songmid
+                    singer = StringUtil.getSinger(searchSong)
+                    songName = searchSong.songname
+                    imgUrl = "${Consts.ALBUM_PIC}${searchSong.albummid}${Consts.JPG}"
+                    duration = searchSong.interval
+                    isOnline = true
+                    listType = Consts.LIST_TYPE_ONLINE
+                    onlineSubjectType = Consts.ONLINE_SEARCH
+                    mediaId = searchSong.strMediaMid
+                    isDownload = DownloadedUtil.hasDownloadedSong(searchSong.songmid?:"")
+                    position = 0
                 }
             }
         }

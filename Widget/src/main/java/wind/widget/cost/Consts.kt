@@ -38,9 +38,9 @@ object Consts {
 
     //在线音乐分类列表
     const val ONLINE_FIRST_LAUNCH = 6// 首次使用app推荐歌单
-    const val POETRY_TYPE_RECENT_READ = 7//
+    const val POETRY_TYPE_RECENT_READ = 7//最近阅读
     const val POETRY_TYPE_LOVED = 8// 喜欢的音乐
-    const val ONLINE_LIST_TYPE_DAILY_RECOMMEND = 9// 每日推荐
+    const val ONLINE_SEARCH = 9
 
 
     const val EVENT_LIST_TYPE = "event_list_type"
