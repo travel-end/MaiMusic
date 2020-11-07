@@ -37,7 +37,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     private var navigationManager: NavigationManager? = null
     private var currentSong: Song? = null
     private var flag: Boolean = false
-    private var playing: Boolean = false
+//    private var playing: Boolean = false
     private var existLivingService: Boolean = false
     private var currentPlayProgress: Long = 0L
     override fun layoutResId() = R.layout.activity_main
@@ -172,15 +172,15 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                         bottomPlayerView.startPlay()
 //                        bottomPlayerView.startCoverRotation()
                         startSeekBarProgress()
-                        playing = true
+//                        playing = true
                     }
                 }
                 Consts.SONG_PAUSE -> {
-                    playing = false
+//                    playing = false
                     bottomPlayerView.pausePlay()
                 }
                 Consts.SONG_RESUME -> {
-                    playing = true
+//                    playing = true
                     bottomPlayerView.resumePlay()
                     startSeekBarProgress()
                 }
@@ -207,13 +207,17 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
             drawerLayout.closeDrawers()
         } else {
             super.onBackPressed()
         }
     }
-
+    fun openDrawer() {
+        if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.openDrawer(GravityCompat.END)
+        }
+    }
     private fun startSeekBarProgress() {
         updateSeekBarHandler.removeMessages(1)
         updateSeekBarHandler.sendEmptyMessageDelayed(1, 1000)
@@ -249,14 +253,9 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         bottomPlayerView.clearAnim()// 这里停掉了  再次进入如果是播放状态 需要手动调用
         val song = SongUtil.getSong()
         song?.currentTime = ((playerServiceBinder?.playingTime ?: 0) / 1000).toLong()
-//        if (flag) {
-//            song?.playStatus = Consts.SONG_PAUSE
-//        } else {
-//            song?.playStatus = Consts.SONG_PLAY
-//        }
 
         /* 记录播放的状态*/   // flag  false
-        if (playing) {
+        if (playerServiceBinder?.playing == true) {
             song?.playStatus = Consts.SONG_PLAY
         } else {
             song?.playStatus = Consts.SONG_PAUSE

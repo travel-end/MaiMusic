@@ -41,7 +41,7 @@ class ListenSongViewModel : BaseViewModel() {
             data.add(TabMenu("", R.string.book_recommend.getStringRes(), 0))
             data.add(ListenSongListTitle(title = "你的精选歌单", text = "查看更多"))
             val randomSongList = dbDao.songListCoverDao().getRandomListCovers(Constants.PAGE_SIZE_SONG_LIST_COVER)
-            data.add(SongListCovers(randomSongList))
+            data.add(SongListCovers("",listCovers = randomSongList))
             data.add(
                 SingleSongTitle(
                     title = R.string.single_song_recommend.getStringRes(),

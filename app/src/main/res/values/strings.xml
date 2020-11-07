@@ -63,4 +63,21 @@
     <string name="poetry_and_song">诗＆歌</string>
     <string name="single_song_recommend">单曲推荐</string>
     <string name="change_range">换一批</string>
+    <string name="create_new_song_list">创建新歌单</string>
+    <string name="input_song_list_title">输入歌单标题</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="author_recommend">随心推荐</string>
+    <string name="song_list_squire">歌单广场</string>
+    <string name="chinese">华语精选</string>
+    <string name="pure_music">纯音乐</string>
+    <string name="japanese">日语</string>
+    <string name="english">英语</string>
+    <string name="antique">古风</string>
+    <string name="folk">民谣</string>
+    <string name="classic">经典老歌</string>
+    <string name="quite">安静</string>
+    <string name="cure">治愈</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
 </resources>

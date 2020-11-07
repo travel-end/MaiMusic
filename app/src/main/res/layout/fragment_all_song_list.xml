@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        layout="@layout/view_song_list_title" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/mAppbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp"
+            app:layout_behavior=".widget.AppBarLayoutBehavior">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/mCtbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/author_recommend"
+                    android:layout_marginStart="@dimen/dp_18"
+                    android:textColor="@color/black2"
+                    android:textSize="15sp"
+                    android:layout_marginTop="@dimen/dp_12"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/all_song_list_rv_author_recommend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_36"
+                    android:layout_marginStart="@dimen/dp_22"
+                    android:layout_marginEnd="@dimen/dp_14"
+                    android:overScrollMode="never" />
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/all_song_list_tab_classify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:tabBackground="@android:color/transparent"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="scrollable"
+                app:tabIndicatorFullWidth="false"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextAppearance="@style/tabLayoutTextSize2"
+                app:tabTextColor="@color/black2"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/all_song_list_rv_classify"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dp_14"
+            android:layout_marginStart="@dimen/dp_14"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

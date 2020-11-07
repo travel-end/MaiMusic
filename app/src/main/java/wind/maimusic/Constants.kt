@@ -1,5 +1,6 @@
 package wind.maimusic
 
+import wind.maimusic.utils.getStringRes
 import wind.widget.cost.Consts
 
 
@@ -65,24 +66,17 @@ object Constants {
     const val ST_DAILY_RECOMMEND = 21// 每日推荐
     const val ST_DAILY_HOT_SONG = 20
 
-    const val ST_ANTIQUITY_1 = 2 // 古风1
-    const val ST_ANTIQUITY_2 = 3// 古风2
-    const val ST_ANTIQUITY_3 = 4// 古风3
-    const val ST_BALLAD_1 = 5// 民谣1
-    const val ST_BALLAD_2 = 6// 民谣2
-    const val ST_BALLAD_3 = 7// 民谣3
-    const val ST_CHINESE_CHOICENESS_1 = 8//华语精选1
-    const val ST_CHINESE_CHOICENESS_2 = 9//华语精选2
-    const val ST_CHINESE_CHOICENESS_3 = 10// 华语精选3
-    const val ST_NET_HOT_1 = 11// 网络热歌1
-    const val ST_NET_HOT_2 =12// 网络热歌2
-    const val ST_JAPANESE_1 =13// 日语歌单1
-    const val ST_JAPANESE_2 =14// 日语歌单2
-    const val ST_ENGLISH_1 =15// 英语歌单1
-    const val ST_ENGLISH_2 =16// 英语歌单2
-    const val ST_ENGLISH_3 =17// 英语歌单3
-    const val ST_CLASSIC_1 =18// 经典老歌1
-    const val ST_CLASSIC_2 =19// 经典老歌2
+
+
+    const val ST_CHINESE = 1// 华语精选
+    const val ST_PURE = 2// 纯音乐
+    const val ST_JAPANESE = 3// 日语
+    const val ST_ENGLISH = 4// 英语
+    const val ST_ANTIQUE = 5// 古风
+    const val ST_FOLK = 6// 民谣
+    const val ST_CLASSIC = 7// 经典老歌
+    const val ST_QUITE = 8// 安静
+    const val ST_CURE = 9// 治愈
 
 
     const val ST_TAG1 = "古风"
@@ -109,4 +103,16 @@ object Constants {
     const val DAILY_RECOMMEND_BOOK = 3
     const val DAILY_LIST_COVER = 4
     const val DAILY_POETRY_SONG = 5
+
+    val tabClassifyName = listOf(
+        R.string.chinese.getStringRes(),
+        R.string.quite.getStringRes(),
+        R.string.antique.getStringRes(),
+        R.string.english.getStringRes(),
+        R.string.japanese.getStringRes(),
+        R.string.classic.getStringRes(),
+        R.string.pure_music.getStringRes(),
+        R.string.folk.getStringRes(),
+        R.string.cure.getStringRes()
+    )
 }

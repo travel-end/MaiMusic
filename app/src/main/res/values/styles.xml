@@ -13,8 +13,11 @@
     <style name="clubToolbar" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">0dp</item>
     </style>
-    <style name="tabLayoutTextSize">
+    <style name="tabLayoutTextSize" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">16sp</item>
+    </style>
+    <style name="tabLayoutTextSize2" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">15sp</item>
     </style>
     <style name="dialog_style" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -25,5 +28,13 @@
         <item name="android:windowBackground">@color/translate</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+    <style name="TextViewButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:background">@color/red_FD5F5F</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

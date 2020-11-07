@@ -6,8 +6,7 @@ import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.OnlineSongList
 import wind.maimusic.model.firstmeet.FirstMeet
 import wind.maimusic.model.firstmeet.FirstMeetSong
-import wind.maimusic.model.listensong.Banner
-import wind.maimusic.model.listensong.SongListCovers
+import wind.maimusic.model.listensong.*
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.widget.cost.Consts
 import java.io.BufferedReader
@@ -69,9 +68,19 @@ object AssetsUtil {
                 /*储存的banner*/
                 val banner = gson.fromJson(readAssetsJson("banner.json"), Banner::class.java)
                 /*储存的歌单封面*/
-                val songListCover = gson.fromJson(readAssetsJson("song_list_cover.json"), SongListCovers::class.java)
+                val classifySongList = gson.fromJson(readAssetsJson("song_list_cover.json"), ClassifySongList::class.java)
+                val allSongList = mutableListOf<SongListCover>()
+                allSongList.addAll(classifySongList.chinese)
+                allSongList.addAll(classifySongList.pure)
+                allSongList.addAll(classifySongList.japanese)
+                allSongList.addAll(classifySongList.english)
+                allSongList.addAll(classifySongList.antique)
+                allSongList.addAll(classifySongList.folk)
+                allSongList.addAll(classifySongList.classic)
+                allSongList.addAll(classifySongList.quite)
+                allSongList.addAll(classifySongList.cure)
                 dbDao.listenBannerDao().addListenBanners(banner.bannerList)
-                dbDao.songListCoverDao().addSongCovers(songListCover.listCovers)
+                dbDao.songListCoverDao().addSongCovers(allSongList)
                 /*所有在线音乐（app推荐）*/
                 val dbSongList = mutableListOf<OnlineSong>()
                 val onlineSongList = gson.fromJson(readAssetsJson("song_list.json"),OnlineSongList::class.java)

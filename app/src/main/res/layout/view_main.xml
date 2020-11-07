@@ -8,10 +8,6 @@
         android:id="@id/top_view"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
-<!--    <include-->
-<!--        android:id="@id/loading_normal_view"-->
-<!--        layout="@layout/view_loading_normal"-->
-<!--        android:visibility="gone"/>-->
     <fragment
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"

@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
-import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.getClass
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.toast
-import wind.maimusic.widget.FloatDialog
+import wind.maimusic.widget.dialog.FloatDialog
 import wind.widget.utils.fastClickListener
 
 /**
@@ -29,7 +27,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private var loadingSongView: View?=null
 
     // 普通加载的view
-    private var loadingNormalDialog:FloatDialog?=null
+    private var loadingNormalDialog: FloatDialog?=null
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
@@ -72,7 +70,8 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
             loadingSongView = songView
         }
         if (loadingNormalDialog == null) {
-            loadingNormalDialog = FloatDialog(requireContext())
+            loadingNormalDialog =
+                FloatDialog(requireContext())
         }
     }
 

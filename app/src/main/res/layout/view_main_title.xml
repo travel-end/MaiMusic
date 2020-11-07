@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_14"
         android:layout_marginEnd="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_4"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@id/main_title_search"
@@ -38,8 +38,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <ImageView
-                android:layout_width="@dimen/dp_26"
-                android:layout_height="@dimen/dp_26"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
                 android:src="@drawable/temp_icon"
                 android:layout_gravity="end|center_vertical"
                 android:layout_marginEnd="@dimen/dp_30" />

@@ -8,6 +8,8 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +44,12 @@ fun <T> getClass(t:Any):Class<T> = (t.javaClass.genericSuperclass as Parameteriz
  */
 fun Int.getStringRes()=
     MaiApp.getInstance().resources.getString(this)
+
+fun String?.getEditableStr() :Editable {
+    val value = this ?: ""
+    return SpannableStringBuilder(value)
+}
+
 
 /**
  * 获取颜色资源

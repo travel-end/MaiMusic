@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_recycler_item_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_28"
+        android:gravity="center_vertical"
+        android:textColor="@color/black2"
+        android:layout_marginStart="@dimen/dp_8"
+        android:text="@string/pure_music"
+        android:textSize="15sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gv_recycler_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:overScrollMode="never"/>
+</LinearLayout>

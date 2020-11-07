@@ -27,7 +27,7 @@
         android:id="@+id/item_common_end_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:gravity="center_vertical"
         android:textColor="@color/text_color"
         android:layout_marginEnd="@dimen/dp_16"

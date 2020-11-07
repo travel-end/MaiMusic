@@ -1,4 +1,4 @@
-package wind.maimusic.widget
+package wind.maimusic.widget.dialog
 
 import android.app.Dialog
 import android.content.Context

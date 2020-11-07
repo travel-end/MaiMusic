@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseFragment
+import wind.maimusic.ui.activities.MainActivity
 import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.gone
 import wind.maimusic.utils.visible
@@ -23,6 +24,7 @@ class MainFragment : BaseFragment(){
     private lateinit var tabOneIcon:ImageView
     private lateinit var tabSecondIcon:ImageView
     private lateinit var tabThirdIcon:ImageView
+    private lateinit var ivDrawerList:ImageView
     private var pageChangeCallback: MainPageChangeCallback? = null
     private val fragments = arrayOf(ListenSongFragment.newInstance(),FindFragment.newInstance(),FavoritesFragment.newInstance())
 
@@ -36,6 +38,7 @@ class MainFragment : BaseFragment(){
         tabOneIcon = mRootView.findViewById(R.id.main_title_tab_one_icon)
         tabSecondIcon = mRootView.findViewById(R.id.main_title_tab_two_icon)
         tabThirdIcon = mRootView.findViewById(R.id.main_title_tab_third_icon)
+        ivDrawerList = mRootView.findViewById(R.id.main_title_list)
         viewPager.offscreenPageLimit=1
         viewPager.adapter = MainVpAdapter()
         pageChangeCallback = MainPageChangeCallback()
@@ -45,11 +48,13 @@ class MainFragment : BaseFragment(){
         super.initAction()
         searchView.fastClickListener {
             val bundle = Bundle()
-            // TODO: 2020/11/4 这里的专场动画可以优化
             bundle.putString(Constants.HOT_SEARCH,"昨夜雨疏风骤，浓睡不消残酒")
             Navigation
                 .findNavController(it)
                 .navigate(R.id.to_search_main_fragment,bundle)
+        }
+        ivDrawerList.fastClickListener {
+            (requireActivity() as MainActivity).openDrawer()//19916716829 13651816004
         }
         tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {

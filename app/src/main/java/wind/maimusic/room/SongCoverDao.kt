@@ -16,4 +16,7 @@ interface SongCoverDao {
 
     @Query("SELECT * FROM song_list_cover ORDER BY RANDOM() LIMIT (:count)")
     suspend fun getRandomListCovers(count:Int):List<SongListCover>
+
+    @Query("SELECT * FROM song_list_cover WHERE type=(:type) ORDER BY id")
+    suspend fun findSongListByType(type:Int):List<SongListCover>
 }

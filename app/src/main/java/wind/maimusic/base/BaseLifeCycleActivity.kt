@@ -11,7 +11,7 @@ import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
-import wind.maimusic.widget.FloatDialog
+import wind.maimusic.widget.dialog.FloatDialog
 import wind.widget.utils.fastClickListener
 
 /**

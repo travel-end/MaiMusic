@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_white_bg_large"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_20">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="@string/create_new_song_list"
+        android:textColor="@color/black2" />
+
+    <EditText
+        android:id="@+id/dialog_et_song_list_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36"
+        android:textColor="@color/text_color"
+        android:hint="@string/input_song_list_title"
+        android:textSize="15sp"
+        android:gravity="bottom"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:inputType="text"
+        android:layout_marginTop="@dimen/dp_14"
+        android:background="@android:color/transparent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorGrayNormal"
+        android:layout_marginTop="@dimen/dp_8"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1/14"
+        android:layout_gravity="end"
+        android:textColor="@color/color999999"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/dp_14" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_gravity="end">
+        <TextView
+            android:id="@+id/dialog_tv_song_list_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/dialog_tv_song_list_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

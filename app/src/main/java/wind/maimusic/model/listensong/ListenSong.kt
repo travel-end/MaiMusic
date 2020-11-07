@@ -60,13 +60,27 @@ data class SongListCover(
     @ColumnInfo
     val type:Int,
     @ColumnInfo
+    val subType:Int,
+    @ColumnInfo
     val tag1:Int,
     @ColumnInfo
     val tag2:Int
 )
 
 data class SongListCovers(
+    val title:String="",
     val listCovers:List<SongListCover>
+)
+data class ClassifySongList(
+    val cure:List<SongListCover>,
+    val quite:List<SongListCover>,
+    val classic:List<SongListCover>,
+    val folk:List<SongListCover>,
+    val antique:List<SongListCover>,
+    val english:List<SongListCover>,
+    val japanese:List<SongListCover>,
+    val pure:List<SongListCover>,
+    val chinese:List<SongListCover>
 )
 
 //@Entity(tableName = "single_song")

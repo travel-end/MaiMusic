@@ -118,10 +118,13 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
             }
             addItem(R.layout.item_common_title) {
                 isForViewType { data, _ -> data is ListenSongListTitle }
-                bindViewHolder { data, position, holder ->
+                bindViewHolder { data, _, _ ->
                     val songListTitle = data as ListenSongListTitle
                     setText(R.id.item_common_title_tv, songListTitle.title)
                     setText(R.id.item_common_end_tv, songListTitle.text)
+                    itemView?.fastClickListener {
+                        it.nav(R.id.to_all_song_list_fragment)
+                    }
                 }
             }
             addItem(R.layout.item_horiz_rv) {

@@ -70,7 +70,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-
+        <action
+            android:id="@+id/to_all_song_list_fragment"
+            app:destination="@id/all_song_list_fragment"
+            app:enterAnim="@anim/alpha_in"
+            app:exitAnim="@anim/alpha_out"
+            app:popEnterAnim="@anim/alpha_in"
+            app:popExitAnim="@anim/alpha_out" />
     </fragment>
 
     <fragment
@@ -114,10 +120,11 @@
         android:id="@+id/loved_song_fragment"
         android:name="wind.maimusic.ui.fragment.love.LovedSongFragment"
         tools:layout="@layout/fragment_md_style_song_list">
-        <!--                    <argument android:name="coverImgUrl"-->
-        <!--                        android:defaultValue=""-->
-        <!--                        app:argType="string" />-->
     </fragment>
+    <fragment
+        android:id="@+id/all_song_list_fragment"
+        android:name="wind.maimusic.ui.fragment.songlist.AllSongListFragment"
+        tools:layout="@layout/fragment_all_song_list" />
 
     <fragment
         android:id="@+id/loved_poetry_fragment"
