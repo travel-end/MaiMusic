@@ -112,6 +112,9 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             1->{//每日推荐
                                 it.toSongListFrg(Constants.ST_DAILY_RECOMMEND)
                             }
+                            3->{
+                                it.nav(R.id.to_singers_fragment)
+                            }
                         }
                     })
                 }

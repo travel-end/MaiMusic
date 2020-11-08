@@ -260,4 +260,12 @@ fun View?.nav(id:Int,bundle: Bundle?=null) {
     }
 }
 
+fun nextInt(range:Int):Int {
+    return if (range != 0) {
+        Random().nextInt(range)
+    } else {
+        0
+    }
+}
+
 

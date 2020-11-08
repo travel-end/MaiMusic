@@ -77,6 +77,15 @@
             app:exitAnim="@anim/alpha_out"
             app:popEnterAnim="@anim/alpha_in"
             app:popExitAnim="@anim/alpha_out" />
+
+
+        <action
+            android:id="@+id/to_singers_fragment"
+            app:destination="@id/singer_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -146,5 +155,9 @@
             app:argType="string" />
 
     </fragment>
-
+    <fragment
+        android:id="@+id/singer_fragment"
+        android:name="wind.maimusic.ui.fragment.singer.SingerFragment"
+        tools:layout="@layout/fragment_singers">
+    </fragment>
 </navigation>

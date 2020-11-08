@@ -6,6 +6,8 @@ import androidx.room.RoomDatabase
 import wind.maimusic.MaiApp
 import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.listensong.*
+import wind.maimusic.model.singer.Singer
+import wind.maimusic.model.songlist.SongListItem
 import wind.maimusic.room.*
 
 /**
@@ -19,19 +21,25 @@ import wind.maimusic.room.*
     entities = [
         OnlineSong::class,
         ListenBanner::class,
-        SongListCover::class
+        SongListCover::class,
+        SongListItem::class,
+        Singer::class
     ],
     version = 1,
     exportSchema = false
 )
 abstract class OnlineSongDatabase : RoomDatabase() {
-    //    abstract fun firstMeetSongDao(): FirstMeetSongDao
+    // 在线音乐
     abstract fun onlineSongDao(): OnlineSongDao
+    // 首页banner
     abstract fun listenBannerDao(): ListenBannerDao
+    // 歌单封面信息
     abstract fun songListCoverDao(): SongCoverDao
+    // 用户创建的歌单
+    abstract fun createdSongListDao():CreateSongListDao
+    // 歌手
+    abstract fun singerDao():SingerDao
 
-    //    abstract fun singleSongDao():SingleSongDao
-//    abstract fun poetrySongDao():PoetrySongDao
     companion object {
         @Volatile
         private var INSTANCE: OnlineSongDatabase? = null

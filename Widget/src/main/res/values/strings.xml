@@ -4,6 +4,7 @@
     <string name="default_song_singer">Wind Shakes the Barley</string>
     <string name="search_hint">大家都在搜 …</string>
     <string name="lrc_empty">暂无歌词…</string>
+    <string name="recommend_singer">推\n荐\n歌\n手</string>
     <string name="play_time_start">00:00</string>
     <string name="j_recycle_loading">正在加载中…</string>
     <string name="j_recycle_no_more">----没有更多了----</string>

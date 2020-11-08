@@ -7,6 +7,7 @@ import wind.maimusic.model.OnlineSongList
 import wind.maimusic.model.firstmeet.FirstMeet
 import wind.maimusic.model.firstmeet.FirstMeetSong
 import wind.maimusic.model.listensong.*
+import wind.maimusic.model.singer.SingerList
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.widget.cost.Consts
 import java.io.BufferedReader
@@ -59,9 +60,45 @@ object AssetsUtil {
         }
         return builder.toString()
     }
+    fun initSongAndSinger() {
+        GlobalUtil.async {
+            val singerDao = OnlineSongDatabase.getDatabase().singerDao()
+            val singList = gson.fromJson(readAssetsJson("singer.json"),SingerList::class.java)
+            singerDao.addSingers(singList.chineseSingers)
+            val dbDao = OnlineSongDatabase.getDatabase().onlineSongDao()
+            /*所有在线音乐（app推荐）*/
+            val dbSongList = mutableListOf<OnlineSong>()
+            val onlineSongList = gson.fromJson(readAssetsJson("song_list.json"),OnlineSongList::class.java)
+            if (onlineSongList != null) {
+                dbSongList.clear()
+                val songList = onlineSongList.maiMusicSongList
+                for (bean in songList) {
+                    val onlineSong = OnlineSong().apply {
+                        songId = bean.songmid
+                        singer = StringUtil.getSinger(bean)
+                        name = bean.songname
+                        imgUrl = "${Consts.ALBUM_PIC}${bean.albummid}${Consts.JPG}"
+                        duration = bean.interval
+                        isOnline = true
+                        mediaId = bean.strMediaMid
+                        songmid = bean.songmid
+                        albumName = bean.albumname
+                        isDownload = DownloadedUtil.hasDownloadedSong(bean.songmid ?: "")//003IHI2x3RbXLS
+                        mainType = bean.mainType
+                        secondType = bean.secondType
+                        isPoetrySong = bean.isPoetrySong
+                        poetrySongId = bean.poetrySongId
+                    }
+                    dbSongList.add(onlineSong)
+                }
+                dbDao.addOnlineSongs(dbSongList)
+            }
+        }
+    }
+
 
     // TODO: 2020/11/4 assets下的数据只在第一次登录的时候使用，考虑将其放到app之外（或者转移数据库）
-    fun initAppData() {
+    fun initCovers() {
         GlobalUtil.execute { // TODO: 2020/11/5 分两步：先同步存储首页的数据，为了能更快的进入首页，然后后面的大数据使用异步存储
             val dbDao = OnlineSongDatabase.getDatabase()
             try {
@@ -81,33 +118,6 @@ object AssetsUtil {
                 allSongList.addAll(classifySongList.cure)
                 dbDao.listenBannerDao().addListenBanners(banner.bannerList)
                 dbDao.songListCoverDao().addSongCovers(allSongList)
-                /*所有在线音乐（app推荐）*/
-                val dbSongList = mutableListOf<OnlineSong>()
-                val onlineSongList = gson.fromJson(readAssetsJson("song_list.json"),OnlineSongList::class.java)
-                if (onlineSongList != null) {
-                    dbSongList.clear()
-                    val songList = onlineSongList.maiMusicSongList
-                    for (bean in songList) {
-                        val onlineSong = OnlineSong().apply {
-                            songId = bean.songmid
-                            singer = StringUtil.getSinger(bean)
-                            name = bean.songname
-                            imgUrl = "${Consts.ALBUM_PIC}${bean.albummid}${Consts.JPG}"
-                            duration = bean.interval
-                            isOnline = true
-                            mediaId = bean.strMediaMid
-                            songmid = bean.songmid
-                            albumName = bean.albumname
-                            isDownload = DownloadedUtil.hasDownloadedSong(bean.songmid ?: "")//003IHI2x3RbXLS
-                            mainType = bean.mainType
-                            secondType = bean.secondType
-                            isPoetrySong = bean.isPoetrySong
-                            poetrySongId = bean.poetrySongId
-                        }
-                        dbSongList.add(onlineSong)
-                    }
-                    dbDao.onlineSongDao().addOnlineSongs(dbSongList)
-                }
             } catch (e:IOException) {
                 e.printStackTrace()
                 LogUtil.e("-----AssetsUtil-----initAppData IOException:${e.message}")

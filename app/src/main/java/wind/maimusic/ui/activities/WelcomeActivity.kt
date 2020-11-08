@@ -79,7 +79,8 @@ class WelcomeActivity : BaseLifeCycleActivity<WelcomeViewModel>() {
 
     private fun initDatabase() {
         if (SpUtil.getString(Constants.FIRST_LAUNCH).isEmpty()) {
-            AssetsUtil.initAppData()
+            AssetsUtil.initCovers()
+            AssetsUtil.initSongAndSinger()
             SpUtil.saveValue(Constants.FIRST_LAUNCH, "has_launch")
         }
     }
