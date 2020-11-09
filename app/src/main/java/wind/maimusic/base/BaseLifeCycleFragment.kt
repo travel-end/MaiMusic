@@ -42,8 +42,8 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
         initStatusView()
     }
 
-    override fun initData() {
-        super.initData()
+    override fun onResume() {
+        super.onResume()
         observe()
     }
 
@@ -62,7 +62,6 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private fun initStatusView() {
         val resultView: View? = mRootView.findViewById(R.id.loading_result_view)
         val songView: View? = mRootView.findViewById(R.id.loading_song_view)
-//        val normalView: View? = mRootView.findViewById(R.id.loading_normal_view)
         if (resultView != null) {
             loadingResultView = resultView
         }
@@ -80,7 +79,6 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     }
 
     open fun showSuccess() {
-
     }
 
     open fun showLoadingSong(msg: String) {

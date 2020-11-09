@@ -80,4 +80,6 @@
     <string name="cure">治愈</string>
     <string name="delete">删除</string>
     <string name="edit">编辑</string>
+    <string name="man">男歌手</string>
+    <string name="woman">女歌手</string>
 </resources>

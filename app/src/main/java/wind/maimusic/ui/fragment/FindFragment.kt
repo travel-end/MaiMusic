@@ -3,6 +3,7 @@ package wind.maimusic.ui.fragment
 import androidx.fragment.app.Fragment
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
+import wind.maimusic.utils.LogUtil
 import wind.maimusic.vm.FindPoetryViewModel
 
 class FindFragment :BaseLifeCycleFragment<FindPoetryViewModel>(){
@@ -12,4 +13,9 @@ class FindFragment :BaseLifeCycleFragment<FindPoetryViewModel>(){
             return FindFragment()
         }
     }
+
+    override fun initView() {
+        super.initView()
+    }
+
 }

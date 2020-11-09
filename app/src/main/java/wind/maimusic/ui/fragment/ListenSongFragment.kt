@@ -101,7 +101,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
             }
             addItem(R.layout.item_tab_menu) {
                 isForViewType { data, _ -> data is TabMenu }
-                bindViewHolder { data, position, holder ->
+                bindViewHolder { data, position, _ ->
                     itemView?.findViewById<ShapeableImageView>(R.id.item_tab_menu_icon)?.shapeAppearanceModel =
                         ShapeAppearanceModel.Builder().setAllCornerSizes(ShapeAppearanceModel.PILL)
                             .build()
@@ -112,7 +112,10 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             1->{//每日推荐
                                 it.toSongListFrg(Constants.ST_DAILY_RECOMMEND)
                             }
-                            3->{
+                            2->{
+                                it.nav(R.id.to_all_song_list_fragment)
+                            }
+                            3->{// 歌手
                                 it.nav(R.id.to_singers_fragment)
                             }
                         }
@@ -228,10 +231,9 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
 
     override fun initData() {
         super.initData()
-//        if (isNewDay()) {
             mViewModel.getListenData()
-//        }
     }
+
 
     override fun observe() {
         super.observe()

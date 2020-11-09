@@ -73,15 +73,14 @@
         <action
             android:id="@+id/to_all_song_list_fragment"
             app:destination="@id/all_song_list_fragment"
-            app:enterAnim="@anim/alpha_in"
-            app:exitAnim="@anim/alpha_out"
-            app:popEnterAnim="@anim/alpha_in"
-            app:popExitAnim="@anim/alpha_out" />
-
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/to_singers_fragment"
-            app:destination="@id/singer_fragment"
+            app:destination="@id/singers_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -156,7 +155,7 @@
 
     </fragment>
     <fragment
-        android:id="@+id/singer_fragment"
+        android:id="@+id/singers_fragment"
         android:name="wind.maimusic.ui.fragment.singer.SingerFragment"
         tools:layout="@layout/fragment_singers">
     </fragment>

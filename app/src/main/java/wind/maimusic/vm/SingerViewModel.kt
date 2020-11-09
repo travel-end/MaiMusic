@@ -9,19 +9,22 @@ import wind.maimusic.Constants
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.model.singer.Singer
 import wind.maimusic.room.database.OnlineSongDatabase
+import wind.maimusic.utils.LogUtil
+import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.utils.nextInt
 
 class SingerViewModel:BaseViewModel() {
-    val allSingers:MutableLiveData<List<Singer>> = MutableLiveData()
+    val allSingers:MutableLiveData<MutableList<Singer>> = MutableLiveData()
     val mRecommendSingers:MutableLiveData<List<Singer>> = MutableLiveData()
-
     fun findAllSingers() {
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
                 OnlineSongDatabase.getDatabase().singerDao().findAllSingers()
+//                OnlineSongDatabase.getDatabase().singerDao().findSingersBySex(1)
             }
-            if (result.isNotEmpty()) {
-                allSingers.value =result
+            LogUtil.e("thread:${result.size}")
+            if (isNotNullOrEmpty(result)) {
+                allSingers.value =result.toMutableList()
             }
         }
     }

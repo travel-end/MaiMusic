@@ -27,18 +27,19 @@ import wind.widget.effcientrv.setup
 import wind.widget.effcientrv.submitList
 import wind.widget.utils.loadImg
 
-class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongListItemClickListener {
-    private lateinit var rvAuthorRecommend:RecyclerView
-    private lateinit var rvClassifySongList:RecyclerView
-    private lateinit var tabLayoutSongList:TabLayout
-    private lateinit var appBarLayout:AppBarLayout
-    private lateinit var rootLayout:LinearLayout
-    private var rootLayoutHeight:Int = 0
-    private var tabLayoutHeight:Int = 0
-    private var needExpanded:Boolean = false
-    private var appBarExpanded:Boolean = false
-    private var allSongListAdapter:AllSongListAdapter?=null
-    override fun layoutResId()=R.layout.fragment_all_song_list
+class AllSongListFragment : BaseLifeCycleFragment<AllSongListViewModel>(),
+    OnSongListItemClickListener {
+    private lateinit var rvAuthorRecommend: RecyclerView
+    private lateinit var rvClassifySongList: RecyclerView
+    private lateinit var tabLayoutSongList: TabLayout
+    private lateinit var appBarLayout: AppBarLayout
+    private lateinit var rootLayout: LinearLayout
+    private var rootLayoutHeight: Int = 0
+    private var tabLayoutHeight: Int = 0
+    private var needExpanded: Boolean = false
+    private var appBarExpanded: Boolean = false
+    private var allSongListAdapter: AllSongListAdapter? = null
+    override fun layoutResId() = R.layout.fragment_all_song_list
     override fun initView() {
         super.initView()
         rvAuthorRecommend = mRootView.findViewById(R.id.all_song_list_rv_author_recommend)
@@ -46,9 +47,10 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
         tabLayoutSongList = mRootView.findViewById(R.id.all_song_list_tab_classify)
         appBarLayout = mRootView.findViewById(R.id.mAppbarLayout)
         rootLayout = mRootView.findViewById(R.id.root_layout)
-        mRootView.findViewById<TextView>(R.id.title_tv).text = R.string.song_list_squire.getStringRes()
+        mRootView.findViewById<TextView>(R.id.title_tv).text =
+            R.string.song_list_squire.getStringRes()
         initTabLayout()
-        val gridLayoutManager = GridLayoutManager(requireContext(),3)
+        val gridLayoutManager = GridLayoutManager(requireContext(), 3)
         rvAuthorRecommend.setup<SongListCover> {
             withLayoutManager {
                 return@withLayoutManager gridLayoutManager
@@ -58,8 +60,9 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
                     bindViewHolder { data, position, holder ->
                         data?.let {
                             val item = it as SongListCover
-                            setText(R.id.item_song_list_tv_desc,item.listName)
-                            itemView?.findViewById<ImageView>(R.id.item_song_list_iv_cover)?.loadImg(item.cover)
+                            setText(R.id.item_song_list_tv_desc, item.listName)
+                            itemView?.findViewById<ImageView>(R.id.item_song_list_iv_cover)
+                                ?.loadImg(item.cover)
                         }
                     }
                 }
@@ -69,16 +72,16 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
 
     override fun onResume() {
         super.onResume()
-//        (requireActivity() as MainActivity).showLoadingNormal("")
         mViewModel.initAllSongListData()
         rootLayout.post {
             rootLayoutHeight = rootLayout.height
         }
     }
-    private fun refreshAdapter(list:List<SongListCovers>) {
-        val bottom = intArrayOf(rootLayoutHeight,tabLayoutHeight)
+
+    private fun refreshAdapter(list: List<SongListCovers>) {
+        val bottom = intArrayOf(rootLayoutHeight, tabLayoutHeight)
         if (allSongListAdapter == null) {
-            allSongListAdapter = AllSongListAdapter(requireContext(),list,bottom)
+            allSongListAdapter = AllSongListAdapter(requireContext(), list, bottom)
             rvClassifySongList.adapter = allSongListAdapter
         } else {
             allSongListAdapter?.refreshData(list)
@@ -88,7 +91,7 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
 
     override fun initAction() {
         super.initAction()
-        tabLayoutSongList.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        tabLayoutSongList.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
@@ -99,43 +102,36 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
                 tab?.let {
                     val position = tab.position
                     if (!needExpanded) {
-                        needExpanded= true
+                        needExpanded = true
                     } else if (!appBarExpanded) {
                         appBarLayout.setExpanded(false)
-                }
+                    }
                     if (tab.position != -1) {// 切换recyclerView的位置
                         rvClassifySongList.scrollToPosition(tab.position)
                         val lm = rvClassifySongList.layoutManager as LinearLayoutManager
-                        lm.scrollToPositionWithOffset(position,0)
+                        lm.scrollToPositionWithOffset(position, 0)
                     }
                 }
-
-
             }
-
         })
-        rvClassifySongList.addOnScrollListener(object :RecyclerView.OnScrollListener(){
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-
+        rvClassifySongList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val lm = rvClassifySongList.layoutManager as LinearLayoutManager
                 val newPosition = lm.findFirstVisibleItemPosition()
-                tabLayoutSongList.setScrollPosition(newPosition,0f,true)
+                tabLayoutSongList.setScrollPosition(newPosition, 0f, true)
             }
         })
-        appBarLayout.addOnOffsetChangedListener(object :AppBarLayoutStateChangeListener(){
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayoutStateChangeListener() {
             override fun onStateChanged(appBarLayout: AppBarLayout?, state: BarState?) {
-                when(state) {
-                    BarState.EXPANDED->{
+                when (state) {
+                    BarState.EXPANDED -> {
                         appBarExpanded = false
                     }
-                    BarState.COLLAPSED->{// 折叠状态
+                    BarState.COLLAPSED -> {// 折叠状态
                         appBarExpanded = true
                     }
-                    BarState.INTERMEDIATE->{
+                    BarState.INTERMEDIATE -> {
                         appBarExpanded = false
                     }
                 }
@@ -145,13 +141,12 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
 
     override fun observe() {
         super.observe()
-        mViewModel.recommendSongs.observe(this,Observer{
-//            (requireActivity() as MainActivity).dismissLoadingNormal()
+        mViewModel.recommendSongs.observe(this, Observer {
             if (isNotNullOrEmpty(it)) {
                 rvAuthorRecommend.submitList(it!!.toMutableList())
             }
         })
-        mViewModel.allSongs.observe(this,Observer{
+        mViewModel.allSongs.observe(this, Observer {
             if (isNotNullOrEmpty(it)) {
                 tabLayoutSongList.post {
                     tabLayoutHeight = tabLayoutSongList.height
@@ -160,9 +155,10 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
             }
         })
     }
+
     private fun initTabLayout() {
         for (tabName in Constants.tabClassifyName) {
-            val tab =tabLayoutSongList.newTab()
+            val tab = tabLayoutSongList.newTab()
             tab.text = tabName
             tabLayoutSongList.addTab(tab)
         }
@@ -194,9 +190,9 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
                     tabView.invalidate()
                 }
 //                tabLayoutSongList.visibility = View.VISIBLE
-            }catch (e:NoSuchFieldException) {
+            } catch (e: NoSuchFieldException) {
                 e.printStackTrace()
-            } catch (e:IllegalAccessException) {
+            } catch (e: IllegalAccessException) {
                 e.printStackTrace()
             }
         }
@@ -205,6 +201,4 @@ class AllSongListFragment:BaseLifeCycleFragment<AllSongListViewModel>(),OnSongLi
     override fun onSongListItemClick(item: SongListCover) {
         LogUtil.e("-----AllSongListFragment songListName:${item.listName}")
     }
-
-
 }

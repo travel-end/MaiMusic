@@ -7,13 +7,22 @@
 7、菜鸟窝pagerRecyclerView，处理搜索页的分页问题
 8、使用JRecyclerView处理下拉刷新问题
 9、对于播放搜索音乐，下一首播放的内容，需要存储一个本地歌单来播放下一首（这种情况很少，就使用这种方式处理）
-10、使用IntentService: 用于处理后台长时间的耗时操作，如：下载文件、播放音乐
+10、使用IntentService: 用于处理后台长时间的耗时操作，如：下载文件、播放音乐（使用JobIntentService代替DownloadService(Service)的下载服务，IntentService已经过时）
 11、部分页面（playActivity）参考ios 的ui，ios 
 12、使用jetPack的WokerManager做定时任务（定时音乐）、包括在application中使用Woker类读取json文件
 13、关于jetPack库使用:https://github.com/OnexZgj/Jetpack_Component
 14、能不能把数据存进数据库之后，把数据库导出，把assets文件清空。最后打包的时候，把确定的数据库在导入到最终的包中(为了省出assets占的空间)
-15、使用JobIntentService代替DownloadService(Service)的下载服务
+15、改造IndicatorView创建本项目首页的tabLayout指示器
 
 todo
 1、关于分区存储
 https://www.bilibili.com/video/BV1fT4y1g74Z
+
+
+indicatorView
+                .setSliderColor(getResColor(R.color.teal_200), getResColor(R.color.red_checked_color))
+                .setSliderWidth(resources.getDimension(R.dimen.dp_17))
+                .setSliderHeight(resources.getDimension(R.dimen.dp_5))
+                .setSlideMode(IndicatorSlideMode.WORM)
+                .setIndicatorStyle(IndicatorStyle.ROUND_RECT)
+                .setupWithViewPager(viewPager2)

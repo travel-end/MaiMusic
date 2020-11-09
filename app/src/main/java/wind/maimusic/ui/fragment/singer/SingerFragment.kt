@@ -17,10 +17,12 @@ import wind.widget.effcientrv.setup
 import wind.widget.effcientrv.submitList
 import wind.widget.utils.loadImg
 
+/**
+ * 歌手
+ */
 class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
     private lateinit var rvRecommendSingers:RecyclerView
     private lateinit var rvAllSingers:RecyclerView
-
     override fun layoutResId()=R.layout.fragment_singers
     override fun initView() {
         super.initView()
@@ -61,12 +63,13 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        mViewModel.initRecommendSingers()
+    override fun initData() {
+        super.initData()
         mViewModel.findAllSingers()
+        mViewModel.initRecommendSingers()
     }
 
+    private val singersList = mutableListOf<Singer>()
     override fun observe() {
         super.observe()
         mViewModel.mRecommendSingers.observe(this,Observer{
@@ -74,10 +77,11 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
                 rvRecommendSingers.submitList(it.toMutableList())
             }
         })
+        // TODO: 2020/11/9 为啥子100多条数据的刷新会花费很长的时间，而且阻塞了当前页面的显示？？？？
         mViewModel.allSingers.observe(this,Observer{
-            if (isNotNullOrEmpty(it)) {
-                rvAllSingers.submitList(it.toMutableList())
-            }
+            singersList.clear()
+            singersList.addAll(it)
+            rvAllSingers.submitList(singersList)
         })
     }
 }

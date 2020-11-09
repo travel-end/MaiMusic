@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RoundRectView">
-        <attr name="roundRatio" format="float" />
-    </declare-styleable>
     <declare-styleable name="SearchEditText">
         <attr name="clearIcon" format="reference" />
         <attr name="scaleSize" format="float" />

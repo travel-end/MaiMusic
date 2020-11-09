@@ -33,7 +33,6 @@ class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
         super.observe()
         mViewModel.dbLocalSong.observe(this,Observer{
                 if (isNotNullOrEmpty(it)) {
-//                    LogUtil.e("本地音乐：$it")
                     localSongs.clear()
                     localSongs.addAll(it)
                     rvSongList.submitList(localSongs)
@@ -50,7 +49,6 @@ class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
                 "发现了您手机上的${it.size}首音乐".toast()
                 localSongs.clear()
                 localSongs.addAll(it)
-//                LogUtil.e("扫描音乐：$it")
                 rvSongList.submitList(localSongs)
                 rvSongList.visible()
                 flPlayAll.visible()

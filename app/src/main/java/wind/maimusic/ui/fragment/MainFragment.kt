@@ -17,18 +17,22 @@ import wind.maimusic.utils.visible
 import wind.widget.tablayout.OnTabSelectListener
 import wind.widget.utils.fastClickListener
 
-class MainFragment : BaseFragment(){
-    private lateinit var tabLayout:TabLayout
-    private lateinit var viewPager:ViewPager2
-    private lateinit var searchView:LinearLayout
-    private lateinit var tabOneIcon:ImageView
-    private lateinit var tabSecondIcon:ImageView
-    private lateinit var tabThirdIcon:ImageView
-    private lateinit var ivDrawerList:ImageView
+class MainFragment : BaseFragment() {
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
+    private lateinit var searchView: LinearLayout
+    private lateinit var tabOneIcon: ImageView
+    private lateinit var tabSecondIcon: ImageView
+    private lateinit var tabThirdIcon: ImageView
+    private lateinit var ivDrawerList: ImageView
     private var pageChangeCallback: MainPageChangeCallback? = null
-    private val fragments = arrayOf(ListenSongFragment.newInstance(),FindFragment.newInstance(),FavoritesFragment.newInstance())
+    private val fragments = arrayOf(
+        ListenSongFragment.newInstance(),
+        FindFragment.newInstance(),
+        FavoritesFragment.newInstance()
+    )
 
-    override fun layoutResId()=R.layout.fragment_main
+    override fun layoutResId() = R.layout.fragment_main
 
     override fun initView() {
         super.initView()
@@ -39,47 +43,59 @@ class MainFragment : BaseFragment(){
         tabSecondIcon = mRootView.findViewById(R.id.main_title_tab_two_icon)
         tabThirdIcon = mRootView.findViewById(R.id.main_title_tab_third_icon)
         ivDrawerList = mRootView.findViewById(R.id.main_title_list)
-        viewPager.offscreenPageLimit=1
+        /**
+         * ViewPager2的offScreenPageLimit默认值为OFFSCREEN_PAGE_LIMIT_DEFAULT,
+         * 当setOffscreenPageLimit为OFFSCREEN_PAGE_LIMIT_DEFAULT时候会使用RecyclerView的缓存机制。
+         * 默认只会加载当前显示的Fragment,而不会像ViewPager一样至少预加载一个item.当切换到下一个item的时候，
+         * 当前Fragment会执行onPause方法，而下一个Fragment则会从onCreate一直执行到onResume。
+         * 当再次滑动回第一个页面的时候当前页面同样会执行onPuase，而第一个页面会执行onResume。
+         * 也就是说：ViewPager2中，默认关闭了预加载机制。
+         * 网络请求放到onStart中即可。(使用ViewPager2关闭limit就可以不用考虑延迟加载的问题)
+         */
+//        viewPager.offscreenPageLimit = 2
+//        viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
         viewPager.adapter = MainVpAdapter()
         pageChangeCallback = MainPageChangeCallback()
         viewPager.registerOnPageChangeCallback(pageChangeCallback!!)
     }
+
     override fun initAction() {
         super.initAction()
         searchView.fastClickListener {
             val bundle = Bundle()
-            bundle.putString(Constants.HOT_SEARCH,"昨夜雨疏风骤，浓睡不消残酒")
+            bundle.putString(Constants.HOT_SEARCH, "昨夜雨疏风骤，浓睡不消残酒")
             Navigation
                 .findNavController(it)
-                .navigate(R.id.to_search_main_fragment,bundle)
+                .navigate(R.id.to_search_main_fragment, bundle)
         }
         ivDrawerList.fastClickListener {
-            (requireActivity() as MainActivity).openDrawer()//19916716829 13651816004
+            (requireActivity() as MainActivity).openDrawer()
         }
-        tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
+
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val position = tab?.position
-                viewPager.currentItem = position?:0
-                setTabIconVisible(position?:0)
+                viewPager.currentItem = position ?: 0
+                setTabIconVisible(position ?: 0)
             }
         })
     }
 
-    inner class MainVpAdapter:FragmentStateAdapter(this) {
-        override fun getItemCount()=fragments.size
-        override fun createFragment(position: Int)=fragments[position]
+    inner class MainVpAdapter : FragmentStateAdapter(this) {
+        override fun getItemCount() = fragments.size
+        override fun createFragment(position: Int) = fragments[position]
 
     }
+
     inner class MainPageChangeCallback : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-//            LogUtil.e("po:$position")
-            tabLayout.setScrollPosition(position,0f,true,true)
+            tabLayout.setScrollPosition(position, 0f, true, true)
             setTabIconVisible(position)
         }
     }
@@ -92,19 +108,19 @@ class MainFragment : BaseFragment(){
         pageChangeCallback = null
     }
 
-    fun setTabIconVisible(position:Int) {
-        when(position) {
-            0->{
+    fun setTabIconVisible(position: Int) {
+        when (position) {
+            0 -> {
                 tabOneIcon.visible()
                 tabSecondIcon.gone()
                 tabThirdIcon.gone()
             }
-            1->{
+            1 -> {
                 tabOneIcon.gone()
                 tabSecondIcon.visible()
                 tabThirdIcon.gone()
             }
-            2->{
+            2 -> {
                 tabOneIcon.gone()
                 tabSecondIcon.gone()
                 tabThirdIcon.visible()

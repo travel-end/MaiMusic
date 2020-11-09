@@ -240,7 +240,7 @@ fun Activity.toPlayAct(playStatus:Int) {
         startActivity(playIntent)
     }
 }
-
+// 关于Navigation: https://juejin.im/post/6844904180990246926
 /*去歌单页面*/
 fun View?.toSongListFrg(songListType:Int) {
     if (this != null) {
