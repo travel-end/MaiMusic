@@ -5,6 +5,7 @@
       "singerId": 1,
       "nickName": "",
       "cover": "https://bkimg.cdn.bcebos.com/pic/bf096b63f6246b600c339f75fcb20d4c510fd9f904d2?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UyMjA=,g_7,xp_5,yp_5",
+      "cover2": "",
       "sex": 0
     },
     {
@@ -518,10 +519,6 @@
       "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
       "sex": 0
     },
-
-
-
-
     {
       "name": "邓紫棋",
       "singerId": 100,
@@ -579,74 +576,74 @@
       "sex": 1
     },
     {
-      "name": "许嵩",
-      "singerId": 9,
+      "name": "蒋雪儿",
+      "singerId": 108,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/10/297/201023173413331_none_5881.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "华晨宇",
-      "singerId": 10,
+      "name": "张韶涵",
+      "singerId": 109,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/04/118/200427090042955_none_7180.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "隔壁老樊",
-      "singerId": 11,
+      "name": "李宇春",
+      "singerId": 110,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0929/1554/ARTM0ce81b51aab4c276ff670468da859722.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "易烊千玺",
-      "singerId": 12,
+      "name": "梦然",
+      "singerId": 111,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/11/310/201105090712337_none_2874.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "胡夏",
-      "singerId": 13,
+      "name": "程响",
+      "singerId": 112,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/09/265/200921135152120_none_8952.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "李健",
-      "singerId": 14,
+      "name": "胡66",
+      "singerId": 113,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0724/1006/ARTM6b6cd76e7f6b15573cd775c7a8feb627.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "吴亦凡",
-      "singerId": 15,
+      "name": "张靓颖",
+      "singerId": 114,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/10/302/201028180754590_none_2942.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "萧敬腾",
-      "singerId": 16,
+      "name": "魏新雨",
+      "singerId": 115,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/06/182/200630161255519_none_6443.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "广东雨神",
-      "singerId": 17,
+      "name": "刘若英",
+      "singerId": 116,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1028/1812/ARTMae0fc41dc0c495cfa7eb34a58e9284ee.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张国荣",
-      "singerId": 18,
+      "name": "杨千嬅",
+      "singerId": 117,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1016/1630/ARTM803c4548afcf99c0ee7a7dc92a946d5b.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
       "name": "双笙",
@@ -656,389 +653,508 @@
       "sex": 1
     },
     {
-      "name": "王嘉尔",
-      "singerId": 20,
+      "name": "陈雪凝",
+      "singerId": 118,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/10/301/201027170221561_none_5326.jpg",
       "sex": 1
     },
     {
-      "name": "蔡徐坤",
-      "singerId": 21,
+      "name": "陈粒",
+      "singerId": 119,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/09/265/200921140037480_none_1797.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "颜人中",
-      "singerId": 22,
+      "name": "孙露",
+      "singerId": 120,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/tycms_picture/20/09/265/200921140037480_none_1797.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "徐秉龙",
-      "singerId": 23,
+      "name": "孙燕姿",
+      "singerId": 121,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1019/1400/ARTM337508d0cffadb2e55cb6cb504bfc58b.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "汪苏泷",
-      "singerId": 24,
+      "name": "莫文蔚",
+      "singerId": 122,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0914/1418/ARTMef6678a873e9688c79eb084463f6fdaa.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "邵帅",
-      "singerId": 25,
+      "name": "蔡雅健",
+      "singerId": 123,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1105/0912/ARTM5e71e17c1ec55821187f21bedc940b27.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "杨宗纬",
-      "singerId": 26,
+      "name": "梁静茹",
+      "singerId": 124,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0427/0906/ARTM91b04e096a2f0cc9bc90af9160f34726.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "焦迈奇",
-      "singerId": 27,
+      "name": "刘瑞琪",
+      "singerId": 125,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1012/1130/ARTM2a201bbb8d7980c586733dd0f4c0b01a.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "赵雷",
-      "singerId": 28,
+      "name": "魏佳艺",
+      "singerId": 126,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1009/1642/ARTM5da532b2aa7c22bd57070f10fe6ab05a.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张学友",
-      "singerId": 29,
+      "name": "田馥甄",
+      "singerId": 127,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1624/ARTM8773d4c1ff847f0da68207b84c534c08.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "刘大壮",
-      "singerId": 30,
+      "name": "杨丞琳",
+      "singerId": 128,
       "nickName": "",
       "cover": "http://p3.music.126.net/-vAAAt4wZ8bAJCkilZVbcQ==/109951163780408942.jpg?param=50y50",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "周兴哲",
-      "singerId": 31,
+      "name": "蔡依林",
+      "singerId": 129,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0917/0900/ARTM75e244389220123150d46988287f1381.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "羽肿",
-      "singerId": 32,
+      "name": "陈慧娴",
+      "singerId": 130,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1009/1406/ARTM3069e63a8b452907a1386cb3ca55daa4.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "尤长靖",
-      "singerId": 33,
+      "name": "于文文",
+      "singerId": 131,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0617/1500/ARTM06788f4111b294e834ac3a86a3422ba8.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "王力宏",
-      "singerId": 34,
+      "name": "叶炫清",
+      "singerId": 132,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1020/1624/ARTMb76241f7df99d34e3d9faea70fe90486.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "陈鸿宇",
-      "singerId": 35,
+      "name": "降央卓玛",
+      "singerId": 133,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0929/1518/ARTMc574a1c67e570e200b9fb93be45fa5c9.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "五月天",
-      "singerId": 36,
+      "name": "袁维娅",
+      "singerId": 134,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0427/0900/ARTM7e7ebebcafff05e478ff2f7bfa2f0faf.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "虎二",
-      "singerId": 37,
+      "name": "张芸京",
+      "singerId": 135,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0911/1418/ARTM98c6b1bf00b4220f00b79fd9f9f8f171.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "周传雄",
-      "singerId": 38,
+      "name": "那英",
+      "singerId": 136,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0914/1418/ARTMcd5935d4a6d9ba9b02786cff0113186b.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "宋冬野",
-      "singerId": 39,
+      "name": "周笔畅",
+      "singerId": 137,
       "nickName": "",
       "cover": "https://pic1.zhimg.com/50/4d3f0d76f_720w.jpg?source=54b3c3a5",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张敬轩",
-      "singerId": 40,
+      "name": "A-Lin",
+      "singerId": 138,
       "nickName": "",
       "cover": "https://bkimg.cdn.bcebos.com/pic/3b87e950352ac65c9cc79625f4f2b21192138aa2?x-bce-process=image/resize,m_lfit,w_268,limit_1/format,f_jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "简弘亦",
-      "singerId": 41,
+      "name": "张碧晨",
+      "singerId": 139,
       "nickName": "",
       "cover": "https://bkimg.cdn.bcebos.com/pic/a5c27d1ed21b0ef420d72733d2c451da81cb3e9b?x-bce-process=image/resize,m_lfit,w_268,limit_1/format,f_jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "刘德华",
-      "singerId": 42,
+      "name": "银临",
+      "singerId": 140,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0818/1536/ARTMc4d4adbc2aea60f7b6aabfd4df088926.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张信哲",
-      "singerId": 43,
+      "name": "容祖儿",
+      "singerId": 141,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1022/1112/ARTM647d82d93adac5f8589b64645a7799b0.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "汪峰",
-      "singerId": 44,
+      "name": "韩红",
+      "singerId": 142,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2019/1111/0942/ARTMc6bcebff5e3241b7aedeb9681ab2fcc6.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "胡彦斌",
-      "singerId": 45,
+      "name": "麦小兜",
+      "singerId": 143,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1554/ARTM4d9a699ea4084fd3e07204ad76842d46.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "徐良",
-      "singerId": 46,
+      "name": "刘珂矣",
+      "singerId": 144,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0911/0942/ARTM9c38a2d81face381a53c769d41d8c965.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张艺兴",
-      "singerId": 47,
+      "name": "林忆莲",
+      "singerId": 145,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0605/1718/ARTM535735aa410a4376ce36c1c05f55ea07.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "郑源",
-      "singerId": 48,
+      "name": "张惠妹",
+      "singerId": 146,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0923/1742/ARTM90805d1f7835b726fd22f9f0fe64f599.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "李代沫",
-      "singerId": 49,
+      "name": "季彦霖",
+      "singerId": 147,
       "nickName": "",
       "cover": "https://bkimg.cdn.bcebos.com/pic/9d82d158ccbf6c8125d21bdbbf3eb13533fa401f?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U4MA==,g_7,xp_5,yp_5",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "阿杜",
-      "singerId": 50,
+      "name": "金玟岐",
+      "singerId": 148,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0630/1618/ARTM769cfe9779b9ae9b0b1a44b753681241.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "方大同",
-      "singerId": 51,
+      "name": "阿悄",
+      "singerId": 149,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0715/1130/ARTMaeb13d9f264bd9f2abe8c011254d524d.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "排骨教主",
-      "singerId": 52,
+      "name": "范玮琪",
+      "singerId": 150,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1022/1048/ARTM23a262c29b9a201391512a855695ee59.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "陈柏宇",
-      "singerId": 53,
+      "name": "周思涵",
+      "singerId": 151,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0624/1418/ARTM5e114930a00c8db923709ca22a571936.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "萧忆情Alex",
-      "singerId": 54,
+      "name": "邓丽君",
+      "singerId": 152,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1019/1406/ARTMa07c5c2fcc29f01b71977adc595f630d.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "梁博",
-      "singerId": 55,
+      "name": "鞠婧祎",
+      "singerId": 153,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2019/1231/1154/ARTM678048c294c3465e835a818950ffae0b.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张震岳",
-      "singerId": 56,
+      "name": "陈瑞",
+      "singerId": 154,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1009/1542/ARTM477e892d3d2a120482ae5289c80bc099.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "蒋蒋",
-      "singerId": 57,
+      "name": "叶倩文",
+      "singerId": 155,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1019/1406/ARTM6ff11cf606e3c6317eadd70c95136ef6.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "张宇",
-      "singerId": 58,
+      "name": "徐佳莹",
+      "singerId": 156,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0107/1812/ARTM65f028a5e2c04000b37a80585f43ae55.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "许巍",
-      "singerId": 59,
+      "name": "萧亚轩",
+      "singerId": 157,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1015/1818/ARTM6ebc7a86931fb2ab001257e610e2e7f7.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "谭咏麟",
-      "singerId": 60,
+      "name": "云菲菲",
+      "singerId": 158,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0721/0848/ARTMcbfd8ab9b51698d85aaf2233ed2badd9.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "陈小春",
-      "singerId": 61,
+      "name": "曲婉婷",
+      "singerId": 159,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1103/0918/ARTMfcdec13f838e2fec9a1fe7077a3b6a03.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "周深",
-      "singerId": 62,
+      "name": "云朵",
+      "singerId": 160,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0427/0906/ARTM284833f6d2e6ff60a1ab559ce1cd8702.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "周华健",
-      "singerId": 63,
+      "name": "刘惜君",
+      "singerId": 161,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1103/0918/ARTMfc782250c3bba8af9f56eb71dadc3569.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "鹿晗",
-      "singerId": 64,
+      "name": "岑宁儿",
+      "singerId": 163,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1022/0854/ARTMb8ba3b011230897ac444ece6c0e2edb5.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "徐誉滕",
-      "singerId": 65,
+      "name": "赵方婧",
+      "singerId": 164,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0113/0918/ARTM4656e383e844975d66a67019dbc65097.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "赵紫骅",
-      "singerId": 66,
+      "name": "阿肆",
+      "singerId": 165,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1019/1436/ARTM82542c7b5ed04784358a0a16365876f2.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "冷漠",
-      "singerId": 67,
+      "name": "吴雨霏",
+      "singerId": 166,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2018/1030/1654/ARTMe57a1bd1335642a9aad94feff6d8008c.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "六哲",
-      "singerId": 68,
+      "name": "丁当",
+      "singerId": 167,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0110/1036/ARTM59364a320b3f9d9c0e2943fb7222a741.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "海鸣威",
-      "singerId": 69,
+      "name": "郁可唯",
+      "singerId": 168,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0113/0918/ARTMcb1f4ab65b06b1a5ea9e915664656b03.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "邰正宵",
-      "singerId": 70,
+      "name": "阿桑",
+      "singerId": 169,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0110/1118/ARTM06e62637ff9409da8b1c4044c19d211b.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "南宫嘉骏",
-      "singerId": 71,
+      "name": "冯提莫",
+      "singerId": 170,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0228/1136/ARTM95d6b10d43219080ac4a41a8a3a5038c.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "Z.TAO黄子韬",
-      "singerId": 72,
+      "name": "谢安琪",
+      "singerId": 171,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/1105/0912/ARTMe87c0aa4faad6554172f5c6ccc2c739c.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "李玖哲",
-      "singerId": 73,
+      "name": "金莎",
+      "singerId": 172,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
-      "sex": 0
+      "sex": 1
     },
     {
-      "name": "陈势安",
-      "singerId": 74,
+      "name": "龙梅子",
+      "singerId": 173,
       "nickName": "",
       "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
-      "sex": 0
+      "sex": 1
+    },
+    {
+      "name": "郭静",
+      "singerId": 174,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0110/1118/ARTM06e62637ff9409da8b1c4044c19d211b.jpg",
+      "sex": 1
+    },
+    {
+      "name": "许茹芸",
+      "singerId": 175,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0228/1136/ARTM95d6b10d43219080ac4a41a8a3a5038c.jpg",
+      "sex": 1
+    },
+    {
+      "name": "黄龄",
+      "singerId": 176,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1105/0912/ARTMe87c0aa4faad6554172f5c6ccc2c739c.jpg",
+      "sex": 1
+    },
+    {
+      "name": "黄诗扶",
+      "singerId": 177,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "花粥",
+      "singerId": 178,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "谢春花",
+      "singerId": 179,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/1105/0912/ARTMe87c0aa4faad6554172f5c6ccc2c739c.jpg",
+      "sex": 1
+    },
+    {
+      "name": "曾轶可",
+      "singerId": 180,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "张悬",
+      "singerId": 181,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "不才",
+      "singerId": 182,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "陈绮贞",
+      "singerId": 183,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "不才",
+      "singerId": 184,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "以冬",
+      "singerId": 185,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "韩雪",
+      "singerId": 186,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "少司命",
+      "singerId": 187,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "刘思涵",
+      "singerId": 188,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2019/0912/0948/ARTM9057c5a6005f4e53aa3840c87436cc3e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "鸾音社",
+      "singerId": 189,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
+    },
+    {
+      "name": "花姐",
+      "singerId": 190,
+      "nickName": "",
+      "cover": "https://cdnmusic.migu.cn/picture/2020/0706/1430/ARTM4f7862a9a17c7feeb8b9fdf43c493a4e.jpg",
+      "sex": 1
     }
   ],
 
