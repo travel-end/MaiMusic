@@ -1,61 +1,118 @@
 package wind.maimusic.ui.fragment.singer
 
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
+import okhttp3.internal.wait
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
+import wind.maimusic.model.singer.AllSingers
+import wind.maimusic.model.singer.RecommendSingers
 import wind.maimusic.model.singer.Singer
+import wind.maimusic.model.singer.SingerSexClassify
+import wind.maimusic.utils.LogUtil
+import wind.maimusic.utils.inflate
 import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.visible
 import wind.maimusic.vm.SingerViewModel
 import wind.widget.effcientrv.addItem
 import wind.widget.effcientrv.setText
 import wind.widget.effcientrv.setup
 import wind.widget.effcientrv.submitList
+import wind.widget.utils.fastClickListener
 import wind.widget.utils.loadImg
 
 /**
  * 歌手
  */
 class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
-    private lateinit var rvRecommendSingers:RecyclerView
     private lateinit var rvAllSingers:RecyclerView
     override fun layoutResId()=R.layout.fragment_singers
     override fun initView() {
         super.initView()
-        rvRecommendSingers = mRootView.findViewById(R.id.singer_rv_recommend)
-        rvAllSingers = mRootView.findViewById(R.id.singer_rv_all)
+        rvAllSingers = mRootView.findViewById(R.id.singer_rv_list)
         mRootView.findViewById<TextView>(R.id.title_tv).text = "歌手"
         val glm = GridLayoutManager(requireContext(),3)
-        rvRecommendSingers.setup<Singer> {
-            withLayoutManager {
-                return@withLayoutManager glm
-            }
+        rvAllSingers.setup<Any> {
             adapter {
-                addItem(R.layout.item_single_singer) {
+                addItem(R.layout.item_singer_recommend) {
+                    isForViewType { data, position -> data is RecommendSingers }
                     bindViewHolder { data, position, holder ->
-                        data?.let {
-                            val ivCover = itemView?.findViewById<ShapeableImageView>(R.id.item_single_singer_cover)
-                            ivCover?.shapeAppearanceModel = ShapeAppearanceModel.Builder().setAllCornerSizes(ShapeAppearanceModel.PILL).build()
-                            ivCover?.loadImg(it.cover?:"")
-                            setText(R.id.item_single_singer_name,it.name)
+                        val itemList = (data as RecommendSingers).recomSingers
+                        val rvRecommend:RecyclerView? = itemView?.findViewById(R.id.singer_rv_recommend)
+                        rvRecommend?.let {rv->
+                            rv.layoutManager = glm
+                            rv.adapter = object :RecyclerView.Adapter<RecommendSingerViewHolder>() {
+                                override fun onCreateViewHolder(
+                                    parent: ViewGroup,
+                                    viewType: Int
+                                ): RecommendSingerViewHolder {
+                                    return RecommendSingerViewHolder(R.layout.item_single_singer.inflate(parent))
+                                }
+
+                                override fun getItemCount()=itemList.size
+
+                                override fun onBindViewHolder(
+                                    holder: RecommendSingerViewHolder,
+                                    position: Int
+                                ) {
+                                    val singer = itemList[position]
+                                    holder.ivSingerCover.shapeAppearanceModel = ShapeAppearanceModel.Builder().setAllCornerSizes(ShapeAppearanceModel.PILL).build()
+                                    holder.ivSingerCover.loadImg(singer.cover?:"")
+                                    holder.tvSingerName.text = singer.name
+                                    holder.itemView.fastClickListener {
+                                        LogUtil.e("----SingerFragment singerName:${singer.name}")
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-            }
-        }
-        rvAllSingers.setup<Singer> {
-            adapter {
-                addItem(R.layout.item_single_singer_horizontal) {
+                addItem(R.layout.item_singer_sex_classify) {
+                    isForViewType { data, position -> data is SingerSexClassify }
                     bindViewHolder { data, position, holder ->
-                        data?.let {
-                            val ivCover = itemView?.findViewById<ShapeableImageView>(R.id.item_hori_singer_cover)
-                            ivCover?.shapeAppearanceModel = ShapeAppearanceModel.Builder().setAllCornerSizes(ShapeAppearanceModel.PILL).build()
-                            ivCover?.loadImg(it.cover?:"")
-                            setText(R.id.item_hori_singer_name,it.name)
+                        val item = data  as SingerSexClassify
+                        setText(R.id.item_singer_tv_male,item.maleSinger)
+                        setText(R.id.item_singer_tv_famale,item.famaleSinger)
+                    }
+                }
+                addItem(R.layout.item_vercital_rv) {
+                    isForViewType { data, position -> data is AllSingers }
+                    bindViewHolder { data, position, holder ->
+                        val itemList = (data as AllSingers).allSingers
+                        val rvAllSinger:RecyclerView? = itemView?.findViewById(R.id.item_ver_rv)
+                        rvAllSinger?.let {rv->
+                            rv.adapter = object :RecyclerView.Adapter<AllSingerViewHolder>() {
+                                override fun onCreateViewHolder(
+                                    parent: ViewGroup,
+                                    viewType: Int
+                                ): AllSingerViewHolder {
+                                    return AllSingerViewHolder(R.layout.item_single_singer_horizontal.inflate(parent))
+                                }
+                                override fun getItemCount()=itemList.size
+                                override fun onBindViewHolder(
+                                    holder: AllSingerViewHolder,
+                                    position: Int
+                                ) {
+                                    val singer = itemList[position]
+                                    holder.ivSingerCover.shapeAppearanceModel = ShapeAppearanceModel.Builder().setAllCornerSizes(ShapeAppearanceModel.PILL).build()
+                                    holder.ivSingerCover.loadImg(singer.cover?:"")
+                                    holder.tvSingerName.text = singer.name
+                                    holder.itemView.fastClickListener {
+                                        LogUtil.e("----SingerFragment singerName:${singer.name}")
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -65,23 +122,32 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
 
     override fun initData() {
         super.initData()
-        mViewModel.findAllSingers()
-        mViewModel.initRecommendSingers()
+        handler.sendEmptyMessageDelayed(1,220)
+    }
+    private val handler=object :Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            if (msg.what==1) {
+                mViewModel.initSingersData()
+            }
+        }
     }
 
-    private val singersList = mutableListOf<Singer>()
     override fun observe() {
         super.observe()
-        mViewModel.mRecommendSingers.observe(this,Observer{
+        mViewModel.singerData.observe(this,Observer{
             if (isNotNullOrEmpty(it)) {
-                rvRecommendSingers.submitList(it.toMutableList())
+                rvAllSingers.submitList(it)
             }
         })
-        // TODO: 2020/11/9 为啥子100多条数据的刷新会花费很长的时间，而且阻塞了当前页面的显示？？？？
-        mViewModel.allSingers.observe(this,Observer{
-            singersList.clear()
-            singersList.addAll(it)
-            rvAllSingers.submitList(singersList)
-        })
+    }
+
+    class RecommendSingerViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
+        val ivSingerCover:ShapeableImageView = itemView.findViewById(R.id.item_single_singer_cover)
+        val tvSingerName:TextView= itemView.findViewById(R.id.item_single_singer_name)
+    }
+    class AllSingerViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
+        val ivSingerCover:ShapeableImageView = itemView.findViewById(R.id.item_hori_singer_cover)
+        val tvSingerName:TextView = itemView.findViewById(R.id.item_hori_singer_name)
     }
 }

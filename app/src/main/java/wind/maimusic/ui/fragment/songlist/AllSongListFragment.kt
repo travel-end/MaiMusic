@@ -70,9 +70,13 @@ class AllSongListFragment : BaseLifeCycleFragment<AllSongListViewModel>(),
         }
     }
 
+    override fun initData() {
+        super.initData()
+        mViewModel.initAllSongListData()
+    }
+
     override fun onResume() {
         super.onResume()
-        mViewModel.initAllSongListData()
         rootLayout.post {
             rootLayoutHeight = rootLayout.height
         }

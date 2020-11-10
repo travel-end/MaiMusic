@@ -26,3 +26,7 @@ indicatorView
                 .setSlideMode(IndicatorSlideMode.WORM)
                 .setIndicatorStyle(IndicatorStyle.ROUND_RECT)
                 .setupWithViewPager(viewPager2)
+                
+遇到的坑：
+1、NestedScrollView嵌套RecyclerView，如果RecyclerView的item项太多，会导致NestedScrollView的测量花费很长的时间，导致页面刷新缓慢        
+                

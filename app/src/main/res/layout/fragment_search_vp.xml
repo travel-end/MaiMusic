@@ -4,18 +4,29 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <wind.widget.tablayout.CommonTabLayout
+<!--    <wind.widget.tablayout.CommonTabLayout-->
+<!--        android:id="@id/frg_main_title_common_tab_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/dp_42"-->
+<!--        app:tl_textBold="SELECT"-->
+<!--        app:tl_tab_space_equal="true"-->
+<!--        app:tl_textSelectColor="@color/colorPrimary"-->
+<!--        app:tl_textUnselectColor="@color/black_33"-->
+<!--        app:tl_indicator_color="@color/colorPrimary"-->
+<!--        app:tl_indicator_width_equal_title="true"-->
+<!--        app:tl_indicator_width="@dimen/dp_40"-->
+<!--        app:tl_textsize="15.5sp" />-->
+    <com.google.android.material.tabs.TabLayout
         android:id="@id/frg_main_title_common_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_42"
-        app:tl_textBold="SELECT"
-        app:tl_tab_space_equal="true"
-        app:tl_textSelectColor="@color/colorPrimary"
-        app:tl_textUnselectColor="@color/black_33"
-        app:tl_indicator_color="@color/colorPrimary"
-        app:tl_indicator_width_equal_title="true"
-        app:tl_indicator_width="@dimen/dp_40"
-        app:tl_textsize="15.5sp" />
+        android:layout_height="wrap_content"
+        app:tabSelectedTextColor="@color/black_33"
+        app:tabTextColor="@color/color999999"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabTextAppearance="@style/tabLayoutTextSize"
+        app:tabIndicatorFullWidth="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.viewpager2.widget.ViewPager2
         android:id="@id/frg_main_view_pager"
         android:layout_width="match_parent"

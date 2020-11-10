@@ -26,8 +26,11 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     // 加载歌曲的view
     private var loadingSongView: View?=null
 
-    // 普通加载的view
+    // 普通加载的dialog
     private var loadingNormalDialog: FloatDialog?=null
+
+    // 页面顶部加载view
+    private var loadingTopView:View?=null
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
@@ -62,6 +65,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private fun initStatusView() {
         val resultView: View? = mRootView.findViewById(R.id.loading_result_view)
         val songView: View? = mRootView.findViewById(R.id.loading_song_view)
+        val topView:View?=mRootView.findViewById(R.id.loading_top_view)
         if (resultView != null) {
             loadingResultView = resultView
         }
@@ -71,6 +75,9 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
         if (loadingNormalDialog == null) {
             loadingNormalDialog =
                 FloatDialog(requireContext())
+        }
+        if (topView!= null) {
+            loadingTopView = topView
         }
     }
 
@@ -97,6 +104,17 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
             if (loadingNormalDialog?.isShowing==false) {
                 loadingNormalDialog!!.show()
             }
+        }
+    }
+    private fun showTopLoading() {
+        if (loadingTopView?.visibility == View.GONE) {
+            loadingTopView?.visibility = View.VISIBLE
+        }
+    }
+
+    private fun dismissTopLoading() {
+        if (loadingTopView?.visibility == View.VISIBLE) {
+            loadingTopView?.visibility = View.GONE
         }
     }
 
@@ -159,6 +177,8 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
                     StateType.DISMISSING_SONG -> dismissLoadingSong()
                     StateType.EMPTY -> showLoadingResultView(it.msg, it.res)
                     StateType.SHOW_TOAST-> showToast(it.msg)
+                    StateType.LOADING_TOP->showTopLoading()
+                    StateType.DISMISSING_TOP->dismissTopLoading()
                 }
             }
         }
