@@ -82,4 +82,5 @@
     <string name="edit">编辑</string>
     <string name="man">男歌手</string>
     <string name="woman">女歌手</string>
+    <string name="hot_singer">热门歌手</string>
 </resources>

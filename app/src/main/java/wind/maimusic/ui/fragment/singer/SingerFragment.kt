@@ -5,25 +5,20 @@ import android.os.Looper
 import android.os.Message
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.ShapeAppearanceModel
-import okhttp3.internal.wait
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
 import wind.maimusic.model.singer.AllSingers
 import wind.maimusic.model.singer.RecommendSingers
-import wind.maimusic.model.singer.Singer
 import wind.maimusic.model.singer.SingerSexClassify
 import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.inflate
 import wind.maimusic.utils.isNotNullOrEmpty
-import wind.maimusic.utils.visible
 import wind.maimusic.vm.SingerViewModel
 import wind.widget.effcientrv.addItem
 import wind.widget.effcientrv.setText
@@ -122,15 +117,12 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
 
     override fun initData() {
         super.initData()
-        handler.sendEmptyMessageDelayed(1,220)
+        requireLazyInit(true)
     }
-    private val handler=object :Handler(Looper.getMainLooper()) {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if (msg.what==1) {
-                mViewModel.initSingersData()
-            }
-        }
+
+    override fun lazyInitData() {
+        super.lazyInitData()
+        mViewModel.initSingersData()
     }
 
     override fun observe() {
