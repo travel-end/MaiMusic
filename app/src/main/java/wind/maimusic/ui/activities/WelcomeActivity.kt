@@ -79,7 +79,7 @@ class WelcomeActivity : BaseLifeCycleActivity<WelcomeViewModel>() {
 
     private fun initDatabase() {
         if (SpUtil.getString(Constants.FIRST_LAUNCH).isEmpty()) {
-            AssetsUtil.initCovers()
+            AssetsUtil.initOtherData()// 其他的数据  如歌单封面、搜索内容、Banner
             AssetsUtil.initSongAndSinger()
             SpUtil.saveValue(Constants.FIRST_LAUNCH, "has_launch")
         }

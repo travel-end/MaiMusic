@@ -10,6 +10,8 @@ import wind.maimusic.base.BaseViewModel
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.model.core.SearchSong
+import wind.maimusic.model.searchhot.HistoryTag
+import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.getStringRes
 import wind.widget.cost.Consts
@@ -80,6 +82,17 @@ class SearchResultViewModel:BaseViewModel() {
             }.onFailure {
                 handleException(it, State(StateType.SHOW_TOAST,msg = it.message?:"未知错误"))
                 songPlayUrlResult.value = null
+            }
+        }
+    }
+
+    fun addOneSearchTag(searchText:String) {
+        val searchDao = MaiDatabase.getDatabase().searchSongDao()
+        request {
+            val existOfTag = searchDao.findSearchTagByName(searchText).isEmpty()
+            if (existOfTag) {
+                val tag = HistoryTag(name = searchText)
+                searchDao.addOneSearchTag(tag)
             }
         }
     }

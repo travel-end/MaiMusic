@@ -7,17 +7,27 @@ import wind.maimusic.MaiApp
 import wind.maimusic.model.*
 import wind.maimusic.model.download.DownloadSong
 import wind.maimusic.model.firstmeet.FirstMeetSong
-import wind.maimusic.room.DownloadSongDao
-import wind.maimusic.room.HistorySongDao
-import wind.maimusic.room.LocalSongDao
-import wind.maimusic.room.LoveSongDao
+import wind.maimusic.model.searchhot.HistoryTag
+import wind.maimusic.model.searchhot.HotSearchSong
+import wind.maimusic.model.searchhot.RecommendSearch
+import wind.maimusic.room.*
 
 /**
  * @By Journey 2020/10/28
  * @Description 关于我的音乐数据库（包括我听过的、本地音乐、下载音乐...）
  */
 @Database(
-    entities = [FirstMeetSong::class, LocalSong::class, HistorySong::class, DownloadSong::class, LoveSong::class,OnlineSong::class],
+    entities = [
+        FirstMeetSong::class,
+        LocalSong::class,
+        HistorySong::class,
+        DownloadSong::class,
+        LoveSong::class,
+        OnlineSong::class,
+        RecommendSearch::class,
+        HotSearchSong::class,
+        HistoryTag::class
+    ],
     version = 1,
     exportSchema = false
 )
@@ -26,6 +36,8 @@ abstract class MaiDatabase : RoomDatabase() {
     abstract fun historySongDao(): HistorySongDao
     abstract fun downloadSongDao(): DownloadSongDao
     abstract fun loveSongDao(): LoveSongDao
+    abstract fun searchSongDao():SearchSongDao
+
     companion object {
         @Volatile
         private var INSTANCE: MaiDatabase? = null

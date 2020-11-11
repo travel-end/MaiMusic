@@ -8,10 +8,12 @@ import androidx.room.PrimaryKey
  * @By Journey 2020/10/27
  * @Description
  */
-@Entity
+@Entity(tableName = "t_search_history")
 data class HistoryTag(
-    @PrimaryKey
-    val id :Int?=null,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     @ColumnInfo
-    val name:String? = null
+    val name: String? = null,
+    @ColumnInfo
+    val tagId: String? = null
 )

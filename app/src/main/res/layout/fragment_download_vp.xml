@@ -6,19 +6,6 @@
     android:orientation="vertical">
 
     <include layout="@layout/view_song_list_title" />
-
-<!--    <wind.widget.tablayout.CommonTabLayout-->
-<!--        android:id="@id/frg_main_title_common_tab_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/dp_42"-->
-<!--        app:tl_indicator_color="@color/colorPrimary"-->
-<!--        app:tl_indicator_width="@dimen/dp_40"-->
-<!--        app:tl_indicator_width_equal_title="true"-->
-<!--        app:tl_tab_space_equal="true"-->
-<!--        app:tl_textBold="SELECT"-->
-<!--        app:tl_textSelectColor="@color/colorPrimary"-->
-<!--        app:tl_textUnselectColor="@color/black_33"-->
-<!--        app:tl_textsize="15.5sp" />-->
     <com.google.android.material.tabs.TabLayout
         android:id="@id/frg_main_title_common_tab_layout"
         android:layout_width="match_parent"

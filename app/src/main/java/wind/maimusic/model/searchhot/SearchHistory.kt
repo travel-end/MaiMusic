@@ -7,7 +7,6 @@ package wind.maimusic.model.searchhot
  * @Description
  */
 data class SearchHistory(
-    val historyList:MutableList<HistoryTag>?=null,
-    val title:String?=null
+    val historyList:List<HistoryTag>?=null
 )
 

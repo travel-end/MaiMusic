@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_48">
+    android:layout_height="@dimen/dp_48"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/view_search_iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_14"
         android:src="@drawable/ic_arrow_left" />
 
-    <wind.widget.edittext.SearchEditText
-        android:id="@+id/view_search_et"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/dp_46"
-        android:layout_marginEnd="@dimen/dp_25"
-        android:background="@android:color/transparent"
-        android:hint="@string/search_hint"
-        android:imeOptions="actionSearch"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:inputType="text"
-        android:textSize="@dimen/sp_16"
-        apps:scaleSize="0.4" />
+    <LinearLayout
+        android:id="@+id/view_ll_search"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_32"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_weight="1"
+        android:background="@drawable/shape_search_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="@dimen/dp_40"
-        android:layout_marginEnd="@dimen/dp_26"
-        android:layout_marginBottom="@dimen/dp_6"
-        android:background="@color/text_color_dark" />
+        <ImageView
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_12"
+            android:src="@drawable/search" />
 
-</FrameLayout>
+        <wind.widget.edittext.SearchEditText
+            android:id="@+id/view_search_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_3"
+            android:paddingBottom="@dimen/dp_3"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
+            android:textSize="@dimen/sp_15"
+            apps:scaleSize="0.4" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/view_search_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:text="@string/search"
+        android:textColor="@color/black_33"
+        android:textSize="15sp" />
+</LinearLayout>

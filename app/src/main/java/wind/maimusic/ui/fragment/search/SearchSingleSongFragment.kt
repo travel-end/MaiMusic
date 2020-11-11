@@ -109,6 +109,7 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
                         }
                         rvSongList.visible()
                     }
+                    mViewModel.addOneSearchTag(searchText)
                 }
             }
         })

@@ -2,6 +2,6 @@
 <shape xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="MissingDefaultResource">
-    <corners android:radius="@dimen/dp_10" />
-    <solid android:color="@color/tag_layout_bg"/>
+    <corners android:radius="@dimen/dp_16" />
+    <solid android:color="@color/bgColorThird"/>
 </shape>

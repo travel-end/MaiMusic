@@ -1,19 +1,27 @@
 package wind.maimusic.ui.fragment.search
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
-import wind.maimusic.model.searchhot.HistoryTag
-import wind.maimusic.model.searchhot.SearchHistory
-import wind.maimusic.model.searchhot.SearchHotSong
-import wind.maimusic.model.title.HotSearchTitle
+import wind.maimusic.model.searchhot.*
+import wind.maimusic.model.title.PoetrySongTitle
+import wind.maimusic.model.title.SingleSongTitle
+import wind.maimusic.model.title.Title
+import wind.maimusic.utils.LogUtil
+import wind.maimusic.utils.getStringRes
+import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.vm.SearchHotViewModel
 import wind.widget.effcientrv.*
+import wind.widget.flowlayout.FlowLayout
+import wind.widget.flowlayout.TagAdapter
+import wind.widget.flowlayout.TagFlowLayout
+import wind.widget.utils.fastClickListener
 
 /**
  * @By Journey 2020/10/27
@@ -32,63 +40,129 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
     override fun initView() {
         super.initView()
         rvSearchHot = mRootView.findViewById(R.id.search_hot_rv)
-        val layoutManager = GridLayoutManager(requireContext(), 2)
+        val lp = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        lp.setMargins(10, 5, 10, 15)
         rvSearchHot.setup<Any> {
-            withLayoutManager {
-                layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int {
-                        return if (adapter?.getItem(position) is SearchHotSong) {
-                            1
-                        } else {
-                            2
-                        }
-                    }
-                }
-                return@withLayoutManager layoutManager
-            }
             adapter {
-                addItem(R.layout.item_search_hot_history) {
+                //2
+                addItem(R.layout.item_flow_layout) {
                     isForViewType { data, position -> data is SearchHistory }
                     bindViewHolder { data, position, holder ->
-                        val item = data as SearchHistory
-                        val rvContent: RecyclerView? = itemView?.findViewById(R.id.item_history_rv)
-                        setText(R.id.item_history_title_tv,item.title)
-                        rvContent?.let {
-                            it.setup<HistoryTag> {
-                                dataSource(item.historyList!!)
-                                adapter {
-                                    addItem(R.layout.item_round_text) {
-                                        bindViewHolder { data: Any?, position: Int, holder: ViewHolderCreator<Any> ->
-                                            val d = data as HistoryTag
-                                            (itemView as TextView).text = d.name
+                        val searchHistory = (data as SearchHistory).historyList
+                        setText(R.id.item_history_title_tv,R.string.search_history.getStringRes())
+                        if (isNotNullOrEmpty(searchHistory)) {
+                            itemView?.findViewById<TagFlowLayout>(R.id.item_sh_flow_layout)
+                                ?.let { flow ->
+                                    flow.adapter =
+                                        object : TagAdapter<HistoryTag>(searchHistory) {
+                                            override fun getView(
+                                                parent: FlowLayout?,
+                                                position: Int,
+                                                t: HistoryTag?
+                                            ): View {
+                                                return LayoutInflater.from(parent?.context)
+                                                    .inflate(
+                                                        R.layout.item_round_text,
+                                                        parent,
+                                                        false
+                                                    )
+                                                    .apply { (this as TextView).text = t?.name }
+                                            }
                                         }
-                                        itemClicked(View.OnClickListener {
-
-                                        })
+                                    flow.setOnTagClickListener { _, position, _ ->
+                                        LogUtil.e("searchHistory name:${searchHistory!![position].name}")
+                                        false
                                     }
+                                    setVisible(R.id.item_sh_flow_layout, true)
                                 }
+                        } else {
+                            visible(R.id.item_sh_tv_no)
+                            invisible(R.id.item_history_end_iv)
+                        }
+                        clicked(R.id.item_history_end_iv,View.OnClickListener {
+                            mViewModel.deleteSearchHistoryTag()
+                        })
+                    }
+                }
+
+                //4
+                addItem(R.layout.item_flow_layout) {
+                    isForViewType { data, position -> data is RecommendSearchList }
+                    bindViewHolder { data, position, holder ->
+                        val recommendList = (data as RecommendSearchList).recommendSearch
+                        LogUtil.e("recommendList----:${recommendList.size}")
+                        setText(R.id.item_history_title_tv,R.string.recommend_search.getStringRes())
+                        invisible(R.id.item_history_end_iv)
+                        if (isNotNullOrEmpty(recommendList)) {
+                            itemView?.findViewById<TagFlowLayout>(R.id.item_sh_flow_layout)
+                                ?.let { flow ->
+                                    flow.adapter =
+                                        object : TagAdapter<RecommendSearch>(recommendList) {
+                                            override fun getView(
+                                                parent: FlowLayout?,
+                                                position: Int,
+                                                t: RecommendSearch?
+                                            ): View {
+                                                return LayoutInflater.from(parent?.context)
+                                                    .inflate(
+                                                        R.layout.item_round_text,
+                                                        parent,
+                                                        false
+                                                    )
+                                                    .apply { (this as TextView).text = t?.tagName }
+                                            }
+                                        }
+                                    flow.setOnTagClickListener { _, position, _ ->
+                                        LogUtil.e("recommendList name:${recommendList[position].tagName}")
+                                        false
+                                    }
+                                    setVisible(R.id.item_sh_flow_layout, true)
+                                }
+                        }
+                    }
+                }
+                // 5
+                addItem(R.layout.item_search_history_title) {
+                    isForViewType { data, _ -> data is SingleSongTitle }
+                    bindViewHolder { data, position, holder ->
+                        invisible(R.id.item_history_end_iv)
+                        setText(R.id.item_history_title_tv, (data as SingleSongTitle).title)
+                    }
+                }
+                // 6
+                addItem(R.layout.item_search_hot_song_bg) {
+                    isForViewType { data, position -> data is HotSearchSongList }
+                    bindViewHolder { data, position, holder ->
+                        val songList = (data as HotSearchSongList).hotSearchSongs
+                        val rootView = itemView as LinearLayout
+                        if (isNotNullOrEmpty(songList)) {
+                            rootView.removeAllViews()
+                            val lps = LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                            )
+                            lps.setMargins(0, 10, 0, 10)
+                            for (song in songList) {
+                                val itemSongView = View.inflate(
+                                    requireContext(),
+                                    R.layout.item_search_hot_song,
+                                    null
+                                )
+                                val tvSongName: TextView =
+                                    itemSongView.findViewById(R.id.item_search_hot_song_tv_song_name)
+                                val tvDesc: TextView =
+                                    itemSongView.findViewById(R.id.item_search_hot_song_tv_description)
+                                val tvIndex: TextView =
+                                    itemSongView.findViewById(R.id.item_search_hot_song_tv_index)
+                                tvSongName.text = song.songName
+                                tvDesc.text = song.desc
+                                tvIndex.text = "${song.id ?: 0}"
+                                rootView.addView(itemSongView, lps)
                             }
                         }
-                    }
-                }
-                addItem(R.layout.item_common_title) {
-                    isForViewType { data, position -> data is HotSearchTitle }
-                    bindViewHolder { data, position, holder ->
-                        val item = data as HotSearchTitle
-                        setText(R.id.item_common_title_tv, item.title)
-                    }
-                }
-                addItem(R.layout.item_search_hot_song) {
-                    isForViewType { data, position -> data is SearchHotSong }
-                    bindViewHolder { data, position, holder ->
-                        val item = data as SearchHotSong
-                        setText(R.id.item_search_hot_song_tv_index, "${position - 2}")
-                        setText(R.id.item_search_hot_song_tv_song_name, item.hotSongName)
-                        if (item.isHot) {
-                            setVisible(R.id.item_search_hot_song_tv_status, true)
-                            setText(R.id.item_search_hot_song_tv_status, "热")
-                        }
-                        setText(R.id.item_search_hot_song_tv_description, item.hotSongDescription)
                     }
                 }
             }
@@ -97,14 +171,19 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
 
     override fun initData() {
         super.initData()
-        mViewModel.getTempData()
+        mViewModel.initHotSearchData()
     }
 
     override fun observe() {
         super.observe()
-        mViewModel.hotSearch.observe(this, Observer {
+        mViewModel.mData.observe(this, Observer {
             it?.let {
                 rvSearchHot.submitList(it)
+            }
+        })
+        mViewModel.deleteHistory.observe(this,Observer{
+            if (it == true) {
+                rvSearchHot.updateData(0,SearchHistory())
             }
         })
     }

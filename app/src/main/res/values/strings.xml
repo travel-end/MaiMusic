@@ -83,4 +83,8 @@
     <string name="man">男歌手</string>
     <string name="woman">女歌手</string>
     <string name="hot_singer">热门歌手</string>
+    <string name="search_history">搜索历史</string>
+    <string name="recommend_search">推荐搜索</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="no_search_history">暂无搜索记录</string>
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_40"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/item_history_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="搜索历史"
+        android:layout_marginStart="@dimen/dp_16"
+        android:textColor="@color/black"
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/sp_16" />
+    <ImageView
+        android:id="@+id/item_history_end_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:layout_marginTop="@dimen/dp_2"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="@dimen/dp_16" />
+</FrameLayout>

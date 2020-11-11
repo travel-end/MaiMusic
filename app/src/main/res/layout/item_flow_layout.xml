@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40">
+        <TextView
+            android:id="@+id/item_history_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_history"
+            android:layout_marginStart="@dimen/dp_16"
+            android:textColor="@color/black2"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/sp_16" />
+        <ImageView
+            android:id="@+id/item_history_end_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"
+            android:layout_marginTop="@dimen/dp_2"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="@dimen/dp_16" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/item_sh_tv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/text_color"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:visibility="gone"
+        android:text="@string/no_search_history" />
+    <wind.widget.flowlayout.TagFlowLayout
+        android:id="@+id/item_sh_flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"/>
+</LinearLayout>

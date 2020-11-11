@@ -260,6 +260,12 @@ fun View?.nav(id:Int,bundle: Bundle?=null) {
     }
 }
 
+fun View?.navUp() {
+    if (this != null) {
+        Navigation.findNavController(this).navigateUp()
+    }
+}
+
 fun nextInt(range:Int):Int {
     return if (range != 0) {
         Random().nextInt(range)
