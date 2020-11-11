@@ -13,12 +13,15 @@ abstract class BaseDialog(context:Context):Dialog(context,R.style.dialog_style) 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId())
-        setCancelable(false)
-        setCanceledOnTouchOutside(false)
+        isCancelable()
         initView()
         initData()
     }
     abstract fun layoutResId():Int
+    open fun isCancelable(cancelable:Boolean = false) {
+        setCancelable(cancelable)
+        setCanceledOnTouchOutside(cancelable)
+    }
     open fun initView() {
 
     }
@@ -26,11 +29,12 @@ abstract class BaseDialog(context:Context):Dialog(context,R.style.dialog_style) 
 
     }
 
+
     override fun onStart() {
         super.onStart()
         val win = window
         val lp = win?.attributes
-        win?.setBackgroundDrawableResource(android.R.color.transparent)
+//        win?.setBackgroundDrawableResource(android.R.color.transparent)
         if (lp != null) {
             lp.gravity = Gravity.CENTER
             val dialogWidth =(Resources.getSystem().displayMetrics.widthPixels) * 0.8

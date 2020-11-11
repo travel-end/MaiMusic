@@ -123,6 +123,9 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
         collect_fl_loved_poetry.fastClickListener {
             it.nav(R.id.to_loved_poetry_fragment)
         }
+        collect_layout_to_login.fastClickListener {
+            requireActivity().toLogin()
+        }
         collect_iv_create_new_song_list.fastClickListener {
             if (createNewSongListDialog == null) {
                 createNewSongListDialog = CreateNewSongListDialog(requireContext(),object :OnDialogBtnClickListener{

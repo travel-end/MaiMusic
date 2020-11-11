@@ -1,6 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/temp_welcome"
+    app:ignore="NamespaceTypo">
 
-</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_40p" />
+
+    <ImageView
+        android:id="@id/title_iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_left_white"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_20" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/dp_28"
+        android:layout_marginEnd="@dimen/dp_28"
+        android:layout_marginTop="@dimen/dp_60">
+
+        <wind.widget.edittext.SearchEditText
+            android:id="@+id/view_search_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_36"
+            android:background="@android:color/transparent"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            android:hint="@string/input_phone"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
+            android:textSize="@dimen/sp_15"
+            android:textColorHint="@color/white_50p"
+            apps:scaleSize="0.4" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorGrayNormal"
+            android:layout_marginBottom="@dimen/dp_14"/>
+        <wind.widget.edittext.SearchEditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_36"
+            android:background="@android:color/transparent"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            android:hint="@string/input_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textCursorDrawable="@null"
+            android:textColorHint="@color/white_50p"
+            android:singleLine="true"
+            android:textSize="@dimen/sp_15"
+            apps:scaleSize="0.4" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorGrayNormal" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_4">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:layout_gravity="end"
+                android:text="@string/forget_password"
+                />
+        </FrameLayout>
+        <wind.widget.rippleview.RippleView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:background="@drawable/shape_btn_blue_bg"
+            app:rv_centered="true"
+            app:rv_type="rectangle"
+            app:rv_color="@color/grayLight2"
+            app:rv_rippleDuration="110">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to_login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_17"
+                android:layout_centerInParent="true" />
+        </wind.widget.rippleview.RippleView>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30">
+            <ImageView
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:src="@drawable/qq"
+                android:layout_marginEnd="@dimen/dp_24"
+                android:layout_gravity="center_horizontal"/>
+            <ImageView
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:src="@drawable/wechat"
+                android:layout_marginStart="@dimen/dp_24"
+                android:layout_gravity="center_horizontal"/>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_is_register"
+            android:textColor="@color/white_50p"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_20"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+
+</FrameLayout>

@@ -22,19 +22,8 @@ import wind.maimusic.utils.nextInt
 
 class SingerViewModel : BaseViewModel() {
     val singerData: MutableLiveData<MutableList<Any>> = MutableLiveData()
+    val classifySinger:MutableLiveData<List<Singer>> = MutableLiveData()
     private val mData = mutableListOf<Any>()
-
-    //    fun findAllSingers() {
-//        viewModelScope.launch {
-//            val result = withContext(Dispatchers.IO) {
-//                OnlineSongDatabase.getDatabase().singerDao().findAllSingers()
-//            }
-//            LogUtil.e("thread:${result.size}")
-//            if (isNotNullOrEmpty(result)) {
-//                allSingers.value =result.toMutableList()
-//            }
-//        }
-//    }
     fun initSingersData() {
         loadStatus.value = State(StateType.LOADING_TOP)
         val singerIds = intArrayOf(
@@ -84,19 +73,28 @@ class SingerViewModel : BaseViewModel() {
             }
             val recommendSinger = RecommendSingers(recommendSingers)
             mData.add(recommendSinger)
-            val sexClassify =
-                SingerSexClassify(R.string.man.getStringRes(), R.string.woman.getStringRes())
+            val sexClassify = SingerSexClassify(R.string.man.getStringRes(), R.string.woman.getStringRes(),R.string.hot_singer.getStringRes(), R.string.other_singer.getStringRes())
             mData.add(sexClassify)
             val result = withContext(Dispatchers.IO) {
-                singerDao.findAllSingers()
+                singerDao.findSingersBySex(Constants.MALE)
             }
-            LogUtil.e("all Singers:${result.size}")
+            LogUtil.e("male Singers:${result.size}")
             if (isNotNullOrEmpty(result)) {
                 val allSinger = AllSingers(result)
                 mData.add(allSinger)
             }
             loadStatus.value = State(StateType.DISMISSING_TOP)
             singerData.value = mData
+        }
+    }
+
+    fun findSingerByClassify(classify:Int) {
+        val singerDao = OnlineSongDatabase.getDatabase().singerDao()
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                singerDao.findSingersBySex(classify)
+            }
+            classifySinger.value = result
         }
     }
 }

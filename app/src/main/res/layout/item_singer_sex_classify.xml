@@ -12,13 +12,13 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/item_singer_tv_male"
+        android:id="@+id/item_singer_tv_famale"
         android:layout_width="@dimen/dp_66"
         android:layout_height="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_10"
         android:background="@drawable/shape_gradient_b"
         android:gravity="center"
-        android:text="@string/man"
+        android:text="@string/woman"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,15 +26,40 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_singer_tv_famale"
+        android:id="@+id/item_singer_tv_male"
+        android:layout_width="@dimen/dp_66"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:background="@drawable/shape_gradient_b"
+        android:gravity="center"
+        android:text="@string/man"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_singer_tv_famale"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_singer_hot_singer"
         android:layout_width="@dimen/dp_66"
         android:layout_height="@dimen/dp_24"
         android:layout_marginStart="@dimen/dp_10"
         android:background="@drawable/shape_gradient_b"
         android:gravity="center"
-        android:text="@string/woman"
+        android:text="@string/hot_singer"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline_center"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/item_singer_other_singer"
+        android:layout_width="@dimen/dp_66"
+        android:layout_height="@dimen/dp_24"
+        android:layout_marginStart="@dimen/dp_10"
+        android:background="@drawable/shape_gradient_b"
+        android:gravity="center"
+        android:text="@string/other_singer"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_singer_hot_singer"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

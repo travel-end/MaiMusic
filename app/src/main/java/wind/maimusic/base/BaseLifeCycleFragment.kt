@@ -12,7 +12,7 @@ import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.toast
-import wind.maimusic.widget.dialog.FloatDialog
+import wind.maimusic.widget.dialog.FloatLoadingDialog
 import wind.widget.utils.fastClickListener
 
 /**
@@ -27,7 +27,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private var loadingSongView: View?=null
 
     // 普通加载的dialog
-    private var loadingNormalDialog: FloatDialog?=null
+    private var loadingNormalDialog: FloatLoadingDialog?=null
 
     // 页面顶部加载view
     private var loadingTopView:View?=null
@@ -74,7 +74,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
         }
         if (loadingNormalDialog == null) {
             loadingNormalDialog =
-                FloatDialog(requireContext())
+                FloatLoadingDialog(requireContext())
         }
         if (topView!= null) {
             loadingTopView = topView

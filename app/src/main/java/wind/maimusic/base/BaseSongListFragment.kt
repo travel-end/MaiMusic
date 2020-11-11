@@ -27,6 +27,7 @@ import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.songlist.SongListTop
 import wind.maimusic.service.PlayerService
 import wind.maimusic.utils.*
+import wind.maimusic.widget.dialog.BottomFunctionDialog
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
 import wind.widget.utils.fastClickListener
@@ -39,11 +40,12 @@ import wind.widget.utils.toIntPx
  */
 abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<VM>() {
     protected var playerBinder: PlayerService.PlayerBinder? = null
+    protected var bottomFunctionDialog:BottomFunctionDialog?=null
 
     /*非必须组件*/
     private var ivBack: ImageView? = null
     private var tvTitle: TextView? = null
-    private var tvFunc: TextView? = null
+    protected var tvFunc: TextView? = null
     private var appBarLayout: AppBarLayout? = null
     private var toolBar: Toolbar? = null
     private var tvSongListName: TextView? = null
@@ -103,49 +105,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
 
     override fun initView() {
         super.initView()
-        /*可选的组件*/
-        mRootView.findViewById<ImageView>(R.id.title_iv_back)?.let {
-            ivBack = it
-        }
-        mRootView.findViewById<TextView>(R.id.title_tv)?.let {
-            tvTitle = it
-        }
-        mRootView.findViewById<TextView>(R.id.title_tv_fun)?.let {
-            tvFunc = it
-        }
-        mRootView.findViewById<AppBarLayout>(R.id.md_song_list_appbar_layout)?.let {
-            appBarLayout = it
-        }
-        mRootView.findViewById<Toolbar>(R.id.md_song_list_toolbar)?.let {
-            toolBar = it
-        }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_name)?.let {
-            tvSongListName = it
-        }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_description)?.let {
-            tvSongListDescription = it
-        }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_author)?.let {
-            tvSongListAuthor = it
-        }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_title_name)?.let {
-            tvSongListTitleName = it
-        }
-        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_title_back)?.let {
-            ivSongListTitleBack = it
-        }
-        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_small_cover)?.let {
-            ivSongListSmallCover = it
-        }
-        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_large_cover)?.let {
-            ivSongListLargeCover = it
-        }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_tab_a)?.let {
-            tvSongListTagA = it
-        }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_tab_b)?.let {
-            tvSongListTagB = it
-        }
+        initOptionsWidget()
         /*必有的组件*/
         rvSongList = mRootView.findViewById(R.id.song_list_rv)
         ivPlayAll = mRootView.findViewById(R.id.view_song_list_iv_play_all)
@@ -190,6 +150,9 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                                 SongUtil.saveSong(s)
                                 playerBinder?.play(s.listType,songListType())
                             })
+                            clicked(R.id.item_song_list_iv_more,View.OnClickListener {
+                                bottomFunctionDialog?.show()
+                            })
                         }
                     }
                 }
@@ -212,11 +175,10 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     override fun initAction() {
         super.initAction()
         ivBack?.fastClickListener {
-
         }
-        tvFunc?.fastClickListener {
-            doFunc()
-        }
+//        tvFunc?.fastClickListener {
+//            doFunc()
+//        }
         tvDownloadAll.fastClickListener {
             downloadAll()
         }
@@ -387,6 +349,56 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
 //            .navigationBarColor(R.color.colorPrimary)
 //            .init()
 //    }
+
+    private fun initOptionsWidget() {
+        /*可选的组件*/
+        mRootView.findViewById<ImageView>(R.id.title_iv_back)?.let {
+            ivBack = it
+        }
+        mRootView.findViewById<TextView>(R.id.title_tv)?.let {
+            tvTitle = it
+        }
+        mRootView.findViewById<TextView>(R.id.title_tv_fun)?.let {
+            tvFunc = it
+        }
+        mRootView.findViewById<AppBarLayout>(R.id.md_song_list_appbar_layout)?.let {
+            appBarLayout = it
+        }
+        mRootView.findViewById<Toolbar>(R.id.md_song_list_toolbar)?.let {
+            toolBar = it
+        }
+        mRootView.findViewById<TextView>(R.id.md_song_list_tv_name)?.let {
+            tvSongListName = it
+        }
+        mRootView.findViewById<TextView>(R.id.md_song_list_tv_description)?.let {
+            tvSongListDescription = it
+        }
+        mRootView.findViewById<TextView>(R.id.md_song_list_tv_author)?.let {
+            tvSongListAuthor = it
+        }
+        mRootView.findViewById<TextView>(R.id.md_song_list_tv_title_name)?.let {
+            tvSongListTitleName = it
+        }
+        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_title_back)?.let {
+            ivSongListTitleBack = it
+        }
+        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_small_cover)?.let {
+            ivSongListSmallCover = it
+        }
+        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_large_cover)?.let {
+            ivSongListLargeCover = it
+        }
+        mRootView.findViewById<TextView>(R.id.md_song_list_tv_tab_a)?.let {
+            tvSongListTagA = it
+        }
+        mRootView.findViewById<TextView>(R.id.md_song_list_tv_tab_b)?.let {
+            tvSongListTagB = it
+        }
+
+        if (bottomFunctionDialog == null) {
+            bottomFunctionDialog = BottomFunctionDialog(requireContext())
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

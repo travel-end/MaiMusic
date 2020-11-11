@@ -128,9 +128,9 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     val songListTitle = data as ListenSongListTitle
                     setText(R.id.item_common_title_tv, songListTitle.title)
                     setText(R.id.item_common_end_tv, songListTitle.text)
-                    itemView?.fastClickListener {
+                    clicked(R.id.item_common_end_tv,View.OnClickListener {
                         it.nav(R.id.to_all_song_list_fragment)
-                    }
+                    })
                 }
             }
             addItem(R.layout.item_horiz_rv) {
@@ -231,7 +231,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
 
     override fun initData() {
         super.initData()
-            mViewModel.getListenData()
+        mViewModel.getListenData()
     }
 
 
@@ -239,13 +239,11 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         super.observe()
         mViewModel.listData.observe(this, Observer {
             it?.let {
-//                rawAdapter?.submitList(it)
                 rawAdapter?.items = it
                 jAdapter?.notifyDataSetChanged()
             }
         })
         mViewModel.specialSongList.observe(this,Observer{
-//            LogUtil.e("specialSongList$it")
             if (isNotNullOrEmpty(it)) {
             }
         })

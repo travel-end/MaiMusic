@@ -7,6 +7,7 @@ import wind.maimusic.utils.*
 import wind.maimusic.vm.LocalSongViewModel
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
+import wind.widget.utils.fastClickListener
 
 class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
     override fun layoutResId()= R.layout.fragment_local
@@ -27,6 +28,9 @@ class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
         super.initData()
         /*获取数据库中本地音乐列表*/
         mViewModel.getLocalSong()
+        tvFunc?.fastClickListener {
+            mViewModel.scanLocalMusic()
+        }
     }
 
     override fun observe() {
@@ -60,7 +64,7 @@ class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
         })
     }
 
-    override fun doFunc() {
-        mViewModel.scanLocalMusic()
-    }
+//    override fun doFunc() {
+//        mViewModel.scanLocalMusic()
+//    }
 }

@@ -11,7 +11,7 @@ import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
-import wind.maimusic.widget.dialog.FloatDialog
+import wind.maimusic.widget.dialog.FloatLoadingDialog
 import wind.widget.utils.fastClickListener
 
 /**
@@ -26,7 +26,7 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     private var loadingSongView: View?=null
 
     // 普通加载的view
-    private var loadingNormalDialog: FloatDialog?=null
+    private var loadingNormalDialog: FloatLoadingDialog?=null
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
@@ -69,7 +69,7 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
             loadingSongView = songView
         }
         if (loadingNormalDialog == null) {
-            loadingNormalDialog = FloatDialog(this)
+            loadingNormalDialog = FloatLoadingDialog(this)
         }
     }
 

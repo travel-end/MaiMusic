@@ -15,6 +15,7 @@ import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.model.title.Title
 import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.getStringRes
+import wind.maimusic.utils.gone
 import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.vm.SearchHotViewModel
 import wind.widget.effcientrv.*
@@ -81,6 +82,8 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
                         } else {
                             visible(R.id.item_sh_tv_no)
                             invisible(R.id.item_history_end_iv)
+                            itemView?.findViewById<TagFlowLayout>(R.id.item_sh_flow_layout)?.removeAllViews()
+                            itemView?.findViewById<TagFlowLayout>(R.id.item_sh_flow_layout)?.gone()
                         }
                         clicked(R.id.item_history_end_iv,View.OnClickListener {
                             mViewModel.deleteSearchHistoryTag()

@@ -82,9 +82,15 @@
     <string name="edit">编辑</string>
     <string name="man">男歌手</string>
     <string name="woman">女歌手</string>
+    <string name="other_singer">其他歌手</string>
     <string name="hot_singer">热门歌手</string>
     <string name="search_history">搜索历史</string>
     <string name="recommend_search">推荐搜索</string>
     <string name="hot_search">热门搜索</string>
     <string name="no_search_history">暂无搜索记录</string>
+    <string name="input_phone">请输入手机号码</string>
+    <string name="input_password">请输入密码</string>
+    <string name="login_is_register">登录即代表注册</string>
+    <string name="forget_password">忘记密码？</string>
+    <string name="to_login">立即登录</string>
 </resources>

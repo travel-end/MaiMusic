@@ -12,7 +12,8 @@
         android:paddingBottom="@dimen/dp_20">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/collect_layout_to_login"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_28"
             android:layout_marginTop="@dimen/dp_13"

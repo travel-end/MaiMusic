@@ -62,6 +62,10 @@ object Constants {
     const val TEMP_BANNER2 = "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89"
 
     const val MSG_CODE = 1
+    const val MALE = 0
+    const val FAMELE = 1
+    const val HOT_SINGER = 2
+    const val OTHER_SINGER =3
 
     /**
      * 歌单类型 具体的名字需要在定义(名字为一句诗 配上一到两个标签,贴在每个歌单的封面 如古风、民谣等)

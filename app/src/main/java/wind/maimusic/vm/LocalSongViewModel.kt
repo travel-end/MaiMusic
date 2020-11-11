@@ -23,11 +23,11 @@ class LocalSongViewModel:BaseViewModel() {
     // TODO: 2020/11/1  添加一个扫描的动画
     /* 扫描本地音乐*/
     fun scanLocalMusic() {
-        val rawSongs = PhoneUtil.scanLocalSong()
-        scanMusic.value = rawSongs?.toMutableList()
-        if (isNotNullOrEmpty(rawSongs)) {
-            request {
-                MaiDatabase.getDatabase().localSongDao().addLocalSongs(rawSongs!!)
+            viewModelScope.launch {
+                val rawSongs = PhoneUtil.scanLocalSong()
+                if (isNotNullOrEmpty(rawSongs)) {
+                    scanMusic.value = rawSongs?.toMutableList()
+                    MaiDatabase.getDatabase().localSongDao().addLocalSongs(rawSongs!!)
             }
         }
     }

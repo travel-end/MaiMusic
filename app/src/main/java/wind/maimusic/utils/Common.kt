@@ -22,6 +22,7 @@ import androidx.navigation.Navigation
 import wind.maimusic.Constants
 import wind.maimusic.MaiApp
 import wind.maimusic.R
+import wind.maimusic.ui.activities.LoginActivity
 import wind.maimusic.ui.activities.PlayActivity
 import wind.widget.cost.Consts
 import wind.widget.utils.toIntPx
@@ -263,6 +264,13 @@ fun View?.nav(id:Int,bundle: Bundle?=null) {
 fun View?.navUp() {
     if (this != null) {
         Navigation.findNavController(this).navigateUp()
+    }
+}
+
+fun Activity?.toLogin() {
+    if (this != null) {
+        val loginIntent = Intent(this,LoginActivity::class.java)
+        this.startActivity(loginIntent)
     }
 }
 

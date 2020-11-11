@@ -11,7 +11,7 @@ import wind.maimusic.utils.isNotNullOrEmpty
  * @By Journey 2020/11/5
  * @Description
  */
-class FloatDialog(context: Context,private val msg: String?=null):Dialog(context,R.style.dialog_style) {
+class FloatLoadingDialog(context: Context, private val msg: String?=null):Dialog(context,R.style.dialog_style) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_loading_normal)
