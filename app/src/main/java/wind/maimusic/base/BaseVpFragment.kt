@@ -19,6 +19,7 @@ abstract class BaseVpFragment : BaseFragment() {
     private var vpFragments: Array<Fragment>? = null
 
     override fun initView() {
+        super.initView()
         mViewPager = mRootView.findViewById(R.id.frg_main_view_pager)
         mTabLayout = mRootView.findViewById(R.id.frg_main_title_common_tab_layout)
     }
