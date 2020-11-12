@@ -41,11 +41,6 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
     override fun initView() {
         super.initView()
         rvSearchHot = mRootView.findViewById(R.id.search_hot_rv)
-        val lp = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        lp.setMargins(10, 5, 10, 15)
         rvSearchHot.setup<Any> {
             adapter {
                 //2

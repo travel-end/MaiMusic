@@ -1,3 +1,4 @@
+####问题
 1、参考playAndroid 项目的room数据库表达方式 以及build中的压缩apk方式
 2、对于本项目中的tablayout，考虑使用android自带的tablayout，因为用的东西比较简单，使用的commonTabLayout太重了
 3、考虑使用原生的statusBar，不适用ImmesionBar
@@ -14,7 +15,7 @@
 14、能不能把数据存进数据库之后，把数据库导出，把assets文件清空。最后打包的时候，把确定的数据库在导入到最终的包中(为了省出assets占的空间)
 15、改造IndicatorView创建本项目首页的tabLayout指示器(或者参考MagicIndicator)
 
-todo
+####todo
 1、关于分区存储
 https://www.bilibili.com/video/BV1fT4y1g74Z
 
@@ -29,4 +30,9 @@ indicatorView
                 
 遇到的坑：
 1、NestedScrollView嵌套RecyclerView，如果RecyclerView的item项太多，会导致NestedScrollView的测量花费很长的时间，导致页面刷新缓慢        
+
+
+
+####github
+https://github.com/smashinggit/Study
                 

@@ -90,7 +90,7 @@
     <string name="no_search_history">暂无搜索记录</string>
     <string name="input_phone">请输入手机号码</string>
     <string name="input_password">请输入密码</string>
-    <string name="login_is_register">登录即代表注册</string>
+    <string name="login_is_register">首次登录即代表注册</string>
     <string name="forget_password">忘记密码？</string>
     <string name="to_login">立即登录</string>
 </resources>

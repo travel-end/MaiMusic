@@ -28,7 +28,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginEnd="@dimen/dp_28"
-        android:layout_marginTop="@dimen/dp_60">
+        android:layout_marginTop="@dimen/dp_76">
 
         <wind.widget.edittext.SearchEditText
             android:id="@+id/view_search_et"

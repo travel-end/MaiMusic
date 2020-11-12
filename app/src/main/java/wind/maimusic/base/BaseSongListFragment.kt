@@ -335,21 +335,6 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         })
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        ImmersionBar.setTitleBar(this,toolBar)
-//    }
-//
-//    override fun initStatusBar() {
-//        super.initStatusBar()
-//        ImmersionBar
-//            .with(this)
-//            .statusBarColorTransformEnable(false)
-//            .keyboardEnable(false)
-//            .navigationBarColor(R.color.colorPrimary)
-//            .init()
-//    }
-
     private fun initOptionsWidget() {
         /*可选的组件*/
         mRootView.findViewById<ImageView>(R.id.title_iv_back)?.let {
@@ -403,5 +388,13 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     override fun onDestroy() {
         super.onDestroy()
         requireContext().unbindService(playerConnection)
+    }
+
+    override fun initStatusBar() {
+        super.initStatusBar()
+        ImmersionBar
+            .with(this)
+            .statusBarDarkFont(false)
+            .init()
     }
 }

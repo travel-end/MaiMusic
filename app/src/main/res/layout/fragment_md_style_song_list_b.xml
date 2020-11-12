@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wind.widget.zoom.DropZoomScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@id/md_song_list_appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_270"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <ImageView
+                android:id="@id/md_song_list_iv_large_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+            <View
+                android:id="@+id/view_"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_60p"
+                app:layout_collapseMode="parallax" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax">
+                <TextView
+                    android:id="@id/md_song_list_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="KTV麦霸必点歌曲"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:layout_marginTop="@dimen/dp_48"
+                    android:layout_marginStart="@dimen/dp_18"
+                    app:drawableEndCompat="@drawable/ic_arrow_right" />
+                <TextView
+                    android:id="@id/md_song_list_tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="【不定时更新】敲带感可循环亿遍的古风歌，古装..."
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginStart="@dimen/dp_18" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_140"
+                    android:layout_marginTop="@dimen/dp_26">
+                    <ImageView
+                        android:id="@id/md_song_list_iv_small_cover"
+                        android:layout_width="@dimen/dp_82"
+                        android:layout_height="@dimen/dp_82"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="@dimen/dp_18" />
+                    <TextView
+                        android:id="@id/md_song_list_tv_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        tools:text="hs 创建"
+                        app:layout_constraintStart_toEndOf="@id/md_song_list_iv_small_cover"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="@dimen/dp_14"
+                        android:layout_marginStart="@dimen/dp_18" />
+                    <TextView
+                        android:id="@id/md_song_list_btn_collect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:paddingStart="@dimen/dp_10"
+                        android:paddingEnd="@dimen/dp_12"
+                        android:paddingBottom="@dimen/dp_4"
+                        android:paddingTop="@dimen/dp_4"
+                        android:drawablePadding="@dimen/dp_4"
+                        android:textSize="10sp"
+                        android:gravity="center"
+                        android:text="@string/tab_my_save"
+                        android:background="@drawable/shape_btn_blue_bg"
+                        app:layout_constraintStart_toEndOf="@id/md_song_list_iv_small_cover"
+                        app:layout_constraintTop_toBottomOf="@id/md_song_list_tv_author"
+                        android:layout_marginStart="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_10"
+                        app:drawableStartCompat="@drawable/love_small"
+                        tools:ignore="SmallSp" />
+
+                    <TextView
+                        android:id="@id/md_song_list_tv_tab_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:paddingStart="@dimen/dp_10"
+                        android:paddingEnd="@dimen/dp_12"
+                        android:paddingBottom="@dimen/dp_3"
+                        android:paddingTop="@dimen/dp_3"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        tools:text="游戏"
+                        android:background="@drawable/shape_btn_translate_bg"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/md_song_list_iv_small_cover"
+                        android:layout_marginStart="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_20" />
+                    <TextView
+                        android:id="@id/md_song_list_tv_tab_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:paddingStart="@dimen/dp_10"
+                        android:paddingEnd="@dimen/dp_12"
+                        android:paddingBottom="@dimen/dp_3"
+                        android:paddingTop="@dimen/dp_3"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        tools:text="流行"
+                        android:background="@drawable/shape_btn_translate_bg"
+                        app:layout_constraintStart_toEndOf="@id/md_song_list_tv_tab_a"
+                        app:layout_constraintTop_toBottomOf="@id/md_song_list_iv_small_cover"
+                        android:layout_marginStart="@dimen/dp_14"
+                        android:layout_marginTop="@dimen/dp_20" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@id/md_song_list_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                style="@style/clubToolbar"
+                android:background="@color/white"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                <ImageView
+                    android:id="@id/md_song_list_iv_title_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:src="@drawable/ic_arrow_left_white" />
+                <TextView
+                    android:id="@id/md_song_list_tv_title_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:maxLines="1"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:textColor="@color/text_color"
+                    tools:text="KTV麦霸必点歌曲" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/song_list_ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <include
+            android:id="@id/fl_play_all"
+            layout="@layout/view_play_all"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@id/song_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+</wind.widget.zoom.DropZoomScrollView>
