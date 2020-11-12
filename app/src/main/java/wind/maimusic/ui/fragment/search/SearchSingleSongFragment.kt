@@ -131,4 +131,6 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
     }
 
     override fun songListType() = 0
+    override fun initStatusBar() {
+    }
 }

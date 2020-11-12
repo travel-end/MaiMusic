@@ -38,4 +38,7 @@ class RecentListenFragment:BaseSongListFragment<RecentListenViewModel>() {
     }
 
     override fun songListType()=Consts.LIST_TYPE_HISTORY
+    override fun initStatusBar() {
+
+    }
 }

@@ -44,6 +44,7 @@ abstract class BaseFragment:Fragment() {
     }
     open fun initView() {
         val titleRootLayout = mRootView.findViewById<LinearLayout>(R.id.main_title_layout)
+
         val normalRootLayout = mRootView.findViewById<ConstraintLayout>(R.id.normal_title_layout)
         if (titleRootLayout!= null) {
             val lp = titleRootLayout.layoutParams as LinearLayout.LayoutParams

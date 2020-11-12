@@ -32,4 +32,8 @@ class DownloadedFragment : BaseSongListFragment<DownloadedViewModel>() {
             flPlayAll.visible()
         })
     }
+
+    override fun initStatusBar() {
+
+    }
 }

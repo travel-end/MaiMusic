@@ -56,6 +56,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var tvSongListTitleName: TextView? = null
     private var tvSongListTagA: TextView? = null
     private var tvSongListTagB: TextView? = null
+    private var immersionBar: ImmersionBar?=null
 
     private var ivSongListTitleBack: ImageView? = null
 
@@ -320,16 +321,21 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 tvSongListTitleName?.alpha = textAlpha
                 canRefresh = true
                 if (canRefresh) {
+                    LogUtil.e("11111111111111111")
                     canRefresh = false
                     ivSongListTitleBack?.setImageResource(R.drawable.ic_arrow_left_white)
+                    immersionBar?.statusBarDarkFont(false)?.init()
                 }
             } else {
                 canRefresh = true
                 if (canRefresh) {
+                    LogUtil.e("2222222222")
                     canRefresh = false
                     toolBar?.background?.alpha = 255
                     tvSongListTitleName?.alpha = 1.0f
                     ivSongListTitleBack?.setImageResource(R.drawable.ic_arrow_left)
+
+                    immersionBar?.statusBarDarkFont(true)?.init()
                 }
             }
         })
@@ -392,9 +398,16 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
 
     override fun initStatusBar() {
         super.initStatusBar()
-        ImmersionBar
+        immersionBar = ImmersionBar
             .with(this)
-            .statusBarDarkFont(false)
-            .init()
+        immersionBar?.statusBarDarkFont(false)?.init()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        immersionBar
+            ?.statusBarDarkFont(true)
+            ?.navigationBarColor(R.color.grayWhites)
+            ?.init()
     }
 }

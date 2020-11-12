@@ -64,7 +64,7 @@ class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
         })
     }
 
-//    override fun doFunc() {
-//        mViewModel.scanLocalMusic()
-//    }
+    override fun initStatusBar() {
+
+    }
 }

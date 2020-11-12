@@ -1,6 +1,7 @@
 package wind.maimusic.ui.fragment.songlist
 
 import androidx.lifecycle.Observer
+import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
