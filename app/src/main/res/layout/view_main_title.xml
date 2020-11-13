@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_14"
         android:layout_marginEnd="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_4"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@id/main_title_search"
@@ -116,7 +115,7 @@
                 android:src="@drawable/temp_logo" />
         </FrameLayout>
         <com.google.android.material.tabs.TabLayout
-            android:id="@id/main_title_tab_layout"
+            android:id="@id/frg_main_title_common_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabSelectedTextColor="@color/black_33"
@@ -126,18 +125,6 @@
             app:tabIndicatorFullWidth="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_listener_song" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_discover" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_my_save" />
         </com.google.android.material.tabs.TabLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

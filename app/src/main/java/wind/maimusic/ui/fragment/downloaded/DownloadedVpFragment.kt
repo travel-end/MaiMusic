@@ -17,8 +17,8 @@ class DownloadedVpFragment : BaseVpFragment() {
             R.string.download_music.getStringRes()
         initVpTitle(
             arrayOf(
-                mTabLayout.newTab().setText(R.string.has_downloaded.getStringRes())
-                , mTabLayout.newTab().setText(R.string.downloading.getStringRes())
+                R.string.has_downloaded.getStringRes()
+                , R.string.downloading.getStringRes()
             )
         )
         initVpFragments(

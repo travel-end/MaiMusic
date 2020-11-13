@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import wind.maimusic.Constants
 import wind.maimusic.R
+import wind.maimusic.utils.LogUtil
 import wind.widget.play.ImUtils
 
 /**
@@ -27,32 +28,37 @@ abstract class BaseFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mRootView = inflater.inflate(layoutResId(),container,false)
+        LogUtil.e("BaseFragment---onCreateView")
         return mRootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initView()
+        LogUtil.e("BaseFragment---onActivityCreated")
         initStatusBar()
+        initView()
+
+        initData()
+        initAction()
     }
 
     override fun onStart() {
         super.onStart()
-        initData()
-        initAction()
+        LogUtil.e("BaseFragment---onStart")
+//        initData()
+//        initAction()
 
     }
     open fun initView() {
         val titleRootLayout = mRootView.findViewById<LinearLayout>(R.id.main_title_layout)
-
         val normalRootLayout = mRootView.findViewById<ConstraintLayout>(R.id.normal_title_layout)
         if (titleRootLayout!= null) {
             val lp = titleRootLayout.layoutParams as LinearLayout.LayoutParams
-            lp.topMargin = ImUtils.getStatusBarHeight(requireContext())
+            lp.topMargin = ImUtils.getStatusBarHeight(requireContext()) + 10// 补点偏差
         }
         if (normalRootLayout!= null) {
             val lp = normalRootLayout.layoutParams as LinearLayout.LayoutParams
-            lp.topMargin = ImUtils.getStatusBarHeight(requireContext())
+            lp.topMargin = ImUtils.getStatusBarHeight(requireContext()) + 10
         }
     }
     open fun initData() {

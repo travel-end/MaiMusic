@@ -37,7 +37,6 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
     private var navigationManager: NavigationManager? = null
     private var currentSong: Song? = null
     private var flag: Boolean = false
-//    private var playing: Boolean = false
     private var existLivingService: Boolean = false
     private var currentPlayProgress: Long = 0L
     override fun layoutResId() = R.layout.activity_main

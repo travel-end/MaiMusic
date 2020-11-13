@@ -4,18 +4,19 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.Constants
 import wind.maimusic.R
@@ -84,7 +85,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var songSinger: String? = null
     private var songId: String? = null
     private var isDownloaded: Boolean = false
-    private var canRefresh: Boolean = true
+    private var alphaFlag: Boolean = true
 
     /*点击改变item状态的标志*/
     private var lastPosition: Int = -1
@@ -313,28 +314,22 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         appBarLayout?.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             if (verticalOffset > -alphaMaxOffset) {
                 toolBar?.background?.alpha = 255 * -verticalOffset / alphaMaxOffset
-//                LogUtil.e("alpha:${(-verticalOffset.toFloat() / 600)}, verticalOffset:$verticalOffset")
                 var textAlpha = -verticalOffset.toFloat() / 1000
                 if (textAlpha > 1) {
                     textAlpha = 1.00f
                 }
                 tvSongListTitleName?.alpha = textAlpha
-                canRefresh = true
-                if (canRefresh) {
-                    LogUtil.e("11111111111111111")
-                    canRefresh = false
+                if (alphaFlag) {
+                    alphaFlag = false
                     ivSongListTitleBack?.setImageResource(R.drawable.ic_arrow_left_white)
                     immersionBar?.statusBarDarkFont(false)?.init()
                 }
             } else {
-                canRefresh = true
-                if (canRefresh) {
-                    LogUtil.e("2222222222")
-                    canRefresh = false
+                if (!alphaFlag) {
+                    alphaFlag = true
                     toolBar?.background?.alpha = 255
                     tvSongListTitleName?.alpha = 1.0f
                     ivSongListTitleBack?.setImageResource(R.drawable.ic_arrow_left)
-
                     immersionBar?.statusBarDarkFont(true)?.init()
                 }
             }
@@ -385,7 +380,6 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         mRootView.findViewById<TextView>(R.id.md_song_list_tv_tab_b)?.let {
             tvSongListTagB = it
         }
-
         if (bottomFunctionDialog == null) {
             bottomFunctionDialog = BottomFunctionDialog(requireContext())
         }

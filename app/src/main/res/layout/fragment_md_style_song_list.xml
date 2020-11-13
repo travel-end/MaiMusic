@@ -9,7 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp">
+        <!--
+            app:titleEnabled="true"
+            app:title="我渣渣渣渣"
+            app:expandedTitleGravity="start|top"
+            app:collapsedTitleGravity="center"
+            app:contentScrim="@color/colorPrimary"
+            app:scrimAnimationDuration="1200"
+            app:scrimVisibleHeightTrigger="@dimen/dp_150"
+            app:statusBarScrim="@color/red_FD5F5F"
+        -->
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/md_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_270"
             android:fitsSystemWindows="true"
@@ -136,7 +147,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@id/md_song_list_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="@dimen/dp_62"
                 style="@style/clubToolbar"
                 android:background="@color/white"
                 app:layout_collapseMode="pin"
@@ -144,22 +155,24 @@
                 <ImageView
                     android:id="@id/md_song_list_iv_title_back"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/dp_12"
                     android:layout_marginStart="@dimen/dp_16"
                     android:src="@drawable/ic_arrow_left_white" />
                 <TextView
                     android:id="@id/md_song_list_tv_title_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/dp_12"
                     android:textSize="18sp"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:maxLines="1"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_20"
-                    android:textColor="@color/text_color"
+                    android:layout_marginEnd="@dimen/dp_26"
+                    android:textColor="@color/black2"
                     tools:text="KTV麦霸必点歌曲" />
 
             </androidx.appcompat.widget.Toolbar>
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

@@ -30,8 +30,8 @@ class SearchVpFragment : BaseVpFragment() {
         searchText = arguments?.getString(Constants.KEY_SEARCH_CONTENT) ?: ""
         initVpTitle(
             arrayOf(
-                mTabLayout.newTab().setText(R.string.single_song.getStringRes())
-                , mTabLayout.newTab().setText(R.string.album.getStringRes())
+                R.string.single_song.getStringRes(),
+                R.string.album.getStringRes()
             )
         )
         initVpFragments(

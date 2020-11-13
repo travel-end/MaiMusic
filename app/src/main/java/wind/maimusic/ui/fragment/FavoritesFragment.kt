@@ -87,7 +87,6 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
                     isSongListEmpty = false
                     val songList = mutableListOf<SongListItem>()
                     songList.add(it)
-//                    createdSongListAdapter.refreshData(songList)
                     createdSongListAdapter.mDataList =songList
                     rvCreateNewSongList.adapter = createdSongListAdapter
                     rvCreateNewSongList.visible()

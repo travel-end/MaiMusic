@@ -45,8 +45,8 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
         initStatusView()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun initData() {
+        super.initData()
         observe()
     }
 
