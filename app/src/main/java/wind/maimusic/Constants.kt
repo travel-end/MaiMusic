@@ -52,7 +52,7 @@ object Constants {
     const val SONG_LIST_TYPE = "song_list_type"
     const val KEY_SEARCH_CONTENT= "key_search_content"
     const val TOOLBAR_MAX_OFFSET = 150
-    const val SEARCH_SONG_PAGE_SIZE = 25
+    const val SEARCH_SONG_PAGE_SIZE = 20
     const val TEMP_SONG_COVER1_NORMAL = "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg"
     const val TEMP_SONG_COVER2_SMALL = "${Consts.ALBUM_PIC}001Jegbz00ePg5${Consts.JPG}"// 小图
     const val TEMP_SONG_COVER3_BIG = "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg"//大图

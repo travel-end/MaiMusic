@@ -1,12 +1,15 @@
 package wind.maimusic.ui.fragment.search
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
 import wind.maimusic.model.core.ListBean
 import wind.maimusic.ui.activities.MainActivity
+import wind.maimusic.ui.adapter.OnSingleSongItemClickListener
+import wind.maimusic.ui.adapter.SearchSingleSongAdapter
 import wind.maimusic.utils.*
 import wind.maimusic.vm.SearchResultViewModel
 import wind.widget.cost.Consts
@@ -18,12 +21,13 @@ import wind.widget.rippleview.RippleView
 /**
  * 歌曲搜索结果（单曲）
  */
-class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
+class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>(),
+    OnSingleSongItemClickListener {
     private var searchText: String = ""
-    private var rawAdapter: EfficientAdapter<ListBean>? = null
+    private var rawAdapter: SearchSingleSongAdapter? = null
     private var jAdapter: JRefreshAndLoadMoreAdapter? = null
     private var pageOffset: Int = 1
-    private var dataList = mutableListOf<ListBean>()
+    private var mData = mutableListOf<ListBean>()
 
     companion object {
         fun newInstance(searchText: String): SearchSingleSongFragment {
@@ -38,41 +42,7 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
 
     override fun layoutResId() = R.layout.fragment_search_single_song
     override fun setRvContent() {
-        rawAdapter = efficientAdapter {
-            addItem(R.layout.item_search_song) {
-                bindViewHolder { data, _, _ ->
-                    data?.let { s ->
-                        setText(R.id.item_search_song_list_tv_song_name, s.songname)
-                        setText(
-                            R.id.item_search_song_list_tv_song_singer,
-                            StringUtil.getSinger(s)
-                        )
-                        setText(R.id.item_search_song_list_tv_song_album, s.albumname)
-                        setVisible(
-                            R.id.item_search_song_list_iv_downloaded,
-                            false
-                        ) // TODO: 2020/10/28
-                        if (s.lyric.isNotNullOrEmpty()) {
-                            setVisible(R.id.item_search_song_list_tv_song_lyric, true)
-                            setText(R.id.item_search_song_list_tv_song_lyric, s.lyric)
-                        }
-                        (itemView as RippleView).setOnRippleCompleteListener {
-                            (requireActivity() as MainActivity).showLoadingNormal("")
-                            val song = SongUtil.assemblySong(s, Consts.ONLINE_SEARCH)
-                            mViewModel.getSongPlayUrl(song)
-                        }
-                    }
-                }
-            }
-        }
-        jAdapter = JRefreshAndLoadMoreAdapter(requireContext(), rawAdapter)
-        jAdapter?.setIsOpenRefresh(false)
-        jAdapter?.setOnLoadMoreListener {
-            LogUtil.e("--setOnLoadMoreListener--")
-            pageOffset += 1
-            mViewModel.searchSong(searchText, pageOffset)
-        }
-        rvSongList.adapter = jAdapter
+        rvSongList.setHasFixedSize(true)
     }
 
     override fun initData() {
@@ -91,25 +61,49 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
                 if (song != null) {
                     val songList = song.list
                     if (isNotNullOrEmpty(songList)) {
-                        hideLoadingResultView()
-                        val size = songList!!.size
-                        flPlayAll.visible()
-                        dataList.addAll(songList)
-                        LogUtil.e("----SearchSingleSongFragment observe dataList size--:${dataList.size}")
-                        if (pageOffset == 1) {
-                            rawAdapter?.items = dataList
-                            jAdapter?.notifyDataSetChanged()
+                        if (mData.isEmpty()) {// 初始加载
+                            hideLoadingResultView()
+                            flPlayAll.visible()
+                            mData.addAll(songList!!)
+                            rawAdapter = SearchSingleSongAdapter(requireContext(), searchText,mData)
+                            rawAdapter?.setOnSingleSongItemClickListener(this@SearchSingleSongFragment)
+                            jAdapter = JRefreshAndLoadMoreAdapter(requireContext(), rawAdapter)
+                            jAdapter?.setOnLoadMoreListener {
+                                pageOffset += 1
+                                mViewModel.searchSong(searchText, pageOffset)
+                            }
+                            jAdapter?.setIsOpenRefresh(false)
+                            rvSongList.adapter = jAdapter
+                            rvSongList.visible()
+                            mViewModel.addOneSearchTag(searchText)
                         } else {
+                            val size = mData.size
+                            val songListSize = songList!!.size
+//                            LogUtil.e("size=$size")
+//                            LogUtil.e("songList size=$songListSize")
+                            mData.addAll(songList)
                             jAdapter?.setLoadComplete()
-                            if (size == 0) {
-                                jAdapter?.setNoMore()
+                            if (songListSize < Constants.SEARCH_SONG_PAGE_SIZE) {
+                                if (songListSize == 0) {
+                                    jAdapter?.setNoMore()
+                                } else {
+                                    jAdapter?.notifyItemRangeInserted(
+                                        jAdapter?.getRealPosition(size)!!,
+                                        songListSize
+                                    )
+                                }
                             } else {
-                                jAdapter?.notifyItemRangeInserted(jAdapter?.getRealPosition(size)!!, size)
+                                jAdapter?.notifyItemRangeInserted(
+                                    jAdapter?.getRealPosition(size)!!,
+                                    Constants.SEARCH_SONG_PAGE_SIZE
+                                )
                             }
                         }
-                        rvSongList.visible()
+                    } else {
+                        if (mData.isNotEmpty()) {
+                            jAdapter?.setNoMore()
+                        }
                     }
-                    mViewModel.addOneSearchTag(searchText)
                 }
             }
         })
@@ -132,5 +126,15 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>() {
 
     override fun songListType() = 0
     override fun initStatusBar() {
+    }
+
+    override fun onSingleSongItemClick(song: ListBean, position: Int) {
+        (requireActivity() as MainActivity).showLoadingNormal("")
+        val currentSearchSong = SongUtil.assemblySong(song, Consts.ONLINE_SEARCH)
+        mViewModel.getSongPlayUrl(currentSearchSong)
+    }
+
+    override fun onRightFunctionClick(view: View) {
+        TODO("Not yet implemented")
     }
 }

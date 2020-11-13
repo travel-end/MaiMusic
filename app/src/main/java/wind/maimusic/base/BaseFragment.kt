@@ -32,6 +32,11 @@ abstract class BaseFragment:Fragment() {
         return mRootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        LogUtil.e("BaseFragment---onViewCreated")
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         LogUtil.e("BaseFragment---onActivityCreated")

@@ -1,5 +1,6 @@
 package wind.maimusic.vm
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -9,6 +10,7 @@ import wind.maimusic.R
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
+import wind.maimusic.model.core.Album
 import wind.maimusic.model.core.SearchSong
 import wind.maimusic.model.searchhot.HistoryTag
 import wind.maimusic.room.database.MaiDatabase
@@ -99,5 +101,22 @@ class SearchResultViewModel:BaseViewModel() {
 }
 
 class SearchAlbumResultViewModel:BaseViewModel()  {
-
+    val searchAlbumResult: MutableLiveData<Album> = MutableLiveData()
+    fun searchAlbum(keyWord:String,page: Int) {
+        loadStatus.value = State(StateType.LOADING_SONG)
+        viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.IO) {
+                    apiService.searchAlbum(keyWord, page)
+                }
+            }.onSuccess {
+                val albumList = it.data?.album?.list
+                Log.e("JG", "关键词搜索专辑结果：albumList $albumList")
+                searchAlbumResult.value = it
+            }.onFailure {
+                handleException(it, State(StateType.ERROR,msg = R.string.empty.getStringRes()))// TODO: 2020/10/29 处理搜索结果空
+            }
+            loadStatus.value = State(StateType.DISMISSING_SONG)
+        }
+    }
 }

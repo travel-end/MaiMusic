@@ -4,21 +4,14 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.navigation.Navigation
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import wind.maimusic.Constants
 import wind.maimusic.R
-import wind.maimusic.base.BaseFragment
 import wind.maimusic.base.BaseVpFragment
 import wind.maimusic.ui.activities.MainActivity
-import wind.maimusic.ui.fragment.search.SearchAlbumFragment
-import wind.maimusic.ui.fragment.search.SearchSingleSongFragment
-import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.gone
 import wind.maimusic.utils.visible
-import wind.widget.tablayout.OnTabSelectListener
 import wind.widget.utils.fastClickListener
 
 class MainFragment : BaseVpFragment() {

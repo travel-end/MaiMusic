@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,18 @@ fun Int.getStringRes()=
 fun String?.getEditableStr() :Editable {
     val value = this ?: ""
     return SpannableStringBuilder(value)
+}
+
+fun TextView?.setDiffColor(appointStr:String?,originalStr:String?) {
+    if (this != null) {
+        if (appointStr!=null && originalStr!=null) {
+            val ori = originalStr.replace(
+                appointStr.toRegex(),
+                "<font color='#FF4081'>$appointStr</font>"
+            )
+            text = Html.fromHtml(ori)
+        }
+    }
 }
 
 

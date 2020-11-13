@@ -123,6 +123,7 @@
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabTextAppearance="@style/tabLayoutTextSize"
             app:tabIndicatorFullWidth="false"
+            app:tabRippleColor="@color/translate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
         </com.google.android.material.tabs.TabLayout>

@@ -17,13 +17,11 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:layout_marginTop="@dimen/dp_20" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_mv"
+    <wind.widget.jrecyclerview.JRecycleView
+        android:id="@+id/rv_search_album"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
 </LinearLayout>
