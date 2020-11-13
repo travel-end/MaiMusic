@@ -117,7 +117,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@id/frg_main_title_common_tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_38"
             app:tabSelectedTextColor="@color/black_33"
             app:tabTextColor="@color/color999999"
             app:tabIndicatorColor="@color/colorPrimary"
