@@ -110,7 +110,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     itemClicked(View.OnClickListener {
                         when(position) {
                             1->{//每日推荐
-                                it.toSongListFrg(Constants.ST_DAILY_RECOMMEND)
+                                it.recommendToSongList(Constants.ST_DAILY_RECOMMEND)
                             }
                             2->{
                                 it.nav(R.id.to_all_song_list_fragment)

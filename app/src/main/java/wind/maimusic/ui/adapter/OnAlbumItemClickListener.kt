@@ -1,5 +1,6 @@
 package wind.maimusic.ui.adapter
 
+import android.view.View
 import wind.maimusic.model.core.AlListBean
 
 /**
@@ -7,5 +8,5 @@ import wind.maimusic.model.core.AlListBean
  * @Description
  */
 interface OnAlbumItemClickListener {
-    fun onAlbumItemClick(album: AlListBean, position:Int)
+    fun onAlbumItemClick(album: AlListBean, position:Int,view:View)
 }

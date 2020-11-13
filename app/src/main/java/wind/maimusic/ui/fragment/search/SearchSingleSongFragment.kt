@@ -79,8 +79,6 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>(),
                         } else {
                             val size = mData.size
                             val songListSize = songList!!.size
-//                            LogUtil.e("size=$size")
-//                            LogUtil.e("songList size=$songListSize")
                             mData.addAll(songList)
                             jAdapter?.setLoadComplete()
                             if (songListSize < Constants.SEARCH_SONG_PAGE_SIZE) {

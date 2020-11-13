@@ -85,6 +85,8 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+
     </fragment>
 
     <fragment
@@ -95,6 +97,14 @@
             android:name="hot_search"
             android:defaultValue=""
             app:argType="string" />
+
+        <action
+            android:id="@+id/to_album_song_fragment"
+            app:destination="@id/album_song_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -152,7 +162,31 @@
             android:name="song_list_type"
             android:defaultValue=""
             app:argType="string" />
-
+    </fragment>
+    <fragment
+        android:id="@+id/album_song_fragment"
+        android:name="wind.maimusic.ui.fragment.search.SearchAlbumSongFragment"
+        tools:layout="@layout/fragment_md_style_song_list">
+        <argument
+            android:name="album_id"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="album_name"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="song_list_desc"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="song_singer_name"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="album_public_time"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/singers_fragment"

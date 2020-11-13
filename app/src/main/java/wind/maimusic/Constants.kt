@@ -50,6 +50,13 @@ object Constants {
     }
     const val HOT_SEARCH = "hot_search"
     const val SONG_LIST_TYPE = "song_list_type"
+    const val ALBUM_ID= "album_id"
+    const val ALBUM_NAME = "album_name"
+    const val ALBUM_SINGER = "album_singer"
+    const val ALBUM_COVER = "album_cover"
+    const val ALBUM_PUBLIC_TIME = "album_public_time"
+
+
     const val KEY_SEARCH_CONTENT= "key_search_content"
     const val TOOLBAR_MAX_OFFSET = 150
     const val SEARCH_SONG_PAGE_SIZE = 20
@@ -73,6 +80,7 @@ object Constants {
      */
     const val ST_DEFAULT= 0//默认的歌单 对于一些没有mainType和secondType的都放到默认歌单中
     const val ST_DAILY_RECOMMEND = 21// 每日推荐
+    const val ST_ALBUM_SONG_LIST = 22
     const val ST_DAILY_HOT_SONG = 20
 
 

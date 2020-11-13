@@ -53,7 +53,7 @@ class AlbumSongsAdapter(private val context: Context, private val searchText:Str
                 tvAlbumSinger.setDiffColor(searchText,bean.singerName)
                 tvAlbumPublicTime.setDiffColor(searchText,bean.publicTime)
                 itemView.fastClickListener {
-                    onAlbumItemClickListener?.onAlbumItemClick(bean,position)
+                    onAlbumItemClickListener?.onAlbumItemClick(bean,position,itemView)
                 }
             }
         }

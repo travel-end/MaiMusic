@@ -23,6 +23,7 @@ import androidx.navigation.Navigation
 import wind.maimusic.Constants
 import wind.maimusic.MaiApp
 import wind.maimusic.R
+import wind.maimusic.model.core.AlListBean
 import wind.maimusic.ui.activities.LoginActivity
 import wind.maimusic.ui.activities.PlayActivity
 import wind.widget.cost.Consts
@@ -256,11 +257,26 @@ fun Activity.toPlayAct(playStatus:Int) {
 }
 // 关于Navigation: https://juejin.im/post/6844904180990246926
 /*去歌单页面*/
-fun View?.toSongListFrg(songListType:Int) {
+fun View?.recommendToSongList(songListType:Int) {
     if (this != null) {
         val bundle = Bundle()
         bundle.putString(Constants.SONG_LIST_TYPE,songListType.toString())
         Navigation.findNavController(this).navigate(R.id.to_song_list_fragment,bundle)
+    }
+}
+
+fun View?.albumToSongList(
+    album:AlListBean
+) {
+    if (this != null) {
+        val bundle = Bundle().apply {
+            putString(Constants.ALBUM_ID,album.albumMID)
+            putString(Constants.ALBUM_NAME,album.albumName)
+            putString(Constants.ALBUM_COVER,album.albumPic)
+            putString(Constants.ALBUM_SINGER,album.singerName)
+            putString(Constants.ALBUM_PUBLIC_TIME,album.publicTime)
+        }
+        Navigation.findNavController(this).navigate(R.id.to_album_song_fragment,bundle)
     }
 }
 

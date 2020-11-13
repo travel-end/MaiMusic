@@ -284,7 +284,7 @@ class PlayerService : Service() {
                                         getOnlineSongPlayUrl(song,currentSongId,Consts.ONLINE_FIRST_LAUNCH,restartTime)
                                     }
                                 }
-                                Constants.ST_DAILY_RECOMMEND->{
+                                Constants.ST_DAILY_RECOMMEND->{// TODO 每日推荐和专辑推荐应该属于同一个类型 在search_online_song表中
                                     if (isNotNullOrEmpty(onlineSongs)) {
                                         val currentSongId = onlineSongs!![currentPosition].songId
                                         getOnlineSongPlayUrl(song,currentSongId,Constants.ST_DAILY_RECOMMEND,restartTime)

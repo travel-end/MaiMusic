@@ -1,6 +1,7 @@
 package wind.maimusic.ui.fragment.search
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import wind.maimusic.Constants
@@ -12,6 +13,7 @@ import wind.maimusic.ui.adapter.AlbumSongsAdapter
 import wind.maimusic.ui.adapter.OnAlbumItemClickListener
 import wind.maimusic.ui.adapter.SearchSingleSongAdapter
 import wind.maimusic.utils.LogUtil
+import wind.maimusic.utils.albumToSongList
 import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.utils.visible
 import wind.maimusic.vm.SearchAlbumResultViewModel
@@ -106,7 +108,7 @@ class SearchAlbumFragment:BaseLifeCycleFragment<SearchAlbumResultViewModel>(),On
         })
     }
 
-    override fun onAlbumItemClick(album: AlListBean, position: Int) {
-
+    override fun onAlbumItemClick(album: AlListBean, position: Int,view:View) {
+        view.albumToSongList(album)
     }
 }

@@ -1,5 +1,7 @@
 package wind.maimusic.utils
 
+import wind.maimusic.model.core.AlbumListBean
+import wind.maimusic.model.core.AlbumSingerBean
 import wind.maimusic.model.core.ListBean
 
 /**
@@ -20,6 +22,22 @@ object StringUtil {
     }
 
     fun getSinger(data: ListBean):String? {
+        val singerList = data.singer
+        singerList?.let {
+            if (it.isNotEmpty()) {
+                val singer = StringBuilder(it[0].name?:"")
+                if (it.size > 1) {
+                    for (i in it.indices+1) {
+                        val bean = it[i]
+                        singer.append("、").append(bean.name)
+                    }
+                }
+                return singer.toString()
+            }
+        }
+        return null
+    }
+    fun getSinger(data: AlbumListBean):String? {
         val singerList = data.singer
         singerList?.let {
             if (it.isNotEmpty()) {

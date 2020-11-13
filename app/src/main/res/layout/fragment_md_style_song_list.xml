@@ -35,7 +35,7 @@
                 android:id="@+id/view_"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/black_50p"
+                android:background="@color/black_60p"
                 app:layout_collapseMode="parallax" />
             <LinearLayout
                 android:layout_width="match_parent"

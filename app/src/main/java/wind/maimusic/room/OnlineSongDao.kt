@@ -16,6 +16,12 @@ import wind.maimusic.model.OnlineSong
 ……
 第七页: SELECT * FROM 表名 LIMIT 18,3   --18,19,20
  */
+
+// TODO: 2020/11/14 所有在线音乐的表，只放在一个表里，每次向这个表里插入数据之前 ，将之前
+// 的数据删除，这样就不用区分那么多的在线音乐类型了（比如每日推荐、热推、专辑歌曲等等...）
+// 另外 需要区分已经存在online_song表中的歌曲 这个表中的歌曲是已经存好的
+// 与搜索到的在线音乐要区分开（新建一个表：search_online_song）
+
 @Dao
 interface OnlineSongDao {
     @Insert(entity = OnlineSong::class,onConflict = OnConflictStrategy.REPLACE)

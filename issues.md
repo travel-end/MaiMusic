@@ -14,6 +14,7 @@
 13、关于jetPack库使用:https://github.com/OnexZgj/Jetpack_Component
 14、能不能把数据存进数据库之后，把数据库导出，把assets文件清空。最后打包的时候，把确定的数据库在导入到最终的包中(为了省出assets占的空间)
 15、改造IndicatorView创建本项目首页的tabLayout指示器(或者参考MagicIndicator)
+16、对于已经下载的音乐的处理（包括本地音乐和已经下载的音乐，都算isDownload，这两个音乐是存在不同的路径下面的）
 
 ####todo
 1、关于分区存储

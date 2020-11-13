@@ -49,12 +49,12 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     protected var tvFunc: TextView? = null
     private var appBarLayout: AppBarLayout? = null
     private var toolBar: Toolbar? = null
-    private var tvSongListName: TextView? = null
-    private var tvSongListDescription: TextView? = null
-    private var ivSongListSmallCover: ImageView? = null
-    private var ivSongListLargeCover: ImageView? = null
-    private var tvSongListAuthor: TextView? = null
-    private var tvSongListTitleName: TextView? = null
+    protected var tvSongListName: TextView? = null
+    protected var tvSongListDescription: TextView? = null
+    protected var ivSongListSmallCover: ImageView? = null
+    protected var ivSongListLargeCover: ImageView? = null
+    protected var tvSongListAuthor: TextView? = null
+    protected var tvSongListTitleName: TextView? = null
     private var tvSongListTagA: TextView? = null
     private var tvSongListTagB: TextView? = null
     private var immersionBar: ImmersionBar?=null
@@ -84,11 +84,11 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var songName: String? = null
     private var songSinger: String? = null
     private var songId: String? = null
-    private var isDownloaded: Boolean = false
+    private var mIsDownloaded: Boolean = false
     private var alphaFlag: Boolean = true
 
     /*点击改变item状态的标志*/
-    private var lastPosition: Int = -1
+    protected var lastPosition: Int = -1
 
     /*需要操作layoutManager的地方调用*/
     protected lateinit var layoutManager: LinearLayoutManager
@@ -130,7 +130,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                             setDataType(it)
                             setText(R.id.item_song_list_tv_song_name, songName)
                             setText(R.id.item_song_list_tv_song_singer, songSinger)
-                            setVisible(R.id.item_song_list_iv_downloaded, isDownloaded)
+                            setVisible(R.id.item_song_list_iv_downloaded, mIsDownloaded)
                             val song = SongUtil.getSong()
                             val currentSongId = song?.songId
                             if (currentSongId != null) {
@@ -203,35 +203,35 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 songName = data.name
                 songSinger = data.singer
                 songId = data.songId
-                isDownloaded = true
+                mIsDownloaded = true
             }
             Consts.LIST_TYPE_HISTORY -> {
                 data as HistorySong
                 songName = data.name
                 songSinger = data.singer
                 songId = data.songId
-                isDownloaded = data.isDownload
+                mIsDownloaded = data.isDownload
             }
             Consts.LIST_TYPE_DOWNLOAD -> {
                 data as Downloaded
                 songName = data.name
                 songSinger = data.singer
                 songId = data.songId
-                isDownloaded = true
+                mIsDownloaded = true
             }
             Consts.LIST_TYPE_LOVE -> {
                 data as LoveSong
                 songName = data.name
                 songSinger = data.singer
                 songId = data.songId
-                isDownloaded = data.isDownload ?: false
+                mIsDownloaded = data.isDownload ?: false
             }
             Constants.ST_DAILY_RECOMMEND -> {
                 data as OnlineSong
                 songName = data.name
                 songSinger = data.singer
                 songId = data.songId
-                isDownloaded = data.isDownload
+                mIsDownloaded = data.isDownload
             }
         }
     }

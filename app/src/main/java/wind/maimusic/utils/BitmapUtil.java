@@ -12,6 +12,7 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.widget.Toast;
 
+import wind.maimusic.MaiApp;
 import wind.widget.play.ImUtils;
 
 /**
@@ -279,6 +280,30 @@ public class BitmapUtil {
         final Drawable foregroundDrawable = new BitmapDrawable(blurBitmap);
         /*加入灰色遮罩层，避免图片过亮影响其他控件*/
         foregroundDrawable.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+        return foregroundDrawable;
+    }
+
+
+    public static Drawable getSongListBackground(Context context,Bitmap bitmap) {
+        /*得到屏幕的宽高比，以便按比例切割图片一部分*/
+        final float widthHeightSize = (float) (ImUtils.getScreenWidth(context)
+                * 1.0 / ImUtils.getScreenHeight(context) * 1.0);
+
+        int cropBitmapWidth = (int) (widthHeightSize * bitmap.getHeight());
+        int cropBitmapWidthX = (int) ((bitmap.getWidth() - cropBitmapWidth) / 2.0);
+
+        /*切割部分图片*/
+        Bitmap cropBitmap = Bitmap.createBitmap(bitmap, cropBitmapWidthX, 0, cropBitmapWidth,
+                bitmap.getHeight());
+        /*缩小图片*/
+        Bitmap scaleBitmap = Bitmap.createScaledBitmap(cropBitmap, bitmap.getWidth() / 50, bitmap
+                .getHeight() / 50, false);
+        /*模糊化*/
+        final Bitmap blurBitmap = fastBlur(scaleBitmap, 3, true);
+
+        final Drawable foregroundDrawable = new BitmapDrawable(blurBitmap);
+        /*加入灰色遮罩层，避免图片过亮影响其他控件*/
+
         return foregroundDrawable;
     }
 }
