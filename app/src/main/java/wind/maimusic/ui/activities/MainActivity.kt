@@ -165,6 +165,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         Bus.observe<Int>(Consts.SONG_STATUS_CHANGE, this) { status ->
             when (status) {
                 Consts.SONG_CHANGE -> {
+                    dismissLoadingNormal()
                     currentSong = SongUtil.getSong()// 刷新当前播放的歌曲
                     if (currentSong != null) {
                         bottomPlayerView.setCurrentSong(currentSong!!)
@@ -182,6 +183,10 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
 //                    playing = true
                     bottomPlayerView.resumePlay()
                     startSeekBarProgress()
+                }
+                Consts.SONG_ERROR->{
+                    dismissLoadingNormal()
+                    // TODO: 2020/11/14 处理播放错误
                 }
             }
         }

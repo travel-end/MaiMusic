@@ -62,7 +62,7 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
         tvSongListAuthor?.text = singerName
         tvSongListName?.text = albumName
         tvSongListTitleName?.text = albumName
-        tvSongListDescription?.text = publicTime
+        tvSongListDescription?.text = "${R.string.public_time.getStringRes()} $publicTime"
     }
 
     override fun initData() {
@@ -111,12 +111,13 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
                                     duration = albumSong.interval?:0
                                     isOnline = true
                                     listType = Consts.LIST_TYPE_ONLINE
+                                    onlineSubjectType = Consts.JUST_ONLINE_SONG
                                     imgUrl = "${Consts.ALBUM_PIC}${albumSong.albummid}${Consts.JPG}"
                                     mediaId = albumSong.strMediaMid
                                     isDownload = hadDownloaded
                                 }
                                 SongUtil.saveSong(s)
-//                                playerBinder?.play(s.listType,songListType())// TODO: 2020/11/14
+                                playerBinder?.play(s.listType,Consts.JUST_ONLINE_SONG)
                             })
                             clicked(R.id.item_song_list_iv_more,View.OnClickListener {
                                 bottomFunctionDialog?.show()

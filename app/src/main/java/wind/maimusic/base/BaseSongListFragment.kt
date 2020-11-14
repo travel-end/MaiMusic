@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.imageview.ShapeableImageView
 import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.Constants
 import wind.maimusic.R
@@ -27,6 +28,7 @@ import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.download.Downloaded
 import wind.maimusic.model.songlist.SongListTop
 import wind.maimusic.service.PlayerService
+import wind.maimusic.ui.activities.MainActivity
 import wind.maimusic.utils.*
 import wind.maimusic.widget.dialog.BottomFunctionDialog
 import wind.widget.cost.Consts
@@ -51,7 +53,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var toolBar: Toolbar? = null
     protected var tvSongListName: TextView? = null
     protected var tvSongListDescription: TextView? = null
-    protected var ivSongListSmallCover: ImageView? = null
+    protected var ivSongListSmallCover: ShapeableImageView? = null
     protected var ivSongListLargeCover: ImageView? = null
     protected var tvSongListAuthor: TextView? = null
     protected var tvSongListTitleName: TextView? = null
@@ -150,6 +152,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                                 setCurrentSong(position)// 设置当前点击的歌曲
                                 val s = SongUtil.assemblySong(currentSong!!, songListType(), position)
                                 SongUtil.saveSong(s)
+                                (requireActivity() as MainActivity).showLoadingNormal("")
                                 playerBinder?.play(s.listType,songListType())
                             })
                             clicked(R.id.item_song_list_iv_more,View.OnClickListener {
@@ -272,10 +275,15 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 placeholder = R.drawable.place_holder_half_translate,
                 error = R.drawable.place_holder_half_translate
             )
-            ivSongListSmallCover?.loadImg(
-                url = info.songListCoverImgUrl ?: "",
-                round = 6f
-            )
+//            ivSongListSmallCover?.loadImg(
+//                url = info.songListCoverImgUrl ?: "",
+//                round = 6f
+//            )
+            if (info.songListCoverImgUrl.isNotNullOrEmpty()) {
+                ivSongListSmallCover?.loadImg(
+                    url = info.songListCoverImgUrl!!
+                )
+            }
         }
     }
 
@@ -368,7 +376,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         mRootView.findViewById<ImageView>(R.id.md_song_list_iv_title_back)?.let {
             ivSongListTitleBack = it
         }
-        mRootView.findViewById<ImageView>(R.id.md_song_list_iv_small_cover)?.let {
+        mRootView.findViewById<ShapeableImageView>(R.id.md_song_list_iv_small_cover)?.let {
             ivSongListSmallCover = it
         }
         mRootView.findViewById<ImageView>(R.id.md_song_list_iv_large_cover)?.let {

@@ -14,7 +14,7 @@ import wind.widget.effcientrv.submitList
 
 /**
  * @By Journey 2020/11/2
- * @Description 歌单列表
+ * @Description 歌单列表 在线音乐
  */
 class SongListFragment : BaseSongListFragment<SongListViewModel>() {
     private var listType: Int = 0
@@ -41,7 +41,7 @@ class SongListFragment : BaseSongListFragment<SongListViewModel>() {
                 rvSongList.visible()
                 flPlayAll.visible()
             }
-            setSongListTop(Constants.ST_DAILY_RECOMMEND)
+            setSongListTop(Constants.ST_DAILY_RECOMMEND)// 每日推荐
         })
     }
 }

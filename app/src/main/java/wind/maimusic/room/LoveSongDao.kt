@@ -20,7 +20,7 @@ interface LoveSongDao {
     @Query("SELECT * FROM love_song WHERE songId =(:songId)")
     suspend fun findLoveSongBySongId(songId:String):List<LoveSong>
 
-    @Query("SELECT * FROM love_song ORDER BY id")
+    @Query("SELECT * FROM love_song ORDER BY id DESC")
     suspend fun findAllLoveSongs():List<LoveSong>
 
 

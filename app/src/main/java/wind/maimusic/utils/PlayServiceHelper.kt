@@ -99,6 +99,28 @@ object PlayServiceHelper {
         }
     }
 
+
+    fun saveJustOnlineSong(currentPosition: Int, subjectType:Int,justOnlineSongs: MutableList<JustOnlineSong>?) {
+        if (justOnlineSongs != null) {
+            val justOnlineSong = justOnlineSongs[currentPosition]
+            val song = Song().apply {
+                position = currentPosition
+                songId = justOnlineSong.songId
+                songName = justOnlineSong.name
+                singer = justOnlineSong.singer
+                imgUrl = justOnlineSong.pic
+                listType = Consts.LIST_TYPE_ONLINE
+                onlineSubjectType = subjectType
+                isOnline = justOnlineSong.isOnline?:false
+                duration = if (justOnlineSong.duration ==null) 0 else justOnlineSong.duration!!.toInt()
+                mediaId = justOnlineSong.mediaId
+                isDownload = justOnlineSong.isDownloaded?:false
+                albumName = justOnlineSong.albumName
+            }
+            SongUtil.saveSong(song)
+        }
+    }
+
     fun transferOnlineSong(onlineSong:OnlineSong?,subjectType:Int):Song? {
         if (onlineSong!= null) {
             return Song().apply {

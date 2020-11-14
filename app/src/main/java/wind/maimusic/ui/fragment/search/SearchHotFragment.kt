@@ -69,7 +69,13 @@ class SearchHotFragment : BaseLifeCycleFragment<SearchHotViewModel>() {
                                             }
                                         }
                                     flow.setOnTagClickListener { _, position, _ ->
-                                        LogUtil.e("searchHistory name:${searchHistory!![position].name}")
+                                        val historyTag = searchHistory!![position].name
+                                        if (historyTag.isNotNullOrEmpty()) {
+                                            val parent = (parentFragment as SearchMainFragment)
+                                            parent.removeFragment(this@SearchHotFragment)
+                                            parent.replaceFragment(SearchVpFragment.newInstance(historyTag!!),historyTag)
+                                            LogUtil.e("searchHistory name:$historyTag")
+                                        }
                                         false
                                     }
                                     setVisible(R.id.item_sh_flow_layout, true)

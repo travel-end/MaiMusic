@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import wind.maimusic.MaiApp
+import wind.maimusic.model.JustOnlineSong
 import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.listensong.*
 import wind.maimusic.model.singer.Singer
@@ -23,7 +24,8 @@ import wind.maimusic.room.*
         ListenBanner::class,
         SongListCover::class,
         SongListItem::class,
-        Singer::class
+        Singer::class,
+        JustOnlineSong::class
     ],
     version = 1,
     exportSchema = false
@@ -39,6 +41,8 @@ abstract class OnlineSongDatabase : RoomDatabase() {
     abstract fun createdSongListDao():CreateSongListDao
     // 歌手
     abstract fun singerDao():SingerDao
+    // 歌单
+    abstract fun justOnlineSongDao():JustOnlineSongDao
 
     companion object {
         @Volatile

@@ -68,21 +68,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_140"
                     android:layout_marginTop="@dimen/dp_26">
-<!--                    <View-->
-<!--                        android:layout_width="@dimen/dp_70"-->
-<!--                        android:layout_height="@dimen/dp_70"-->
-<!--                        android:background="@drawable/shape_translate_rect_bg"-->
-<!--                        android:layout_marginTop="@dimen/dp_8"-->
-<!--                        android:layout_marginStart="@dimen/dp_34"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
+                    <View
+                        android:layout_width="@dimen/dp_70"
+                        android:layout_height="@dimen/dp_70"
+                        android:background="@drawable/shape_translate_rect_bg"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginStart="@dimen/dp_34"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@id/md_song_list_iv_small_cover"
                         android:layout_width="@dimen/dp_82"
                         android:layout_height="@dimen/dp_82"
                         android:layout_marginStart="@dimen/dp_18"
+                        app:shapeAppearanceOverlay="@style/roundedCornerImageStyle"
                         android:src="@drawable/temp_rect_cover"
+                        android:scaleType="centerCrop"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

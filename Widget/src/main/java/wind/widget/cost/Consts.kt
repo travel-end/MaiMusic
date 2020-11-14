@@ -28,6 +28,7 @@ object Consts {
     const val SONG_RESUME = 2// ->song start
     const val SONG_CHANGE = 3
     const val SONG_COMPLETE = 4
+    const val SONG_ERROR = 5
 
     // 播放列表
     const val LIST_TYPE_LOCAL=1//本地列表
@@ -41,6 +42,7 @@ object Consts {
     const val POETRY_TYPE_RECENT_READ = 7//最近阅读
     const val POETRY_TYPE_LOVED = 8// 喜欢的音乐
     const val ONLINE_SEARCH = 9
+    const val JUST_ONLINE_SONG = 10
 
 
     const val EVENT_LIST_TYPE = "event_list_type"

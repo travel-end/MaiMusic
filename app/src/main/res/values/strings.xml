@@ -93,4 +93,5 @@
     <string name="login_is_register">首次登录即代表注册</string>
     <string name="forget_password">忘记密码？</string>
     <string name="to_login">立即登录</string>
+    <string name="public_time">发行于</string>
 </resources>

@@ -17,6 +17,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/temp_rect_cover"
         app:strokeColor="@color/colorPrimaryLight"
+        android:padding="0.5dp"
         app:strokeWidth="@dimen/dp_1" />
 
     <TextView

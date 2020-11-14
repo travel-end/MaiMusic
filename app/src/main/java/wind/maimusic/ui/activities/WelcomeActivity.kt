@@ -80,7 +80,7 @@ class WelcomeActivity : BaseLifeCycleActivity<WelcomeViewModel>() {
     private fun initDatabase() {
         if (SpUtil.getString(Constants.FIRST_LAUNCH).isEmpty()) {
             AssetsUtil.initOtherData()// 其他的数据  如歌单封面、搜索内容、Banner
-            AssetsUtil.initSongAndSinger()
+            AssetsUtil.initSongAndSinger()// 初始化所有歌曲喝歌手
             SpUtil.saveValue(Constants.FIRST_LAUNCH, "has_launch")
         }
     }

@@ -90,12 +90,19 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment,searchContent:String = "") {
+        if (searchContent.isNotNullOrEmpty()) {
+            isSearchVp = true
+            searchEditText.text = searchContent.getEditableStr()
+            searchEditText.setSelection(searchContent.length)
+            searchEditText.isCursorVisible = true
+            requireActivity().hideKeyboards()
+        }
         childFragmentManager.beginTransaction().replace(R.id.main_search_fl_container, fragment)
             .commitAllowingStateLoss()
     }
 
-    private fun removeFragment(fragment: Fragment) {
+    fun removeFragment(fragment: Fragment) {
         childFragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss()
     }
 }

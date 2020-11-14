@@ -25,6 +25,7 @@ class SongListViewModel:BaseViewModel() {
         viewModelScope.launch {
             when(listType){
             Constants.ST_DAILY_RECOMMEND->{
+                /*获取每日推荐的歌曲   从曲库中随机抽取xx首歌  每天更新一此 TODO 这个算法要重新计算一下*/
                 val result = withContext(Dispatchers.IO) {
                     val startIndex = DataUtil.getTheDayStartIndex(Constants.DAILY_RECOMMEND_SONG)
                     LogUtil.e("----SongListViewModel ST_DAILY_RECOMMEND startIndex:$startIndex")

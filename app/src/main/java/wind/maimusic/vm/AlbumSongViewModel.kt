@@ -5,10 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
+import wind.maimusic.model.JustOnlineSong
 import wind.maimusic.model.core.AlbumListBean
 import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.room.database.OnlineSongDatabase
@@ -37,7 +39,24 @@ class AlbumSongViewModel:BaseViewModel() {
     }
 
     private fun saveAlbumSongs(list:List<AlbumListBean>?) {
-        if (isNotNullOrEmpty(list)) {
+        val dao = OnlineSongDatabase.getDatabase().justOnlineSongDao()
+        viewModelScope.launch {
+            dao.deleteAllJustOnlineSong()
+            withContext(Dispatchers.IO) {
+                if (isNotNullOrEmpty(list)) {
+                    for (song in list!!) {
+                        val justOnlineSong= JustOnlineSong().apply {
+                            name = song.songname
+                            singer = if (song.singer.isNullOrEmpty()) "" else song.singer!![0].name
+                            songId = song.songmid
+                            this.albumName = song.albumname
+                            duration = if (song.interval==null) 0 else song.interval!!.toLong()
+                            pic = "${Constants.ALBUM_PIC}${song.albummid}${Constants.JPG}"
+                        }
+                        dao.addSingleJustOnlineSong(justOnlineSong)
+                    }
+                }
+            }
         }
     }
 
