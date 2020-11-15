@@ -10,5 +10,9 @@ data class SongListTop(
     var songListAuthor:String?="",
     var songListCoverImgUrl:String?="",
     var songListTagA:String?="",
-    var songListTagB:String?=""
+    var songListTagB:String?="",
+    var type:String?="",
+    var publicTime:String?="",
+    var language:String?="",
+    var company:String?=""
 )

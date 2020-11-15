@@ -19,6 +19,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import wind.maimusic.Constants
 import wind.maimusic.MaiApp
@@ -262,6 +264,16 @@ fun View?.recommendToSongList(songListType:Int) {
         val bundle = Bundle()
         bundle.putString(Constants.SONG_LIST_TYPE,songListType.toString())
         Navigation.findNavController(this).navigate(R.id.to_song_list_fragment,bundle)
+    }
+}
+
+fun View?.singerToSongList(singerId:Int) {
+    if (this != null) {
+        val bundle = bundleOf(
+            Constants.SONG_LIST_TYPE to Consts.ONLINE_SINGER_SONG.toString(),
+            Constants.SINGER_ID to singerId.toString()
+        )
+        Navigation.findNavController(this).navigate(R.id.singer_to_song_list_fragment,bundle)
     }
 }
 

@@ -162,6 +162,20 @@
             android:name="song_list_type"
             android:defaultValue=""
             app:argType="string" />
+
+        <argument
+            android:name="singer_id"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <action
+            android:id="@+id/song_list_to_album_top_detail_fragment"
+            app:destination="@id/songlist_top_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
     <fragment
         android:id="@+id/album_song_fragment"
@@ -187,10 +201,32 @@
             android:name="album_public_time"
             android:defaultValue=""
             app:argType="string" />
+        <action
+            android:id="@+id/album_to_album_top_detail_fragment"
+            app:destination="@id/songlist_top_detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
     </fragment>
     <fragment
         android:id="@+id/singers_fragment"
         android:name="wind.maimusic.ui.fragment.singer.SingerFragment"
         tools:layout="@layout/fragment_singers">
+        <action
+            android:id="@+id/singer_to_song_list_fragment"
+            app:destination="@id/song_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/songlist_top_detail_fragment"
+        android:name="wind.maimusic.ui.fragment.songlist.SongListTopDetailFragment"
+        tools:layout="@layout/fragment_song_list_top_detail" >
+
     </fragment>
 </navigation>

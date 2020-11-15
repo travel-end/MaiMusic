@@ -20,4 +20,5 @@ interface SingerDao {
     @Query("SELECT * FROM t_singer WHERE sex=(:sex) ORDER BY id")
     suspend fun findSingersBySex(sex:Int):List<Singer>
 
+
 }

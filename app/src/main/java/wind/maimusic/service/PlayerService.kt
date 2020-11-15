@@ -214,6 +214,20 @@ class PlayerService : Service() {
         fun setPlayModel(mode: Int) {
             playMode = mode
         }
+        fun singerPlay(singerId:Int,restartTime: Int?=null) {
+            onlineSongs = GlobalUtil.execute {
+                OnlineSongDatabase.getDatabase().onlineSongDao().findSongBySingerId(singerId).toMutableList()
+            }
+            val song = SongUtil.getSong()
+            if (song != null) {
+                currentPosition = song.position
+                mediaPlayer.reset()
+                if (isNotNullOrEmpty(onlineSongs)) {
+                    val currentSongId = onlineSongs!![currentPosition].songId
+                    getOnlineSongPlayUrl(song,currentSongId,Consts.ONLINE_SINGER_SONG,restartTime)
+                }
+            }
+        }
         // 播放下一首（包括在线音乐）、播放暂停的音乐
         fun play(type: Int,onlineSubjectType:Int?=null, restartTime: Int? = null) {
             try {
@@ -297,6 +311,7 @@ class PlayerService : Service() {
                         Consts.LIST_TYPE_LOVE -> {
                             if (isNotNullOrEmpty(loveSongs)) {
                                 val playUrl = loveSongs!![currentPosition].url
+                                LogUtil.e("-----PlayerService---PlayerBinder ---playUrl:$playUrl")
                                 if (playUrl.isNotNullOrEmpty()) {
                                     mediaPlayer.setDataSource(playUrl)
                                     startPlay(restartTime)
@@ -362,6 +377,11 @@ class PlayerService : Service() {
                             nextSongId = launchSongs!![currentPosition].songId
                         }
                         Constants.ST_DAILY_RECOMMEND->{
+                            currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,onlineSongs?.size)
+                            PlayServiceHelper.saveCurrentOnlineSong(currentPosition,subjectType,onlineSongs)
+                            nextSongId = onlineSongs!![currentPosition].songId
+                        }
+                        Consts.ONLINE_SINGER_SONG->{
                             currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,onlineSongs?.size)
                             PlayServiceHelper.saveCurrentOnlineSong(currentPosition,subjectType,onlineSongs)
                             nextSongId = onlineSongs!![currentPosition].songId

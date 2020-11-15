@@ -10,6 +10,7 @@ import wind.maimusic.R
 import wind.maimusic.base.BaseViewModel
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
+import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.singer.AllSingers
 import wind.maimusic.model.singer.RecommendSingers
 import wind.maimusic.model.singer.Singer
@@ -23,6 +24,7 @@ import wind.maimusic.utils.nextInt
 class SingerViewModel : BaseViewModel() {
     val singerData: MutableLiveData<MutableList<Any>> = MutableLiveData()
     val classifySinger:MutableLiveData<List<Singer>> = MutableLiveData()
+    val singerSongs:MutableLiveData<List<OnlineSong>> = MutableLiveData()
     private val mData = mutableListOf<Any>()
     fun initSingersData() {
         loadStatus.value = State(StateType.LOADING_TOP)
@@ -96,5 +98,8 @@ class SingerViewModel : BaseViewModel() {
             }
             classifySinger.value = result
         }
+    }
+    fun findSongsBySingerId(singId:String) {
+
     }
 }

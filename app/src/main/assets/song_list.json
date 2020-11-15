@@ -1035,6 +1035,84 @@
       "poetrySongId": 0,
       "ver": 7,
       "vid": ""
+    },
+    {"albumid":14987875,"albummid":"003upyzb0Lc1ul","albumname":"彩券","albumname_hilight":"<em>彩券</em>","alertid":11,"belongCD":0,"cdIdx":1,"chinesesinger":0,"docid":"15967084356399457563","grp":[],"interval":275,"isonly":0,"lyric":"","lyric_hilight":"","media_mid":"0002u6ZH3GSQPl","msgid":0,"newStatus":1,"nt":392131122,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":0,"payinfo":0,"payplay":0,"paytrackmouth":0,"paytrackprice":0},"preview":{"trybegin":72831,"tryend":116649,"trysize":0},"pubtime":1602518400,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4415092,"size320":11037353,"sizeape":0,"sizeflac":29698622,"sizeogg":5935191,"songid":279963220,"songmid":"0002u6ZH3GSQPl","songname":"彩券","songname_hilight":"<em>彩券</em>","strMediaMid":"0002u6ZH3GSQPl","stream":1,"switch":606007,"t":1,"tag":12,"type":0,"ver":0,"vid":"q0034uy8d4q","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":1376305,"albummid":"000dcZ9I1nzO62","albumname":"初学者","albumname_hilight":"初学者","alertid":23,"belongCD":0,"cdIdx":2,"chinesesinger":0,"docid":"17297020296612563680","grp":[],"interval":250,"isonly":0,"lyric":"《我与你的光年距离》网络剧主题曲|《总裁误宠替身甜妻》网络剧主题曲","lyric_hilight":"《我与你的光年距离》网络剧主题曲|《总裁误宠替身甜妻》网络剧主题曲","media_mid":"000PcSos12VDrz","msgid":16,"newStatus":2,"nt":1852333250,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":76043,"tryend":108865,"trysize":0},"pubtime":1468771200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4008840,"size320":10021810,"sizeape":0,"sizeflac":24163825,"sizeogg":5435074,"songid":107192538,"songmid":"001TXSYu1Gwuwv","songname":"刚刚好","songname_hilight":"<em>刚刚好</em>","strMediaMid":"000PcSos12VDrz","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"c00200si22o","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":1376305,"albummid":"000dcZ9I1nzO62","albumname":"初学者","albumname_hilight":"<em>初学者</em>","alertid":23,"belongCD":0,"cdIdx":1,"chinesesinger":0,"docid":"3179108086257687510","grp":[],"interval":280,"isonly":0,"lyric":"","lyric_hilight":"","media_mid":"003AIp252pSZEI","msgid":16,"newStatus":2,"nt":1970501677,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":81816,"tryend":111996,"trysize":0},"pubtime":1468771200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4481134,"size320":11202545,"sizeape":0,"sizeflac":31895390,"sizeogg":6345099,"songid":106381715,"songmid":"0025bbhu4ZKGnF","songname":"初学者","songname_hilight":"<em>初学者</em>","strMediaMid":"003AIp252pSZEI","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"z0020lrokg8","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":1376305,"albummid":"000dcZ9I1nzO62","albumname":"初学者","albumname_hilight":"初学者","alertid":23,"belongCD":0,"cdIdx":5,"chinesesinger":0,"docid":"15915073518035217958","grp":[],"interval":290,"isonly":0,"lyric":"《职场是个技术》电视剧片尾曲|《记忆清除者》网络大电影插曲","lyric_hilight":"《职场是个技术》电视剧片尾曲|《记忆清除者》网络大电影插曲","media_mid":"00157pJT2Fd1h2","msgid":16,"newStatus":2,"nt":3919932160,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":61128,"tryend":128018,"trysize":0},"pubtime":1468771200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4657093,"size320":11642262,"sizeape":0,"sizeflac":31722118,"sizeogg":6445893,"songid":107693527,"songmid":"001ndJe947wlaP","songname":"绅士","songname_hilight":"<em>绅士</em>","strMediaMid":"00157pJT2Fd1h2","stream":1,"switch":17413891,"t":1,"tag":10,"type":0,"ver":0,"vid":"z0016p7fv5s","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":1376305,"albummid":"000dcZ9I1nzO62","albumname":"初学者","albumname_hilight":"初学者","alertid":23,"belongCD":0,"cdIdx":4,"chinesesinger":0,"docid":"2196522191509683794","grp":[],"interval":261,"isonly":0,"lyric":"","lyric_hilight":"","media_mid":"000ZFByR1KvV8k","msgid":16,"newStatus":2,"nt":527902936,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":62214,"tryend":102603,"trysize":0},"pubtime":1468771200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4181037,"size320":10452306,"sizeape":0,"sizeflac":48354687,"sizeogg":5628772,"songid":107693526,"songmid":"000K74Op0OV8Cm","songname":"演员","songname_hilight":"<em>演员</em>","strMediaMid":"000ZFByR1KvV8k","stream":1,"switch":17413891,"t":1,"tag":10,"type":0,"ver":0,"vid":"o0016t2ucce","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":8157,"albummid":"003D17OJ0mh5uA","albumname":"暧昧","albumname_hilight":"<em>暧昧</em>","alertid":23,"belongCD":0,"cdIdx":2,"chinesesinger":0,"docid":"14530998311884202260","grp":[],"interval":251,"isonly":1,"lyric":"《恶魔在身边》偶像剧片尾曲","lyric_hilight":"《恶魔在身边》偶像剧片尾曲","media_mid":"003usgmN2mlO3O","msgid":16,"newStatus":2,"nt":4164125708,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":98255,"tryend":146506,"trysize":960887},"pubtime":1125504000,"pure":0,"singer":[{"id":4658,"mid":"000ZVS6E1f6f0d","name":"杨丞琳","name_hilight":"杨丞琳"}],"size128":4024301,"size320":10060467,"sizeape":0,"sizeflac":27527880,"sizeogg":5865106,"songid":5105685,"songmid":"000uID4Z47cx9h","songname":"暧昧","songname_hilight":"<em>暧昧</em>","strMediaMid":"003usgmN2mlO3O","stream":1,"switch":636675,"t":1,"tag":11,"type":0,"ver":0,"vid":"q0022l3mfml","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":1376305,"albummid":"000dcZ9I1nzO62","albumname":"初学者","albumname_hilight":"初学者","alertid":23,"belongCD":0,"cdIdx":3,"chinesesinger":0,"docid":"14013566222854530323","grp":[],"interval":279,"isonly":0,"lyric":"《精灵王座》动画电影主题曲","lyric_hilight":"《精灵王座》动画电影主题曲","media_mid":"001X66lF1M9eL9","msgid":16,"newStatus":2,"nt":2749986525,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":81123,"tryend":109861,"trysize":0},"pubtime":1468771200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4467769,"size320":11169118,"sizeape":0,"sizeflac":51856416,"sizeogg":6200506,"songid":107439472,"songmid":"004VBMk71TdUuR","songname":"我好像在哪见过你","songname_hilight":"<em>我好像在哪见过你</em>","strMediaMid":"001X66lF1M9eL9","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"b0020rlv2g6","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":443691,"albummid":"000QgFcm0v8WaF","albumname":"意外","albumname_hilight":"<em>意外</em>","alertid":23,"belongCD":0,"cdIdx":2,"chinesesinger":0,"docid":"17009995977753992791","grp":[],"interval":287,"isonly":0,"lyric":"《如果我爱你》电视剧插曲","lyric_hilight":"《如果我爱你》电视剧插曲","media_mid":"001F8BTd1TZYWZ","msgid":16,"newStatus":2,"nt":2765624465,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":54293,"tryend":103728,"trysize":0},"pubtime":1384099200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4600248,"size320":11500337,"sizeape":0,"sizeflac":33975760,"sizeogg":6708302,"songid":5106590,"songmid":"004dADLe4ec8RG","songname":"意外","songname_hilight":"<em>意外</em>","strMediaMid":"001F8BTd1TZYWZ","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"f00138jq44x","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":443691,"albummid":"000QgFcm0v8WaF","albumname":"意外","albumname_hilight":"意外","alertid":23,"belongCD":0,"cdIdx":8,"chinesesinger":0,"docid":"4275747744130319699","grp":[],"interval":242,"isonly":0,"lyric":"《妈妈像花儿一样》电视剧插曲","lyric_hilight":"《妈妈像花儿一样》电视剧插曲","media_mid":"002xnvc92xDOg6","msgid":16,"newStatus":2,"nt":578619132,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":84222,"tryend":117599,"trysize":0},"pubtime":1384099200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":3875507,"size320":9688484,"sizeape":0,"sizeflac":23056006,"sizeogg":5195907,"songid":104775877,"songmid":"003ouHMP12glVD","songname":"其实","songname_hilight":"<em>其实</em>","strMediaMid":"002xnvc92xDOg6","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"q0013l5k1zx","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":443691,"albummid":"000QgFcm0v8WaF","albumname":"意外","albumname_hilight":"意外","alertid":23,"belongCD":0,"cdIdx":3,"chinesesinger":0,"docid":"991192659131343267","grp":[],"interval":310,"isonly":0,"lyric":"《妈妈像花儿一样》电视剧片尾曲|《如果我爱你》电视剧插曲","lyric_hilight":"《妈妈像花儿一样》电视剧片尾曲|《如果我爱你》电视剧插曲","media_mid":"003odRSi1odVpq","msgid":16,"newStatus":2,"nt":2481618274,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":101744,"tryend":140372,"trysize":0},"pubtime":1384099200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4976420,"size320":12440753,"sizeape":0,"sizeflac":27550792,"sizeogg":6398751,"songid":5106430,"songmid":"002BWGZQ2UKjKn","songname":"你还要我怎样","songname_hilight":"<em>你还要我怎样</em>","strMediaMid":"003odRSi1odVpq","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"y00131c5aqf","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":443691,"albummid":"000QgFcm0v8WaF","albumname":"意外","albumname_hilight":"意外","alertid":23,"belongCD":0,"cdIdx":1,"chinesesinger":0,"docid":"3229413130358048883","grp":[],"interval":248,"isonly":0,"lyric":"《如果我爱你》电视剧插曲","lyric_hilight":"《如果我爱你》电视剧插曲","media_mid":"002EsKmq1Mtjpi","msgid":16,"newStatus":2,"nt":3690552803,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":53922,"tryend":84007,"trysize":0},"pubtime":1384099200,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":3976237,"size320":9939803,"sizeape":0,"sizeflac":24808629,"sizeogg":5464913,"songid":5106429,"songmid":"000QwTVo0YHdcP","songname":"丑八怪","songname_hilight":"<em>丑八怪</em>","strMediaMid":"002EsKmq1Mtjpi","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"u00139g552o","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":51504,"albummid":"003mUYW22JXKVK","albumname":"薛之谦","albumname_hilight":"薛之谦","alertid":23,"belongCD":0,"cdIdx":2,"chinesesinger":0,"docid":"2812222260820394324","grp":[],"interval":261,"isonly":0,"lyric":"","lyric_hilight":"","media_mid":"002Zofjh1TEowM","msgid":16,"newStatus":2,"nt":2435494903,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":61131,"tryend":99046,"trysize":0},"pubtime":1149782400,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4182713,"size320":10456072,"sizeape":0,"sizeflac":26633520,"sizeogg":5564540,"songid":1333803,"songmid":"001hUNRP0P8g7x","songname":"认真的雪","songname_hilight":"<em>认真的雪</em>","strMediaMid":"002Zofjh1TEowM","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"c00909gbzLn","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
+    },
+    {"albumid":3310789,"albummid":"001L7UIu3GXVtT","albumname":"渡 The Crossing","albumname_hilight":"渡 The Crossing","alertid":23,"belongCD":0,"cdIdx":3,"chinesesinger":0,"docid":"3748172221757940157","grp":[],"interval":255,"isonly":0,"lyric":"《小女花不弃》电视剧插曲","lyric_hilight":"《小女花不弃》电视剧插曲","media_mid":"000SCo0V0kjCdg","msgid":16,"newStatus":2,"nt":1023450399,"pay":{"payalbum":0,"payalbumprice":0,"paydownload":1,"payinfo":1,"payplay":0,"paytrackmouth":1,"paytrackprice":200},"preview":{"trybegin":63111,"tryend":99128,"trysize":0},"pubtime":1511798400,"pure":0,"singer":[{"id":5062,"mid":"002J4UUk29y8BY","name":"薛之谦","name_hilight":"薛之谦"}],"size128":4082843,"size320":10206781,"sizeape":0,"sizeflac":47483441,"sizeogg":5549931,"songid":207323048,"songmid":"001uxKNp3a7Qkv","songname":"像风一样","songname_hilight":"<em>像风一样</em>","strMediaMid":"000SCo0V0kjCdg","stream":1,"switch":17413891,"t":1,"tag":11,"type":0,"ver":0,"vid":"a00254ppfbr","mainType": 11,
+      "secondType": 8,
+      "isPoetrySong": 1,
+      "poetrySongId": 0,
+      "singerId": 5
     }
   ]
 }

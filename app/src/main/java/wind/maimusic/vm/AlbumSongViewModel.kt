@@ -12,6 +12,7 @@ import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.model.JustOnlineSong
 import wind.maimusic.model.core.AlbumListBean
+import wind.maimusic.model.songlist.SongListTop
 import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.getStringRes
@@ -19,6 +20,7 @@ import wind.maimusic.utils.isNotNullOrEmpty
 
 class AlbumSongViewModel:BaseViewModel() {
     val albumSongs: MutableLiveData<List<AlbumListBean>> = MutableLiveData()
+    val albumDetail:MutableLiveData<SongListTop> = MutableLiveData()
     fun getAlbumSongs(albumId:String) {
             loadStatus.value = State(StateType.LOADING_SONG)
             viewModelScope.launch {
@@ -28,6 +30,17 @@ class AlbumSongViewModel:BaseViewModel() {
                     }
                 }.onSuccess {
                     if (it.code ==0) {
+                        val data = it.data
+                        if (data != null) {
+                            val top = SongListTop(
+                                songListName = data.name,
+                                language = data.lan,
+                                company = data.company,
+                                type = data.genre,
+                                songListDescription = data.desc
+                            )
+                            albumDetail.value = top
+                        }
                         albumSongs.value = it.data?.list
                         saveAlbumSongs(it.data?.list)
                     }

@@ -4,6 +4,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -15,11 +17,13 @@ import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
 import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.core.AlbumListBean
+import wind.maimusic.ui.fragment.songlist.SongListTopDetailFragment
 import wind.maimusic.utils.*
 import wind.maimusic.vm.AlbumSongViewModel
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
 import wind.widget.model.Song
+import wind.widget.utils.fastClickListener
 
 /**
  * @By Journey 2020/11/13
@@ -31,6 +35,14 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
     private var albumCover:String?=null
     private var publicTime:String?=null
     private var albumId:String?=null
+
+
+    private var detailName:String=""
+    private var detailLanguage:String=""
+    private var detailCompany:String=""
+    private var detailDesc:String=""
+    private var detailPublicTime:String=""
+    private var detailType:String=""
     override fun songListType()= -1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,7 +79,10 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
 
     override fun initData() {
         super.initData()
-        requireLazyInit(true)
+        requireLazyInit()
+        tvSongListName?.fastClickListener {
+            it.nav(R.id.album_to_album_top_detail_fragment,setBundle())
+        }
     }
 
     override fun lazyInitData() {
@@ -129,7 +144,6 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
         }
     }
 
-
     override fun observe() {
         super.observe()
         mViewModel.albumSongs.observe(this,Observer{
@@ -138,6 +152,13 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
                 rvSongList.visible()
                 flPlayAll.visible()
             }
+        })
+        mViewModel.albumDetail.observe(this,Observer{
+            detailName = it.songListName?:""
+            detailLanguage = it.language?:""
+            detailCompany = it.company?:""
+            detailDesc = it.songListDescription?:""
+            detailType = it.type?:""
         })
     }
 
@@ -150,5 +171,16 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
             albumCover = it.getString(Constants.ALBUM_COVER)
             publicTime = it.getString(Constants.ALBUM_PUBLIC_TIME)
         }
+    }
+    private fun setBundle():Bundle {
+        return bundleOf(
+            SongListTopDetailFragment.DETAIL_COVER to albumCover,
+            SongListTopDetailFragment.DETAIL_NAME to detailName,
+            SongListTopDetailFragment.DETAIL_LANGUAGE to detailLanguage,
+            SongListTopDetailFragment.DETAIL_COMPANY to detailCompany,
+            SongListTopDetailFragment.DETAIL_DESC to detailDesc,
+            SongListTopDetailFragment.DETAIL_PUBLIC_TIME to detailPublicTime,
+            SongListTopDetailFragment.DETAIL_TYPE to detailType
+        )
     }
 }

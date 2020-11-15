@@ -62,4 +62,7 @@ interface OnlineSongDao {
 
     @Query("SELECT * FROM online_song ORDER BY id LIMIT 0,10")
     suspend fun findLaunchSongs(): List<OnlineSong>
+
+    @Query("SELECT * FROM online_song WHERE singerId=(:singerId) ORDER BY id")
+    suspend fun findSongBySingerId(singerId:Int):List<OnlineSong>
 }

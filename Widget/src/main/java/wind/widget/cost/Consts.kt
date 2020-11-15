@@ -43,6 +43,7 @@ object Consts {
     const val POETRY_TYPE_LOVED = 8// 喜欢的音乐
     const val ONLINE_SEARCH = 9
     const val JUST_ONLINE_SONG = 10
+    const val ONLINE_SINGER_SONG = 11
 
 
     const val EVENT_LIST_TYPE = "event_list_type"

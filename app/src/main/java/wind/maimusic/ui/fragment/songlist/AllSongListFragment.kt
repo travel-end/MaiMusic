@@ -72,7 +72,7 @@ class AllSongListFragment : BaseLifeCycleFragment<AllSongListViewModel>(),
 
     override fun initData() {
         super.initData()
-        requireLazyInit(true)
+        requireLazyInit()
     }
 
     override fun lazyInitData() {

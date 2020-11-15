@@ -22,6 +22,7 @@ import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.ui.activities.TestActivity
 import wind.maimusic.utils.*
 import wind.maimusic.vm.ListenSongViewModel
+import wind.maimusic.widget.MaiRefreshView
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter

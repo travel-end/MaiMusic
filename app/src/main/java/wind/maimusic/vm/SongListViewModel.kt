@@ -12,6 +12,7 @@ import wind.maimusic.model.songlist.SongListTop
 import wind.maimusic.room.database.OnlineSongDatabase
 import wind.maimusic.utils.DataUtil
 import wind.maimusic.utils.LogUtil
+import wind.widget.cost.Consts
 import kotlin.random.Random
 
 /**
@@ -37,9 +38,21 @@ class SongListViewModel:BaseViewModel() {
                 Constants.ST_DAILY_HOT_SONG->{
 
                 }
+
         }
 
         }
     }
+    fun findSingerSongs(singerId:Int) {
+        if (singerId != -1) {
+            val dao = OnlineSongDatabase.getDatabase().onlineSongDao()
+            viewModelScope.launch {
+                val result = withContext(Dispatchers.IO) {
+                    dao.findSongBySingerId(singerId)
+                }
+                onlineSongs.value = result.toMutableList()
+            }
+        }
 
+    }
 }

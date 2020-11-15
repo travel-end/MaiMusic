@@ -45,5 +45,7 @@ data class OnlineSong(
     @ColumnInfo
     var isPoetrySong:Int=0,//是否是诗歌 0不是  1是
     @ColumnInfo
-    var poetrySongId:Int?=0// 如果是诗歌，需要有一个id对应匹配的诗歌内容（文章）
+    var poetrySongId:Int?=0,// 如果是诗歌，需要有一个id对应匹配的诗歌内容（文章）
+    @ColumnInfo
+    var singerId:Int?=null
 )

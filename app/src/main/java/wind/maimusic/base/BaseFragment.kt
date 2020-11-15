@@ -76,10 +76,8 @@ abstract class BaseFragment:Fragment() {
 
     }
     /*navigation带动画的切换fragment会导致在切换的时候卡顿，使用这种方法暂时屏蔽这种卡顿。需要寻找其他根本的解决办法*/
-    open fun requireLazyInit(isRequire:Boolean=false) {
-        if (isRequire) {
-            lazyHandler.sendEmptyMessageDelayed(Constants.MSG_CODE,200)
-        }
+    open fun requireLazyInit(millis:Long = 200) {
+        lazyHandler.sendEmptyMessageDelayed(Constants.MSG_CODE,millis)
     }
 
     private val lazyHandler = object :Handler(Looper.getMainLooper()) {

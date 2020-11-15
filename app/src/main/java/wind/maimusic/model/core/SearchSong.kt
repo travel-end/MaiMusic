@@ -145,5 +145,6 @@ data class ListBean (
     var mainType:Int = 0,
     var secondType:Int = 0,
     var isPoetrySong:Int=0,
-    var poetrySongId:Int=0
+    var poetrySongId:Int=0,
+    var singerId:Int=0
 )

@@ -236,6 +236,13 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 songId = data.songId
                 mIsDownloaded = data.isDownload
             }
+            Consts.ONLINE_SINGER_SONG -> {
+                data as OnlineSong
+                songName = data.name
+                songSinger = data.singer
+                songId = data.songId
+                mIsDownloaded = data.isDownload
+            }
         }
     }
 
@@ -246,6 +253,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             Consts.LIST_TYPE_DOWNLOAD -> currentSong = downloadedSongs[position]
             Consts.LIST_TYPE_LOVE -> currentSong = lovedSongs[position]
             Constants.ST_DAILY_RECOMMEND -> currentSong = onlineSongs[position]
+            Consts.ONLINE_SINGER_SONG-> currentSong = onlineSongs[position]
         }
     }
 
@@ -275,14 +283,12 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 placeholder = R.drawable.place_holder_half_translate,
                 error = R.drawable.place_holder_half_translate
             )
-//            ivSongListSmallCover?.loadImg(
-//                url = info.songListCoverImgUrl ?: "",
-//                round = 6f
-//            )
             if (info.songListCoverImgUrl.isNotNullOrEmpty()) {
                 ivSongListSmallCover?.loadImg(
                     url = info.songListCoverImgUrl!!
                 )
+            }
+            tvSongListName?.fastClickListener {
             }
         }
     }
@@ -309,6 +315,19 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                     "推荐",
                     "清新"
                 )
+            }
+            Consts.ONLINE_SINGER_SONG -> {
+                if (isNotNullOrEmpty(onlineSongs)) {
+                    val song = onlineSongs[0]
+                    songListTop = SongListTop(
+                        song.name,
+                        "入我相思门，知我相思苦。早知如此绊人心，何如当初莫相识",
+                        "By suo luo -",
+                        if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl,
+                        "推荐",
+                        "清新"
+                    )
+                }
             }
         }
         initSongListInfo()

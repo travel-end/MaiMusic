@@ -45,6 +45,7 @@ public class JRefreshAndLoadMoreAdapter extends JBaseRecycleAdapter<RecyclerView
 
         if (mRefreshLoadView == null) {
             if (JRecycleViewManager.getInstance().getRefreshLoadView() == null) {
+//                mRefreshLoadView = new OrdinaryRefreshLoadView(context);
                 mRefreshLoadView = new OrdinaryRefreshLoadView(context);
             } else {
                 mRefreshLoadView = JRecycleViewManager.getInstance().getRefreshLoadView();

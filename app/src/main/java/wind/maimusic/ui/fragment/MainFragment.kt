@@ -37,7 +37,7 @@ class MainFragment : BaseVpFragment() {
          * 也就是说：ViewPager2中，默认关闭了预加载机制。
          * 网络请求放到onStart中即可。(使用ViewPager2关闭limit就可以不用考虑延迟加载的问题)
          */
-        mViewPager.offscreenPageLimit = 1
+        mViewPager.offscreenPageLimit = 1// 将我的页面提前加载好
 //        viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 //        viewPager.adapter = MainVpAdapter()
 //        pageChangeCallback = MainPageChangeCallback()

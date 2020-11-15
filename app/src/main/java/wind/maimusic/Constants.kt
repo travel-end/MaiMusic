@@ -50,6 +50,7 @@ object Constants {
     }
     const val HOT_SEARCH = "hot_search"
     const val SONG_LIST_TYPE = "song_list_type"
+    const val SINGER_ID = "singer_id"
     const val ALBUM_ID= "album_id"
     const val ALBUM_NAME = "album_name"
     const val ALBUM_SINGER = "album_singer"

@@ -14,10 +14,7 @@ import wind.maimusic.base.BaseLifeCycleFragment
 import wind.maimusic.model.singer.AllSingers
 import wind.maimusic.model.singer.RecommendSingers
 import wind.maimusic.model.singer.SingerSexClassify
-import wind.maimusic.utils.LogUtil
-import wind.maimusic.utils.getStringRes
-import wind.maimusic.utils.inflate
-import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.*
 import wind.maimusic.vm.SingerViewModel
 import wind.widget.effcientrv.*
 import wind.widget.utils.fastClickListener
@@ -62,6 +59,7 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
                                     holder.tvSingerName.text = singer.name
                                     holder.itemView.fastClickListener {
                                         LogUtil.e("----SingerFragment singerName:${singer.name}")
+                                        it.singerToSongList(singer.singerId?:0)
                                     }
                                 }
                             }
@@ -128,7 +126,7 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
 
     override fun initData() {
         super.initData()
-        requireLazyInit(true)
+        requireLazyInit()
     }
 
     override fun lazyInitData() {

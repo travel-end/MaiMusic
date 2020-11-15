@@ -45,7 +45,7 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
 
     override fun initData() {
         super.initData()
-        requireLazyInit(true)
+        requireLazyInit()
     }
 
     override fun lazyInitData() {
@@ -95,7 +95,7 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
             isSearchVp = true
             searchEditText.text = searchContent.getEditableStr()
             searchEditText.setSelection(searchContent.length)
-            searchEditText.isCursorVisible = true
+//            searchEditText.isCursorVisible = true
             requireActivity().hideKeyboards()
         }
         childFragmentManager.beginTransaction().replace(R.id.main_search_fl_container, fragment)

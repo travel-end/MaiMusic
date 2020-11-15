@@ -91,6 +91,7 @@ object AssetsUtil {
                             secondType = bean.secondType
                             isPoetrySong = bean.isPoetrySong
                             poetrySongId = bean.poetrySongId
+                            singerId = bean.singerId
                         }
                         dbSongList.add(onlineSong)
                     }
