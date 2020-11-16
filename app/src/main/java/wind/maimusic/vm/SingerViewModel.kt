@@ -27,7 +27,7 @@ class SingerViewModel : BaseViewModel() {
     val singerSongs:MutableLiveData<List<OnlineSong>> = MutableLiveData()
     private val mData = mutableListOf<Any>()
     fun initSingersData() {
-        loadStatus.value = State(StateType.LOADING_TOP)
+//        loadStatus.value = State(StateType.LOADING_TOP)
         val singerIds = intArrayOf(
             Constants.SINGER_JAY_CHOU,
             Constants.SINGER_XUE,
@@ -85,7 +85,7 @@ class SingerViewModel : BaseViewModel() {
                 val allSinger = AllSingers(result)
                 mData.add(allSinger)
             }
-            loadStatus.value = State(StateType.DISMISSING_TOP)
+//            loadStatus.value = State(StateType.DISMISSING_TOP)
             singerData.value = mData
         }
     }

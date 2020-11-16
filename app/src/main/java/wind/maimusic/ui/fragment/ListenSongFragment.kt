@@ -1,6 +1,5 @@
 package wind.maimusic.ui.fragment
 
-import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -19,10 +18,11 @@ import wind.maimusic.model.listensong.*
 import wind.maimusic.model.title.ListenSongListTitle
 import wind.maimusic.model.title.PoetrySongTitle
 import wind.maimusic.model.title.SingleSongTitle
-import wind.maimusic.ui.activities.TestActivity
-import wind.maimusic.utils.*
+import wind.maimusic.utils.inflate
+import wind.maimusic.utils.isNotNullOrEmpty
+import wind.maimusic.utils.nav
+import wind.maimusic.utils.recommendToSongList
 import wind.maimusic.vm.ListenSongViewModel
-import wind.maimusic.widget.MaiRefreshView
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
@@ -88,12 +88,6 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                                 holder.bannerIv.loadImg(banner.imgUrl, 8f)
                                 holder.bannerTvName.text = banner.title
                                 holder.itemView.fastClickListener {
-                                    requireActivity().startActivity(
-                                        Intent(
-                                            requireContext(),
-                                            TestActivity::class.java
-                                        )
-                                    )
                                 }
                             }
                         }

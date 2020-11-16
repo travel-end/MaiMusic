@@ -33,6 +33,7 @@ import wind.maimusic.utils.*
 import wind.maimusic.widget.dialog.BottomFunctionDialog
 import wind.widget.cost.Consts
 import wind.widget.effcientrv.*
+import wind.widget.rippleview.RippleView
 import wind.widget.utils.fastClickListener
 import wind.widget.utils.loadImg
 import wind.widget.utils.toIntPx
@@ -44,6 +45,8 @@ import wind.widget.utils.toIntPx
 abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<VM>() {
     protected var playerBinder: PlayerService.PlayerBinder? = null
     protected var bottomFunctionDialog:BottomFunctionDialog?=null
+    protected var listType: Int = 0
+    protected var singerId:Int = 0
 
     /*非必须组件*/
     private var ivBack: ImageView? = null
@@ -143,21 +146,28 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                                     setVisible(R.id.item_song_list_iv_playing, false)
                                 }
                             }
-                            itemClicked(View.OnClickListener {
+                            itemView?.findViewById<RippleView>(R.id.ripple_view)?.fastClickListener {
                                 if (position != lastPosition) {
                                     notifyItemChanged(lastPosition)
                                     lastPosition = position
                                 }
+                                LogUtil.e("songlistitemclick:${songListType()}")
                                 notifyItemChanged(position)
                                 setCurrentSong(position)// 设置当前点击的歌曲
                                 val s = SongUtil.assemblySong(currentSong!!, songListType(), position)
+                                LogUtil.e("songlistitemclick:${songListType()}, songName:${s.songName}")
                                 SongUtil.saveSong(s)
                                 (requireActivity() as MainActivity).showLoadingNormal("")
-                                playerBinder?.play(s.listType,songListType())
-                            })
-                            clicked(R.id.item_song_list_iv_more,View.OnClickListener {
+                                if (listType == Consts.ONLINE_SINGER_SONG) {
+                                    playerBinder?.singerPlay(singerId)
+                                    SpUtil.saveValue("singerId",singerId)
+                                } else {
+                                    playerBinder?.play(s.listType,songListType())//ONLINE_SINGER_SONG
+                                }
+                            }
+                            itemView?.findViewById<ImageView>(R.id.item_song_list_iv_more)?.fastClickListener {
                                 bottomFunctionDialog?.show()
-                            })
+                            }
                         }
                     }
                 }

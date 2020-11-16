@@ -69,6 +69,13 @@ class PlayerService : Service() {
                         MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
                     }
                 }
+                Consts.ONLINE_SINGER_SONG -> {
+                    onlineSongs = GlobalUtil.execute {
+                        OnlineSongDatabase.getDatabase().onlineSongDao().findSongBySingerId(
+                            SpUtil.getInt("singerId")
+                        ).toMutableList()
+                    }
+                }
                 Consts.LIST_TYPE_ONLINE -> {
                     when (song.onlineSubjectType) {
                         Consts.ONLINE_FIRST_LAUNCH -> {// 首次使用app
@@ -189,10 +196,27 @@ class PlayerService : Service() {
                             }
                         }
                     }
+                    Consts.ONLINE_SINGER_SONG->{
+                        LogUtil.e("-------PlayService----onBind ONLINE_SINGER_SONG:$onlineSongs------")
+                        if (isNotNullOrEmpty(onlineSongs)) {
+                            currentPosition = if (currentPosition==onlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
+                                0
+                            } else {
+                                PlayServiceHelper.getNextSongPosition(
+                                    currentPosition,
+                                    playMode,
+                                    onlineSongs?.size
+                                )
+                            }
+                        }
+                        PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_SINGER_SONG,onlineSongs)
+                    }
                 }
                 if (listType != 0) {
                     if (listType == Consts.LIST_TYPE_ONLINE) {
                         playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
+                    } else if (listType == Consts.ONLINE_SINGER_SONG) {
+                        playerBinder.singerPlay(SpUtil.getInt("singerId"))
                     } else {
                         playerBinder.play(listType)
                     }
@@ -215,10 +239,12 @@ class PlayerService : Service() {
             playMode = mode
         }
         fun singerPlay(singerId:Int,restartTime: Int?=null) {
+            listType = Consts.ONLINE_SINGER_SONG
             onlineSongs = GlobalUtil.execute {
                 OnlineSongDatabase.getDatabase().onlineSongDao().findSongBySingerId(singerId).toMutableList()
             }
             val song = SongUtil.getSong()
+            LogUtil.e("-----singerPlay--$song, ${song?.songName},onlineSongs:$onlineSongs")
             if (song != null) {
                 currentPosition = song.position
                 mediaPlayer.reset()

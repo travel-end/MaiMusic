@@ -19,8 +19,6 @@ import wind.widget.effcientrv.submitList
  * @Description 歌单列表 在线音乐
  */
 class SongListFragment : BaseSongListFragment<SongListViewModel>() {
-    private var listType: Int = 0
-    private var singerId:Int = 0
     override fun songListType() = listType
     override fun initView() {
         arguments?.let {
@@ -36,6 +34,7 @@ class SongListFragment : BaseSongListFragment<SongListViewModel>() {
     override fun layoutResId() = R.layout.fragment_md_style_song_list
     override fun initData() {
         if (listType != 0) {
+            LogUtil.e("-----SongListFragment---listType:$listType")
             when(listType) {
                 Consts.ONLINE_SINGER_SONG->{
                     mViewModel.findSingerSongs(singerId)

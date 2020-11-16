@@ -278,6 +278,22 @@ object SongUtil {
                     position = 0
                 }
             }
+            Consts.ONLINE_SINGER_SONG->{
+                val singerSong = s as OnlineSong
+                song = Song().apply {
+                    songId = singerSong.songId //004DrG5A2nm7q2
+                    singer = singerSong.singer// 鸾音社
+                    songName = singerSong.name// 夜来寒雨晓来风
+                    imgUrl = singerSong.imgUrl
+                    duration = singerSong.duration ?: 0//187  (秒)
+                    isOnline = singerSong.isOnline
+                    mediaId = singerSong.mediaId//004DrG5A2nm7q2
+                    albumName = singerSong.albumName//夜来寒雨晓来风
+                    isDownload = singerSong.isDownload
+                    listType = Consts.ONLINE_SINGER_SONG
+                    position = pos
+                }
+            }
         }
         return song!!
     }

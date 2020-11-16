@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
     <include layout="@layout/view_song_list_title" />
-    <include
-        android:id="@+id/loading_top_view"
-        layout="@layout/view_loading_top"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+<!--    <include-->
+<!--        android:id="@+id/loading_top_view"-->
+<!--        layout="@layout/view_loading_top"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"/>-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/singer_rv_list"
         android:layout_width="match_parent"

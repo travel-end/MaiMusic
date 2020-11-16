@@ -28,18 +28,18 @@ abstract class BaseFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mRootView = inflater.inflate(layoutResId(),container,false)
-        LogUtil.e("BaseFragment---onCreateView")
+//        LogUtil.e("BaseFragment---onCreateView")
         return mRootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        LogUtil.e("BaseFragment---onViewCreated")
+//        LogUtil.e("BaseFragment---onViewCreated")
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        LogUtil.e("BaseFragment---onActivityCreated")
+//        LogUtil.e("BaseFragment---onActivityCreated")
         initStatusBar()
         initView()
 
@@ -49,7 +49,7 @@ abstract class BaseFragment:Fragment() {
 
     override fun onStart() {
         super.onStart()
-        LogUtil.e("BaseFragment---onStart")
+//        LogUtil.e("BaseFragment---onStart")
 //        initData()
 //        initAction()
 
