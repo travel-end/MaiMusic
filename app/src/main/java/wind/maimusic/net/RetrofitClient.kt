@@ -65,10 +65,19 @@ class RetrofitClient {
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
 
+    private val poetryRetrofit = Retrofit.Builder()
+        .client(okHttpClient)
+        .baseUrl(Constants.GUSHI_BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+
     val apiService: ApiService = retrofit.create(ApiService::class.java)
 
     val singerApiService: ApiService = singerRetrofit.create(ApiService::class.java)
 
     val songUrlApiService: ApiService = songUrlRetrofit.create(ApiService::class.java)
+
+    val poetryApiService :ApiService = poetryRetrofit.create(ApiService::class.java)
 
 }

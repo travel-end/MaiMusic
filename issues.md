@@ -35,7 +35,12 @@ indicatorView
 
 
 ####github
+1、基础知识学习
 https://github.com/smashinggit/Study
+2、音频库
+https://github.com/yangchong211/YCAudioPlayer
+3、耳机线控
+https://blog.csdn.net/m0_37700275/article/details/79269722
 
 
 

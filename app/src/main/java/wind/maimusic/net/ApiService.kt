@@ -61,4 +61,8 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun getLocalSingerImg(@Field("s") singer:String):SingerImg
 
+
+    @GET("onehour/Default10.aspx?page=1&token=gswapi")
+    suspend fun getPoetryRecommend()
+
 }
