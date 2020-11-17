@@ -6,6 +6,7 @@ package wind.maimusic.model.songlist
  */
 data class SongListTop(
     var songListName:String?="",
+    var songListTitleName:String?="",
     var songListDescription:String?="",
     var songListAuthor:String?="",
     var songListCoverImgUrl:String?="",

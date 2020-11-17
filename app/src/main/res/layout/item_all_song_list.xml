@@ -4,11 +4,12 @@
     android:id="@+id/ll_recycler_item_group"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_10"
     android:orientation="vertical">
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_28"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:textColor="@color/black2"
         android:layout_marginStart="@dimen/dp_8"

@@ -49,33 +49,33 @@
                     tools:text="KTV麦霸必点歌曲"
                     android:maxLines="1"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="24sp"
-                    android:layout_marginTop="@dimen/dp_54"
-                    android:layout_marginStart="@dimen/dp_18"
-                    app:drawableEndCompat="@drawable/ic_arrow_right_white" />
-                <TextView
-                    android:id="@id/md_song_list_tv_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="【不定时更新】敲带感可循环亿遍的古风歌，古装..."
-                    android:maxLines="1"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:layout_marginTop="@dimen/dp_6"
+                    android:textSize="18sp"
+                    android:layout_marginTop="@dimen/dp_92"
                     android:layout_marginStart="@dimen/dp_18" />
+<!--                <TextView-->
+<!--                    android:id="@id/md_song_list_tv_description"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    tools:text="【不定时更新】敲带感可循环亿遍的古风歌，古装..."-->
+<!--                    android:maxLines="1"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:layout_marginTop="@dimen/dp_6"-->
+<!--                    android:layout_marginStart="@dimen/dp_18" />-->
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_140"
-                    android:layout_marginTop="@dimen/dp_26">
-                    <View
-                        android:layout_width="@dimen/dp_70"
-                        android:layout_height="@dimen/dp_70"
-                        android:background="@drawable/shape_translate_rect_bg"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:layout_marginStart="@dimen/dp_34"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_marginTop="@dimen/dp_10">
+<!--                    <View-->
+<!--                        android:layout_width="@dimen/dp_70"-->
+<!--                        android:layout_height="@dimen/dp_70"-->
+<!--                        android:background="@drawable/shape_translate_rect_bg"-->
+<!--                        android:layout_marginTop="@dimen/dp_6"-->
+<!--                        android:layout_marginStart="@dimen/dp_34"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@id/md_song_list_iv_small_cover"
@@ -89,16 +89,31 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@id/md_song_list_tv_author"
-                        android:layout_width="wrap_content"
+                        android:id="@id/md_song_list_tv_description"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        app:layout_constraintHorizontal_weight="1"
                         android:textColor="@color/white"
-                        tools:text="hs 创建"
+                        tools:text="【不定时更新】敲带感可循环亿遍的古风歌，古装哈撒给，啊同理卡通，我的剑就是你的剑"
                         app:layout_constraintStart_toEndOf="@id/md_song_list_iv_small_cover"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="@dimen/dp_14"
-                        android:layout_marginStart="@dimen/dp_18" />
+                        app:layout_constraintEnd_toStartOf="@id/md_iv_arrow"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:layout_marginStart="@dimen/dp_12" />
+
+                    <ImageView
+                        android:id="@+id/md_iv_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_right_white"
+                        app:layout_constraintStart_toEndOf="@id/md_song_list_tv_description"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10" />
                     <TextView
                         android:id="@id/md_song_list_btn_collect"
                         android:layout_width="wrap_content"
@@ -114,8 +129,8 @@
                         android:text="@string/tab_my_save"
                         android:background="@drawable/shape_btn_blue_bg"
                         app:layout_constraintStart_toEndOf="@id/md_song_list_iv_small_cover"
-                        app:layout_constraintTop_toBottomOf="@id/md_song_list_tv_author"
-                        android:layout_marginStart="@dimen/dp_18"
+                        app:layout_constraintTop_toBottomOf="@id/md_song_list_tv_description"
+                        android:layout_marginStart="@dimen/dp_12"
                         android:layout_marginTop="@dimen/dp_10"
                         app:drawableStartCompat="@drawable/love_small"
                         tools:ignore="SmallSp" />
@@ -132,6 +147,7 @@
                         android:textSize="12sp"
                         android:gravity="center"
                         tools:text="游戏"
+                        android:visibility="gone"
                         android:background="@drawable/shape_btn_translate_bg"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/md_song_list_iv_small_cover"
@@ -149,6 +165,7 @@
                         android:textSize="12sp"
                         android:gravity="center"
                         tools:text="流行"
+                        android:visibility="gone"
                         android:background="@drawable/shape_btn_translate_bg"
                         app:layout_constraintStart_toEndOf="@id/md_song_list_tv_tab_a"
                         app:layout_constraintTop_toBottomOf="@id/md_song_list_iv_small_cover"

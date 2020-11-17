@@ -24,12 +24,13 @@
                 android:id="@+id/mCtbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/grayWhites"
                 app:layout_scrollFlags="scroll">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/author_recommend"
-                    android:layout_marginStart="@dimen/dp_18"
+                    android:layout_marginStart="@dimen/dp_28"
                     android:textColor="@color/black2"
                     android:textSize="15sp"
                     android:layout_marginTop="@dimen/dp_12"/>
@@ -40,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_36"
                     android:layout_marginStart="@dimen/dp_22"
-                    android:layout_marginEnd="@dimen/dp_14"
+                    android:layout_marginEnd="@dimen/dp_22"
                     android:overScrollMode="never" />
 
 
@@ -49,17 +50,17 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/all_song_list_tab_classify"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:layout_height="@dimen/dp_38"
+                android:background="@color/grayWhites"
                 app:tabBackground="@android:color/transparent"
                 app:tabIndicatorColor="@color/colorPrimary"
                 app:tabIndicatorHeight="2dp"
                 app:tabMode="scrollable"
                 app:tabIndicatorFullWidth="false"
+                app:tabRippleColor="@color/translate"
                 app:tabSelectedTextColor="@color/colorPrimary"
                 app:tabTextAppearance="@style/tabLayoutTextSize2"
-                app:tabTextColor="@color/black2"
-                />
+                app:tabTextColor="@color/black_33" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

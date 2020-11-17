@@ -99,12 +99,20 @@ object Constants {
     const val ST_CLASSIC = 7// 经典老歌
     const val ST_QUITE = 8// 安静
     const val ST_CURE = 9// 治愈
+    /*具体的所有歌单id*/
+    const val SL_1 = 1
+    const val SL_2 = 2
+    const val SL_3 = 3
+    const val SL_4 = 4
 
 
-    const val ST_TAG1 = "古风"
-    const val ST_TAG2 = "民谣"
+    const val ST_TAG1 = "华语"
+    const val ST_TAG2 = "翻唱"
     const val ST_TAG3 = "轻音乐"
     const val ST_TAG4 = "安静"
+    const val ST_TAG5 = "民谣"
+    const val ST_TAG6 = "女声"
+    const val ST_TAG7 = "节奏"
 
 
     const val PAGE_SIZE_BANNER = 4

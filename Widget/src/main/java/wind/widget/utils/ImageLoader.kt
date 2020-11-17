@@ -24,8 +24,8 @@ fun ImageView.loadImg(
     url: String,
     round: Float = 0f,
     cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL,
-    placeholder: Int = R.drawable.place_holder,
-    error: Int = R.drawable.place_holder
+    placeholder: Int = R.drawable.default_cover,
+    error: Int = R.drawable.default_cover
 ) {
 
     if (round == 0f) {
@@ -53,8 +53,8 @@ fun ImageView.loadImg(
 fun loadImg(
     context:Context,
     url: String,
-    placeholder: Int = R.drawable.place_holder,
-    error: Int = R.drawable.place_holder,
+    placeholder: Int = R.drawable.default_cover,
+    error: Int = R.drawable.default_cover,
     block: (resource: Drawable) -> Unit
 ) {
     Glide

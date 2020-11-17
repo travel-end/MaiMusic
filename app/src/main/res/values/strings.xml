@@ -67,7 +67,7 @@
     <string name="input_song_list_title">输入歌单标题</string>
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
-    <string name="author_recommend">随心推荐</string>
+    <string name="author_recommend">推荐歌单</string>
     <string name="song_list_squire">歌单广场</string>
     <string name="chinese">华语精选</string>
     <string name="pure_music">纯音乐</string>
@@ -94,4 +94,5 @@
     <string name="forget_password">忘记密码？</string>
     <string name="to_login">立即登录</string>
     <string name="public_time">发行于</string>
+    <string name="today_recommend">今日推荐</string>
 </resources>

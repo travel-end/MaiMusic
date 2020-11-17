@@ -212,15 +212,12 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
             }
         }
 //            .attach(rvListenSong)
-        // JRecyclerView
         jAdapter = JRefreshAndLoadMoreAdapter(requireContext(), rawAdapter).apply {
             setOnRefreshListener {
-                mViewModel.getListenData()
-                jAdapter?.setRefreshComplete()
+                requireLazyInit(1500)
             }
         }
         jAdapter?.setIsOpenLoadMore(false)
-//        jAdapter?.refreshLoadView = MaiRefreshView(requireContext())
         rvListenSong.adapter = jAdapter
     }
 
@@ -229,6 +226,11 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         mViewModel.getListenData()
     }
 
+    override fun lazyInitData() {
+        super.lazyInitData()
+        mViewModel.getListenData()
+        jAdapter?.setRefreshComplete()
+    }
 
     override fun observe() {
         super.observe()
@@ -240,6 +242,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
         })
         mViewModel.specialSongList.observe(this,Observer{
             if (isNotNullOrEmpty(it)) {
+
             }
         })
     }

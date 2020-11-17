@@ -172,21 +172,21 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                         bottomPlayerView.startPlay()
 //                        bottomPlayerView.startCoverRotation()
                         startSeekBarProgress()
-//                        playing = true
                     }
                 }
                 Consts.SONG_PAUSE -> {
-//                    playing = false
                     bottomPlayerView.pausePlay()
                 }
                 Consts.SONG_RESUME -> {
-//                    playing = true
                     bottomPlayerView.resumePlay()
                     startSeekBarProgress()
                 }
                 Consts.SONG_ERROR->{
                     dismissLoadingNormal()
-                    // TODO: 2020/11/14 处理播放错误
+                    bottomPlayerView.pausePlay()
+                }
+                Consts.SONG_COMPLETE ->{
+                    bottomPlayerView.pausePlay()
                 }
             }
         }

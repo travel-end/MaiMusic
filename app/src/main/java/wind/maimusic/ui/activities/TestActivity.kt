@@ -1,11 +1,8 @@
 package wind.maimusic.ui.activities
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,16 +11,11 @@ import wind.maimusic.R
 import wind.maimusic.model.Image
 import wind.maimusic.model.searchhot.HistoryTag
 import wind.maimusic.model.title.HotSearchTitle
-import wind.maimusic.model.title.SingleSongTitle
 import wind.maimusic.model.title.Title
 import wind.maimusic.utils.LogUtil
-import wind.maimusic.utils.inflate
-import wind.maimusic.utils.toast
-import wind.maimusic.widget.MaiRefreshView
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
-import wind.widget.jrecyclerview.config.JRecycleConfig
 import java.util.*
 
 /**
@@ -89,7 +81,7 @@ class TestActivity : AppCompatActivity() {
 //                jAdapter?.setRefreshComplete()
 //            },2000)
 //        }
-        jAdapter?.refreshLoadView = MaiRefreshView(baseContext)
+//        jAdapter?.refreshLoadView = MaiRefreshView(baseContext)
         rv.adapter = jAdapter
 
         adapter?.submitList(data2)

@@ -47,4 +47,11 @@ https://blog.csdn.net/m0_37700275/article/details/79269722
 ####学习记录
 1、关于viewPager2
 viewPager2消除了viewPager需要处理的懒加载机制
+
+
+
+
+
+
+listId
                 

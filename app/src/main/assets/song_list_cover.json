@@ -47,7 +47,7 @@
 
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "安静1",
+      "listName": "小径有风，茅屋有月，手中有酒，心中有诗",
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -451,10 +451,11 @@
   "chinese": [
     {
       "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
-      "listName": "默认歌单",
+      "listName": "小径有风，茅屋有月，手中有酒，心中有诗",
       "desc": "",
       "type": 1,
-      "tag1": 0,
+      "listId": 1,
+      "tag1": 1,
       "tag2": 0
     },
     {

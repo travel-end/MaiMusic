@@ -31,7 +31,7 @@ class AllSongListViewModel:BaseViewModel() {
     fun initAllSongListData() {
         val dbDao = OnlineSongDatabase.getDatabase()
         viewModelScope.launch {
-            recommendSongs.value = dbDao.songListCoverDao().getRandomListCovers(6)
+            recommendSongs.value = dbDao.songListCoverDao().getStartListCovers(6)
             val allSongList = mutableListOf<SongListCovers>()
             for (type in allSongListType) {
                 val result = dbDao.songListCoverDao().findSongListByType(type)

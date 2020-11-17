@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginStart="@dimen/dp_6"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
         style="@style/Widget.MaterialComponents.CardView"
@@ -28,5 +29,6 @@
         android:textColor="@color/text_color"
         android:maxLines="2"
         android:textSize="12sp"
+        android:ellipsize="end"
         android:layout_marginTop="@dimen/dp_6" />
 </LinearLayout>

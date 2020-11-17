@@ -1,21 +1,18 @@
 package wind.widget.jrecyclerview.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import wind.widget.jrecyclerview.config.JRecycleConfig;
 import wind.widget.jrecyclerview.config.JRecycleViewManager;
+import wind.widget.jrecyclerview.loadview.MyRefreshView;
 import wind.widget.jrecyclerview.loadview.OrdinaryLoadMoreView;
-import wind.widget.jrecyclerview.loadview.OrdinaryRefreshLoadView;
 import wind.widget.jrecyclerview.loadview.base.IBaseLoadMoreView;
 import wind.widget.jrecyclerview.loadview.base.IBaseRefreshLoadView;
-import wind.widget.jrecyclerview.utils.LogUtils;
 
 
 /**
@@ -46,7 +43,7 @@ public class JRefreshAndLoadMoreAdapter extends JBaseRecycleAdapter<RecyclerView
         if (mRefreshLoadView == null) {
             if (JRecycleViewManager.getInstance().getRefreshLoadView() == null) {
 //                mRefreshLoadView = new OrdinaryRefreshLoadView(context);
-                mRefreshLoadView = new OrdinaryRefreshLoadView(context);
+                mRefreshLoadView = new MyRefreshView(context);
             } else {
                 mRefreshLoadView = JRecycleViewManager.getInstance().getRefreshLoadView();
             }

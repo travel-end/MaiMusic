@@ -44,9 +44,10 @@ import wind.widget.utils.toIntPx
  */
 abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<VM>() {
     protected var playerBinder: PlayerService.PlayerBinder? = null
-    protected var bottomFunctionDialog:BottomFunctionDialog?=null
+    protected var bottomFunctionDialog: BottomFunctionDialog? = null
     protected var listType: Int = 0
-    protected var singerId:Int = 0
+    protected var singerId: Int = 0
+    private lateinit var mAdapter: EfficientAdapter<Any>
 
     /*非必须组件*/
     private var ivBack: ImageView? = null
@@ -58,11 +59,12 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     protected var tvSongListDescription: TextView? = null
     protected var ivSongListSmallCover: ShapeableImageView? = null
     protected var ivSongListLargeCover: ImageView? = null
-    protected var tvSongListAuthor: TextView? = null
+
+    //    protected var tvSongListAuthor: TextView? = null
     protected var tvSongListTitleName: TextView? = null
     private var tvSongListTagA: TextView? = null
     private var tvSongListTagB: TextView? = null
-    private var immersionBar: ImmersionBar?=null
+    private var immersionBar: ImmersionBar? = null
 
     private var ivSongListTitleBack: ImageView? = null
 
@@ -96,7 +98,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     protected var lastPosition: Int = -1
 
     /*需要操作layoutManager的地方调用*/
-    protected lateinit var layoutManager: LinearLayoutManager
+    protected lateinit var mLayoutManager: LinearLayoutManager
     private val playerConnection = object : ServiceConnection {
         override fun onServiceDisconnected(p0: ComponentName?) {
         }
@@ -118,58 +120,96 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         ivPlayAll = mRootView.findViewById(R.id.view_song_list_iv_play_all)
         flPlayAll = mRootView.findViewById(R.id.fl_play_all)
         tvDownloadAll = mRootView.findViewById(R.id.tv_download_all)
-        layoutManager = LinearLayoutManager(requireContext())
+        mLayoutManager = LinearLayoutManager(requireContext())
         /*默认的recyclerView*/
         setRvContent()
     }
+
     open fun setRvContent() {
         rvSongList.setHasFixedSize(true)
-        rvSongList.setup<Any> {
-            withLayoutManager {
-                return@withLayoutManager layoutManager
-            }
-            adapter {
-                addItem(R.layout.item_song_list) {
-                    bindViewHolder { data, position, _ ->
-                        data?.let {
-                            setDataType(it)
-                            setText(R.id.item_song_list_tv_song_name, songName)
-                            setText(R.id.item_song_list_tv_song_singer, songSinger)
-                            setVisible(R.id.item_song_list_iv_downloaded, mIsDownloaded)
-                            val song = SongUtil.getSong()
-                            val currentSongId = song?.songId
-                            if (currentSongId != null) {
-                                if (currentSongId == songId) {
-                                    setVisible(R.id.item_song_list_iv_playing, true)
-                                    lastPosition = position
-                                } else {
-                                    setVisible(R.id.item_song_list_iv_playing, false)
-                                }
+        rvSongList.layoutManager = mLayoutManager
+        mAdapter = efficientAdapter<Any> {
+            addItem(R.layout.item_song_list) {
+                bindViewHolder { data, position, _ ->
+                    data?.let {
+                        setDataType(it)
+                        setText(R.id.item_song_list_tv_song_name, songName)
+                        setText(R.id.item_song_list_tv_song_singer, songSinger)
+                        setVisible(R.id.item_song_list_iv_downloaded, mIsDownloaded)
+                        val song = SongUtil.getSong()
+                        val currentSongId = song?.songId
+                        if (currentSongId != null) {
+                            if (currentSongId == songId) {
+                                setVisible(R.id.item_song_list_iv_playing, true)
+                                setTextColor(
+                                    R.id.item_song_list_tv_song_name,
+                                    R.color.colorPrimary.getColorRes()
+                                )
+                                setTextColor(
+                                    R.id.item_song_list_tv_song_singer,
+                                    R.color.colorPrimary.getColorRes()
+                                )
+                                lastPosition = position
+                            } else {
+                                setTextColor(
+                                    R.id.item_song_list_tv_song_name,
+                                    R.color.black2.getColorRes()
+                                )
+                                setTextColor(
+                                    R.id.item_song_list_tv_song_singer,
+                                    R.color.text_color.getColorRes()
+                                )
+                                setVisible(R.id.item_song_list_iv_playing, false)
                             }
-                            itemView?.findViewById<RippleView>(R.id.ripple_view)?.fastClickListener {
+                        }
+                        itemView?.findViewById<RippleView>(R.id.ripple_view)
+                            ?.setOnRippleCompleteListener {
                                 if (position != lastPosition) {
                                     notifyItemChanged(lastPosition)
                                     lastPosition = position
                                 }
-                                LogUtil.e("songlistitemclick:${songListType()}")
                                 notifyItemChanged(position)
                                 setCurrentSong(position)// 设置当前点击的歌曲
-                                val s = SongUtil.assemblySong(currentSong!!, songListType(), position)
-                                LogUtil.e("songlistitemclick:${songListType()}, songName:${s.songName}")
+                                val s = SongUtil.assemblySong(
+                                    currentSong!!,
+                                    songListType(),
+                                    position
+                                )
                                 SongUtil.saveSong(s)
                                 (requireActivity() as MainActivity).showLoadingNormal("")
                                 if (listType == Consts.ONLINE_SINGER_SONG) {
                                     playerBinder?.singerPlay(singerId)
-                                    SpUtil.saveValue("singerId",singerId)
+                                    SpUtil.saveValue("singerId", singerId)
                                 } else {
-                                    playerBinder?.play(s.listType,songListType())//ONLINE_SINGER_SONG
+                                    playerBinder?.play(
+                                        s.listType,
+                                        songListType()
+                                    )//ONLINE_SINGER_SONG
                                 }
                             }
-                            itemView?.findViewById<ImageView>(R.id.item_song_list_iv_more)?.fastClickListener {
+                        itemView?.findViewById<ImageView>(R.id.item_song_list_iv_more)
+                            ?.fastClickListener {
                                 bottomFunctionDialog?.show()
                             }
-                        }
                     }
+                }
+            }
+        }
+        val song = SongUtil.getSong()
+        if (song != null) {
+            mLayoutManager.scrollToPositionWithOffset(song.position - 4, rvSongList.height)
+        }
+        rvSongList.adapter = mAdapter
+    }
+
+    override fun observe() {
+        super.observe()
+        Bus.observe<Int>(Consts.SONG_STATUS_CHANGE, this) { status ->
+            if (status == Consts.SONG_CHANGE) {
+                mAdapter.notifyDataSetChanged()
+                val song = SongUtil.getSong()
+                if (song != null) {
+                    mLayoutManager.scrollToPositionWithOffset(song.position + 4, rvSongList.height)
                 }
             }
         }
@@ -191,9 +231,6 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         super.initAction()
         ivBack?.fastClickListener {
         }
-//        tvFunc?.fastClickListener {
-//            doFunc()
-//        }
         tvDownloadAll.fastClickListener {
             downloadAll()
         }
@@ -263,7 +300,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             Consts.LIST_TYPE_DOWNLOAD -> currentSong = downloadedSongs[position]
             Consts.LIST_TYPE_LOVE -> currentSong = lovedSongs[position]
             Constants.ST_DAILY_RECOMMEND -> currentSong = onlineSongs[position]
-            Consts.ONLINE_SINGER_SONG-> currentSong = onlineSongs[position]
+            Consts.ONLINE_SINGER_SONG -> currentSong = onlineSongs[position]
         }
     }
 
@@ -284,10 +321,9 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         songListTop?.let { info ->
             tvSongListName?.text = info.songListName
             tvSongListDescription?.text = info.songListDescription
-            tvSongListAuthor?.text = info.songListAuthor
             tvSongListTagA?.text = info.songListTagA
             tvSongListTagB?.text = info.songListTagB
-            tvSongListTitleName?.text = info.songListName
+            tvSongListTitleName?.text = info.songListTitleName
             ivSongListLargeCover?.loadImg(
                 url = info.songListCoverImgUrl ?: "",
                 placeholder = R.drawable.place_holder_half_translate,
@@ -318,12 +354,10 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             }
             Constants.ST_DAILY_RECOMMEND -> {
                 songListTop = SongListTop(
-                    "每日推荐",
-                    "入我相思门，知我相思苦。早知如此绊人心，何如当初莫相识",
-                    "By suo luo -",
-                    if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl,
-                    "推荐",
-                    "清新"
+                    songListTitleName = R.string.today_recommend.getStringRes(),
+                    songListName = "世界微尘里 吾宁爱与憎",
+                    songListDescription = "残阳入西掩，茅屋仿股僧。落叶人何在，韩云路基层。独敲初夜磬，闲倚一枝藤。世界微尘里，吾宁爱与憎。",
+                    songListCoverImgUrl = if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl
                 )
             }
             Consts.ONLINE_SINGER_SONG -> {
@@ -341,6 +375,13 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
             }
         }
         initSongListInfo()
+    }
+
+    open fun showTag(showTag: Boolean) {
+        if (showTag) {
+            tvSongListTagA.visible()
+            tvSongListTagB.visible()
+        }
     }
 
     /*监听md toolBar透明度的变化*/
@@ -396,9 +437,9 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         mRootView.findViewById<TextView>(R.id.md_song_list_tv_description)?.let {
             tvSongListDescription = it
         }
-        mRootView.findViewById<TextView>(R.id.md_song_list_tv_author)?.let {
-            tvSongListAuthor = it
-        }
+//        mRootView.findViewById<TextView>(R.id.md_song_list_tv_author)?.let {
+//            tvSongListAuthor = it
+//        }
         mRootView.findViewById<TextView>(R.id.md_song_list_tv_title_name)?.let {
             tvSongListTitleName = it
         }
@@ -429,16 +470,19 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
 
     override fun initStatusBar() {
         super.initStatusBar()
-        immersionBar = ImmersionBar
-            .with(this)
-        immersionBar?.statusBarDarkFont(false)?.init()
+        immersionBar = ImmersionBar.with(this)
+
+        immersionBar
+        ?.statusBarDarkFont(false)
+//        ?.navigationBarColor(R.color.grayWhites)
+        ?.init()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         immersionBar
             ?.statusBarDarkFont(true)
-            ?.navigationBarColor(R.color.grayWhites)
+//            ?.navigationBarColor(R.color.grayWhites)
             ?.init()
     }
 }

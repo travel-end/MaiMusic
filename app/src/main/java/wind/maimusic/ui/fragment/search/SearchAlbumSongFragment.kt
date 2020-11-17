@@ -71,7 +71,7 @@ class SearchAlbumSongFragment:BaseSongListFragment<AlbumSongViewModel>() {
                 .apply(RequestOptions.errorOf(R.drawable.shape_translate_rect_bg))
                 .into(target)
         }
-        tvSongListAuthor?.text = singerName
+//        tvSongListAuthor?.text = singerName
         tvSongListName?.text = albumName
         tvSongListTitleName?.text = albumName
         tvSongListDescription?.text = "${R.string.public_time.getStringRes()} $publicTime"

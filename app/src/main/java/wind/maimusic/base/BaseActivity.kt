@@ -50,7 +50,7 @@ abstract class BaseActivity:AppCompatActivity() {
             .with(this)
             .keyboardEnable(true)
             .statusBarDarkFont(true)
-            .navigationBarColor(R.color.grayWhites)
+//            .navigationBarColor(R.color.grayWhites)
             .init()
     }
 

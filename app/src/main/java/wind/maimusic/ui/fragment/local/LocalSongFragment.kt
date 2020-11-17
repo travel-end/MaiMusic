@@ -15,12 +15,12 @@ class LocalSongFragment:BaseSongListFragment<LocalSongViewModel>() {
         super.initView()
         initTitle(R.string.local_music.getStringRes(),R.string.scan_music.getStringRes())
         intiPlayAll(false)
-        val song = SongUtil.getSong()
-        if (song != null) {
-            layoutManager.scrollToPositionWithOffset(
-                song.position - 4,rvSongList.height
-            )
-        }
+//        val song = SongUtil.getSong()
+//        if (song != null) {
+//            layoutManager.scrollToPositionWithOffset(
+//                song.position - 4,rvSongList.height
+//            )
+//        }
     }
 
     override fun songListType()=Consts.LIST_TYPE_LOCAL

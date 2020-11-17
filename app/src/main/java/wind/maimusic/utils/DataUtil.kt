@@ -78,4 +78,17 @@ object DataUtil {
 
         return startIndex
     }
+
+    private fun compareDay(c1:Calendar,c2:Calendar):Boolean {
+        return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)&& c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR)
+    }
+
+    fun isSameDay(time:Long):Boolean {
+        val c1 = Calendar.getInstance()
+        c1.time = Date()
+        val c2 = Calendar.getInstance()
+        c2.timeInMillis = time
+        return compareDay(c1,c2)
+    }
+
 }

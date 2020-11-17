@@ -234,6 +234,7 @@ object PlayServiceHelper {
         return loveSongList
     }
 
+    @Throws(Exception::class)
     fun getOnlineSongUrl(songId: String): String? {
         val songUrl = "${Consts.SONG_URL_DATA_LEFT}$songId${Consts.SONG_URL_DATA_RIGHT}"
         var playUrl: String? = null

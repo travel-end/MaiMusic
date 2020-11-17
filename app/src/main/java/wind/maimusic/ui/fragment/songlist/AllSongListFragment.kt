@@ -209,5 +209,6 @@ class AllSongListFragment : BaseLifeCycleFragment<AllSongListViewModel>(),
 
     override fun onSongListItemClick(item: SongListCover) {
         LogUtil.e("-----AllSongListFragment songListName:${item.listName}")
+
     }
 }
