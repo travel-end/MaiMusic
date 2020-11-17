@@ -1,15 +1,10 @@
 package wind.maimusic.ui.fragment.search
 
 import android.os.Bundle
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseVpFragment
-import wind.maimusic.model.MaiTab
 import wind.maimusic.utils.getStringRes
-import wind.widget.tablayout.CustomTab
 
 class SearchVpFragment : BaseVpFragment() {
     private var searchText: String = ""
