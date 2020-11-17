@@ -85,7 +85,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             override fun getItemCount() = Int.MAX_VALUE
                             override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
                                 val banner = bannerList[position % bannerList.size]
-                                holder.bannerIv.loadImg(banner.imgUrl, 8f)
+                                holder.bannerIv.loadImg(banner.imgUrl)
                                 holder.bannerTvName.text = banner.title
                                 holder.itemView.fastClickListener {
                                 }

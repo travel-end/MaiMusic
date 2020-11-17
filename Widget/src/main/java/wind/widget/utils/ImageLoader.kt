@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import wind.widget.R
 
 /**
@@ -22,13 +21,11 @@ import wind.widget.R
  */
 fun ImageView.loadImg(
     url: String,
-    round: Float = 0f,
-    cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL,
     placeholder: Int = R.drawable.default_cover,
     error: Int = R.drawable.default_cover
 ) {
 
-    if (round == 0f) {
+//    if (round == 0f) {
         val option = RequestOptions()
             .placeholder(placeholder)
             .error(error)
@@ -37,17 +34,17 @@ fun ImageView.loadImg(
             .load(url)
             .apply(option)
             .into(this)
-    } else {
-        val option = RequestOptions
-            .bitmapTransform(RoundedCornersTransformation(round.toIntPx(), 0, cornerType))
-            .placeholder(placeholder)
-            .error(error)
-        Glide
-            .with(this.context)
-            .load(url)
-            .apply(option)
-            .into(this)
-    }
+//    } else {
+//        val option = RequestOptions
+//            .bitmapTransform(RoundedCornersTransformation(round.toIntPx(), 0, cornerType))
+//            .placeholder(placeholder)
+//            .error(error)
+//        Glide
+//            .with(this.context)
+//            .load(url)
+//            .apply(option)
+//            .into(this)
+//    }
 }
 
 fun loadImg(

@@ -37,6 +37,10 @@
     <!--圆角-->
     <style name="roundedCornerImageStyle">
         <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_8</item>
+    </style>
+    <style name="roundedCornerImageStyle_b">
+        <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/dp_10</item>
     </style>
     <!--圆形图片-->

@@ -44,7 +44,7 @@ class AlbumSongsAdapter(private val context: Context, private val searchText:Str
             val bean = dataList[position]
             holder.run {
                 bean.albumPic?.let {
-                    ivAlbumCover.loadImg(it,round = 8f)
+                    ivAlbumCover.loadImg(it)
                 }
                 tvAlbumName.text = bean.albumName
                 tvAlbumSinger.text = bean.singerName

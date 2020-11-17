@@ -11,10 +11,11 @@
     app:cardCornerRadius="@dimen/dp_10"
     app:cardElevation="0dp">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/item_banner_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/roundedCornerImageStyle_b"
         android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/item_banner_tv_name"
