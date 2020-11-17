@@ -22,7 +22,7 @@
                 android:scaleType="centerCrop"
                 android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginBottom="@dimen/dp_20"
-                style="@style/roundedCornerImageStyle"
+                style="@style/roundedCornerImageStyle_8b"
                 android:src="@drawable/temp_rect_cover"
                 android:layout_gravity="center_horizontal" />
 

@@ -82,7 +82,7 @@
                         android:layout_width="@dimen/dp_82"
                         android:layout_height="@dimen/dp_82"
                         android:layout_marginStart="@dimen/dp_18"
-                        app:shapeAppearanceOverlay="@style/roundedCornerImageStyle"
+                        app:shapeAppearanceOverlay="@style/roundedCornerImageStyle_8b"
                         android:src="@drawable/temp_rect_cover"
                         android:scaleType="centerCrop"
                         app:layout_constraintStart_toStartOf="parent"

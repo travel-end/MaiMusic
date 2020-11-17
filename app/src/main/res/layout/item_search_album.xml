@@ -17,7 +17,7 @@
         android:layout_height="@dimen/dp_66"
         android:src="@drawable/temp_rect_cover"
         android:scaleType="centerCrop"
-        style="@style/roundedCornerImageStyle"
+        style="@style/roundedCornerImageStyle_8b"
         android:layout_marginStart="@dimen/dp_16"
         android:layout_centerVertical="true" />
     <TextView

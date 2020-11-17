@@ -15,7 +15,7 @@
         android:id="@+id/item_banner_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/roundedCornerImageStyle_b"
+        style="@style/roundedCornerImageStyle_10b"
         android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/item_banner_tv_name"

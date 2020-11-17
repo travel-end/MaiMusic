@@ -2,7 +2,8 @@
   "cure": [
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "治愈1",
+      "listName": "我有一瓢酒，可以慰风尘",
+      "listId": 12,
       "desc": "",
       "type": 9,
       "tag1": 0,
@@ -11,7 +12,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "治愈2",
+      "listName": "殷勤昨夜三更雨，又得浮生一日凉",
+      "listId": 15,
       "desc": "",
       "type": 9,
       "tag1": 0,
@@ -19,7 +21,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "治愈3",
+      "listName": "此情可待成追忆，只是当时已惘然",
+      "listId": 17,
       "desc": "",
       "type": 9,
       "tag1": 0,
@@ -27,7 +30,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "治愈4",
+      "listName": "世界微尘里，吾宁爱与憎",
+      "listId": 29,
       "desc": "",
       "type": 9,
       "tag1": 0,
@@ -47,7 +51,8 @@
 
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "小径有风，茅屋有月，手中有酒，心中有诗",
+      "listName": "柴门闻犬吠，风雪夜归人",
+      "listId": 5,
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -56,7 +61,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "安静2",
+      "listName": "连雨不知春去，一晴方觉夏深",
+      "listId": 7,
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -64,7 +70,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "安静3",
+      "listName": "绿蚁新焙酒，红泥小火炉。晚来天欲雪，能饮一杯无",
+      "listId": 10,
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -72,7 +79,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "安静4",
+      "listName": "山僧不解数甲子，一叶落知天下秋",
+      "listId": 22,
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -81,7 +89,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "安静5",
+      "listName": "清时有味是无能，闲爱孤云静爱僧",
+      "listId": 24,
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -90,7 +99,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "安静6",
+      "listName": "空山新雨后，天气晚来秋。明月松间照，清泉石上流",
+      "listId": 33,
       "desc": "",
       "type": 8,
       "tag1": 0,
@@ -108,7 +118,8 @@
   "classic": [
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "经典老歌1",
+      "listName": "桃李春风一杯酒，江湖夜雨十年灯",
+      "listId": 8,
       "desc": "",
       "type": 7,
       "tag1": 0,
@@ -117,7 +128,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "经典老歌2",
+      "listName": "多少长安名利客，机关算尽不如君",
+      "listId": 9,
       "desc": "",
       "type": 7,
       "tag1": 0,
@@ -125,7 +137,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "经典老歌3",
+      "listName": "欲买桂花同载酒，终不似，少年游",
+      "listId": 11,
       "desc": "",
       "type": 7,
       "tag1": 0,
@@ -133,7 +146,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "经典老歌4",
+      "listName": "浮云一别后，流水十年间",
+      "listId": 20,
       "desc": "",
       "type": 7,
       "tag1": 0,
@@ -142,7 +156,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "经典老歌5",
+      "listName": "种桃道士今何在，前度刘郎今又来",
+      "listId": 23,
       "desc": "",
       "type": 7,
       "tag1": 0,
@@ -184,7 +199,8 @@
   "folk": [
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "民谣1",
+      "listName": "我未成名君未嫁，可能俱是不如人",
+      "listId": 13,
       "desc": "",
       "type": 6,
       "tag1": 0,
@@ -193,7 +209,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "民谣2",
+      "listName": "还君明珠双泪垂，恨不相逢未嫁时",
+      "listId": 37,
       "desc": "",
       "type": 6,
       "tag1": 0,
@@ -245,7 +262,8 @@
   "antique": [
     {
       "cover": "http://p1.music.126.net/slpd09Tf5Ju82Mv-h8MP4w==/3440371884651965.jpg?param=40y40",
-      "listName": "古风1",
+      "listName": "白头宫女在，闲坐说玄宗",
+      "listId": 1,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -254,7 +272,8 @@
   ,
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "古风2",
+      "listName": "满堂花醉三千客，一剑霜寒十四州",
+      "listId": 2,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -263,7 +282,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "古风3",
+      "listName": "四明有狂客，风流贺季真。长安一相见，呼我谪仙人",
+      "listId": 3,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -272,7 +292,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "古风4",
+      "listName": "正是江南好风景，落花时节又逢君",
+      "listId": 19,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -281,7 +302,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "古风5",
+      "listName": "海水梦悠悠，君愁我亦愁。南风知我意，吹梦到西洲",
+      "listId": 27,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -289,7 +311,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "古风6",
+      "listName": "闽国扬帆去，蟾蜍亏复圆。秋风生渭水，落叶满长安",
+      "listId": 34,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -297,7 +320,8 @@
     },
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "古风7",
+      "listName": "谁家玉笛暗飞声，散入春风满洛城。此夜曲中闻折柳，何人不起故园情",
+      "listId": 35,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -306,7 +330,8 @@
   ,
     {
       "cover": "http://p2.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62",
-      "listName": "古风8",
+      "listName": "杨花落尽子规啼，闻道龙标过五溪。我寄愁心与明月，随风直到夜郎西",
+      "listId": 36,
       "desc": "",
       "type": 5,
       "tag1": 0,
@@ -409,7 +434,8 @@
   "pure": [
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "TEMP_纯音乐1",
+      "listName": "黄鹤楼中吹玉笛，江城五月落梅花",
+      "listId": 4,
       "desc": "",
       "type": 2,
       "tag1": 0,
@@ -417,7 +443,8 @@
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "TEMP_纯音乐2",
+      "listName": "数声风笛离亭晚，君向潇湘我向秦",
+      "listId": 6,
       "desc": "",
       "type": 2,
       "tag1": 0,
@@ -425,7 +452,8 @@
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1021/AS9b631a8fddf7ccc36362b6925a9b4f1e.jpg",
-      "listName": "TEMP_纯音乐3",
+      "listName": "一生几许伤心事，不向空门何处销",
+      "listId": 14,
       "desc": "",
       "type": 2,
       "tag1": 0,
@@ -433,7 +461,8 @@
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "TEMP_纯音乐4",
+      "listName": "人似秋鸿来有信，事如春梦了无痕",
+      "listId": 18,
       "desc": "",
       "type": 2,
       "tag1": 0,
@@ -441,7 +470,8 @@
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1030/0258/ASdc8b9d4849a1f8dc7799f19a8ba2b542.jpg",
-      "listName": "TEMP_纯音乐5",
+      "listName": "行到水穷处，坐看云起时。偶然值林叟，谈笑无还期",
+      "listId": 30,
       "desc": "",
       "type": 2,
       "tag1": 0,
@@ -451,16 +481,17 @@
   "chinese": [
     {
       "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
-      "listName": "小径有风，茅屋有月，手中有酒，心中有诗",
+      "listName": "世间无限丹青手，一片伤心画不成",
       "desc": "",
       "type": 1,
-      "listId": 1,
+      "listId": 21,
       "tag1": 1,
       "tag2": 0
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1021/AS9b631a8fddf7ccc36362b6925a9b4f1e.jpg",
-      "listName": "每日推荐",
+      "listName": "尘世难逢开口笑，菊花须插满头归",
+      "listId": 26,
       "desc": "",
       "type": 1,
       "tag1": 0,
@@ -468,7 +499,8 @@
     },
     {
       "cover": "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg",
-      "listName": "TEMP_华语精选1",
+      "listName": "昨夜星辰昨夜风，画楼西畔桂堂东。身无彩凤双飞翼，心有灵犀一点通",
+      "listId": 28,
       "desc": "",
       "type": 1,
       "tag1": 0,
@@ -476,7 +508,8 @@
     },
     {
       "cover": "https://cdnmusic.migu.cn/picture/2020/1027/1021/AS9b631a8fddf7ccc36362b6925a9b4f1e.jpg",
-      "listName": "TEMP_华语精选2",
+      "listName": "得成比目何辞死，愿作鸳鸯不羡仙",
+      "listId": 31,
       "desc": "",
       "type": 1,
       "tag1": 0,
