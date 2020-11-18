@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@id/md_song_list_appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/md_collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_270"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <ImageView
+                android:id="@id/md_song_list_iv_large_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+            <View
+                android:id="@+id/view_"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_60p"
+                app:layout_collapseMode="parallax" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax">
+                <TextView
+                    android:id="@id/md_song_list_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="薛之谦"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/dp_92"
+                    android:layout_marginStart="@dimen/dp_18" />
+                <TextView
+                    android:id="@id/md_song_list_tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:textColor="@color/white"
+                    tools:text="【不定时更新】敲带感可循环亿遍的古风歌，古装哈撒给，啊同理卡通，我的剑就是你的剑"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_18"
+                    android:layout_marginEnd="@dimen/dp_18"/>
+
+            </LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@id/md_song_list_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_62"
+                style="@style/clubToolbar"
+                android:background="@color/white"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                <ImageView
+                    android:id="@id/md_song_list_iv_title_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/dp_12"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:src="@drawable/ic_arrow_left_white" />
+                <TextView
+                    android:id="@id/md_song_list_tv_title_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/dp_12"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:layout_marginEnd="@dimen/dp_26"
+                    android:textColor="@color/black2"
+                    tools:text="薛之谦" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/song_list_ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <include
+            android:id="@id/fl_play_all"
+            layout="@layout/view_play_all"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@id/song_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

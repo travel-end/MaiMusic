@@ -144,6 +144,7 @@
         android:name="wind.maimusic.ui.fragment.songlist.AllSongListFragment"
         tools:layout="@layout/fragment_all_song_list" />
 
+
     <fragment
         android:id="@+id/loved_poetry_fragment"
         android:name="wind.maimusic.ui.fragment.love.LovePoetryFragment"
@@ -162,12 +163,6 @@
             android:name="song_list_type"
             android:defaultValue=""
             app:argType="string" />
-
-        <argument
-            android:name="singer_id"
-            android:defaultValue=""
-            app:argType="string" />
-
         <action
             android:id="@+id/song_list_to_album_top_detail_fragment"
             app:destination="@id/songlist_top_detail_fragment"
@@ -217,7 +212,7 @@
         tools:layout="@layout/fragment_singers">
         <action
             android:id="@+id/singer_to_song_list_fragment"
-            app:destination="@id/song_list_fragment"
+            app:destination="@id/singer_song_list_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -228,5 +223,22 @@
         android:name="wind.maimusic.ui.fragment.songlist.SongListTopDetailFragment"
         tools:layout="@layout/fragment_song_list_top_detail" >
 
+    </fragment>
+    <fragment
+        android:id="@+id/singer_song_list_fragment"
+        android:name="wind.maimusic.ui.fragment.singer.SingerSongListFragment"
+        tools:layout="@layout/fragment_md_singer_song_list" >
+        <argument
+            android:name="singer_id"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="singer_name"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="singer_cover"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 </navigation>

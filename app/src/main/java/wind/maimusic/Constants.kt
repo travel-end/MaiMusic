@@ -16,78 +16,95 @@ object Constants {
     //根据歌手获取歌手图片的baseUrl
     const val SINGER_PIC_BASE_URL = "http://music.163.com/"
     const val SINGER_PIC = "api/search/get/web?csrf_token=&type=100"
+
     // Fiddler抓包qq音乐网站后的地址
     const val FIDDLER_BASE_QQ_URL = "https://c.y.qq.com/"
+
     //获取播放地址的baseUrl
     const val FIDDLER_BASE_SONG_URL = "https://u.y.qq.com/"
+
     // 获取歌手图片需要添加user-agent的表头
-    const val HEADER_USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+    const val HEADER_USER_AGENT =
+        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
 
     // 专辑照片
-    const val ALBUM_PIC="http://y.gtimg.cn/music/photo_new/T002R180x180M000"
-    const val JPG=".jpg"
-    const val SONG_URL_DATA_LEFT="%7B%22req_0%22%3A%7B%22module%22%3A%22vkey.GetVkeyServer%22%2C%22method%22%3A%22CgiGetVkey%22%2C%22param%22%3A%7B%22guid%22%3A%22358840384%22%2C%22songmid%22%3A%5B%22"
-    const val SONG_URL_DATA_RIGHT="%22%5D%2C%22songtype%22%3A%5B0%5D%2C%22uin%22%3A%221443481947%22%2C%22loginflag%22%3A1%2C%22platform%22%3A%2220%22%7D%7D%2C%22comm%22%3A%7B%22uin%22%3A%221443481947%22%2C%22format%22%3A%22json%22%2C%22ct%22%3A24%2C%22cv%22%3A0%7D%7D"
+    const val ALBUM_PIC = "http://y.gtimg.cn/music/photo_new/T002R180x180M000"
+    const val JPG = ".jpg"
+    const val SONG_URL_DATA_LEFT =
+        "%7B%22req_0%22%3A%7B%22module%22%3A%22vkey.GetVkeyServer%22%2C%22method%22%3A%22CgiGetVkey%22%2C%22param%22%3A%7B%22guid%22%3A%22358840384%22%2C%22songmid%22%3A%5B%22"
+    const val SONG_URL_DATA_RIGHT =
+        "%22%5D%2C%22songtype%22%3A%5B0%5D%2C%22uin%22%3A%221443481947%22%2C%22loginflag%22%3A1%2C%22platform%22%3A%2220%22%7D%7D%2C%22comm%22%3A%7B%22uin%22%3A%221443481947%22%2C%22format%22%3A%22json%22%2C%22ct%22%3A24%2C%22cv%22%3A0%7D%7D"
 
     //根据qq音乐的mid获取歌词
-    const val ONLINE_SONG_LRC = "https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?format=json&nobase64=1"
+    const val ONLINE_SONG_LRC =
+        "https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?format=json&nobase64=1"
 
 
     // 单曲封面图片的路径
-    fun coverImgUrl():String {
-        return "${MaiApp.getInstance().getExternalFilesDir("coverImg").toString()}/maimusic/coverimg/"
+    fun coverImgUrl(): String {
+        return "${MaiApp.getInstance().getExternalFilesDir("coverImg")
+            .toString()}/maimusic/coverimg/"
     }
 
 
     // 下载歌曲的路径 todo 使用共享路径 保证app卸载后歌曲不会被删除
-    fun downloadSongUrl():String {
-        return "${MaiApp.getInstance().getExternalFilesDir("downloadSong").toString()}/maimusic/downloadsong/"
+    fun downloadSongUrl(): String {
+        return "${MaiApp.getInstance().getExternalFilesDir("downloadSong")
+            .toString()}/maimusic/downloadsong/"
     }
+
     // 保存歌词的路径
-    fun lrcTextUrl():String {
+    fun lrcTextUrl(): String {
         return "${MaiApp.getInstance().getExternalFilesDir("lrcText").toString()}/maimusic/lrctext"
     }
 
     // 当前播放歌曲的路径
-    fun currentSongUrl():String {
+    fun currentSongUrl(): String {
         return "${MaiApp.getInstance().getExternalFilesDir("song").toString()}/maimusic"
     }
+
     const val HOT_SEARCH = "hot_search"
     const val SONG_LIST_TYPE = "song_list_type"
     const val SINGER_ID = "singer_id"
-    const val ALBUM_ID= "album_id"
+    const val SINGER_COVER = "singer_cover"
+    const val SINGER_NAME = "singer_name"
+    const val ALBUM_ID = "album_id"
     const val ALBUM_NAME = "album_name"
     const val ALBUM_SINGER = "album_singer"
     const val ALBUM_COVER = "album_cover"
     const val ALBUM_PUBLIC_TIME = "album_public_time"
+    const val SONG_LIST_ID = "song_list_id"
 
 
-    const val KEY_SEARCH_CONTENT= "key_search_content"
+    const val KEY_SEARCH_CONTENT = "key_search_content"
     const val TOOLBAR_MAX_OFFSET = 150
     const val SEARCH_SONG_PAGE_SIZE = 20
-    const val TEMP_SONG_COVER1_NORMAL = "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg"
+    const val TEMP_SONG_COVER1_NORMAL =
+        "http://p1.music.126.net/qTDkcmWPMK3U54RNC0IgMw==/109951163288035254.jpg"
     const val TEMP_SONG_COVER2_SMALL = "${Consts.ALBUM_PIC}001Jegbz00ePg5${Consts.JPG}"// 小图
-    const val TEMP_SONG_COVER3_BIG = "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg"//大图
+    const val TEMP_SONG_COVER3_BIG =
+        "https://p4.music.126.net/1XfoEJK6dQ2TEw55eXZLfA==/109951165418603915.jpg"//大图
 
 
-    const val TEMP_BANNER1 = "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89"
-    const val TEMP_BANNER2 = "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89"
+    const val TEMP_BANNER1 =
+        "http://p1.music.126.net/ADoIa_dS6CQ5fpUrwxkZ4g==/109951165433749064.jpg?imageView&quality=89"
+    const val TEMP_BANNER2 =
+        "http://p1.music.126.net/KYCSrOuaRhLp9-a4Dntc4g==/109951165433368451.jpg?imageView&quality=89"
 
     const val MSG_CODE = 1
     const val MALE = 0
     const val FAMELE = 1
     const val HOT_SINGER = 2
-    const val OTHER_SINGER =3
+    const val OTHER_SINGER = 3
 
     /**
      * 歌单类型 具体的名字需要在定义(名字为一句诗 配上一到两个标签,贴在每个歌单的封面 如古风、民谣等)
      * 每首歌对应两个歌单名称，比如'旧梦一场' 对应华语热歌和网络热歌
      */
-    const val ST_DEFAULT= 0//默认的歌单 对于一些没有mainType和secondType的都放到默认歌单中
+    const val ST_DEFAULT = 0//默认的歌单 对于一些没有mainType和secondType的都放到默认歌单中
     const val ST_DAILY_RECOMMEND = 21// 每日推荐
     const val ST_ALBUM_SONG_LIST = 22
     const val ST_DAILY_HOT_SONG = 20
-
 
 
     const val ST_CHINESE = 1// 华语精选
@@ -99,6 +116,7 @@ object Constants {
     const val ST_CLASSIC = 7// 经典老歌
     const val ST_QUITE = 8// 安静
     const val ST_CURE = 9// 治愈
+
     /*具体的所有歌单id   mainType--->listId 每首歌只对应一个歌单*/
     const val SL_1 = 1//白头宫女在，闲坐说玄宗  5
     const val SL_2 = 2//满堂花醉三千客，一剑霜寒十四州 5
@@ -115,7 +133,8 @@ object Constants {
     const val SL_13 = 13// 我未成名君未嫁，可能俱是不如人 6
     const val SL_14 = 14// 一生几许伤心事，不向空门何处销 2
     const val SL_15 = 15//殷勤昨夜三更雨，又得浮生一日凉 9
-//    const val SL_16 = 16//一寸相思千万绪，人间没个安排处 6
+
+    //    const val SL_16 = 16//一寸相思千万绪，人间没个安排处 6
     const val SL_17 = 17// 此情可待成追忆，只是当时已惘然 9
     const val SL_18 = 18//人似秋鸿来有信，事如春梦了无痕 2
     const val SL_19 = 19// 正是江南好风景，落花时节又逢君 5
@@ -124,14 +143,16 @@ object Constants {
     const val SL_22 = 22//山僧不解数甲子，一叶落知天下秋 8
     const val SL_23 = 23//种桃道士今何在，前度刘郎今又来 7
     const val SL_24 = 24//清时有味是无能，闲爱孤云静爱僧 9
-//    const val SL_25 = 25//月失楼台，雾迷津渡，桃源望断无寻处 2
+
+    //    const val SL_25 = 25//月失楼台，雾迷津渡，桃源望断无寻处 2
     const val SL_26 = 26//尘世难逢开口笑，菊花须插满头归 1
     const val SL_27 = 27//海水梦悠悠，君愁我亦愁。南风知我意，吹梦到西洲 5
     const val SL_28 = 28//昨夜星辰昨夜风，画楼西畔桂堂东。身无彩凤双飞翼，心有灵犀一点通 1
     const val SL_29 = 29//世界微尘里，吾宁爱与憎 9
     const val SL_30 = 30//行到水穷处，坐看云起时。偶然值林叟，谈笑无还期 2
     const val SL_31 = 31//得成比目何辞死，愿作鸳鸯不羡仙 1
-//    const val SL_32 = 32// 江畔何人初见月，江月和年初照人？人生代代无穷已，江月年年望相似 2
+
+    //    const val SL_32 = 32// 江畔何人初见月，江月和年初照人？人生代代无穷已，江月年年望相似 2
     const val SL_33 = 33//空山新雨后，天气晚来秋。明月松间照，清泉石上流 9
     const val SL_34 = 34// 闽国扬帆去，蟾蜍亏复圆。秋风生渭水，落叶满长安 5
     const val SL_35 = 35//谁家玉笛暗飞声，散入春风满洛城。此夜曲中闻折柳，何人不起故园情 5
@@ -201,13 +222,6 @@ object Constants {
     const val SL_100 = 100
 
 
-
-
-
-
-
-
-
     const val ST_TAG1 = "华语"
     const val ST_TAG2 = "翻唱"
     const val ST_TAG3 = "轻音乐"
@@ -225,12 +239,12 @@ object Constants {
     const val PAGE_SIZE_RECOMMEND_BOOK = 2
 
     const val FIRST_LAUNCH = "first_launch"
-    const val DAY_OF_WEEK ="day_of_week"
+    const val DAY_OF_WEEK = "day_of_week"
     const val THE_DAY_STEP = "the_day_step"
 
     /*每日可变的数据 保持一天都不变的数据 过了当天就更换*/
     const val DAILY_BANNER = 0
-    const val DAILY_RECOMMEND_SONG =1
+    const val DAILY_RECOMMEND_SONG = 1
     const val DAILY_HOT_SONG = 2
     const val DAILY_RECOMMEND_BOOK = 3
     const val DAILY_LIST_COVER = 4
@@ -257,12 +271,18 @@ object Constants {
     const val SINGER_WAIT_JUN = 107
 
 
-    const val IMG_JAY_CHOU_1 = "https://cdnmusic.migu.cn/picture/2019/1031/1528/AM8fc7d10693eb4b658a481781cbc16d6a.jpg"
-    const val IMG_JAY_CHOU_2 = "https://cdnmusic.migu.cn/picture/2020/0611/1054/ARTMefb7b84e00cfb7692ea2d3eaafd8b09f.jpg"
-    const val IMG_JAY_CHOU_3 = "https://cdnmusic.migu.cn/picture/2020/0612/0000/AM977e777d850e857ef41d7a457021e6c9.jpg"
-    const val IMG_JAY_CHOU_4 = "https://cdnmusic.migu.cn/picture/2019/1031/0115/AM5e4e490819324ef38e3f335b5feea38d.jpg"
-    const val IMG_JAY_CHOU_5 = "https://cdnmusic.migu.cn/picture/2020/0918/1728/AM1875dd224f9487154de50fdd20137052.jpg"
-    const val IMG_JAY_CHOU_6 = "https://cdnmusic.migu.cn/picture/2019/1031/0114/AM7be67f4731fd4ccb9a95b42f7875dd2b.jpg"
+    const val IMG_JAY_CHOU_1 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/1528/AM8fc7d10693eb4b658a481781cbc16d6a.jpg"
+    const val IMG_JAY_CHOU_2 =
+        "https://cdnmusic.migu.cn/picture/2020/0611/1054/ARTMefb7b84e00cfb7692ea2d3eaafd8b09f.jpg"
+    const val IMG_JAY_CHOU_3 =
+        "https://cdnmusic.migu.cn/picture/2020/0612/0000/AM977e777d850e857ef41d7a457021e6c9.jpg"
+    const val IMG_JAY_CHOU_4 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/0115/AM5e4e490819324ef38e3f335b5feea38d.jpg"
+    const val IMG_JAY_CHOU_5 =
+        "https://cdnmusic.migu.cn/picture/2020/0918/1728/AM1875dd224f9487154de50fdd20137052.jpg"
+    const val IMG_JAY_CHOU_6 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/0114/AM7be67f4731fd4ccb9a95b42f7875dd2b.jpg"
     val jayChouImgs = arrayOf(
         IMG_JAY_CHOU_1,
         IMG_JAY_CHOU_2,
@@ -273,12 +293,18 @@ object Constants {
     )
 
 
-    const val IMG_XUE_1 = "https://cdnmusic.migu.cn/picture/2019/1031/0324/AM6fa11f9630ec45a38d8de73d1f075f3b.jpg"
-    const val IMG_XUE_2 = "https://cdnmusic.migu.cn/picture/2020/0731/0324/AMee13f50a6f9240804c1b3fe6e802aff8.jpg"
-    const val IMG_XUE_3 = "https://cdnmusic.migu.cn/picture/2019/1031/0314/AM67d96d6eebf64b13acef4f9380537287.jpg"
-    const val IMG_XUE_4 = "https://cdnmusic.migu.cn/picture/2019/1031/1035/AM9b799e13105e4523aa8df662fff2fdaf.jpg"
-    const val IMG_XUE_5 = "https://cdnmusic.migu.cn/picture/2019/1031/0252/AM3d9e461f1dde4e829c72175fd5bef8b2.jpg"
-    const val IMG_XUE_6 = "https://cdnmusic.migu.cn/picture/2020/0515/1800/AM2c2103b25dbb02b6be71801dec6e7182.jpg"
+    const val IMG_XUE_1 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/0324/AM6fa11f9630ec45a38d8de73d1f075f3b.jpg"
+    const val IMG_XUE_2 =
+        "https://cdnmusic.migu.cn/picture/2020/0731/0324/AMee13f50a6f9240804c1b3fe6e802aff8.jpg"
+    const val IMG_XUE_3 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/0314/AM67d96d6eebf64b13acef4f9380537287.jpg"
+    const val IMG_XUE_4 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/1035/AM9b799e13105e4523aa8df662fff2fdaf.jpg"
+    const val IMG_XUE_5 =
+        "https://cdnmusic.migu.cn/picture/2019/1031/0252/AM3d9e461f1dde4e829c72175fd5bef8b2.jpg"
+    const val IMG_XUE_6 =
+        "https://cdnmusic.migu.cn/picture/2020/0515/1800/AM2c2103b25dbb02b6be71801dec6e7182.jpg"
     val xueImgs = arrayOf(
         IMG_XUE_1,
         IMG_XUE_2,
@@ -289,12 +315,18 @@ object Constants {
     )
 
 
-    const val IMG_EASON_1 = "https://cdnmusic.migu.cn/picture/2019/1128/1714/AMcbe740ed5b4341f09951a17ef7d6f202.jpg"
-    const val IMG_EASON_2 = "https://cdnmusic.migu.cn/picture/2019/1113/0949/AM200519e98ebe4c828edbfcf2edda85a1.jpg"
-    const val IMG_EASON_3 = "https://cdnmusic.migu.cn/picture/2020/0813/0307/AM78a35c2c43f7901718275548e4d2d0d2.jpg"
-    const val IMG_EASON_4 = "https://cdnmusic.migu.cn/picture/2020/1030/0321/AM84bde70f8257781831fe991060742ce8.jpg"
-    const val IMG_EASON_5 = "https://cdnmusic.migu.cn/picture/2020/1031/0314/AMdcef963373f6e0d73ed582e2cb17a28c.jpg"
-    const val IMG_EASON_6 = "https://cdnmusic.migu.cn/picture/2020/0926/0324/AMc0aebd3c75c3a255a8159204f3782887.jpg"
+    const val IMG_EASON_1 =
+        "https://cdnmusic.migu.cn/picture/2019/1128/1714/AMcbe740ed5b4341f09951a17ef7d6f202.jpg"
+    const val IMG_EASON_2 =
+        "https://cdnmusic.migu.cn/picture/2019/1113/0949/AM200519e98ebe4c828edbfcf2edda85a1.jpg"
+    const val IMG_EASON_3 =
+        "https://cdnmusic.migu.cn/picture/2020/0813/0307/AM78a35c2c43f7901718275548e4d2d0d2.jpg"
+    const val IMG_EASON_4 =
+        "https://cdnmusic.migu.cn/picture/2020/1030/0321/AM84bde70f8257781831fe991060742ce8.jpg"
+    const val IMG_EASON_5 =
+        "https://cdnmusic.migu.cn/picture/2020/1031/0314/AMdcef963373f6e0d73ed582e2cb17a28c.jpg"
+    const val IMG_EASON_6 =
+        "https://cdnmusic.migu.cn/picture/2020/0926/0324/AMc0aebd3c75c3a255a8159204f3782887.jpg"
     val eaSonImgs = arrayOf(
         IMG_EASON_1,
         IMG_EASON_2,
@@ -305,13 +337,18 @@ object Constants {
     )
 
 
-
-    const val IMG_DENG_ZQ_1 = "https://cdnmusic.migu.cn/picture/2020/0316/1349/AMb53926db54c66c96dc26c6c4ba721c99.jpg"
-    const val IMG_DENG_ZQ_2 = "https://cdnmusic.migu.cn/picture/2020/0316/1407/AMf63f25a8980d719e533d305b1de55a6e.jpg"
-    const val IMG_DENG_ZQ_3 = "https://cdnmusic.migu.cn/picture/2019/0510/0856/AMdaf805b05cae4648921499075e061b28.jpg"
-    const val IMG_DENG_ZQ_4 = "https://cdnmusic.migu.cn/picture/2020/0316/1349/AM0a78b1b019624c77345b78170f218399.jpg"
-    const val IMG_DENG_ZQ_5 = "https://cdnmusic.migu.cn/picture/2020/0316/1407/AMcd2cb7d7f05806fdc6ce6572051e08bc.jpg"
-    const val IMG_DENG_ZQ_6 = "https://cdnmusic.migu.cn/picture/2020/0519/1728/AMa95f65ad40ec17dbb01cc1dccd54e4ad.jpg"
+    const val IMG_DENG_ZQ_1 =
+        "https://cdnmusic.migu.cn/picture/2020/0316/1349/AMb53926db54c66c96dc26c6c4ba721c99.jpg"
+    const val IMG_DENG_ZQ_2 =
+        "https://cdnmusic.migu.cn/picture/2020/0316/1407/AMf63f25a8980d719e533d305b1de55a6e.jpg"
+    const val IMG_DENG_ZQ_3 =
+        "https://cdnmusic.migu.cn/picture/2019/0510/0856/AMdaf805b05cae4648921499075e061b28.jpg"
+    const val IMG_DENG_ZQ_4 =
+        "https://cdnmusic.migu.cn/picture/2020/0316/1349/AM0a78b1b019624c77345b78170f218399.jpg"
+    const val IMG_DENG_ZQ_5 =
+        "https://cdnmusic.migu.cn/picture/2020/0316/1407/AMcd2cb7d7f05806fdc6ce6572051e08bc.jpg"
+    const val IMG_DENG_ZQ_6 =
+        "https://cdnmusic.migu.cn/picture/2020/0519/1728/AMa95f65ad40ec17dbb01cc1dccd54e4ad.jpg"
     val dengZqImgs = arrayOf(
         IMG_DENG_ZQ_1,
         IMG_DENG_ZQ_2,
@@ -321,11 +358,16 @@ object Constants {
         IMG_DENG_ZQ_6
     )
 
-    const val REN_RAN_1 = "https://cdnmusic.migu.cn/picture/2019/0523/0842/AMda1880f666f249319309d0c6ccd92133.jpg"
-    const val REN_RAN_2 = "https://cdnmusic.migu.cn/picture/2019/0523/0842/AM8f33663f926e4c13b9543b229ef663b8.jpg"
-    const val REN_RAN_3 = "https://cdnmusic.migu.cn/picture/2019/0523/0842/AM8e157948aa1942bd9404f8b4cad0b75d.jpg"
-    const val REN_RAN_4 = "https://cdnmusic.migu.cn/picture/2020/0612/1728/AM1f081629156f8fd9ca28bd5333de87f9.jpg"
-    const val REN_RAN_5 = "https://cdnmusic.migu.cn/picture/2020/1009/1642/ARTMbbfe89ced045a354490ad9f2a955c3a7.jpg"
+    const val REN_RAN_1 =
+        "https://cdnmusic.migu.cn/picture/2019/0523/0842/AMda1880f666f249319309d0c6ccd92133.jpg"
+    const val REN_RAN_2 =
+        "https://cdnmusic.migu.cn/picture/2019/0523/0842/AM8f33663f926e4c13b9543b229ef663b8.jpg"
+    const val REN_RAN_3 =
+        "https://cdnmusic.migu.cn/picture/2019/0523/0842/AM8e157948aa1942bd9404f8b4cad0b75d.jpg"
+    const val REN_RAN_4 =
+        "https://cdnmusic.migu.cn/picture/2020/0612/1728/AM1f081629156f8fd9ca28bd5333de87f9.jpg"
+    const val REN_RAN_5 =
+        "https://cdnmusic.migu.cn/picture/2020/1009/1642/ARTMbbfe89ced045a354490ad9f2a955c3a7.jpg"
     val renRanImgs = arrayOf(
         REN_RAN_1,
         REN_RAN_2,
@@ -334,10 +376,14 @@ object Constants {
         REN_RAN_5
     )
 
-    const val WAIT_JUN_1 = "https://cdnmusic.migu.cn/picture/2020/1023/2100/ARTM38415224de9e5d19e5f22953c45a0c3b.jpg"
-    const val WAIT_JUN_2 = "https://cdnmusic.migu.cn/picture/2020/0731/0352/AM43d53eb431b1d6035d577eddcbbeece0.jpg"
-    const val WAIT_JUN_3 = "https://bkimg.cdn.bcebos.com/pic/2934349b033b5bb5c9ea5c52c29ac239b6003af3164f?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5"
-    const val WAIT_JUN_4 = "https://bkimg.cdn.bcebos.com/pic/b7003af33a87e950352a97c0e4714443fbf2b2111e4f?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxNTA=,g_7,xp_5,yp_5"
+    const val WAIT_JUN_1 =
+        "https://cdnmusic.migu.cn/picture/2020/1023/2100/ARTM38415224de9e5d19e5f22953c45a0c3b.jpg"
+    const val WAIT_JUN_2 =
+        "https://cdnmusic.migu.cn/picture/2020/0731/0352/AM43d53eb431b1d6035d577eddcbbeece0.jpg"
+    const val WAIT_JUN_3 =
+        "https://bkimg.cdn.bcebos.com/pic/2934349b033b5bb5c9ea5c52c29ac239b6003af3164f?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxMTY=,g_7,xp_5,yp_5"
+    const val WAIT_JUN_4 =
+        "https://bkimg.cdn.bcebos.com/pic/b7003af33a87e950352a97c0e4714443fbf2b2111e4f?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2UxNTA=,g_7,xp_5,yp_5"
     val waitJunImgs = arrayOf(
         WAIT_JUN_1,
         WAIT_JUN_2,

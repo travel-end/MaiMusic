@@ -23,27 +23,14 @@ class SongListFragment : BaseSongListFragment<SongListViewModel>() {
     override fun initView() {
         arguments?.let {
             listType = it.getString(Constants.SONG_LIST_TYPE)?.toInt() ?: 0
-            val id= it.getString(Constants.SINGER_ID)
-            if (id.isNotNullOrEmpty()) {
-                singerId = id!!.toInt()
-                LogUtil.e("singerId:$singerId")
-            }
         }
         super.initView()
     }
     override fun layoutResId() = R.layout.fragment_md_style_song_list
     override fun initData() {
         if (listType != 0) {
-            LogUtil.e("-----SongListFragment---listType:$listType")
-            when(listType) {
-                Consts.ONLINE_SINGER_SONG->{
-                    mViewModel.findSingerSongs(singerId)
-                }
-                 else ->{
-                     mViewModel.getOnlineSongs(listType)
-                 }
-            }
-
+//            LogUtil.e("-----SongListFragment---listType:$listType")
+            mViewModel.getOnlineSongs(listType)
         }
         super.initData()
     }

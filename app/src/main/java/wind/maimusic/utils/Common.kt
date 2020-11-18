@@ -26,6 +26,7 @@ import wind.maimusic.Constants
 import wind.maimusic.MaiApp
 import wind.maimusic.R
 import wind.maimusic.model.core.AlListBean
+import wind.maimusic.model.singer.Singer
 import wind.maimusic.ui.activities.LoginActivity
 import wind.maimusic.ui.activities.PlayActivity
 import wind.widget.cost.Consts
@@ -267,11 +268,12 @@ fun View?.recommendToSongList(songListType:Int) {
     }
 }
 
-fun View?.singerToSongList(singerId:Int) {
+fun View?.singerToSongList(singer:Singer) {
     if (this != null) {
         val bundle = bundleOf(
-            Constants.SONG_LIST_TYPE to Consts.ONLINE_SINGER_SONG.toString(),
-            Constants.SINGER_ID to singerId.toString()
+            Constants.SINGER_NAME to singer.name,
+            Constants.SINGER_ID to singer.singerId.toString(),
+            Constants.SINGER_COVER to singer.cover
         )
         Navigation.findNavController(this).navigate(R.id.singer_to_song_list_fragment,bundle)
     }

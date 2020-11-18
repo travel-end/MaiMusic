@@ -29,18 +29,21 @@ class PlayerService : Service() {
     private var loveSongs: MutableList<LoveSong>? = null
     private var launchSongs: MutableList<OnlineSong>? = null
     private var onlineSongs: MutableList<OnlineSong>? = null
-    private var justOnlineSongs:MutableList<JustOnlineSong>?=null
+    private var justOnlineSongs: MutableList<JustOnlineSong>? = null
     private var listType: Int = 0
     private var currentPosition: Int = 0
     private var isPlaying: Boolean = false
     private var isPaused: Boolean = false
     private val playerBinder = PlayerBinder()
     private var playMode: Int = Consts.PLAY_ORDER
+    private var songListId: Int = 0
     private val mediaPlayer by lazy {
         MediaPlayer()
     }
+
     override fun onCreate() {
         super.onCreate()
+        songListId = SpUtil.getInt(Constants.SONG_LIST_ID)
         val song = SongUtil.getSong()
         LogUtil.e("-------PlayService----onCreate currentSong:$song; songName:${song?.songName}------")
         if (song != null) {
@@ -69,35 +72,43 @@ class PlayerService : Service() {
                         MaiDatabase.getDatabase().loveSongDao().findAllLoveSongs().toMutableList()
                     }
                 }
-                Consts.ONLINE_SINGER_SONG -> {
+                Consts.ONLINE_SINGER_SONG -> {//歌手歌单
                     onlineSongs = GlobalUtil.execute {
-                        OnlineSongDatabase.getDatabase().onlineSongDao().findSongBySingerId(
-                            SpUtil.getInt("singerId")
-                        ).toMutableList()
+                        OnlineSongDatabase.getDatabase().onlineSongDao()
+                            .findSongBySingerId(songListId).toMutableList()
                     }
                 }
                 Consts.LIST_TYPE_ONLINE -> {
                     when (song.onlineSubjectType) {
                         Consts.ONLINE_FIRST_LAUNCH -> {// 首次使用app
                             launchSongs = GlobalUtil.execute {
-                                OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
+                                OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs()
+                                    .toMutableList()
                             }
                         }
-                        Constants.ST_DAILY_RECOMMEND->{// 每日推荐歌曲
-                            val startIndex = DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
+                        Constants.ST_DAILY_RECOMMEND -> {// 每日推荐歌曲
+                            val startIndex =
+                                DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
                             onlineSongs = GlobalUtil.execute {
-                                OnlineSongDatabase.getDatabase().onlineSongDao().findRangeOnlineSongs(startIndex,Constants.PAGE_SIZE_DAILY_RECOMMEND).toMutableList()
+                                OnlineSongDatabase.getDatabase().onlineSongDao()
+                                    .findRangeOnlineSongs(
+                                        startIndex,
+                                        Constants.PAGE_SIZE_DAILY_RECOMMEND
+                                    ).toMutableList()
                             }
                         }
-                        Consts.JUST_ONLINE_SONG->{// 搜索的在线歌单（如专辑、、）
+                        Consts.JUST_ONLINE_SONG -> {// 搜索的在线歌单，非固定曲目（如专辑、、）这种的歌曲是单独使用一个表，每次插入数据前清空之前的数据
                             justOnlineSongs = GlobalUtil.execute {
-                                OnlineSongDatabase.getDatabase().justOnlineSongDao().findJustOnlineSongs().toMutableList()
+                                OnlineSongDatabase.getDatabase().justOnlineSongDao()
+                                    .findJustOnlineSongs().toMutableList()
                             }
                         }
-                        else->{}
+                        else -> {
+                        }
                     }
                 }
-                else -> {}
+                else -> {
+                }
             }
         }
     }
@@ -111,12 +122,13 @@ class PlayerService : Service() {
         mediaPlayer.setOnErrorListener { _, i, i2 ->
             LogUtil.e("--->播放出错：setOnErrorListener:$i, $i2")
 //            "播放出错".toast()
-            Bus.post(Consts.SONG_STATUS_CHANGE,Consts.SONG_ERROR)
+            Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_ERROR)
             playCompleteNextSong()
             true
         }
         return playerBinder
     }
+
     private fun playCompleteNextSong() {
 //        Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_PAUSE)
         Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_COMPLETE)// 歌曲播放完毕 在播放页面监听
@@ -163,74 +175,98 @@ class PlayerService : Service() {
                         Consts.ONLINE_FIRST_LAUNCH -> {
                             // TODO: 2020/11/5 放到一个方法里面去 上面的也是跟这个一样的逻辑
                             if (isNotNullOrEmpty(launchSongs)) {
-                                currentPosition = if (currentPosition==launchSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                                    0
-                                } else {
-                                    PlayServiceHelper.getNextSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        launchSongs?.size
-                                    )
-                                }
+                                currentPosition =
+                                    if (currentPosition == launchSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                        0
+                                    } else {
+                                        PlayServiceHelper.getNextSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            launchSongs?.size
+                                        )
+                                    }
                             }
                             LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                            PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,launchSongs)
-                        }
-                        Constants.ST_DAILY_RECOMMEND->{
-                            if (isNotNullOrEmpty(onlineSongs)) {
-                                currentPosition = if (currentPosition==onlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                                    0
-                                } else {
-                                    PlayServiceHelper.getNextSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        onlineSongs?.size
-                                    )
-                                }
-                            }
-                            LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                            PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Constants.ST_DAILY_RECOMMEND,onlineSongs)
-                        }
-                        Consts.JUST_ONLINE_SONG->{
-                            if (isNotNullOrEmpty(justOnlineSongs)) {
-                                currentPosition = if (currentPosition==justOnlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                                    0
-                                } else {
-                                    PlayServiceHelper.getNextSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        justOnlineSongs?.size
-                                    )
-                                }
-                            }
-                            LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                            PlayServiceHelper.saveJustOnlineSong(currentPosition,Constants.ST_DAILY_RECOMMEND,justOnlineSongs)
-                        }
-                    }
-                }
-                Consts.ONLINE_SINGER_SONG->{
-                    LogUtil.e("-------PlayService----onBind ONLINE_SINGER_SONG:$onlineSongs------")
-                    if (isNotNullOrEmpty(onlineSongs)) {
-                        currentPosition = if (currentPosition==onlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                            0
-                        } else {
-                            PlayServiceHelper.getNextSongPosition(
+                            PlayServiceHelper.saveCurrentOnlineSong(
                                 currentPosition,
-                                playMode,
-                                onlineSongs?.size
+                                Consts.ONLINE_FIRST_LAUNCH,
+                                launchSongs
+                            )
+                        }
+                        Constants.ST_DAILY_RECOMMEND -> {
+                            if (isNotNullOrEmpty(onlineSongs)) {
+                                currentPosition =
+                                    if (currentPosition == onlineSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                        0
+                                    } else {
+                                        PlayServiceHelper.getNextSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            onlineSongs?.size
+                                        )
+                                    }
+                            }
+                            LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                            PlayServiceHelper.saveCurrentOnlineSong(
+                                currentPosition,
+                                Constants.ST_DAILY_RECOMMEND,
+                                onlineSongs
+                            )
+                        }
+                        Consts.JUST_ONLINE_SONG -> {
+                            if (isNotNullOrEmpty(justOnlineSongs)) {
+                                currentPosition =
+                                    if (currentPosition == justOnlineSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                        0
+                                    } else {
+                                        PlayServiceHelper.getNextSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            justOnlineSongs?.size
+                                        )
+                                    }
+                            }
+                            LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                            PlayServiceHelper.saveJustOnlineSong(
+                                currentPosition,
+                                Constants.ST_DAILY_RECOMMEND,
+                                justOnlineSongs
                             )
                         }
                     }
-                    PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_SINGER_SONG,onlineSongs)
+                }
+                // 歌手歌单
+                Consts.ONLINE_SINGER_SONG -> {
+//                    LogUtil.e("-------PlayService----onBind ONLINE_SINGER_SONG:$onlineSongs------")
+                    if (isNotNullOrEmpty(onlineSongs)) {
+                        currentPosition =
+                            if (currentPosition == onlineSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                0
+                            } else {
+                                PlayServiceHelper.getNextSongPosition(
+                                    currentPosition,
+                                    playMode,
+                                    onlineSongs?.size
+                                )
+                            }
+                    }
+                    PlayServiceHelper.saveCurrentOnlineSong(
+                        currentPosition,
+                        Consts.ONLINE_SINGER_SONG,
+                        onlineSongs
+                    )
                 }
             }
             if (listType != 0) {
                 when (listType) {
                     Consts.LIST_TYPE_ONLINE -> {
-                        playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
+                        playerBinder.play(
+                            type = Consts.LIST_TYPE_ONLINE,
+                            onlineSubjectType = song.onlineSubjectType
+                        )
                     }
                     Consts.ONLINE_SINGER_SONG -> {
-                        playerBinder.singerPlay(SpUtil.getInt("singerId"))
+                        playerBinder.singerPlay(songListId)
                     }
                     else -> {
                         playerBinder.play(listType)
@@ -247,24 +283,31 @@ class PlayerService : Service() {
         fun setPlayModel(mode: Int) {
             playMode = mode
         }
-        fun singerPlay(singerId:Int,restartTime: Int?=null) {
+
+        fun singerPlay(singerId: Int, restartTime: Int? = null, changeSingerId: Boolean = false) {
             listType = Consts.ONLINE_SINGER_SONG
+            if (changeSingerId) {
+                songListId = singerId
+                SpUtil.saveValue(Constants.SONG_LIST_ID, singerId)
+            }
             onlineSongs = GlobalUtil.execute {
-                OnlineSongDatabase.getDatabase().onlineSongDao().findSongBySingerId(singerId).toMutableList()
+                OnlineSongDatabase.getDatabase().onlineSongDao().findSongBySingerId(singerId)
+                    .toMutableList()
             }
             val song = SongUtil.getSong()
-            LogUtil.e("-----singerPlay--$song, ${song?.songName},onlineSongs:$onlineSongs")
+//            LogUtil.e("-----singerPlay--$song, ${song?.songName},onlineSongs:$onlineSongs")
             if (song != null) {
                 currentPosition = song.position
                 mediaPlayer.reset()
                 if (isNotNullOrEmpty(onlineSongs)) {
                     val currentSongId = onlineSongs!![currentPosition].songId
-                    getOnlineSongPlayUrl(song,currentSongId,Consts.ONLINE_SINGER_SONG,restartTime)
+                    getOnlineSongPlayUrl(song, currentSongId, restartTime)
                 }
             }
         }
-        // 播放下一首（包括在线音乐）、播放暂停的音乐
-        fun play(type: Int,onlineSubjectType:Int?=null, restartTime: Int? = null) {
+
+        // 播放下一首（包括在线音乐）、播放暂停的音乐/退出app后重新播放的情况
+        fun play(type: Int, onlineSubjectType: Int? = null, restartTime: Int? = null) {
             try {
                 listType = type
                 if (listType != 0) {
@@ -287,25 +330,39 @@ class PlayerService : Service() {
                                     .toMutableList()
                             }
                         }
-                        Consts.LIST_TYPE_ONLINE->{
-                            when(onlineSubjectType) {
-                                Consts.ONLINE_FIRST_LAUNCH->{
+                        Consts.LIST_TYPE_ONLINE -> {
+                            when (onlineSubjectType) {
+                                Consts.ONLINE_FIRST_LAUNCH -> {
                                     launchSongs = GlobalUtil.execute {
-                                        OnlineSongDatabase.getDatabase().onlineSongDao().findLaunchSongs().toMutableList()
+                                        OnlineSongDatabase.getDatabase().onlineSongDao()
+                                            .findLaunchSongs().toMutableList()
                                     }
                                 }
-                                Constants.ST_DAILY_RECOMMEND->{
-                                    val startIndex = DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
+                                Constants.ST_DAILY_RECOMMEND -> {
+                                    val startIndex =
+                                        DataUtil.getTheDayStartIndex(Constants.ST_DAILY_RECOMMEND)
                                     onlineSongs = GlobalUtil.execute {
-                                        OnlineSongDatabase.getDatabase().onlineSongDao().findRangeOnlineSongs(startIndex,Constants.PAGE_SIZE_DAILY_RECOMMEND).toMutableList()
+                                        OnlineSongDatabase.getDatabase().onlineSongDao()
+                                            .findRangeOnlineSongs(
+                                                startIndex,
+                                                Constants.PAGE_SIZE_DAILY_RECOMMEND
+                                            ).toMutableList()
                                     }
                                     LogUtil.e("-------PlayService PlayerBinder play onlineSongs:$onlineSongs")
                                 }
-                                Consts.JUST_ONLINE_SONG->{
+                                // 不固定的在线歌单
+                                Consts.JUST_ONLINE_SONG -> {
                                     justOnlineSongs = GlobalUtil.execute {
-                                        OnlineSongDatabase.getDatabase().justOnlineSongDao().findJustOnlineSongs().toMutableList()
+                                        OnlineSongDatabase.getDatabase().justOnlineSongDao()
+                                            .findJustOnlineSongs().toMutableList()
                                     }
                                 }
+                            }
+                        }
+                        Consts.ONLINE_SINGER_SONG -> {
+                            onlineSongs = GlobalUtil.execute {
+                                OnlineSongDatabase.getDatabase().onlineSongDao()
+                                    .findSongBySingerId(songListId).toMutableList()
                             }
                         }
                     }
@@ -354,42 +411,55 @@ class PlayerService : Service() {
                             }
                         }
                         // 播放在线音乐（只有自动播放下一曲才会执行这里  其他的是走的playOnline）
-                        Consts.LIST_TYPE_ONLINE->{
-                            when(onlineSubjectType){
-                                Consts.ONLINE_FIRST_LAUNCH->{
+                        Consts.LIST_TYPE_ONLINE -> {
+                            when (onlineSubjectType) {
+                                Consts.ONLINE_FIRST_LAUNCH -> {
                                     if (isNotNullOrEmpty(launchSongs)) {
                                         val currentSongId = launchSongs!![currentPosition].songId
-                                        getOnlineSongPlayUrl(song,currentSongId,Consts.ONLINE_FIRST_LAUNCH,restartTime)
+                                        getOnlineSongPlayUrl(song, currentSongId, restartTime)
                                     }
                                 }
-                                Constants.ST_DAILY_RECOMMEND->{// TODO 每日推荐和专辑推荐应该属于同一个类型 在search_online_song表中
+                                Constants.ST_DAILY_RECOMMEND -> {// TODO 每日推荐和专辑推荐应该属于同一个类型 在search_online_song表中
                                     if (isNotNullOrEmpty(onlineSongs)) {
                                         val currentSongId = onlineSongs!![currentPosition].songId
-                                        getOnlineSongPlayUrl(song,currentSongId,Constants.ST_DAILY_RECOMMEND,restartTime)
+                                        getOnlineSongPlayUrl(song, currentSongId, restartTime)
                                     }
                                 }
-                                Consts.ONLINE_SEARCH->{// 搜索的歌曲
+                                Consts.ONLINE_SEARCH -> {// 搜索的歌曲
                                     val nextSearchSong = GlobalUtil.execute {
-                                        OnlineSongDatabase.getDatabase().onlineSongDao().findRandomSingleSong()
+                                        OnlineSongDatabase.getDatabase().onlineSongDao()
+                                            .findRandomSingleSong()
                                     }
-                                    val nextSong = PlayServiceHelper.transferOnlineSong(nextSearchSong, Consts.ONLINE_SEARCH)
+                                    val nextSong = PlayServiceHelper.transferOnlineSong(
+                                        nextSearchSong,
+                                        Consts.ONLINE_SEARCH
+                                    )
                                     LogUtil.e("nextSearchSong$nextSearchSong")
-                                    if (nextSong!= null) {
-                                        val playUrl = PlayServiceHelper.getOnlineSongUrl(nextSong.songId!!)
+                                    if (nextSong != null) {
+                                        val playUrl =
+                                            PlayServiceHelper.getOnlineSongUrl(nextSong.songId!!)
                                         if (playUrl.isNotNullOrEmpty()) {
-                                            nextSong.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
+                                            nextSong.url =
+                                                playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
                                             SongUtil.saveSong(nextSong)
                                             mediaPlayer.setDataSource(playUrl)
                                             startPlay(restartTime)
                                         }
                                     }
                                 }
-                                Consts.JUST_ONLINE_SONG->{// TODO 每日推荐和专辑推荐应该属于同一个类型 在search_online_song表中
+                                Consts.JUST_ONLINE_SONG -> {// TODO 每日推荐和专辑推荐应该属于同一个类型 在search_online_song表中
                                     if (isNotNullOrEmpty(justOnlineSongs)) {
-                                        val currentSongId = justOnlineSongs!![currentPosition].songId
-                                        getOnlineSongPlayUrl(song,currentSongId,Consts.JUST_ONLINE_SONG,restartTime)
+                                        val currentSongId =
+                                            justOnlineSongs!![currentPosition].songId
+                                        getOnlineSongPlayUrl(song, currentSongId, restartTime)
                                     }
                                 }
+                            }
+                        }
+                        Consts.ONLINE_SINGER_SONG -> {
+                            if (isNotNullOrEmpty(onlineSongs)) {
+                                val currentSongId = onlineSongs!![currentPosition].songId
+                                getOnlineSongPlayUrl(song, currentSongId, restartTime)
                             }
                         }
                     }
@@ -397,49 +467,26 @@ class PlayerService : Service() {
             } catch (e: Exception) {
                 LogUtil.e("-----PlayerService---PlayerBinder ---play exception:${e.message}")
 //                "播放异常".toast()
-                Bus.post(Consts.SONG_STATUS_CHANGE,Consts.SONG_ERROR)
+                Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_ERROR)
             }
         }
-        private fun getOnlineSongPlayUrl(song:Song,songId:String?,subjectType:Int,restartTime: Int?) {
+
+        private fun getOnlineSongPlayUrl(song: Song, songId: String?, restartTime: Int?) {
             if (songId.isNotNullOrEmpty()) {
                 try {
                     val playUrl = PlayServiceHelper.getOnlineSongUrl(songId!!)
-                    var nextSongId:String?=null
                     if (playUrl.isNullOrEmpty()) {
                         playCompleteNextSong()
-//                    when(subjectType) {
-//                        Consts.ONLINE_FIRST_LAUNCH->{
-//                            currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,launchSongs?.size)
-//                            PlayServiceHelper.saveCurrentOnlineSong(currentPosition,subjectType,launchSongs)
-//                            nextSongId = launchSongs!![currentPosition].songId
-//                        }
-//                        Constants.ST_DAILY_RECOMMEND->{
-//                            currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,onlineSongs?.size)
-//                            PlayServiceHelper.saveCurrentOnlineSong(currentPosition,subjectType,onlineSongs)
-//                            nextSongId = onlineSongs!![currentPosition].songId
-//                        }
-//                        Consts.ONLINE_SINGER_SONG->{
-//                            currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,onlineSongs?.size)
-//                            PlayServiceHelper.saveCurrentOnlineSong(currentPosition,subjectType,onlineSongs)
-//                            nextSongId = onlineSongs!![currentPosition].songId
-//                        }
-//                        Consts.JUST_ONLINE_SONG->{
-//                            currentPosition = PlayServiceHelper.getNextSongPosition(currentPosition,playMode,justOnlineSongs?.size)
-//                            PlayServiceHelper.saveJustOnlineSong(currentPosition,subjectType,justOnlineSongs)
-//                            nextSongId = justOnlineSongs!![currentPosition].songId
-//                        }
-//                    }
-//                    getOnlineSongPlayUrl(song,nextSongId,subjectType,restartTime)
                     } else {
                         song.url = playUrl// 保存在线音乐的url 这样如果暂停后再次进入则会继续播放这首音乐
                         SongUtil.saveSong(song)
                         mediaPlayer.setDataSource(playUrl)
                         startPlay(restartTime)
                     }
-                } catch (e:Exception) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                     "网络连接错误~".toast()
-                    Bus.post(Consts.SONG_STATUS_CHANGE,Consts.SONG_ERROR)
+                    Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_ERROR)
                 }
             }
         }
@@ -469,7 +516,8 @@ class PlayerService : Service() {
                     }
                 }
             } catch (e: Exception) {
-                "播放在线歌曲出错".toast()
+                e.printStackTrace()
+                LogUtil.e("PlayService--------playOnline exception:${e.message}")
             }
         }
 
@@ -529,55 +577,93 @@ class PlayerService : Service() {
                         )
                         PlayServiceHelper.saveLoveSong(currentPosition)
                     }
-                    Consts.LIST_TYPE_ONLINE ->{
-                        when(song.onlineSubjectType) {
-                            Consts.ONLINE_FIRST_LAUNCH->{
-                                currentPosition = if (currentPosition==launchSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                                    0
-                                } else {
-                                    PlayServiceHelper.getNextSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        launchSongs?.size
-                                    )
-                                }
+                    Consts.LIST_TYPE_ONLINE -> {
+                        when (song.onlineSubjectType) {
+                            Consts.ONLINE_FIRST_LAUNCH -> {
+                                currentPosition =
+                                    if (currentPosition == launchSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                        0
+                                    } else {
+                                        PlayServiceHelper.getNextSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            launchSongs?.size
+                                        )
+                                    }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,launchSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(
+                                    currentPosition,
+                                    Consts.ONLINE_FIRST_LAUNCH,
+                                    launchSongs
+                                )
                             }
-                            Constants.ST_DAILY_RECOMMEND->{
-                                currentPosition = if (currentPosition==onlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                                    0
-                                } else {
-                                    PlayServiceHelper.getNextSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        onlineSongs?.size
-                                    )
-                                }
+                            Constants.ST_DAILY_RECOMMEND -> {
+                                currentPosition =
+                                    if (currentPosition == onlineSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                        0
+                                    } else {
+                                        PlayServiceHelper.getNextSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            onlineSongs?.size
+                                        )
+                                    }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Constants.ST_DAILY_RECOMMEND,onlineSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(
+                                    currentPosition,
+                                    Constants.ST_DAILY_RECOMMEND,
+                                    onlineSongs
+                                )
                             }
-                            Consts.JUST_ONLINE_SONG->{
-                                currentPosition = if (currentPosition==justOnlineSongs!!.size-1 && playMode == Consts.PLAY_ORDER) {
-                                    0
-                                } else {
-                                    PlayServiceHelper.getNextSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        justOnlineSongs?.size
-                                    )
-                                }
+                            Consts.JUST_ONLINE_SONG -> {
+                                currentPosition =
+                                    if (currentPosition == justOnlineSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                        0
+                                    } else {
+                                        PlayServiceHelper.getNextSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            justOnlineSongs?.size
+                                        )
+                                    }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveJustOnlineSong(currentPosition,Consts.JUST_ONLINE_SONG,justOnlineSongs)
+                                PlayServiceHelper.saveJustOnlineSong(
+                                    currentPosition,
+                                    Consts.JUST_ONLINE_SONG,
+                                    justOnlineSongs
+                                )
                             }
                         }
                     }
+                    Consts.ONLINE_SINGER_SONG -> {
+                        currentPosition =
+                            if (currentPosition == onlineSongs!!.size - 1 && playMode == Consts.PLAY_ORDER) {
+                                0
+                            } else {
+                                PlayServiceHelper.getNextSongPosition(
+                                    currentPosition,
+                                    playMode,
+                                    onlineSongs?.size
+                                )
+                            }
+                        LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                        PlayServiceHelper.saveSingerSong(currentPosition, onlineSongs)
+                    }
                 }
                 if (listType != 0) {
-                    if (listType == Consts.LIST_TYPE_ONLINE) {
-                        playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
-                    } else {
-                        playerBinder.play(listType)
+                    when (listType) {
+                        Consts.LIST_TYPE_ONLINE -> {
+                            playerBinder.play(
+                                type = Consts.LIST_TYPE_ONLINE,
+                                onlineSubjectType = song.onlineSubjectType
+                            )
+                        }
+                        Consts.ONLINE_SINGER_SONG -> {
+                            playerBinder.singerPlay(songListId)
+                        }
+                        else -> {
+                            playerBinder.play(listType)
+                        }
                     }
                 }
             }
@@ -621,54 +707,87 @@ class PlayerService : Service() {
                         )
                         PlayServiceHelper.saveLoveSong(currentPosition)
                     }
-                    Consts.LIST_TYPE_ONLINE ->{
-                        when(song.onlineSubjectType) {
-                            Consts.ONLINE_FIRST_LAUNCH->{
-                                currentPosition = if (currentPosition==0 && playMode == Consts.PLAY_ORDER) {
-                                    launchSongs!!.size-1
-                                } else {
-                                    PlayServiceHelper.getLastSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        launchSongs?.size
-                                    )
-                                }
+                    Consts.LIST_TYPE_ONLINE -> {
+                        when (song.onlineSubjectType) {
+                            Consts.ONLINE_FIRST_LAUNCH -> {
+                                currentPosition =
+                                    if (currentPosition == 0 && playMode == Consts.PLAY_ORDER) {
+                                        launchSongs!!.size - 1
+                                    } else {
+                                        PlayServiceHelper.getLastSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            launchSongs?.size
+                                        )
+                                    }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,launchSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(
+                                    currentPosition,
+                                    Consts.ONLINE_FIRST_LAUNCH,
+                                    launchSongs
+                                )
                             }
-                            Constants.ST_DAILY_RECOMMEND->{
-                                currentPosition = if (currentPosition==0 && playMode == Consts.PLAY_ORDER) {
-                                    onlineSongs!!.size-1
-                                } else {
-                                    PlayServiceHelper.getLastSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        onlineSongs?.size
-                                    )
-                                }
+                            Constants.ST_DAILY_RECOMMEND -> {
+                                currentPosition =
+                                    if (currentPosition == 0 && playMode == Consts.PLAY_ORDER) {
+                                        onlineSongs!!.size - 1
+                                    } else {
+                                        PlayServiceHelper.getLastSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            onlineSongs?.size
+                                        )
+                                    }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveCurrentOnlineSong(currentPosition,Consts.ONLINE_FIRST_LAUNCH,onlineSongs)
+                                PlayServiceHelper.saveCurrentOnlineSong(
+                                    currentPosition,
+                                    Consts.ONLINE_FIRST_LAUNCH,
+                                    onlineSongs
+                                )
                             }
-                            Consts.JUST_ONLINE_SONG->{
-                                currentPosition = if (currentPosition==0 && playMode == Consts.PLAY_ORDER) {
-                                    justOnlineSongs!!.size-1
-                                } else {
-                                    PlayServiceHelper.getLastSongPosition(
-                                        currentPosition,
-                                        playMode,
-                                        justOnlineSongs?.size
-                                    )
-                                }
+                            Consts.JUST_ONLINE_SONG -> {
+                                currentPosition =
+                                    if (currentPosition == 0 && playMode == Consts.PLAY_ORDER) {
+                                        justOnlineSongs!!.size - 1
+                                    } else {
+                                        PlayServiceHelper.getLastSongPosition(
+                                            currentPosition,
+                                            playMode,
+                                            justOnlineSongs?.size
+                                        )
+                                    }
                                 LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
-                                PlayServiceHelper.saveJustOnlineSong(currentPosition,Consts.JUST_ONLINE_SONG,justOnlineSongs)
+                                PlayServiceHelper.saveJustOnlineSong(
+                                    currentPosition,
+                                    Consts.JUST_ONLINE_SONG,
+                                    justOnlineSongs
+                                )
                             }
                         }
                     }
-
+                    Consts.ONLINE_SINGER_SONG -> {
+                        currentPosition =
+                            if (currentPosition == 0 && playMode == Consts.PLAY_ORDER) {
+                                onlineSongs!!.size - 1
+                            } else {
+                                PlayServiceHelper.getLastSongPosition(
+                                    currentPosition,
+                                    playMode,
+                                    onlineSongs?.size
+                                )
+                            }
+                        LogUtil.e("-------PlayService----onBind currentPosition:$currentPosition------")
+                        PlayServiceHelper.saveSingerSong(currentPosition, onlineSongs)
+                    }
                 }
                 if (listType != 0) {
                     if (listType == Consts.LIST_TYPE_ONLINE) {
-                        playerBinder.play(type = Consts.LIST_TYPE_ONLINE,onlineSubjectType = song.onlineSubjectType)
+                        playerBinder.play(
+                            type = Consts.LIST_TYPE_ONLINE,
+                            onlineSubjectType = song.onlineSubjectType
+                        )
+                    } else if (listType == Consts.ONLINE_SINGER_SONG) {
+                        playerBinder.singerPlay(songListId)
                     } else {
                         playerBinder.play(listType)
                     }

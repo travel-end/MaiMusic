@@ -58,8 +58,8 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
                                     holder.ivSingerCover.loadImg(singer.cover?:"")
                                     holder.tvSingerName.text = singer.name
                                     holder.itemView.fastClickListener {
-                                        LogUtil.e("----SingerFragment singerName:${singer.name}")
-                                        it.singerToSongList(singer.singerId?:0)
+//                                        LogUtil.e("----SingerFragment singerName:${singer.name}")
+                                        it.singerToSongList(singer)
                                     }
                                 }
                             }
