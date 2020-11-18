@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_collect.*
+import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleFragment
 import wind.maimusic.model.songlist.SongListItem
@@ -100,6 +101,10 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
                 createdSongListAdapter.removeData(deletePosition)
             }
         })
+        Bus.observe<String>(Constants.LOGIN_SUCCESS,this) {
+            LogUtil.e("---FavoritesFragment--login success:$it")
+            collect_tv_cuter.text = "提莫队长"
+        }
     }
 
     override fun initAction() {
@@ -123,7 +128,11 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
             it.nav(R.id.to_loved_poetry_fragment)
         }
         collect_layout_to_login.fastClickListener {
-            requireActivity().toLogin()
+            if (isLogin()) {
+                it.nav(R.id.to_mime_fragment)
+            } else {
+                requireActivity().toLogin()
+            }
         }
         collect_iv_create_new_song_list.fastClickListener {
             if (createNewSongListDialog == null) {
@@ -146,5 +155,4 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
             createNewSongListDialog?.etContent.showKeyBoard(requireContext())
         }
     }
-
 }

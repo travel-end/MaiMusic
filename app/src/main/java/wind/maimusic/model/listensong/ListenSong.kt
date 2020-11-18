@@ -80,7 +80,8 @@ data class ClassifySongList(
     val english:List<SongListCover>,
     val japanese:List<SongListCover>,
     val pure:List<SongListCover>,
-    val chinese:List<SongListCover>
+    val chinese:List<SongListCover>,
+    val recommend:List<SongListCover>
 )
 
 //@Entity(tableName = "single_song")

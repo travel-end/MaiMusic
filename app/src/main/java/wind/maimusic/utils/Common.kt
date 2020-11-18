@@ -27,6 +27,7 @@ import wind.maimusic.MaiApp
 import wind.maimusic.R
 import wind.maimusic.model.core.AlListBean
 import wind.maimusic.model.singer.Singer
+import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.ui.activities.LoginActivity
 import wind.maimusic.ui.activities.PlayActivity
 import wind.widget.cost.Consts
@@ -43,22 +44,23 @@ import java.util.*
  * 通过反射获取父类泛型<T>对应的Class类
  */
 @Suppress("UNCHECKED_CAST")
-fun <T> getClass(t:Any):Class<T> = (t.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
+fun <T> getClass(t: Any): Class<T> =
+    (t.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>
 
 /**
  * 获取字符串资源
  */
-fun Int.getStringRes()=
+fun Int.getStringRes() =
     MaiApp.getInstance().resources.getString(this)
 
-fun String?.getEditableStr() :Editable {
+fun String?.getEditableStr(): Editable {
     val value = this ?: ""
     return SpannableStringBuilder(value)
 }
 
-fun TextView?.setDiffColor(appointStr:String?,originalStr:String?) {
+fun TextView?.setDiffColor(appointStr: String?, originalStr: String?) {
     if (this != null) {
-        if (appointStr!=null && originalStr!=null) {
+        if (appointStr != null && originalStr != null) {
             val ori = originalStr.replace(
                 appointStr.toRegex(),
                 "<font color='#FF4081'>$appointStr</font>"
@@ -72,35 +74,35 @@ fun TextView?.setDiffColor(appointStr:String?,originalStr:String?) {
 /**
  * 获取颜色资源
  */
-fun Int.getColorRes()=
+fun Int.getColorRes() =
     MaiApp.getInstance().resources.getColor(this)
 
 /**
  * 字符串不为null或者空
  */
-fun String?.isNotNullOrEmpty():Boolean = !(this == null || this.trim().isBlank())
+fun String?.isNotNullOrEmpty(): Boolean = !(this == null || this.trim().isBlank())
 
 /**
  * 列表不为null或者空
  */
-fun isNotNullOrEmpty(list:List<Any>?) :Boolean{
+fun isNotNullOrEmpty(list: List<Any>?): Boolean {
     return !list.isNullOrEmpty()
 }
 
 /**
  * toast
  */
-fun CharSequence.toast(duration:Int = Toast.LENGTH_SHORT) {
+fun CharSequence.toast(duration: Int = Toast.LENGTH_SHORT) {
     if (this.isNotEmpty()) {
-        Toast.makeText(MaiApp.getInstance(),this,duration).show()
+        Toast.makeText(MaiApp.getInstance(), this, duration).show()
     }
 }
 
 /**
  * 加载xml布局
  */
-fun Int.inflate(parent:ViewGroup,attachToRoot:Boolean = false) :View{
-    return LayoutInflater.from(parent.context).inflate(this,parent,attachToRoot)
+fun Int.inflate(parent: ViewGroup, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(parent.context).inflate(this, parent, attachToRoot)
 }
 
 /**
@@ -115,10 +117,10 @@ fun View?.visible() {
 /**
  * 显示view，带有渐显得动画效果
  */
-fun View?.visibleWithAlphaAnim(duration:Long = 500L) {
+fun View?.visibleWithAlphaAnim(duration: Long = 500L) {
     this?.visibility = View.VISIBLE
     this?.startAnimation(
-        AlphaAnimation(0f,1f).apply {
+        AlphaAnimation(0f, 1f).apply {
             this.duration = duration
             fillAfter = true
         }
@@ -175,7 +177,12 @@ fun View?.invisibleWithAlphaAnim(duration: Long = 500L) {
  * @param iconHeight   图标高dp：默认自动根据图标大小
  * @param direction    图标方向，0左 1上 2右 3下 默认图标位于左侧0
  */
-fun TextView.setDrawable(drawable: Drawable?, iconWidth: Float? = null, iconHeight: Float? = null, direction: Int = 0) {
+fun TextView.setDrawable(
+    drawable: Drawable?,
+    iconWidth: Float? = null,
+    iconHeight: Float? = null,
+    direction: Int = 0
+) {
     if (iconWidth != null && iconHeight != null) {
         //第一个0是距左边距离，第二个0是距上边距离，iconWidth、iconHeight 分别是长宽
         drawable?.setBounds(0, 0, iconWidth.toIntPx(), iconHeight.toIntPx())
@@ -199,7 +206,14 @@ fun TextView.setDrawable(drawable: Drawable?, iconWidth: Float? = null, iconHeig
  * @param rIconWidth    图标宽dp：默认自动根据图标大小
  * @param rIconHeight   图标高dp：默认自动根据图标大小
  */
-fun TextView.setDrawables(lDrawable: Drawable?, rDrawable: Drawable?, lIconWidth: Float? = null, lIconHeight: Float? = null, rIconWidth: Float? = null, rIconHeight: Float? = null) {
+fun TextView.setDrawables(
+    lDrawable: Drawable?,
+    rDrawable: Drawable?,
+    lIconWidth: Float? = null,
+    lIconHeight: Float? = null,
+    rIconWidth: Float? = null,
+    rIconHeight: Float? = null
+) {
     if (lIconWidth != null && lIconHeight != null) {
         lDrawable?.setBounds(0, 0, lIconWidth.toIntPx(), lIconHeight.toIntPx())
     }
@@ -211,10 +225,10 @@ fun TextView.setDrawables(lDrawable: Drawable?, rDrawable: Drawable?, lIconWidth
 
 
 fun EditText?.showKeyBoard(context: Context) {
-    this?.let {et->
+    this?.let { et ->
         // 设置可获得焦点
-        et.isFocusable=true
-        et.isFocusableInTouchMode=true
+        et.isFocusable = true
+        et.isFocusableInTouchMode = true
         // 获取焦点
         et.requestFocus()
         // 调用系统输入法
@@ -232,7 +246,7 @@ fun Activity.hideKeyboards() {
     imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 }
 
-fun Activity.isServiceRunning(serviceName:String) :Boolean {
+fun Activity.isServiceRunning(serviceName: String): Boolean {
     val am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
     val infos = am.getRunningServices(100)
     for (info in infos) {
@@ -245,7 +259,7 @@ fun Activity.isServiceRunning(serviceName:String) :Boolean {
 }
 
 /*去播放页面*/
-fun Activity.toPlayAct(playStatus:Int) {
+fun Activity.toPlayAct(playStatus: Int) {
     val playIntent = Intent(this, PlayActivity::class.java)
     playIntent.putExtra(Consts.PLAY_STATUS, playStatus)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -258,46 +272,47 @@ fun Activity.toPlayAct(playStatus:Int) {
         startActivity(playIntent)
     }
 }
+
 // 关于Navigation: https://juejin.im/post/6844904180990246926
 /*去歌单页面*/
-fun View?.recommendToSongList(songListType:Int) {
+fun View?.recommendToSongList(songListType: Int) {
     if (this != null) {
         val bundle = Bundle()
-        bundle.putString(Constants.SONG_LIST_TYPE,songListType.toString())
-        Navigation.findNavController(this).navigate(R.id.to_song_list_fragment,bundle)
+        bundle.putString(Constants.SONG_LIST_TYPE, songListType.toString())
+        Navigation.findNavController(this).navigate(R.id.to_song_list_fragment, bundle)
     }
 }
 
-fun View?.singerToSongList(singer:Singer) {
+fun View?.singerToSongList(singer: Singer) {
     if (this != null) {
         val bundle = bundleOf(
             Constants.SINGER_NAME to singer.name,
             Constants.SINGER_ID to singer.singerId.toString(),
             Constants.SINGER_COVER to singer.cover
         )
-        Navigation.findNavController(this).navigate(R.id.singer_to_song_list_fragment,bundle)
+        Navigation.findNavController(this).navigate(R.id.singer_to_song_list_fragment, bundle)
     }
 }
 
 fun View?.albumToSongList(
-    album:AlListBean
+    album: AlListBean
 ) {
     if (this != null) {
         val bundle = Bundle().apply {
-            putString(Constants.ALBUM_ID,album.albumMID)
-            putString(Constants.ALBUM_NAME,album.albumName)
-            putString(Constants.ALBUM_COVER,album.albumPic)
-            putString(Constants.ALBUM_SINGER,album.singerName)
-            putString(Constants.ALBUM_PUBLIC_TIME,album.publicTime)
+            putString(Constants.ALBUM_ID, album.albumMID)
+            putString(Constants.ALBUM_NAME, album.albumName)
+            putString(Constants.ALBUM_COVER, album.albumPic)
+            putString(Constants.ALBUM_SINGER, album.singerName)
+            putString(Constants.ALBUM_PUBLIC_TIME, album.publicTime)
         }
-        Navigation.findNavController(this).navigate(R.id.to_album_song_fragment,bundle)
+        Navigation.findNavController(this).navigate(R.id.to_album_song_fragment, bundle)
     }
 }
 
-fun View?.nav(id:Int,bundle: Bundle?=null) {
+fun View?.nav(id: Int, bundle: Bundle? = null) {
     if (this != null) {
-        if (bundle!= null) {
-            Navigation.findNavController(this).navigate(id,bundle)
+        if (bundle != null) {
+            Navigation.findNavController(this).navigate(id, bundle)
         } else {
             Navigation.findNavController(this).navigate(id)
         }
@@ -312,12 +327,20 @@ fun View?.navUp() {
 
 fun Activity?.toLogin() {
     if (this != null) {
-        val loginIntent = Intent(this,LoginActivity::class.java)
+        val loginIntent = Intent(this, LoginActivity::class.java)
         this.startActivity(loginIntent)
+
     }
 }
 
-fun nextInt(range:Int):Int {
+fun isLogin():Boolean {
+    val result = GlobalUtil.execute {
+        MaiDatabase.getDatabase().cuterDao().findCuter()
+    }
+    return result.isNotEmpty()
+}
+
+fun nextInt(range: Int): Int {
     return if (range != 0) {
         Random().nextInt(range)
     } else {

@@ -34,7 +34,7 @@ class ListenSongViewModel : BaseViewModel() {
             val randomBanner = dbDao.listenBannerDao().getRangeBanners(0,Constants.PAGE_SIZE_BANNER)
             val banner = Banner(randomBanner)
             data.add(banner)
-            data.add(TabMenu("", R.string.daily_recommend.getStringRes(), 0))
+            data.add(TabMenu("", R.string.today_recommend.getStringRes(), 0))
             data.add(TabMenu("", R.string.song_list.getStringRes(), 0))
             data.add(TabMenu("", R.string.singer.getStringRes(), 0))
             data.add(TabMenu("", R.string.hot_songs.getStringRes(), 0))

@@ -26,7 +26,8 @@ import wind.maimusic.room.*
         OnlineSong::class,
         RecommendSearch::class,
         HotSearchSong::class,
-        HistoryTag::class
+        HistoryTag::class,
+        Cuter::class
     ],
     version = 1,
     exportSchema = false
@@ -37,6 +38,7 @@ abstract class MaiDatabase : RoomDatabase() {
     abstract fun downloadSongDao(): DownloadSongDao
     abstract fun loveSongDao(): LoveSongDao
     abstract fun searchSongDao():SearchSongDao
+    abstract fun cuterDao():CuterDao
 
     companion object {
         @Volatile

@@ -15,7 +15,7 @@
             android:id="@+id/collect_layout_to_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_28"
+            android:layout_marginStart="@dimen/dp_34"
             android:layout_marginTop="@dimen/dp_13"
             android:layout_marginEnd="@dimen/dp_28"
             android:orientation="horizontal">
@@ -23,24 +23,19 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="@dimen/dp_40"
                 android:layout_height="@dimen/dp_40"
-                android:src="@drawable/temp_logo" />
+                app:shapeAppearanceOverlay="@style/circleCornerImageStyle"
+                android:src="@drawable/un_login" />
 
             <TextView
+                android:id="@+id/collect_tv_cuter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginStart="@dimen/dp_14"
                 android:text="@string/go_to_login"
+                android:layout_marginBottom="@dimen/dp_1"
                 android:textColor="@color/text_color"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/dp_4"
-                android:src="@drawable/ic_arrow_right" />
-
+                android:textSize="17sp" />
         </LinearLayout>
 
         <LinearLayout

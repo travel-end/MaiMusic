@@ -324,8 +324,8 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         when (songListType) {
             Consts.LIST_TYPE_LOVE -> {
                 songListTop = SongListTop(
-                    "我喜欢的音乐",
-                    "我喜欢的音乐",
+                    R.string.my_love_songs.getStringRes(),
+                    R.string.my_love_songs.getStringRes(),
                     "By Journey - Travel end -",
                     songListCoverImgUrl = if (lovedSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else lovedSongs[0].pic)
             }

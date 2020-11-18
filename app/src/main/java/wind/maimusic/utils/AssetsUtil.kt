@@ -117,6 +117,7 @@ object AssetsUtil {
                 /*储存的歌单封面*/
                 val classifySongList = gson.fromJson(readAssetsJson("song_list_cover.json"), ClassifySongList::class.java)
                 val allSongList = mutableListOf<SongListCover>()
+                allSongList.addAll(classifySongList.recommend)
                 allSongList.addAll(classifySongList.chinese)
                 allSongList.addAll(classifySongList.pure)
                 allSongList.addAll(classifySongList.japanese)
@@ -128,7 +129,7 @@ object AssetsUtil {
                 allSongList.addAll(classifySongList.cure)
                 dbDao.listenBannerDao().addListenBanners(banner.bannerList)
                 dbDao.songListCoverDao().addSongCovers(allSongList)
-                /*搜索页面内容*/
+                /*搜索页面内容（推荐搜索、热搜）*/
                 val search = gson.fromJson(readAssetsJson("search.json"),Search::class.java)
                 if (search!= null) {
                     searchDao.addRecommendSearch(search.recommendSearch)

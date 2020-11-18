@@ -1,5 +1,6 @@
 package wind.maimusic.utils
 
+import android.text.TextUtils
 import wind.maimusic.model.core.AlbumListBean
 import wind.maimusic.model.core.AlbumSingerBean
 import wind.maimusic.model.core.ListBean
@@ -9,6 +10,20 @@ import wind.maimusic.model.core.ListBean
  * @Description
  */
 object StringUtil {
+    // TODO: 2020/11/18 正则表达式待完善
+    fun checkPhone(phone: String): Boolean {
+        if (TextUtils.isDigitsOnly(phone) && phone.matches(Regex("^([0123456789])\\d{11}$"))) {
+            return true
+        }
+        return false
+    }
+    fun passwordCheck(pwd: String): Boolean {
+        if (pwd.length >= 6) {
+            return true
+        }
+        return false
+    }
+
     fun formatSinger(singer:String):String {
         return if (singer.contains("/")) singer.split("/")[0].trim() else singer.trim()
     }

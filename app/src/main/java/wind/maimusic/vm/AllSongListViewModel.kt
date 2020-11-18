@@ -20,18 +20,17 @@ class AllSongListViewModel:BaseViewModel() {
         Constants.ST_CHINESE,
         Constants.ST_QUITE,
         Constants.ST_ANTIQUE,
+        Constants.ST_FOLK,
+        Constants.ST_CURE,
+        Constants.ST_CLASSIC,
         Constants.ST_ENGLISH,
         Constants.ST_JAPANESE,
-        Constants.ST_CLASSIC,
-        Constants.ST_PURE,
-        Constants.ST_FOLK,
-        Constants.ST_CURE
+        Constants.ST_PURE
     )
-
     fun initAllSongListData() {
         val dbDao = OnlineSongDatabase.getDatabase()
         viewModelScope.launch {
-            recommendSongs.value = dbDao.songListCoverDao().getStartListCovers(6)
+            recommendSongs.value = dbDao.songListCoverDao().findSongListByType(Constants.ST_RECOMMEND)
             val allSongList = mutableListOf<SongListCovers>()
             for (type in allSongListType) {
                 val result = dbDao.songListCoverDao().findSongListByType(type)

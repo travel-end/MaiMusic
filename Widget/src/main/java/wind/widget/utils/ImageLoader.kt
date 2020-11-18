@@ -13,42 +13,23 @@ import wind.widget.R
  * @By Journey 2020/10/26
  * @Description
  */
-
-/**
- * Glide加载图片 可以指定圆弧角度
- * cornerType：圆角角度
- * todo: 自定义placeHolder 和error
- */
 fun ImageView.loadImg(
     url: String,
     placeholder: Int = R.drawable.default_cover,
     error: Int = R.drawable.default_cover
 ) {
-
-//    if (round == 0f) {
-        val option = RequestOptions()
-            .placeholder(placeholder)
-            .error(error)
-        Glide
-            .with(this.context)
-            .load(url)
-            .apply(option)
-            .into(this)
-//    } else {
-//        val option = RequestOptions
-//            .bitmapTransform(RoundedCornersTransformation(round.toIntPx(), 0, cornerType))
-//            .placeholder(placeholder)
-//            .error(error)
-//        Glide
-//            .with(this.context)
-//            .load(url)
-//            .apply(option)
-//            .into(this)
-//    }
+    val option = RequestOptions()
+        .placeholder(placeholder)
+        .error(error)
+    Glide
+        .with(this.context)
+        .load(url)
+        .apply(option)
+        .into(this)
 }
 
 fun loadImg(
-    context:Context,
+    context: Context,
     url: String,
     placeholder: Int = R.drawable.default_cover,
     error: Int = R.drawable.default_cover,

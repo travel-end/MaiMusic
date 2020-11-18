@@ -29,7 +29,7 @@
     <string name="download_music">下载音乐</string>
     <string name="query_lrc">查找歌词中 …</string>
     <string name="read_history">最近阅读</string>
-    <string name="go_to_login">去登录</string>
+    <string name="go_to_login">点击登录</string>
     <string name="like">喜欢</string>
     <string name="download">下载</string>
     <string name="collect">收藏</string>
@@ -55,7 +55,6 @@
     <string name="collect_song_list">收藏的歌单</string>
     <string name="no_collect_song_list">还没有收藏的歌单啦</string>
     <string name="no_local_music">还没有发现本地音乐啦</string>
-    <string name="daily_recommend">每日推荐</string>
     <string name="singer">歌手</string>
     <string name="hot_songs">热歌精选</string>
     <string name="song_style">我的风格</string>
@@ -95,4 +94,7 @@
     <string name="to_login">立即登录</string>
     <string name="public_time">发行于</string>
     <string name="today_recommend">今日推荐</string>
+    <string name="my_love_songs">我喜欢的音乐</string>
+    <string name="mime_music">我的音乐</string>
+    <string name="total_listen_songs">累计听歌</string>
 </resources>
