@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_main.*
+import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleActivity
 import wind.maimusic.service.PlayerService
@@ -20,6 +21,7 @@ import wind.maimusic.utils.*
 import wind.maimusic.vm.MainViewModel
 import wind.maimusic.widget.BottomPlayerView
 import wind.widget.cost.Consts
+import wind.widget.imageselector.util.ImageSelector
 import wind.widget.interf.OnPlayerViewClickListener
 import wind.widget.model.Song
 import java.lang.ref.WeakReference
@@ -267,5 +269,18 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
         SongUtil.saveSong(song)
         updateSeekBarHandler.removeMessages(1)
         updateSeekBarHandler.removeCallbacksAndMessages(null)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.PIC_REQUEST_CODE && data != null) {
+            val imageArr = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT)
+            if (!imageArr.isNullOrEmpty()) {
+                val image = imageArr[0]
+                //url: /storage/emulated/0/Android/data/wind.maimusic/cache/image_select/20201119_042756.jpg
+                // 使用viewModel+liveData传递数据，liveData的生命周期会跟随activity而不是fragment
+                shareViewModel.setSelectImage(image)
+            }
+        }
     }
 }

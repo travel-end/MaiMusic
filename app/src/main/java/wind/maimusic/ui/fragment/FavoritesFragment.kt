@@ -15,6 +15,7 @@ import wind.maimusic.vm.FavoritesViewModel
 import wind.maimusic.widget.dialog.CreateNewSongListDialog
 import wind.maimusic.widget.dialog.OnDialogBtnClickListener
 import wind.widget.utils.fastClickListener
+import wind.widget.utils.loadImg
 
 /**
  * 我的收藏
@@ -46,7 +47,6 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
                     // TODO: 2020/11/8 添加确认删除弹窗
                     deletePosition = position
                     mViewModel.deleteCreatedSongList(t)
-
                 }
             }
 
@@ -55,6 +55,13 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
                 // TODO: 2020/11/8 使用ImageSelector选取封面图片
             }
         })
+
+        val cuter = CuterManager.getCuterInfo()
+        if (cuter!= null) {
+            val cuterName = cuter.nickName
+            collect_tv_nickname.text = cuterName
+            collect_iv_avatar.loadImg(cuter.cuterCover?:"",error = R.drawable.un_login)
+        }
     }
 
     override fun initData() {
@@ -102,11 +109,10 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
             }
         })
         Bus.observe<String>(Constants.LOGIN_SUCCESS,this) {
-            LogUtil.e("---FavoritesFragment--login success:$it")
-            collect_tv_cuter.text = "提莫队长"
+            collect_tv_nickname.text = it
+            collect_iv_avatar.loadImg(Constants.TEMP_AVATAR,error = R.drawable.un_login)
         }
     }
-
     override fun initAction() {
         super.initAction()
         collect_tv_local_song.fastClickListener {
@@ -128,7 +134,7 @@ class FavoritesFragment:BaseLifeCycleFragment<FavoritesViewModel>() {
             it.nav(R.id.to_loved_poetry_fragment)
         }
         collect_layout_to_login.fastClickListener {
-            if (isLogin()) {
+            if (isLogin) {
                 it.nav(R.id.to_mime_fragment)
             } else {
                 requireActivity().toLogin()

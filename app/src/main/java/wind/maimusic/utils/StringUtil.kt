@@ -12,7 +12,7 @@ import wind.maimusic.model.core.ListBean
 object StringUtil {
     // TODO: 2020/11/18 正则表达式待完善
     fun checkPhone(phone: String): Boolean {
-        if (TextUtils.isDigitsOnly(phone) && phone.matches(Regex("^([0123456789])\\d{11}$"))) {
+        if (TextUtils.isDigitsOnly(phone) && phone.matches(Regex("^1[0-9]{10}\$"))) {
             return true
         }
         return false

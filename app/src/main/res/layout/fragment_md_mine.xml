@@ -16,7 +16,7 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <ImageView
-                android:id="@id/md_song_list_iv_large_cover"
+                android:id="@+id/md_cuter_iv_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -32,24 +32,24 @@
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax">
 
-                <TextView
-                    android:id="@+id/mime_tv_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:paddingStart="@dimen/dp_10"
-                    android:paddingEnd="@dimen/dp_12"
-                    android:paddingBottom="@dimen/dp_3"
-                    android:paddingTop="@dimen/dp_3"
-                    android:textSize="12sp"
-                    android:text="@string/edit"
-                    android:background="@drawable/shape_btn_translate_bg"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_80"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/mime_tv_edit"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:paddingStart="@dimen/dp_10"-->
+<!--                    android:paddingEnd="@dimen/dp_12"-->
+<!--                    android:paddingBottom="@dimen/dp_3"-->
+<!--                    android:paddingTop="@dimen/dp_3"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:text="@string/edit"-->
+<!--                    android:background="@drawable/shape_btn_translate_bg"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_marginEnd="@dimen/dp_20"-->
+<!--                    android:layout_marginTop="@dimen/dp_80"/>-->
 
                 <TextView
-                    android:id="@id/md_song_list_tv_name"
+                    android:id="@+id/md_cuter_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="提莫队友"
@@ -61,7 +61,7 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginStart="@dimen/dp_18" />
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/mime_iv_avatar"
+                    android:id="@+id/mime_cuter_iv_avatar"
                     android:layout_width="@dimen/dp_80"
                     android:layout_height="@dimen/dp_80"
                     android:src="@drawable/temp_rect_cover"
@@ -69,9 +69,9 @@
                     android:layout_marginEnd="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_24"
                     app:shapeAppearanceOverlay="@style/circleCornerImageStyle"
-                    app:strokeWidth="@dimen/dp_4"
-                    app:strokeColor="@color/black_40p"
-                    android:padding="@dimen/dp_4" />
+                    app:strokeWidth="@dimen/dp_2"
+                    app:strokeColor="@color/colorPrimaryLight"
+                    android:padding="@dimen/dp_2" />
             </FrameLayout>
             <androidx.appcompat.widget.Toolbar
                 android:id="@id/md_song_list_toolbar"
@@ -144,6 +144,7 @@
                         android:layout_height="@dimen/dp_62"
                         app:shapeAppearanceOverlay="@style/roundedCornerImageStyle_8b"
                         android:scaleType="centerCrop"
+                        android:src="@drawable/temp_rect_cover"
                         android:layout_marginTop="@dimen/dp_8"
                         app:layout_constraintTop_toBottomOf="@id/mime_tv_listen_song"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -177,6 +178,7 @@
                         android:layout_height="@dimen/dp_62"
                         app:shapeAppearanceOverlay="@style/roundedCornerImageStyle_8b"
                         android:scaleType="centerCrop"
+                        android:src="@drawable/temp_rect_cover"
                         android:layout_marginTop="@dimen/dp_8"
                         app:layout_constraintTop_toBottomOf="@id/mime_iv_recent_listen"
                         app:layout_constraintStart_toStartOf="parent"

@@ -407,6 +407,29 @@ object Constants {
         WAIT_JUN_4
     )
 
+    const val NICK_NAME_1 = "港城宝藏女孩"
+    const val NICK_NAME_2 = "一米五的小可爱"
+    const val NICK_NAME_3 = "卖提莫的小蘑菇"
+    const val NICK_NAME_4 = "白日梦工厂厂长"
+    const val NICK_NAME_5 = "酒后表演艺术家"
+    const val NICK_NAME_6 = "国家一级烧烤品鉴师"
+    const val NICK_NAME_7 = "葬爱家族形象代言人"
+    const val NICK_NAME_8 = "著名奶茶鉴定专家"
+    const val NICK_NAME_9 = "耳机依赖患者"
+    const val TEMP_AVATAR = "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1684265410,2034259684&fm=26&gp=0.jpg"
+    const val TEMP_DEFAULT_MIME_BG = "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2249261519,1414642618&fm=26&gp=0.jpg"
+    val nickNames = arrayOf(
+        NICK_NAME_1,
+        NICK_NAME_2,
+        NICK_NAME_3,
+        NICK_NAME_4,
+        NICK_NAME_5,
+        NICK_NAME_6,
+        NICK_NAME_7,
+        NICK_NAME_8,
+        NICK_NAME_9
+    )
+
     /*名句*/
     /**
      * GET /api/privilege/getCustomerCreditInfo HTTP/1.1

@@ -78,15 +78,18 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
         }
         searchEditText.setOnEditorActionListener { textView, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
-                requireActivity().hideKeyboards()
-                val content = textView.text.toString()
-                if (content.isNotNullOrEmpty()) {
-                    isSearchVp = true
-                    searchVpFragment = SearchVpFragment.newInstance(content)
-                    replaceFragment(searchVpFragment)
-                }
+//                requireActivity().hideKeyboards()
+//                val content = textView.text.toString()
+//                if (content.isNotNullOrEmpty()) {
+//                    isSearchVp = true
+//                    searchVpFragment = SearchVpFragment.newInstance(content)
+//                    replaceFragment(searchVpFragment)
+//                }
+                searchTv.performClick()
+                true
+            } else {
+                false
             }
-            false
         }
     }
 

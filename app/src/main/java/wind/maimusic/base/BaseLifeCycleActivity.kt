@@ -11,6 +11,7 @@ import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
+import wind.maimusic.vm.ShareViewModel
 import wind.maimusic.widget.dialog.FloatLoadingDialog
 import wind.widget.utils.fastClickListener
 
@@ -30,6 +31,11 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
+
+
+    protected val shareViewModel by lazy {
+        ViewModelProvider(this).get(ShareViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()

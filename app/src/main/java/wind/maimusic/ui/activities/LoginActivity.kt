@@ -1,5 +1,6 @@
 package wind.maimusic.ui.activities
 
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.android.synthetic.main.activity_login.*
@@ -7,6 +8,7 @@ import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseLifeCycleActivity
 import wind.maimusic.utils.Bus
+import wind.maimusic.utils.getColorRes
 import wind.maimusic.vm.LoginViewModel
 import wind.widget.utils.fastClickListener
 
@@ -28,28 +30,28 @@ class LoginActivity:BaseLifeCycleActivity<LoginViewModel>() {
             password = login_et_password.text.toString()
             mViewModel.login(phone!!,password!!)
         }
-//        login_et_phone.doAfterTextChanged {
-//            phone = it.toString()
-//        }
-//        login_et_password.doAfterTextChanged {
-//            password = it.toString()
-//            if (phone.isNotNullOrEmpty() && password.isNotNullOrEmpty()) {
-//                mViewModel.seeLoginData(phone!!,password!!)
-//            }
-//        }
+        login_et_phone.doAfterTextChanged {
+            phone = it.toString()
+        }
+        login_et_password.doAfterTextChanged {
+            password = it.toString()
+            mViewModel.seeLoginData(phone?:"",password?:"")
+        }
     }
 
     override fun initData() {
         super.initData()
-//        mViewModel.loginData.observe(this,Observer{
-//            if (it) {
-//                login_btn.setBackgroundColor(R.color.colorPrimaryLight2.getColorRes())
-//                login_btn.isEnabled =true
-//                login_btn.setTextColor(R.color.white.getColorRes())
-//            }
-//        })
+        mViewModel.loginData.observe(this,Observer{
+            if (it) {
+                login_btn.isEnabled =true
+                login_btn.setTextColor(R.color.white.getColorRes())
+            } else {
+                login_btn.isEnabled =false
+                login_btn.setTextColor(R.color.white_50p.getColorRes())
+            }
+        })
         mViewModel.loginStatus.observe(this,Observer{
-            Bus.post(Constants.LOGIN_SUCCESS,phone)
+            Bus.post(Constants.LOGIN_SUCCESS,it)
             finish()
         })
     }

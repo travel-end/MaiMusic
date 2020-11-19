@@ -90,19 +90,18 @@
                 />
         </FrameLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_56"
+            android:layout_height="@dimen/dp_46"
             android:textAllCaps="false"
             android:text="@string/to_login"
             android:layout_marginTop="@dimen/dp_30"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
-            android:enabled="true"
-            android:backgroundTint="@color/colorPrimaryLight"
-            apps:cornerRadius="@dimen/dp_32"
+            android:enabled="false"
             android:textSize="@dimen/sp_17"
+            android:background="@drawable/selector_login_btn"
             android:textColor="@color/white_50p" />
         <FrameLayout
             android:layout_width="match_parent"

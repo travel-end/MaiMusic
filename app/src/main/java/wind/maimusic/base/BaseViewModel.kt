@@ -26,6 +26,7 @@ open class BaseViewModel:ViewModel() {
     val loadStatus by lazy {
         MutableLiveData<State>()
     }
+
     protected val apiService: ApiService by lazy {
         RetrofitClient.instance.apiService
     }

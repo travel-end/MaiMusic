@@ -6,12 +6,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import wind.maimusic.R
 import wind.maimusic.base.state.State
 import wind.maimusic.base.state.StateType
 import wind.maimusic.utils.getClass
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.toast
+import wind.maimusic.vm.ShareViewModel
 import wind.maimusic.widget.dialog.FloatLoadingDialog
 import wind.widget.utils.fastClickListener
 
@@ -34,6 +36,11 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
+
+    protected val shareViewModel by lazy {
+        val owner = requireActivity() as ViewModelStoreOwner
+        ViewModelProvider(owner).get(ShareViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()
@@ -183,4 +190,5 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
             }
         }
     }
+
 }

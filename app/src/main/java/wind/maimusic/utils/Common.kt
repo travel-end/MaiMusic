@@ -31,6 +31,7 @@ import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.ui.activities.LoginActivity
 import wind.maimusic.ui.activities.PlayActivity
 import wind.widget.cost.Consts
+import wind.widget.imageselector.util.ImageSelector
 import wind.widget.utils.toIntPx
 import java.lang.reflect.ParameterizedType
 import java.util.*
@@ -333,11 +334,16 @@ fun Activity?.toLogin() {
     }
 }
 
-fun isLogin():Boolean {
-    val result = GlobalUtil.execute {
-        MaiDatabase.getDatabase().cuterDao().findCuter()
+fun Activity?.imageSelect() {
+    if (this != null) {
+        ImageSelector.builder()
+            .useCamera(true)
+            .setCrop(true)
+            .setCropRatio(1.0f)
+            .setSingle(true)
+            .canPreview(true)
+            .start(this,Constants.PIC_REQUEST_CODE)
     }
-    return result.isNotEmpty()
 }
 
 fun nextInt(range: Int): Int {

@@ -14,6 +14,8 @@ object GlobalUtil {
             }
         }
     }
+
+    // TODO: 2020/11/19 处理协程泄露的问题
     fun <T> async(block:suspend () -> T) :T?{
         var result:T?=null
         GlobalScope.launch {

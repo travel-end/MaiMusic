@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import wind.maimusic.Constants
 import wind.maimusic.R
+import wind.maimusic.utils.CuterManager
 import wind.maimusic.utils.LogUtil
 import wind.widget.play.ImUtils
 
@@ -91,6 +92,8 @@ abstract class BaseFragment:Fragment() {
     open fun lazyInitData() {
 
     }
+
+    protected val isLogin get() = CuterManager.isLogin()
 
     override fun onDestroy() {
         super.onDestroy()

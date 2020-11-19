@@ -51,8 +51,7 @@
         <activity android:name=".ui.activities.TestActivity" />
         <activity android:name=".ui.activities.LoginActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
             android:name="wind.widget.imageselector.ImageSelectorActivity"
