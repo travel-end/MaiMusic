@@ -168,7 +168,7 @@ object Constants {
     const val SL_34 = 34//秋风生渭水，落叶满长安 5
     const val SL_55 = 55//人面不知何处去，桃花依旧笑春风 5
     const val SL_36 = 36// 杨花落尽子规啼，闻道龙标过五溪 5
-    const val SL_43 = 43//孰知不向边庭苦，纵死犹闻侠骨香 5
+//    const val SL_43 = 43//孰知不向边庭苦，纵死犹闻侠骨香 5
     const val SL_63 = 63//人生自是有情痴，此恨不关风与月 5
     const val SL_78 = 78//人生不相见，动如参与商 5
     const val SL_81 = 81//一川烟草，满城风絮，梅子黄时雨 5
@@ -176,7 +176,6 @@ object Constants {
 
     /*民谣*/
     const val SL_9 = 9//多少长安名利客，机关算尽不如君 6
-    const val SL_11 = 11//欲买桂花同载酒，终不似，少年游 6
     const val SL_13 = 13// 我未成名君未嫁，可能俱是不如人 6
     const val SL_37 = 37//还君明珠双泪垂，恨不相逢未嫁时 6
     const val SL_64 = 64//君埋泉下泥销骨，我寄人间雪满头 6
@@ -186,6 +185,7 @@ object Constants {
 
     /*经典老歌*/
     const val SL_8 = 8//桃李春风一杯酒，江湖夜雨十年灯 7
+    const val SL_11 = 11//欲买桂花同载酒，终不似，少年游7
     const val SL_20 = 20//浮云一别后，流水十年间 7
     const val SL_23 = 23//种桃道士今何在，前度刘郎今又来 7
     const val SL_49 = 49//月落乌啼霜满天，江枫渔火对愁眠 7
@@ -196,6 +196,7 @@ object Constants {
     const val SL_72 = 72//物是人非事事休，欲语泪先流 7
     const val SL_79 = 79//诚知此恨人人有，贫贱夫妻百事哀 7
     const val SL_90 = 90//天地肃清堪四望，为君扶病上高台  7
+
 
     /*安静*/
     const val SL_5 = 5//柴门闻犬吠，风雪夜归人 8
