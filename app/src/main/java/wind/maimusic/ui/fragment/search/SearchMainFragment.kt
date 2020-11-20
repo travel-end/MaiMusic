@@ -35,12 +35,7 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
             val lp = searchRootLayout.layoutParams as LinearLayout.LayoutParams
             lp.topMargin = ImUtils.getStatusBarHeight(requireContext())
         }
-        arguments?.let {
-            val recommendSearch = it.getString(Constants.HOT_SEARCH)
-            if (recommendSearch.isNotNullOrEmpty()) {
-                searchEditText.hint = recommendSearch
-            }
-        }
+        searchEditText.hint = R.string.search_content_hint.getStringRes()
     }
 
     override fun initData() {
@@ -78,13 +73,6 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
         }
         searchEditText.setOnEditorActionListener { textView, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
-//                requireActivity().hideKeyboards()
-//                val content = textView.text.toString()
-//                if (content.isNotNullOrEmpty()) {
-//                    isSearchVp = true
-//                    searchVpFragment = SearchVpFragment.newInstance(content)
-//                    replaceFragment(searchVpFragment)
-//                }
                 searchTv.performClick()
                 true
             } else {

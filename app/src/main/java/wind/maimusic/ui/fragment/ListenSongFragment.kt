@@ -82,7 +82,11 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             override fun getItemCount() = Int.MAX_VALUE
                             override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
                                 val banner = bannerList[position % bannerList.size]
-                                holder.bannerIv.loadImg(banner.imgUrl)
+                                holder.bannerIv.loadImg(
+                                    banner.imgUrl,
+                                    placeholder = R.drawable.shape_translate_rect_bg,
+                                    error = R.drawable.shape_translate_rect_bg
+                                )
                                 holder.bannerTvName.text = banner.title
                                 holder.itemView.fastClickListener {
                                 }
@@ -100,15 +104,15 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     val menu = data as TabMenu
                     setText(R.id.item_tab_menu_name, menu.menuName)
                     itemClicked(View.OnClickListener {
-                        when(position) {
-                            1->{//每日推荐
-                                NavUtil.recommendToSongList(it,Constants.ST_DAILY_RECOMMEND)
+                        when (position) {
+                            1 -> {//每日推荐
+                                NavUtil.recommendToSongList(it, Constants.ST_DAILY_RECOMMEND)
                             }
-                            2->{
-                                NavUtil.nav(it,R.id.to_all_song_list_fragment)
+                            2 -> {
+                                NavUtil.nav(it, R.id.to_all_song_list_fragment)
                             }
-                            3->{// 歌手
-                                NavUtil.nav(it,R.id.to_singers_fragment)
+                            3 -> {// 歌手
+                                NavUtil.nav(it, R.id.to_singers_fragment)
                             }
                         }
                     })
@@ -120,8 +124,8 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     val songListTitle = data as ListenSongListTitle
                     setText(R.id.item_common_title_tv, songListTitle.title)
                     setText(R.id.item_common_end_tv, songListTitle.text)
-                    clicked(R.id.item_common_end_tv,View.OnClickListener {
-                        NavUtil.nav(it,R.id.to_all_song_list_fragment)
+                    clicked(R.id.item_common_end_tv, View.OnClickListener {
+                        NavUtil.nav(it, R.id.to_all_song_list_fragment)
                     })
                 }
             }
@@ -177,7 +181,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     data?.let {
                         val singleSong = it as SingleSong
                         holder.itemView?.findViewById<ImageView>(R.id.single_song_iv_cover)
-                            ?.loadImg(singleSong.cover?:"")
+                            ?.loadImg(singleSong.cover ?: "")
                         setText(R.id.single_song_tv_name, singleSong.songName)
                         setText(R.id.single_song_tv_singer, singleSong.singer)
                         setText(R.id.single_song_tv_desc, singleSong.desc)
@@ -202,7 +206,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             itemView?.findViewById<ShapeableImageView>(R.id.find_sp_iv_icon)
                         leftIv?.shapeAppearanceModel = ShapeAppearanceModel.Builder()
                             .setAllCornerSizes(ShapeAppearanceModel.PILL).build()
-                        leftIv?.loadImg(poetrySong.cover?:"")
+                        leftIv?.loadImg(poetrySong.cover ?: "")
                         setText(R.id.find_sp_tv_title, poetrySong.name)
                         setText(R.id.find_tv_sp_author, poetrySong.singer)
                         setText(R.id.poetry_song_tv_desc, poetrySong.desc)
@@ -239,7 +243,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                 jAdapter?.notifyDataSetChanged()
             }
         })
-        mViewModel.specialSongList.observe(this,Observer{
+        mViewModel.specialSongList.observe(this, Observer {
             if (isNotNullOrEmpty(it)) {
 
             }

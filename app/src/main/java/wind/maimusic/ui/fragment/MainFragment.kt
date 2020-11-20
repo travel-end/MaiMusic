@@ -1,11 +1,9 @@
 package wind.maimusic.ui.fragment
 
-import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayout
-import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseVpFragment
 import wind.maimusic.ui.activities.MainActivity
@@ -61,11 +59,9 @@ class MainFragment : BaseVpFragment() {
     override fun initAction() {
         super.initAction()
         searchView.fastClickListener {
-            val bundle = Bundle()
-            bundle.putString(Constants.HOT_SEARCH, "昨夜雨疏风骤，浓睡不消残酒")
             Navigation
                 .findNavController(it)
-                .navigate(R.id.to_search_main_fragment, bundle)
+                .navigate(R.id.to_search_main_fragment)
         }
         ivDrawerList.fastClickListener {
             (requireActivity() as MainActivity).openDrawer()

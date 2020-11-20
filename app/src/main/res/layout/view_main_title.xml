@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
                 android:textColor="@color/color999999"
-                android:text="试试搜旅拍今日最佳"
+                android:text="@string/search_content_hint"
                 android:layout_marginStart="@dimen/dp_4" />
         </LinearLayout>
         <FrameLayout

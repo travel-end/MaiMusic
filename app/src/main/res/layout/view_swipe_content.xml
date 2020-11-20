@@ -4,6 +4,8 @@
     android:id="@+id/root_rl_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_6"
+    android:layout_marginBottom="@dimen/dp_6"
     android:background="@color/white">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -41,21 +43,7 @@
         android:textColor="@color/text_color"
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/song_list_iv_cover"
-        app:layout_constraintTop_toBottomOf="@id/song_list_tv_title"/>
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/single_song_card_view"-->
-    <!--        style="@style/Widget.MaterialComponents.CardView"-->
-    <!--        android:layout_width="@dimen/dp_64"-->
-    <!--        android:layout_height="@dimen/dp_64"-->
-    <!--        android:layout_centerVertical="true"-->
-    <!--        android:layout_marginStart="@dimen/dp_10"-->
-    <!--        android:layout_marginTop="@dimen/dp_8"-->
-    <!--        android:layout_marginBottom="@dimen/dp_8"-->
-    <!--        app:cardBackgroundColor="@color/translate"-->
-    <!--        app:cardCornerRadius="@dimen/dp_6">-->
-
-
-    <!--    </androidx.cardview.widget.CardView>-->
+        app:layout_constraintTop_toBottomOf="@id/song_list_tv_title" />
 
 
     <!--        <TextView-->

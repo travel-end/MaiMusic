@@ -63,7 +63,6 @@ object Constants {
         return "${MaiApp.getInstance().getExternalFilesDir("song").toString()}/maimusic"
     }
 
-    const val HOT_SEARCH = "hot_search"
     const val SONG_LIST_TYPE = "song_list_type"
     const val SINGER_ID = "singer_id"
     const val SINGER_COVER = "singer_cover"

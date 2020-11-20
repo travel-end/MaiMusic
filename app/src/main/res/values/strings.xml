@@ -98,4 +98,5 @@
     <string name="my_love_songs">我喜欢的音乐</string>
     <string name="mime_music">我的音乐</string>
     <string name="total_listen_songs">累计听歌</string>
+    <string name="search_content_hint">搜索歌曲/歌手/专辑</string>
 </resources>
