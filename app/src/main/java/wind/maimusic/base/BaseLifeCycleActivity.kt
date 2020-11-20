@@ -32,10 +32,10 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     // 初始化viewModel
     protected lateinit var mViewModel: VM
 
-
-    protected val shareViewModel by lazy {
-        ViewModelProvider(this).get(ShareViewModel::class.java)
-    }
+//    protected val shareViewModel by lazy {
+//        ViewModelProvider(this).get(ShareViewModel::class.java)
+//    }
+    protected lateinit var shareViewModel:ShareViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()
@@ -80,7 +80,8 @@ abstract class BaseLifeCycleActivity<VM : BaseViewModel> : BaseActivity() {
     }
 
     private fun initViewModel() {
-        mViewModel = ViewModelProvider(this).get(getClass(this))
+        mViewModel = ViewModelProvider(this,BaseViewModelFactory())[getClass(this)]
+        shareViewModel = ViewModelProvider(this,BaseViewModelFactory())[ShareViewModel::class.java]
     }
 
     open fun showSuccess() {

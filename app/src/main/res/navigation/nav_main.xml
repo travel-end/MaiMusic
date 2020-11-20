@@ -93,6 +93,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/to_create_song_list_fragment"
+            app:destination="@id/created_song_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
 
     </fragment>
 
@@ -251,6 +259,24 @@
             app:argType="string" />
         <argument
             android:name="singer_cover"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/created_song_list_fragment"
+        android:name="wind.maimusic.ui.fragment.songlist.CreatedSongListFragment"
+        tools:layout="@layout/fragment_md_singer_song_list" >
+<!--        <argument-->
+<!--            android:name="song_list_id"-->
+<!--            android:defaultValue=""-->
+<!--            app:argType="string" />-->
+        <argument
+            android:name="song_list_name"
+            android:defaultValue=""
+            app:argType="string" />
+        <argument
+            android:name="song_list_cover"
             android:defaultValue=""
             app:argType="string" />
     </fragment>

@@ -30,7 +30,7 @@ class LovedSongFragment : BaseSongListFragment<LoveSongViewModel>() {
                 rvSongList.visible()
                 flPlayAll.visible()
             }
-            setSongListTop(Consts.LIST_TYPE_LOVE)
+            setSongListTop()
         })
     }
 

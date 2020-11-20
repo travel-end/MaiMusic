@@ -21,27 +21,22 @@ import wind.widget.utils.fastClickListener
  * @By Journey 2020/10/25
  * @Description
  */
-abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
+abstract class BaseLifeCycleFragment<VM : BaseViewModel> : BaseFragment() {
     // 加载结果的view
-    private var loadingResultView: View?=null
+    private var loadingResultView: View? = null
 
     // 加载歌曲的view
-    private var loadingSongView: View?=null
+    private var loadingSongView: View? = null
 
     // 普通加载的dialog
-    private var loadingNormalDialog: FloatLoadingDialog?=null
+    private var loadingNormalDialog: FloatLoadingDialog? = null
 
     // 页面顶部加载view
-    private var loadingTopView:View?=null
+    private var loadingTopView: View? = null
 
     // 初始化viewModel
     protected lateinit var mViewModel: VM
-
-    protected val shareViewModel by lazy {
-        val owner = requireActivity() as ViewModelStoreOwner
-        ViewModelProvider(owner).get(ShareViewModel::class.java)
-    }
-
+    protected lateinit var shareViewModel: ShareViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         initViewModel()
         super.onCreate(savedInstanceState)
@@ -72,7 +67,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     private fun initStatusView() {
         val resultView: View? = mRootView.findViewById(R.id.loading_result_view)
         val songView: View? = mRootView.findViewById(R.id.loading_song_view)
-        val topView:View?=mRootView.findViewById(R.id.loading_top_view)
+        val topView: View? = mRootView.findViewById(R.id.loading_top_view)
         if (resultView != null) {
             loadingResultView = resultView
         }
@@ -83,13 +78,17 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
             loadingNormalDialog =
                 FloatLoadingDialog(requireContext())
         }
-        if (topView!= null) {
+        if (topView != null) {
             loadingTopView = topView
         }
     }
 
     private fun initViewModel() {
-        mViewModel = ViewModelProvider(this).get(getClass(this))
+        mViewModel = ViewModelProvider(this, BaseViewModelFactory())[getClass(this)]
+        shareViewModel = ViewModelProvider(
+            requireActivity(),
+            BaseViewModelFactory()
+        )[ShareViewModel::class.java]
     }
 
     open fun showSuccess() {
@@ -98,7 +97,8 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     open fun showLoadingSong(msg: String) {
         if (loadingSongView?.visibility == View.GONE) {
             if (msg.isEmpty()) {
-                loadingSongView?.findViewById<TextView>(R.id.view_loading_song_tv_msg)?.text = R.string.loading.getStringRes()
+                loadingSongView?.findViewById<TextView>(R.id.view_loading_song_tv_msg)?.text =
+                    R.string.loading.getStringRes()
             } else {
                 loadingSongView?.findViewById<TextView>(R.id.view_loading_song_tv_msg)?.text = msg
             }
@@ -107,12 +107,13 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     }
 
     open fun showLoadingNormal(msg: String) {
-        if (loadingNormalDialog!=null) {
-            if (loadingNormalDialog?.isShowing==false) {
+        if (loadingNormalDialog != null) {
+            if (loadingNormalDialog?.isShowing == false) {
                 loadingNormalDialog!!.show()
             }
         }
     }
+
     private fun showTopLoading() {
         if (loadingTopView?.visibility == View.GONE) {
             loadingTopView?.visibility = View.VISIBLE
@@ -132,7 +133,7 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
     }
 
     open fun dismissLoadingNormal() {
-        if (loadingNormalDialog!=null) {
+        if (loadingNormalDialog != null) {
             if (loadingNormalDialog!!.isShowing) {
                 loadingNormalDialog!!.dismiss()
             }
@@ -151,7 +152,8 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
             loadingResultView?.visibility = View.VISIBLE
         }
         if (res != 0) {
-            loadingResultView?.findViewById<ImageView>(R.id.view_empty_iv_icon)?.setImageResource(res)
+            loadingResultView?.findViewById<ImageView>(R.id.view_empty_iv_icon)
+                ?.setImageResource(res)
         }
         if (msg.isNotEmpty()) {
             loadingResultView?.findViewById<TextView>(R.id.view_empty_tv_msg)?.text = msg
@@ -183,9 +185,9 @@ abstract class BaseLifeCycleFragment<VM:BaseViewModel>:BaseFragment() {
                     StateType.DISMISSING_NORMAL -> dismissLoadingNormal()
                     StateType.DISMISSING_SONG -> dismissLoadingSong()
                     StateType.EMPTY -> showLoadingResultView(it.msg, it.res)
-                    StateType.SHOW_TOAST-> showToast(it.msg)
-                    StateType.LOADING_TOP->showTopLoading()
-                    StateType.DISMISSING_TOP->dismissTopLoading()
+                    StateType.SHOW_TOAST -> showToast(it.msg)
+                    StateType.LOADING_TOP -> showTopLoading()
+                    StateType.DISMISSING_TOP -> dismissTopLoading()
                 }
             }
         }

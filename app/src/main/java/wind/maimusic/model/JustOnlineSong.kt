@@ -4,6 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @DESC
+ * 这个表装的是临时的歌单 辟如专辑音乐...
+ */
 @Entity(tableName = "t_just_online_song")
 data class JustOnlineSong(
     @PrimaryKey(autoGenerate = true)

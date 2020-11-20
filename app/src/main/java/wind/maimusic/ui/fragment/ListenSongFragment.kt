@@ -18,10 +18,7 @@ import wind.maimusic.model.listensong.*
 import wind.maimusic.model.title.ListenSongListTitle
 import wind.maimusic.model.title.PoetrySongTitle
 import wind.maimusic.model.title.SingleSongTitle
-import wind.maimusic.utils.inflate
-import wind.maimusic.utils.isNotNullOrEmpty
-import wind.maimusic.utils.nav
-import wind.maimusic.utils.recommendToSongList
+import wind.maimusic.utils.*
 import wind.maimusic.vm.ListenSongViewModel
 import wind.widget.effcientrv.*
 import wind.widget.jrecyclerview.JRecycleView
@@ -105,13 +102,13 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     itemClicked(View.OnClickListener {
                         when(position) {
                             1->{//每日推荐
-                                it.recommendToSongList(Constants.ST_DAILY_RECOMMEND)
+                                NavUtil.recommendToSongList(it,Constants.ST_DAILY_RECOMMEND)
                             }
                             2->{
-                                it.nav(R.id.to_all_song_list_fragment)
+                                NavUtil.nav(it,R.id.to_all_song_list_fragment)
                             }
                             3->{// 歌手
-                                it.nav(R.id.to_singers_fragment)
+                                NavUtil.nav(it,R.id.to_singers_fragment)
                             }
                         }
                     })
@@ -124,7 +121,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     setText(R.id.item_common_title_tv, songListTitle.title)
                     setText(R.id.item_common_end_tv, songListTitle.text)
                     clicked(R.id.item_common_end_tv,View.OnClickListener {
-                        it.nav(R.id.to_all_song_list_fragment)
+                        NavUtil.nav(it,R.id.to_all_song_list_fragment)
                     })
                 }
             }
@@ -158,7 +155,9 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             holder.coverName.text = cover.listName
                             holder.itemView.fastClickListener {
 //                                LogUtil.e("歌单类型：${cover.type}")
-                                mViewModel.findSongListByType(cover.type)
+                                if (cover.type != null) {
+                                    mViewModel.findSongListByType(cover.type)
+                                }
                             }
                         }
                     }

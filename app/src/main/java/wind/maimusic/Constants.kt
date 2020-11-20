@@ -74,6 +74,8 @@ object Constants {
     const val ALBUM_COVER = "album_cover"
     const val ALBUM_PUBLIC_TIME = "album_public_time"
     const val SONG_LIST_ID = "song_list_id"
+    const val SONG_LIST_NAME = "song_list_name"
+    const val SONG_LIST_COVER = "song_list_cover"
 
 
     const val KEY_SEARCH_CONTENT = "key_search_content"

@@ -50,7 +50,7 @@ data class TabMenu(
 @Entity(tableName = "song_list_cover")
 data class SongListCover(
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    val id:Int?=null,
     @ColumnInfo
     val cover:String = "",
     @ColumnInfo
@@ -58,13 +58,15 @@ data class SongListCover(
     @ColumnInfo
     val desc:String = "",
     @ColumnInfo
-    val type:Int,
+    val type:Int?=null,
     @ColumnInfo
-    val subType:Int,
+    val subType:Int?=null,
     @ColumnInfo
-    val tag1:Int,
+    val tag1:Int?=null,
     @ColumnInfo
-    val tag2:Int
+    val tag2:Int?=null,
+    @ColumnInfo
+    var isUserCreated:Int = 0//0不是用户创建 1用户创建
 )
 
 data class SongListCovers(

@@ -37,7 +37,6 @@ abstract class MaiDatabase : RoomDatabase() {
     abstract fun downloadSongDao(): DownloadSongDao
     abstract fun loveSongDao(): LoveSongDao
     abstract fun searchSongDao():SearchSongDao
-//    abstract fun cuterDao():CuterDao
 
     companion object {
         @Volatile

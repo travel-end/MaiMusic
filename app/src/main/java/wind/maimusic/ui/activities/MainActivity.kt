@@ -93,7 +93,7 @@ class MainActivity : BaseLifeCycleActivity<MainViewModel>(),
                         playStatus = Consts.SONG_PAUSE
                     }
                     SongUtil.saveSong(song)
-                    toPlayAct(playStatus)
+                    NavUtil.toPlayAct(this@MainActivity,playStatus)
                 }
             }
 

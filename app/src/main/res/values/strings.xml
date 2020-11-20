@@ -94,6 +94,7 @@
     <string name="to_login">立即登录</string>
     <string name="public_time">发行于</string>
     <string name="today_recommend">今日推荐</string>
+    <string name="created_songList">创建的歌单</string>
     <string name="my_love_songs">我喜欢的音乐</string>
     <string name="mime_music">我的音乐</string>
     <string name="total_listen_songs">累计听歌</string>

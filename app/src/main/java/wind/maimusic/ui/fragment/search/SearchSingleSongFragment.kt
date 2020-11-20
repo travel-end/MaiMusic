@@ -117,7 +117,7 @@ class SearchSingleSongFragment : BaseSongListFragment<SearchResultViewModel>(),
                 song.url = url
                 SongUtil.saveSong(song)
                 playerBinder?.playOnline()
-                requireActivity().toPlayAct(Consts.SONG_PLAY)
+                NavUtil.toPlayAct(requireActivity(),Consts.SONG_PLAY)
             }
         })
     }

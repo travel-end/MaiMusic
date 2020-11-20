@@ -27,6 +27,9 @@ import wind.widget.effcientrv.setup
 import wind.widget.effcientrv.submitList
 import wind.widget.utils.loadImg
 
+/**
+ * @DESC songList Squire
+ */
 class AllSongListFragment : BaseLifeCycleFragment<AllSongListViewModel>(),
     OnSongListItemClickListener {
     private lateinit var rvAuthorRecommend: RecyclerView

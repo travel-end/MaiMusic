@@ -33,7 +33,7 @@ import wind.widget.utils.toIntPx
 
 /**
  * @By Journey 2020/11/18
- * @Description
+ * @Description 歌手歌单
  */
 class SingerSongListFragment : BaseLifeCycleFragment<SingerSongListViewModel>() {
     private var singerCover: String = ""

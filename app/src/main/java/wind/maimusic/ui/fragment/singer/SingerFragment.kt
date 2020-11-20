@@ -21,7 +21,7 @@ import wind.widget.utils.fastClickListener
 import wind.widget.utils.loadImg
 
 /**
- * 歌手
+ * 全部歌手
  */
 class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
     private lateinit var rvAllSingers:RecyclerView
@@ -59,7 +59,7 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
                                     holder.tvSingerName.text = singer.name
                                     holder.itemView.fastClickListener {
 //                                        LogUtil.e("----SingerFragment singerName:${singer.name}")
-                                        it.singerToSongList(singer)
+                                        NavUtil.singerToSongList(it,singer)
                                     }
                                 }
                             }

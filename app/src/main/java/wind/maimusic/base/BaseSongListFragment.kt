@@ -108,6 +108,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     override fun initView() {
         super.initView()
         initOptionsWidget()
+        listType = songListType()
         /*必有的组件*/
         rvSongList = mRootView.findViewById(R.id.song_list_rv)
         ivPlayAll = mRootView.findViewById(R.id.view_song_list_iv_play_all)
@@ -165,14 +166,14 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                                 setCurrentSong(position)// 设置当前点击的歌曲
                                 val s = SongUtil.assemblySong(
                                     currentSong!!,
-                                    songListType(),
+                                    listType,
                                     position
                                 )
                                 SongUtil.saveSong(s)
                                 (requireActivity() as MainActivity).showLoadingNormal("")
                                 playerBinder?.play(
                                     s.listType,
-                                    songListType()
+                                    listType
                                 )
                             }
                         itemView?.findViewById<ImageView>(R.id.item_song_list_iv_more)
@@ -235,7 +236,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     }
 
     private fun setDataType(data: Any) {
-        when (songListType()) {
+        when (listType) {
             Consts.LIST_TYPE_LOCAL -> {
                 data as LocalSong
                 songName = data.name
@@ -320,8 +321,8 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     }
 
     /*初始化歌单数据 赋值*/
-    open fun setSongListTop(songListType: Int) {
-        when (songListType) {
+    open fun setSongListTop(songLisName:String?=null,songListCover:String?=null) {
+        when (listType) {
             Consts.LIST_TYPE_LOVE -> {
                 songListTop = SongListTop(
                     R.string.my_love_songs.getStringRes(),
@@ -335,6 +336,13 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                     songListName = "世界微尘里 吾宁爱与憎",
                     songListDescription = "残阳入西掩，茅屋仿股僧。落叶人何在，韩云路基层。独敲初夜磬，闲倚一枝藤。世界微尘里，吾宁爱与憎。",
                     songListCoverImgUrl = if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl
+                )
+            }
+            Consts.LIST_TYPE_MY_CREATED->{
+                songListTop = SongListTop(
+                    songListTitleName = "${CuterManager.nickname}${R.string.create_song_list}",
+                    songListName = songLisName,
+                    songListCoverImgUrl = songListCover
                 )
             }
         }

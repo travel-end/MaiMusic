@@ -1,5 +1,6 @@
 package wind.maimusic.ui.fragment.songlist
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.Constants
@@ -16,20 +17,20 @@ import wind.widget.effcientrv.submitList
 
 /**
  * @By Journey 2020/11/2
- * @Description 歌单列表 在线音乐
+ * @Description 歌单列表 目前实现的有：每日推荐歌单
  */
 class SongListFragment : BaseSongListFragment<SongListViewModel>() {
     override fun songListType() = listType
-    override fun initView() {
-        arguments?.let {
-            listType = it.getString(Constants.SONG_LIST_TYPE)?.toInt() ?: 0
+    override fun getBundle(bundle: Bundle) {
+        val type = bundle.getString(Constants.SONG_LIST_TYPE)
+        if (type.isNotNullOrEmpty()) {
+            listType = type!!.toInt()
         }
-        super.initView()
     }
+
     override fun layoutResId() = R.layout.fragment_md_style_song_list
     override fun initData() {
         if (listType != 0) {
-//            LogUtil.e("-----SongListFragment---listType:$listType")
             mViewModel.getOnlineSongs(listType)
         }
         super.initData()
@@ -45,7 +46,7 @@ class SongListFragment : BaseSongListFragment<SongListViewModel>() {
                 rvSongList.visible()
                 flPlayAll.visible()
             }
-            setSongListTop(listType)
+            setSongListTop()
         })
     }
 }

@@ -2,6 +2,7 @@ package wind.maimusic.ui.fragment.mime
 
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
 import com.gyf.immersionbar.ImmersionBar
@@ -23,37 +24,38 @@ import wind.widget.utils.toIntPx
  * @By Journey 2020/11/18
  * @Description
  */
-class MimeFragment:BaseLifeCycleFragment<MimeViewModel>() {
+class MimeFragment : BaseLifeCycleFragment<MimeViewModel>() {
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var toolBar: Toolbar
     private var alphaFlag: Boolean = true
     private var immersionBar: ImmersionBar? = null
-    private var imageType:Int = 0
-    private var imageLiveData:LiveData<String>?=null
+    private var imageType: Int = 0
+
     companion object {
         private const val IMAGE_TYPE_AVATAR = 0
         private const val IMAGE_TYPE_BG = 1
     }
-    override fun layoutResId()=R.layout.fragment_md_mine
+
+    override fun layoutResId() = R.layout.fragment_md_mine
     override fun initView() {
         super.initView()
         appBarLayout = mRootView.findViewById(R.id.md_song_list_appbar_layout)
         toolBar = mRootView.findViewById(R.id.md_song_list_toolbar)
         initToolBar()
         mime_cuter_iv_avatar.fastClickListener {
-            imageType= IMAGE_TYPE_AVATAR
+            imageType = IMAGE_TYPE_AVATAR
             requireActivity().imageSelect()
         }
         md_cuter_iv_bg.fastClickListener {
-            imageType= IMAGE_TYPE_BG
+            imageType = IMAGE_TYPE_BG
             requireActivity().imageSelect()
         }
         val cuter = CuterManager.getCuterInfo()
         if (cuter != null) {
-            mime_cuter_iv_avatar.loadImg(cuter.cuterCover?:"")
+            mime_cuter_iv_avatar.loadImg(cuter.cuterCover ?: "")
             md_cuter_tv_name.text = cuter.nickName
             if (cuter.cuterBg != null) {
-                md_cuter_iv_bg.loadImg(cuter.cuterBg?:"")
+                md_cuter_iv_bg.loadImg(cuter.cuterBg ?: "")
             } else {
                 md_cuter_iv_bg.loadImg(Constants.TEMP_DEFAULT_MIME_BG)
             }
@@ -67,31 +69,28 @@ class MimeFragment:BaseLifeCycleFragment<MimeViewModel>() {
 
     override fun observe() {
         super.observe()
-        // TODO: 2020/11/19 共享viewModel如何取消数据监听？
-        if (imageLiveData == null) {
-            imageLiveData = shareViewModel.getSelectImage()
-            imageLiveData!!.observe(this,Observer{
-                LogUtil.e("-----MimeFragment---observe image:$it")
-                LogUtil.e("imageType:$imageType")
-                // TODO: 2020/11/19 将默认的图片
-                if (imageType == IMAGE_TYPE_AVATAR) {
-                    mime_cuter_iv_avatar.loadImg(it?:"")
-                } else if (imageType == IMAGE_TYPE_BG) {
-                    md_cuter_iv_bg.loadImg(it?:"")
-                }
-                updateCuterInfo(it)
-            })
-        }
+        // TODO: 2020/11/19 共享viewModel如何取消数据监听？ LiveData对象属于MainActivity，生命周期跟随activity而不是fragment
+        shareViewModel.getSelectImage().observe(this,Observer<String> {
+            LogUtil.e("-----MimeFragment---observe image:$it")
+            LogUtil.e("imageType:$imageType")
+            // TODO: 2020/11/19 将默认的图片
+            if (imageType == IMAGE_TYPE_AVATAR) {
+                mime_cuter_iv_avatar.loadImg(it ?: "")
+            } else if (imageType == IMAGE_TYPE_BG) {
+                md_cuter_iv_bg.loadImg(it ?: "")
+            }
+            updateCuterInfo(it)
+        })
     }
 
-    private fun updateCuterInfo(img:String) {
+    private fun updateCuterInfo(img: String) {
         val cuterInfo = CuterManager.getCuterInfo()
         if (cuterInfo != null) {
-            when(imageType) {
-                IMAGE_TYPE_AVATAR->{
+            when (imageType) {
+                IMAGE_TYPE_AVATAR -> {
                     cuterInfo.cuterCover = img
                 }
-                IMAGE_TYPE_BG->{
+                IMAGE_TYPE_BG -> {
                     cuterInfo.cuterBg = img
                 }
             }
@@ -126,11 +125,5 @@ class MimeFragment:BaseLifeCycleFragment<MimeViewModel>() {
                 }
             }
         })
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        LogUtil.e("--------onDestroy-----")
-        imageLiveData?.removeObservers(this)
     }
 }

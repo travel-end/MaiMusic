@@ -259,81 +259,6 @@ fun Activity.isServiceRunning(serviceName: String): Boolean {
     return false
 }
 
-/*去播放页面*/
-fun Activity.toPlayAct(playStatus: Int) {
-    val playIntent = Intent(this, PlayActivity::class.java)
-    playIntent.putExtra(Consts.PLAY_STATUS, playStatus)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        startActivity(
-            playIntent,
-            ActivityOptions.makeSceneTransitionAnimation(this)
-                .toBundle()
-        )
-    } else {
-        startActivity(playIntent)
-    }
-}
-
-// 关于Navigation: https://juejin.im/post/6844904180990246926
-/*去歌单页面*/
-fun View?.recommendToSongList(songListType: Int) {
-    if (this != null) {
-        val bundle = Bundle()
-        bundle.putString(Constants.SONG_LIST_TYPE, songListType.toString())
-        Navigation.findNavController(this).navigate(R.id.to_song_list_fragment, bundle)
-    }
-}
-
-fun View?.singerToSongList(singer: Singer) {
-    if (this != null) {
-        val bundle = bundleOf(
-            Constants.SINGER_NAME to singer.name,
-            Constants.SINGER_ID to singer.singerId.toString(),
-            Constants.SINGER_COVER to singer.cover
-        )
-        Navigation.findNavController(this).navigate(R.id.singer_to_song_list_fragment, bundle)
-    }
-}
-
-fun View?.albumToSongList(
-    album: AlListBean
-) {
-    if (this != null) {
-        val bundle = Bundle().apply {
-            putString(Constants.ALBUM_ID, album.albumMID)
-            putString(Constants.ALBUM_NAME, album.albumName)
-            putString(Constants.ALBUM_COVER, album.albumPic)
-            putString(Constants.ALBUM_SINGER, album.singerName)
-            putString(Constants.ALBUM_PUBLIC_TIME, album.publicTime)
-        }
-        Navigation.findNavController(this).navigate(R.id.to_album_song_fragment, bundle)
-    }
-}
-
-fun View?.nav(id: Int, bundle: Bundle? = null) {
-    if (this != null) {
-        if (bundle != null) {
-            Navigation.findNavController(this).navigate(id, bundle)
-        } else {
-            Navigation.findNavController(this).navigate(id)
-        }
-    }
-}
-
-fun View?.navUp() {
-    if (this != null) {
-        Navigation.findNavController(this).navigateUp()
-    }
-}
-
-fun Activity?.toLogin() {
-    if (this != null) {
-        val loginIntent = Intent(this, LoginActivity::class.java)
-        this.startActivity(loginIntent)
-
-    }
-}
-
 fun Activity?.imageSelect() {
     if (this != null) {
         ImageSelector.builder()
@@ -342,7 +267,7 @@ fun Activity?.imageSelect() {
             .setCropRatio(1.0f)
             .setSingle(true)
             .canPreview(true)
-            .start(this,Constants.PIC_REQUEST_CODE)
+            .start(this, Constants.PIC_REQUEST_CODE)
     }
 }
 
@@ -352,6 +277,11 @@ fun nextInt(range: Int): Int {
     } else {
         0
     }
+}
+
+fun randomOnlySongListId(): Int {
+    val millions = System.currentTimeMillis().toString()
+    return millions.substring(millions.length - 4, millions.length).toInt()
 }
 
 

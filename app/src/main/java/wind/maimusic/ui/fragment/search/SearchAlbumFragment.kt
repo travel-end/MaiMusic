@@ -12,10 +12,7 @@ import wind.maimusic.model.core.ListBean
 import wind.maimusic.ui.adapter.AlbumSongsAdapter
 import wind.maimusic.ui.adapter.OnAlbumItemClickListener
 import wind.maimusic.ui.adapter.SearchSingleSongAdapter
-import wind.maimusic.utils.LogUtil
-import wind.maimusic.utils.albumToSongList
-import wind.maimusic.utils.isNotNullOrEmpty
-import wind.maimusic.utils.visible
+import wind.maimusic.utils.*
 import wind.maimusic.vm.SearchAlbumResultViewModel
 import wind.widget.jrecyclerview.adapter.JRefreshAndLoadMoreAdapter
 
@@ -109,6 +106,6 @@ class SearchAlbumFragment:BaseLifeCycleFragment<SearchAlbumResultViewModel>(),On
     }
 
     override fun onAlbumItemClick(album: AlListBean, position: Int,view:View) {
-        view.albumToSongList(album)
+        NavUtil.albumToSongList(view,album)
     }
 }

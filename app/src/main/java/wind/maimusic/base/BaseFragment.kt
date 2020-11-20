@@ -29,32 +29,26 @@ abstract class BaseFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mRootView = inflater.inflate(layoutResId(),container,false)
-//        LogUtil.e("BaseFragment---onCreateView")
         return mRootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        LogUtil.e("BaseFragment---onViewCreated")
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        LogUtil.e("BaseFragment---onActivityCreated")
+        initBundle()
         initStatusBar()
         initView()
-
         initData()
         initAction()
     }
 
-    override fun onStart() {
-        super.onStart()
-//        LogUtil.e("BaseFragment---onStart")
-//        initData()
-//        initAction()
-
+    private fun initBundle() {
+        arguments?.let {
+            getBundle(it)
+        }
     }
+    open fun getBundle(bundle: Bundle) {
+    }
+
     open fun initView() {
         val titleRootLayout = mRootView.findViewById<LinearLayout>(R.id.main_title_layout)
         val normalRootLayout = mRootView.findViewById<ConstraintLayout>(R.id.normal_title_layout)

@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import wind.maimusic.base.BaseViewModel
-import wind.maimusic.model.songlist.SongListItem
+import wind.maimusic.model.listensong.SongListCover
 import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.room.database.OnlineSongDatabase
 
@@ -14,9 +14,9 @@ class FavoritesViewModel:BaseViewModel() {
     val songNums:MutableLiveData<Array<Int?>> = MutableLiveData()
     val addCreatedSongList:MutableLiveData<Boolean> = MutableLiveData()
     val deleteCreatedSongList:MutableLiveData<Boolean> = MutableLiveData()
-    val addAndFindThisSongList:MutableLiveData<SongListItem> = MutableLiveData()
+    val addAndFindThisSongList:MutableLiveData<SongListCover> = MutableLiveData()
 
-    val allCreatedSongList :MutableLiveData<List<SongListItem>> = MutableLiveData()
+    val allCreatedSongList :MutableLiveData<List<SongListCover>> = MutableLiveData()
 
     fun getSongNums() {
         val array = arrayOfNulls<Int>(3)
@@ -29,20 +29,20 @@ class FavoritesViewModel:BaseViewModel() {
         }
     }
 
-    fun addCreatedSongListItem(songListItem:SongListItem) {
-        viewModelScope.launch {
-            val result  = OnlineSongDatabase.getDatabase().createdSongListDao().addCreatedSongList(songListItem)
-            if (result != 0L) {
-                addCreatedSongList.value = true
-            }
-        }
-    }
+//    fun addCreatedSongListItem(songListItem:SongListItem) {
+//        viewModelScope.launch {
+//            val result  = OnlineSongDatabase.getDatabase().createdSongListDao().addCreatedSongList(songListItem)
+//            if (result != 0L) {
+//                addCreatedSongList.value = true
+//            }
+//        }
+//    }
 
-    fun addAndFindThisSongList(songListItem:SongListItem) {
+    fun addAndFindThisSongList(cover:SongListCover) {
         viewModelScope.launch {
-            val result  = OnlineSongDatabase.getDatabase().createdSongListDao().addCreatedSongList(songListItem)
+            val result  = OnlineSongDatabase.getDatabase().songListCoverDao().addSongCover(cover)
             if (result != 0L) {
-                val songList = OnlineSongDatabase.getDatabase().createdSongListDao().findCreatedSongListById(result.toInt())
+                val songList = OnlineSongDatabase.getDatabase().songListCoverDao().findSongCoverById(result.toInt())
                 addAndFindThisSongList.value =songList
             }
         }
@@ -51,14 +51,14 @@ class FavoritesViewModel:BaseViewModel() {
     fun findAllCreatedSongList() {
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
-                OnlineSongDatabase.getDatabase().createdSongListDao().findALlCreatedSongList()
+                OnlineSongDatabase.getDatabase().songListCoverDao().findAllUserCreatedSongList()
             }
             allCreatedSongList.value =result.reversed()
         }
     }
-    fun deleteCreatedSongList(item: SongListItem) {
+    fun deleteCreatedSongList(item: SongListCover) {
         viewModelScope.launch {
-            val result = OnlineSongDatabase.getDatabase().createdSongListDao().deleteSongList(item)
+            val result = OnlineSongDatabase.getDatabase().songListCoverDao().deleteUserCreatedSongList(item)
             if (result != 0) {
                 deleteCreatedSongList.value = true
             }

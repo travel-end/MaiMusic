@@ -73,7 +73,7 @@ class SearchMainFragment : BaseLifeCycleFragment<SearchMainViewModel>() {
                 isSearchVp = false
             } else {
                 requireActivity().hideKeyboards()
-                it.navUp()
+                NavUtil.navUp(it)
             }
         }
         searchEditText.setOnEditorActionListener { textView, i, keyEvent ->

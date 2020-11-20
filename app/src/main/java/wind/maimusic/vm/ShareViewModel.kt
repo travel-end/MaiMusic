@@ -13,7 +13,6 @@ class ShareViewModel : ViewModel() {
 
     fun setSelectImage(image: String) {
         selectImage.value = image
-//        selectImage.postValue(image)
     }
 
     fun getSelectImage(): LiveData<String> {

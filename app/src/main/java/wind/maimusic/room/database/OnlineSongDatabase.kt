@@ -8,7 +8,6 @@ import wind.maimusic.model.JustOnlineSong
 import wind.maimusic.model.OnlineSong
 import wind.maimusic.model.listensong.*
 import wind.maimusic.model.singer.Singer
-import wind.maimusic.model.songlist.SongListItem
 import wind.maimusic.room.*
 
 /**
@@ -23,7 +22,6 @@ import wind.maimusic.room.*
         OnlineSong::class,
         ListenBanner::class,
         SongListCover::class,
-        SongListItem::class,
         Singer::class,
         JustOnlineSong::class
     ],
@@ -31,17 +29,17 @@ import wind.maimusic.room.*
     exportSchema = false
 )
 abstract class OnlineSongDatabase : RoomDatabase() {
-    // 在线音乐
+    // app歌库音乐
     abstract fun onlineSongDao(): OnlineSongDao
     // 首页banner
     abstract fun listenBannerDao(): ListenBannerDao
     // 歌单封面信息
     abstract fun songListCoverDao(): SongCoverDao
     // 用户创建的歌单
-    abstract fun createdSongListDao():CreateSongListDao
+//    abstract fun createdSongListDao():CreateSongListDao
     // 歌手
     abstract fun singerDao():SingerDao
-    // 歌单
+    // 一次性歌单（如专辑音乐）
     abstract fun justOnlineSongDao():JustOnlineSongDao
 
     companion object {
