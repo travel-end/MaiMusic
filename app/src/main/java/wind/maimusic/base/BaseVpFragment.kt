@@ -43,7 +43,7 @@ abstract class BaseVpFragment : BaseFragment() {
     }
 
     inner class VpAdapter : FragmentStateAdapter(this) {
-        override fun getItemCount() = if (vpFragments == null) 0 else vpFragments!!.size
+        override fun getItemCount() = if (vpFragments.isNullOrEmpty()) 0 else vpFragments!!.size
         override fun createFragment(position: Int) = vpFragments!![position]
     }
 

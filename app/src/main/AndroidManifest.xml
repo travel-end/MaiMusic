@@ -8,20 +8,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--
+    usesCleartextTraffic 指示应用程序是否打算使用明文网络流量，例如明文HTTP。
+    目标API级别为27或更低的应用程序的默认值为“ true”。面向API级别28或更高级别的应用默认为“ false”。
+    避免明文通信的主要原因是缺乏机密性，真实性和防篡改保护；网络攻击者可以窃听所传输的数据，并且还可以对其进行修改而不会被检测到。
+    -->
     <application
         android:name=".MaiApp"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
-        <service
-            android:name=".service.DownloadService"
-            android:enabled="true"
-            android:exported="false" />
         <!-- shipei全面屏 -->
         <meta-data
             android:name="android.max_aspect"
@@ -65,11 +67,14 @@
             android:name="wind.widget.imageselector.ClipImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <service
             android:name=".service.PlayerService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
+        <service
+            android:name=".service.DownloadService"
+            android:enabled="true"
+            android:exported="true" />
         <receiver android:name=".receiver.HeadsetButtonReceiver">
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.MEDIA_BUTTON" />

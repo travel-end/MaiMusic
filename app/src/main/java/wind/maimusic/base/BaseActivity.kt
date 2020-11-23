@@ -7,7 +7,9 @@ import android.content.ServiceConnection
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.gyf.immersionbar.ImmersionBar
 import wind.maimusic.R
 import wind.maimusic.service.DownloadService
@@ -17,11 +19,11 @@ import wind.maimusic.service.PlayerService
  * @By Journey 2020/10/25
  * @Description
  */
-abstract class BaseActivity:AppCompatActivity() {
-    protected var playerServiceBinder:PlayerService.PlayerBinder?=null
-    protected var downloadServiceBinder:DownloadService.DownloadBinder?=null
-    private var isBindService:Boolean = false
-    private var isDownloadServiceBind:Boolean = false
+abstract class BaseActivity : AppCompatActivity() {
+    protected var playerServiceBinder: PlayerService.PlayerBinder? = null
+    protected var downloadServiceBinder: DownloadService.DownloadBinder? = null
+    private var isBindService: Boolean = false
+    private var isDownloadServiceBind: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId())
@@ -30,20 +32,24 @@ abstract class BaseActivity:AppCompatActivity() {
         initData()
         initAction()
     }
+
     /**
      * 布局id
      */
-    abstract fun layoutResId():Int
+    abstract fun layoutResId(): Int
 
     open fun initView() {
 
     }
+
     open fun initData() {
 
     }
+
     open fun initAction() {
 
     }
+
     open fun initStatusBar() {
         /*透明状态栏 全屏 深色字体*/
         ImmersionBar
@@ -54,33 +60,34 @@ abstract class BaseActivity:AppCompatActivity() {
             .init()
     }
 
-    open fun startService() {
-        val playerIntent = Intent(this,PlayerService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(playerIntent)
-        } else {
-            startService(playerIntent)
-        }
+    protected fun startService() {
+        val playerIntent = Intent(this, PlayerService::class.java)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            startForegroundService(playerIntent)
+//        } else {
+//            startService(playerIntent)
+//        }
+        ContextCompat.startForegroundService(this,playerIntent)
         bindService(playerIntent, playerConnection, Context.BIND_AUTO_CREATE)
         isBindService = true
     }
 
-    open fun bindService() {
+    protected fun bindService() {
         val playerIntent = Intent(this, PlayerService::class.java)
         bindService(playerIntent, playerConnection, Context.BIND_AUTO_CREATE)
         isBindService = true
     }
 
     open fun bindDownloadService() {
-        val downloadIntent = Intent(this,DownloadService::class.java)
-        bindService(downloadIntent,downloadConnection,Context.BIND_AUTO_CREATE)
+        val downloadIntent = Intent(this, DownloadService::class.java)
+        bindService(downloadIntent, downloadConnection, Context.BIND_AUTO_CREATE)
     }
 
     open fun serviceConnection() {
 
     }
 
-    private val playerConnection = object :ServiceConnection {
+    private val playerConnection = object : ServiceConnection {
         override fun onServiceDisconnected(p0: ComponentName?) {
         }
 
@@ -89,7 +96,7 @@ abstract class BaseActivity:AppCompatActivity() {
             serviceConnection()
         }
     }
-    private val downloadConnection = object :ServiceConnection {
+    private val downloadConnection = object : ServiceConnection {
         override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
             downloadServiceBinder = p1 as DownloadService.DownloadBinder
         }

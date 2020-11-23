@@ -1,15 +1,21 @@
 package wind.maimusic.service
 
-import android.app.Service
+import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.MediaPlayer
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
+import androidx.core.app.NotificationCompat
 import wind.maimusic.Constants
+import wind.maimusic.R
 import wind.maimusic.model.*
 import wind.maimusic.model.download.Downloaded
 import wind.maimusic.room.database.MaiDatabase
 import wind.maimusic.room.database.OnlineSongDatabase
+import wind.maimusic.ui.activities.MainActivity
 import wind.maimusic.utils.*
 import wind.widget.cost.Consts
 import wind.widget.model.Song
@@ -40,7 +46,9 @@ class PlayerService : Service() {
     private val mediaPlayer by lazy {
         MediaPlayer()
     }
-
+    companion object {
+        const val NOTIFICATION_ID = 98
+    }
     override fun onCreate() {
         super.onCreate()
         songListId = SpUtil.getInt(Constants.SONG_LIST_ID)
@@ -111,6 +119,9 @@ class PlayerService : Service() {
                 }
             }
         }
+
+        // 安卓8.0之后启动前台服务必须要启动一个前台通知 ，否则会报错
+        startForeground(NOTIFICATION_ID, getNotification("爱音乐，开启你的私人音乐之旅o(*￣▽￣*)ブ"))
     }
 
     override fun onBind(intent: Intent): IBinder {
@@ -120,8 +131,7 @@ class PlayerService : Service() {
             playCompleteNextSong()
         }
         mediaPlayer.setOnErrorListener { _, i, i2 ->
-            LogUtil.e("--->播放出错：setOnErrorListener:$i, $i2")
-//            "播放出错".toast()
+            LogUtil.e("--->PlayService onBind：setOnErrorListener:$i, $i2")
             Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_ERROR)
             playCompleteNextSong()
             true
@@ -499,21 +509,23 @@ class PlayerService : Service() {
                     mediaPlayer.run {
                         reset()
                         val playUrl = song.url
+                        LogUtil.e("playUrl:$playUrl")
                         if (playUrl.isNotNullOrEmpty()) {
                             setDataSource(playUrl)
                             prepareAsync()
-                            setOnPreparedListener { mp ->
+                            setOnPreparedListener {
                                 this@PlayerService.isPlaying = true
                                 PlayServiceHelper.save2History()
                                 if (restartTime != null && restartTime != 0) {
-                                    mp.seekTo(restartTime)
+                                    seekTo(restartTime)
                                 }
                                 Bus.post(Consts.SONG_STATUS_CHANGE, Consts.SONG_CHANGE)
                                 // TODO: 2020/10/30 如果是由暂停进入播放的状态  发送的应该是pause 这样就不用刷新bottomPlayView左边的图片和名称了
-                                mp.start()
+                                start()
                             }
                         }
                     }
+                    notificationManager.notify(NOTIFICATION_ID,getNotification("${song.songName}-${song.singer}"))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -824,6 +836,30 @@ class PlayerService : Service() {
         }
     }
 
+    private val notificationManager get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    private fun getNotification(title: String): Notification {
+        val pi = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), 0)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val id = "play"
+            val name = "播放歌曲"
+            val channel = NotificationChannel(id, name, NotificationManager.IMPORTANCE_LOW)
+            notificationManager.createNotificationChannel(channel)
+            return Notification.Builder(this, id)
+                .setSmallIcon(R.drawable.temp_logo)
+                .setContentIntent(pi)
+                .setContentTitle(title)
+                .build()
+        } else {
+            return NotificationCompat.Builder(this, "play")
+                .setSmallIcon(R.drawable.temp_logo)
+                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.temp_logo))
+                .setContentIntent(pi)
+                .setContentTitle(title)
+                .build()
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         LogUtil.e("-------PlayService----onDestroy------")
@@ -831,5 +867,6 @@ class PlayerService : Service() {
             mediaPlayer.stop()
             mediaPlayer.release()
         }
+        stopForeground(true)
     }
 }
