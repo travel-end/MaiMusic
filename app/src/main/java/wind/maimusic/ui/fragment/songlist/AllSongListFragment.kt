@@ -17,6 +17,7 @@ import wind.maimusic.model.listensong.SongListCovers
 import wind.maimusic.ui.adapter.AllSongListAdapter
 import wind.maimusic.ui.adapter.OnSongListItemClickListener
 import wind.maimusic.utils.LogUtil
+import wind.maimusic.utils.NavUtil
 import wind.maimusic.utils.getStringRes
 import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.vm.AllSongListViewModel
@@ -211,7 +212,7 @@ class AllSongListFragment : BaseLifeCycleFragment<AllSongListViewModel>(),
     }
 
     override fun onSongListItemClick(item: SongListCover) {
-        LogUtil.e("-----AllSongListFragment songListName:${item.listName}")
-
+        LogUtil.e("-----AllSongListFragment songListName:${item.listName},songListId:${item.listId}")
+        NavUtil.allSongListToNormalSongList(mRootView,Constants.ST_ALL_SONG_LIST,item.listId?:0,item.listName,item.cover)
     }
 }

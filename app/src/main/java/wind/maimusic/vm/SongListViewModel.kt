@@ -21,8 +21,8 @@ import kotlin.random.Random
  */
 class SongListViewModel : BaseViewModel() {
     val onlineSongs: MutableLiveData<MutableList<OnlineSong>> = MutableLiveData()
-    fun getOnlineSongs(listType: Int) {
-        val dbDao = OnlineSongDatabase.getDatabase().onlineSongDao()
+    fun getOnlineSongs(listType: Int,songListId:Int) {
+        val dao = OnlineSongDatabase.getDatabase().onlineSongDao()
         viewModelScope.launch {
             when (listType) {
                 Constants.ST_DAILY_RECOMMEND -> {
@@ -31,7 +31,7 @@ class SongListViewModel : BaseViewModel() {
                         val startIndex =
                             DataUtil.getTheDayStartIndex(Constants.DAILY_RECOMMEND_SONG)
                         LogUtil.e("----SongListViewModel ST_DAILY_RECOMMEND startIndex:$startIndex")
-                        dbDao.findRangeOnlineSongs(startIndex, Constants.PAGE_SIZE_DAILY_RECOMMEND)
+                        dao.findRangeOnlineSongs(startIndex, Constants.PAGE_SIZE_DAILY_RECOMMEND)
                             .toMutableList()
                     }
                     onlineSongs.value = result
@@ -39,22 +39,14 @@ class SongListViewModel : BaseViewModel() {
                 Constants.ST_DAILY_HOT_SONG -> {
 
                 }
-
-            }
-
-        }
-    }
-
-    fun findSingerSongs(singerId: Int) {
-        if (singerId != -1) {
-            val dao = OnlineSongDatabase.getDatabase().onlineSongDao()
-            viewModelScope.launch {
-                val result = withContext(Dispatchers.IO) {
-                    dao.findSongBySingerId(singerId)
+                Constants.ST_ALL_SONG_LIST->{
+                    val result = withContext(Dispatchers.IO) {
+                        dao.findOnlineSongByMainType(songListId)
+                    }
+                    LogUtil.e("----SongListViewModel ST_ALL_SONG_LIST songListId:$songListId, result:${result.size}")
+                    onlineSongs.value = result.toMutableList()
                 }
-                onlineSongs.value = result.toMutableList()
             }
         }
-
     }
 }

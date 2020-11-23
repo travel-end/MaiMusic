@@ -278,7 +278,7 @@ object SongUtil {
                     position = 0
                 }
             }
-            Consts.ONLINE_SINGER_SONG->{
+            Consts.ONLINE_SINGER_SONG,Constants.ST_ALL_SONG_LIST->{
                 val singerSong = s as OnlineSong
                 song = Song().apply {
                     songId = singerSong.songId //004DrG5A2nm7q2

@@ -1,6 +1,7 @@
 package wind.maimusic.utils
 
 import wind.maimusic.Constants
+import wind.widget.imageselector.util.DateUtils
 import java.util.*
 
 /**
@@ -12,16 +13,19 @@ import java.util.*
  */
 object DataUtil {
     private fun isNewDay():Boolean {
-        val lastDay = SpUtil.getString(Constants.DAY_OF_WEEK)
-        val calender = Calendar.getInstance()
-        if (lastDay.isBlank()) {
-            SpUtil.saveValue(Constants.DAY_OF_WEEK,calender.get(Calendar.DAY_OF_WEEK).toString())
+        val lastDayMillis = SpUtil.getString(Constants.DAY_TIME_MILLIS)
+        if (lastDayMillis.isBlank()) {
+            SpUtil.saveValue(Constants.DAY_TIME_MILLIS,System.currentTimeMillis().toString())
             return false
         }
-        return if (lastDay==calender.get(Calendar.DAY_OF_WEEK).toString()) {
+        val c1 = Calendar.getInstance()
+        c1.timeInMillis = System.currentTimeMillis()
+        val c2 = Calendar.getInstance()
+        c2.timeInMillis = lastDayMillis.toLong()
+        return if (DateUtils.sameDay(c1,c2)) {
             false
         } else {
-            SpUtil.saveValue(Constants.DAY_OF_WEEK,calender.get(Calendar.DAY_OF_WEEK).toString())
+            SpUtil.saveValue(Constants.DAY_TIME_MILLIS,System.currentTimeMillis().toString())
             true
         }
     }
@@ -79,16 +83,16 @@ object DataUtil {
         return startIndex
     }
 
-    private fun compareDay(c1:Calendar,c2:Calendar):Boolean {
-        return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)&& c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR)
-    }
-
-    fun isSameDay(time:Long):Boolean {
-        val c1 = Calendar.getInstance()
-        c1.time = Date()
-        val c2 = Calendar.getInstance()
-        c2.timeInMillis = time
-        return compareDay(c1,c2)
-    }
+//    private fun compareDay(c1:Calendar,c2:Calendar):Boolean {
+//        return c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)&& c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR)
+//    }
+//
+//    fun isSameDay(time:Long):Boolean {
+//        val c1 = Calendar.getInstance()
+//        c1.time = Date()
+//        val c2 = Calendar.getInstance()
+//        c2.timeInMillis = time
+//        return compareDay(c1,c2)
+//    }
 
 }

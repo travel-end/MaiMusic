@@ -46,8 +46,9 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     protected var playerBinder: PlayerService.PlayerBinder? = null
     protected var bottomFunctionDialog: BottomFunctionDialog? = null
     protected var listType: Int = 0
-    protected var singerId: Int = 0
+    protected var songListId: Int = 0
     private lateinit var mAdapter: EfficientAdapter<Any>
+
     /*非必须组件*/
     private var ivBack: ImageView? = null
     private var tvTitle: TextView? = null
@@ -58,14 +59,17 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     protected var tvSongListDescription: TextView? = null
     protected var ivSongListSmallCover: ShapeableImageView? = null
     protected var ivSongListLargeCover: ImageView? = null
+
     //    protected var tvSongListAuthor: TextView? = null
     protected var tvSongListTitleName: TextView? = null
     private var tvSongListTagA: TextView? = null
     private var tvSongListTagB: TextView? = null
     private var immersionBar: ImmersionBar? = null
     private var ivSongListTitleBack: ImageView? = null
+
     /*歌单顶部信息*/
     private var songListTop: SongListTop? = null
+
     /*必须组件*/
     protected lateinit var ivPlayAll: ImageView
     protected lateinit var tvDownloadAll: TextView
@@ -88,8 +92,10 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     private var songId: String? = null
     private var mIsDownloaded: Boolean = false
     private var alphaFlag: Boolean = true
+
     /*点击改变item状态的标志*/
     protected var lastPosition: Int = -1
+
     /*需要操作layoutManager的地方调用*/
     protected lateinit var mLayoutManager: LinearLayoutManager
     private val playerConnection = object : ServiceConnection {
@@ -171,10 +177,17 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                                 )
                                 SongUtil.saveSong(s)
                                 (requireActivity() as MainActivity).showLoadingNormal("")
-                                playerBinder?.play(
-                                    s.listType,
-                                    listType
-                                )
+                                if (listType == Constants.ST_ALL_SONG_LIST) {
+                                    playerBinder?.allSongListPlay(
+                                        songListId,
+                                        changeSongListId = true
+                                    )
+                                } else {
+                                    playerBinder?.play(
+                                        s.listType,
+                                        listType
+                                    )
+                                }
                             }
                         itemView?.findViewById<ImageView>(R.id.item_song_list_iv_more)
                             ?.fastClickListener {
@@ -265,7 +278,7 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
                 songId = data.songId
                 mIsDownloaded = data.isDownload ?: false
             }
-            Constants.ST_DAILY_RECOMMEND -> {
+            Constants.ST_DAILY_RECOMMEND, Constants.ST_ALL_SONG_LIST -> {
                 data as OnlineSong
                 songName = data.name
                 songSinger = data.singer
@@ -276,12 +289,13 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     }
 
     private fun setCurrentSong(position: Int) {
-        when (songListType()) {
+        when (listType) {
             Consts.LIST_TYPE_LOCAL -> currentSong = localSongs[position]
             Consts.LIST_TYPE_HISTORY -> currentSong = recentListenSongs[position]
             Consts.LIST_TYPE_DOWNLOAD -> currentSong = downloadedSongs[position]
             Consts.LIST_TYPE_LOVE -> currentSong = lovedSongs[position]
-            Constants.ST_DAILY_RECOMMEND -> currentSong = onlineSongs[position]
+            Constants.ST_DAILY_RECOMMEND, Constants.ST_ALL_SONG_LIST -> currentSong =
+                onlineSongs[position]
         }
     }
 
@@ -321,26 +335,33 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
     }
 
     /*初始化歌单数据 赋值*/
-    open fun setSongListTop(songLisName:String?=null,songListCover:String?=null) {
+    open fun setSongListTop(songLisName: String? = null, songListCover: String? = null) {
         when (listType) {
             Consts.LIST_TYPE_LOVE -> {
                 songListTop = SongListTop(
                     R.string.my_love_songs.getStringRes(),
                     R.string.my_love_songs.getStringRes(),
                     "By Journey - Travel end -",
-                    songListCoverImgUrl = if (lovedSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else lovedSongs[0].pic)
+                    songListCoverImgUrl = if (lovedSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else lovedSongs[0].pic
+                )
             }
             Constants.ST_DAILY_RECOMMEND -> {
                 songListTop = SongListTop(
                     songListTitleName = R.string.today_recommend.getStringRes(),
-                    songListName = "世界微尘里 吾宁爱与憎",
-                    songListDescription = "残阳入西掩，茅屋仿股僧。落叶人何在，韩云路基层。独敲初夜磬，闲倚一枝藤。世界微尘里，吾宁爱与憎。",
+                    songListName = R.string.today_recommend.getStringRes(),
                     songListCoverImgUrl = if (onlineSongs.isNullOrEmpty()) Constants.TEMP_SONG_COVER1_NORMAL else onlineSongs[0].imgUrl
                 )
             }
-            Consts.LIST_TYPE_MY_CREATED->{
+            Consts.LIST_TYPE_MY_CREATED -> {
                 songListTop = SongListTop(
                     songListTitleName = "${CuterManager.nickname}${R.string.create_song_list}",
+                    songListName = songLisName,
+                    songListCoverImgUrl = songListCover
+                )
+            }
+            Constants.ST_ALL_SONG_LIST -> {
+                songListTop = SongListTop(
+                    songListTitleName = songLisName,
                     songListName = songLisName,
                     songListCoverImgUrl = songListCover
                 )
@@ -445,8 +466,8 @@ abstract class BaseSongListFragment<VM : BaseViewModel> : BaseLifeCycleFragment<
         immersionBar = ImmersionBar.with(this)
 
         immersionBar
-        ?.statusBarDarkFont(false)
-        ?.init()
+            ?.statusBarDarkFont(false)
+            ?.init()
     }
 
     override fun onDestroyView() {

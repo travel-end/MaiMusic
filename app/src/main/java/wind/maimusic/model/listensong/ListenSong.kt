@@ -66,7 +66,9 @@ data class SongListCover(
     @ColumnInfo
     val tag2:Int?=null,
     @ColumnInfo
-    var isUserCreated:Int = 0//0不是用户创建 1用户创建
+    var isUserCreated:Int = 0,//0不是用户创建 1用户创建
+    @ColumnInfo
+    var listId:Int?=null
 )
 
 data class SongListCovers(

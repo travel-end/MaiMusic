@@ -152,12 +152,19 @@
     <fragment
         android:id="@+id/loved_song_fragment"
         android:name="wind.maimusic.ui.fragment.love.LovedSongFragment"
-        tools:layout="@layout/fragment_md_style_song_list">
-    </fragment>
+        tools:layout="@layout/fragment_md_style_song_list"></fragment>
     <fragment
         android:id="@+id/all_song_list_fragment"
         android:name="wind.maimusic.ui.fragment.songlist.AllSongListFragment"
-        tools:layout="@layout/fragment_all_song_list" />
+        tools:layout="@layout/fragment_all_song_list" >
+        <action
+            android:id="@+id/all_song_list_to_song_list_fragment"
+            app:destination="@id/song_list_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
 
     <fragment
@@ -236,19 +243,19 @@
     <fragment
         android:id="@+id/songlist_top_detail_fragment"
         android:name="wind.maimusic.ui.fragment.songlist.SongListTopDetailFragment"
-        tools:layout="@layout/fragment_song_list_top_detail" >
+        tools:layout="@layout/fragment_song_list_top_detail">
 
     </fragment>
     <fragment
         android:id="@+id/mime_fragment"
         android:name="wind.maimusic.ui.fragment.mime.MimeFragment"
-        tools:layout="@layout/fragment_md_mine" >
+        tools:layout="@layout/fragment_md_mine">
 
     </fragment>
     <fragment
         android:id="@+id/singer_song_list_fragment"
         android:name="wind.maimusic.ui.fragment.singer.SingerSongListFragment"
-        tools:layout="@layout/fragment_md_singer_song_list" >
+        tools:layout="@layout/fragment_md_singer_song_list">
         <argument
             android:name="singer_id"
             android:defaultValue=""
@@ -266,11 +273,11 @@
     <fragment
         android:id="@+id/created_song_list_fragment"
         android:name="wind.maimusic.ui.fragment.songlist.CreatedSongListFragment"
-        tools:layout="@layout/fragment_md_singer_song_list" >
-<!--        <argument-->
-<!--            android:name="song_list_id"-->
-<!--            android:defaultValue=""-->
-<!--            app:argType="string" />-->
+        tools:layout="@layout/fragment_md_singer_song_list">
+        <!--        <argument-->
+        <!--            android:name="song_list_id"-->
+        <!--            android:defaultValue=""-->
+        <!--            app:argType="string" />-->
         <argument
             android:name="song_list_name"
             android:defaultValue=""

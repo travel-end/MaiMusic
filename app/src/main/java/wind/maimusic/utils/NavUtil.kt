@@ -41,11 +41,32 @@ object NavUtil {
 
     // 关于Navigation: https://juejin.im/post/6844904180990246926
     /*去歌单页面（今日推荐）*/
-    fun recommendToSongList(view: View?, songListType: Int) {
+    fun recommendToSongList(view: View?) {
+        if (view != null) {
+            val bundle = Bundle()
+            bundle.putString(Constants.SONG_LIST_TYPE, Constants.ST_DAILY_RECOMMEND.toString())
+            Navigation.findNavController(view).navigate(R.id.to_song_list_fragment, bundle)
+        }
+    }
+    fun listenSongToSongList(view: View?, songListType: Int, songListId: Int = 0,songListName:String="",songListCover:String="") {
         if (view != null) {
             val bundle = Bundle()
             bundle.putString(Constants.SONG_LIST_TYPE, songListType.toString())
+            bundle.putInt(Constants.SONG_LIST_ID, songListId)
+            bundle.putString(Constants.SONG_LIST_NAME,songListName)
+            bundle.putString(Constants.SONG_LIST_COVER,songListCover)
             Navigation.findNavController(view).navigate(R.id.to_song_list_fragment, bundle)
+        }
+    }
+
+    fun allSongListToNormalSongList(view: View?, songListType: Int, songListId: Int = 0,songListName:String="",songListCover:String="") {
+        if (view != null) {
+            val bundle = Bundle()
+            bundle.putString(Constants.SONG_LIST_TYPE, songListType.toString())
+            bundle.putInt(Constants.SONG_LIST_ID, songListId)
+            bundle.putString(Constants.SONG_LIST_NAME,songListName)
+            bundle.putString(Constants.SONG_LIST_COVER,songListCover)
+            Navigation.findNavController(view).navigate(R.id.all_song_list_to_song_list_fragment, bundle)
         }
     }
 
@@ -60,6 +81,7 @@ object NavUtil {
             Navigation.findNavController(view).navigate(R.id.singer_to_song_list_fragment, bundle)
         }
     }
+
     /*去用户创建的歌单页面*/
     fun toCreatedSongList(view: View?, cover: SongListCover) {
         if (view != null) {

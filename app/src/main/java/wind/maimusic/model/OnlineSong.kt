@@ -39,13 +39,13 @@ data class OnlineSong(
     @ColumnInfo
     var isDownload:Boolean = false,
     @ColumnInfo
-    var mainType:Int? =0,//对应主歌单名称
+    var mainType:Int? =null,//对应主歌单名称
     @ColumnInfo
-    var secondType:Int?=0,// 对应次歌单名称
+    var secondType:Int?=null,// 对应次歌单名称
     @ColumnInfo
-    var isPoetrySong:Int=0,//是否是诗歌 0不是  1是
+    var isPoetrySong:Int?=null,//是否是诗歌 0不是  1是
     @ColumnInfo
-    var poetrySongId:Int?=0,// 如果是诗歌，需要有一个id对应匹配的诗歌内容（文章）
+    var poetrySongId:Int?=null,// 如果是诗歌，需要有一个id对应匹配的诗歌内容（文章）
     @ColumnInfo
     var singerId:Int?=null
 )

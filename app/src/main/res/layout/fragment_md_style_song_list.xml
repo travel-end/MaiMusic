@@ -48,8 +48,9 @@
                     android:layout_height="wrap_content"
                     tools:text="KTV麦霸必点歌曲"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:layout_marginTop="@dimen/dp_92"
                     android:layout_marginStart="@dimen/dp_18" />
                 <androidx.constraintlayout.widget.ConstraintLayout

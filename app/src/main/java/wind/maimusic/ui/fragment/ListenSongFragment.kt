@@ -106,7 +106,7 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                     itemClicked(View.OnClickListener {
                         when (position) {
                             1 -> {//每日推荐
-                                NavUtil.recommendToSongList(it, Constants.ST_DAILY_RECOMMEND)
+                                NavUtil.recommendToSongList(it)
                             }
                             2 -> {
                                 NavUtil.nav(it, R.id.to_all_song_list_fragment)
@@ -158,9 +158,15 @@ class ListenSongFragment : BaseLifeCycleFragment<ListenSongViewModel>() {
                             holder.coverIv.loadImg(cover.cover)
                             holder.coverName.text = cover.listName
                             holder.itemView.fastClickListener {
-//                                LogUtil.e("歌单类型：${cover.type}")
                                 if (cover.type != null) {
-                                    mViewModel.findSongListByType(cover.type)
+//                                    mViewModel.findSongListByType(cover.type)
+                                    NavUtil.listenSongToSongList(
+                                        mRootView,
+                                        Constants.ST_ALL_SONG_LIST,
+                                        cover.listId ?: 0,
+                                        cover.listName,
+                                        cover.cover
+                                    )
                                 }
                             }
                         }

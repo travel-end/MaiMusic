@@ -145,11 +145,9 @@
                 app:tabRippleColor="@color/translate"
                 app:tabSelectedTextColor="@color/black_33"
                 app:tabTextAppearance="@style/tabLayoutTextSize"
-                app:tabTextColor="@color/color999999"></com.google.android.material.tabs.TabLayout>
+                app:tabTextColor="@color/color999999" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@id/frg_main_view_pager"
         android:layout_width="match_parent"

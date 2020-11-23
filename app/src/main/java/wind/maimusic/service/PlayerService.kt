@@ -278,6 +278,9 @@ class PlayerService : Service() {
                     Consts.ONLINE_SINGER_SONG -> {
                         playerBinder.singerPlay(songListId)
                     }
+                    Constants.ST_ALL_SONG_LIST->{
+                        playerBinder.allSongListPlay(songListId)
+                    }
                     else -> {
                         playerBinder.play(listType)
                     }
@@ -306,6 +309,28 @@ class PlayerService : Service() {
             }
             val song = SongUtil.getSong()
 //            LogUtil.e("-----singerPlay--$song, ${song?.songName},onlineSongs:$onlineSongs")
+            if (song != null) {
+                currentPosition = song.position
+                mediaPlayer.reset()
+                if (isNotNullOrEmpty(onlineSongs)) {
+                    val currentSongId = onlineSongs!![currentPosition].songId
+                    getOnlineSongPlayUrl(song, currentSongId, restartTime)
+                }
+            }
+        }
+
+
+        fun allSongListPlay(id: Int, restartTime: Int? = null, changeSongListId: Boolean = false) {
+            listType = Constants.ST_ALL_SONG_LIST
+            if (changeSongListId) {
+                songListId = id
+                SpUtil.saveValue(Constants.SONG_LIST_ID, id)
+            }
+            onlineSongs = GlobalUtil.execute {
+                OnlineSongDatabase.getDatabase().onlineSongDao().findOnlineSongByMainType(id)
+                    .toMutableList()
+            }
+            val song = SongUtil.getSong()
             if (song != null) {
                 currentPosition = song.position
                 mediaPlayer.reset()
@@ -673,6 +698,9 @@ class PlayerService : Service() {
                         Consts.ONLINE_SINGER_SONG -> {
                             playerBinder.singerPlay(songListId)
                         }
+                        Constants.ST_ALL_SONG_LIST->{
+                            playerBinder.allSongListPlay(songListId)
+                        }
                         else -> {
                             playerBinder.play(listType)
                         }
@@ -793,15 +821,22 @@ class PlayerService : Service() {
                     }
                 }
                 if (listType != 0) {
-                    if (listType == Consts.LIST_TYPE_ONLINE) {
-                        playerBinder.play(
-                            type = Consts.LIST_TYPE_ONLINE,
-                            onlineSubjectType = song.onlineSubjectType
-                        )
-                    } else if (listType == Consts.ONLINE_SINGER_SONG) {
-                        playerBinder.singerPlay(songListId)
-                    } else {
-                        playerBinder.play(listType)
+                    when (listType) {
+                        Consts.LIST_TYPE_ONLINE -> {
+                            playerBinder.play(
+                                type = Consts.LIST_TYPE_ONLINE,
+                                onlineSubjectType = song.onlineSubjectType
+                            )
+                        }
+                        Consts.ONLINE_SINGER_SONG -> {
+                            playerBinder.singerPlay(songListId)
+                        }
+                        Constants.ST_ALL_SONG_LIST->{
+                            playerBinder.allSongListPlay(songListId)
+                        }
+                        else -> {
+                            playerBinder.play(listType)
+                        }
                     }
                 }
             }

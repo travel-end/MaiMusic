@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import wind.maimusic.Constants
 import wind.maimusic.R
 import wind.maimusic.base.BaseSongListFragment
-import wind.maimusic.utils.LogUtil
 import wind.maimusic.utils.isNotNullOrEmpty
 import wind.maimusic.utils.visible
 import wind.maimusic.vm.CreatedSongListViewModel

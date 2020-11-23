@@ -19,6 +19,7 @@ import wind.maimusic.vm.SingerViewModel
 import wind.widget.effcientrv.*
 import wind.widget.utils.fastClickListener
 import wind.widget.utils.loadImg
+import kotlin.math.sin
 
 /**
  * 全部歌手
@@ -114,6 +115,7 @@ class SingerFragment:BaseLifeCycleFragment<SingerViewModel>() {
                                     holder.tvSingerName.text = singer.name
                                     holder.itemView.fastClickListener {
                                         LogUtil.e("----SingerFragment singerName:${singer.name}")
+                                        NavUtil.singerToSongList(mRootView, singer)
                                     }
                                 }
                             }

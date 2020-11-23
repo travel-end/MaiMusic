@@ -109,6 +109,7 @@ object Constants {
     const val ST_DAILY_RECOMMEND = 21// 每日推荐
     const val ST_ALBUM_SONG_LIST = 22
     const val ST_DAILY_HOT_SONG = 20
+    const val ST_ALL_SONG_LIST = 23
 
     /**
      * 歌单类型
@@ -256,12 +257,13 @@ object Constants {
     const val PAGE_SIZE_SONG_LIST_COVER = 5
     const val PAGE_SIZE_SINGLE_SONG = 3
     const val PAGE_SIZE_POETRY_SONG = 6
-    const val PAGE_SIZE_DAILY_RECOMMEND = 6
+    const val PAGE_SIZE_DAILY_RECOMMEND = 16
     const val PAGE_SIZE_RECOMMEND_BOOK = 2
 
     const val FIRST_LAUNCH = "first_launch"
     const val DAY_OF_WEEK = "day_of_week"
     const val THE_DAY_STEP = "the_day_step"
+    const val DAY_TIME_MILLIS = "day_time_millis"
 
     /*每日可变的数据 保持一天都不变的数据 过了当天就更换*/
     const val DAILY_BANNER = 0

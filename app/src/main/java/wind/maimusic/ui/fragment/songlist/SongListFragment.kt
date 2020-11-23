@@ -17,21 +17,30 @@ import wind.widget.effcientrv.submitList
 
 /**
  * @By Journey 2020/11/2
- * @Description 歌单列表 目前实现的有：每日推荐歌单
+ * @Description 歌单列表 目前实现的有：每日推荐歌单，全部歌单中的具体歌单
  */
 class SongListFragment : BaseSongListFragment<SongListViewModel>() {
+    private var songListName: String? = null
+    private var songListCover: String? = null
     override fun songListType() = listType
     override fun getBundle(bundle: Bundle) {
         val type = bundle.getString(Constants.SONG_LIST_TYPE)
         if (type.isNotNullOrEmpty()) {
             listType = type!!.toInt()
         }
+        val id = bundle.getInt(Constants.SONG_LIST_ID)
+        if (id != 0) {
+            songListId = id
+        }
+        songListName = bundle.getString(Constants.SONG_LIST_NAME)
+        songListCover = bundle.getString(Constants.SONG_LIST_COVER)
+//        LogUtil.e("SongListFragment listType:$listType, songListId: $id,songListName: $songListName ,songListCover:$songListCover")
     }
 
     override fun layoutResId() = R.layout.fragment_md_style_song_list
     override fun initData() {
         if (listType != 0) {
-            mViewModel.getOnlineSongs(listType)
+            mViewModel.getOnlineSongs(listType, songListId)
         }
         super.initData()
     }
@@ -46,7 +55,7 @@ class SongListFragment : BaseSongListFragment<SongListViewModel>() {
                 rvSongList.visible()
                 flPlayAll.visible()
             }
-            setSongListTop()
+            setSongListTop(songListName, songListCover)
         })
     }
 }
