@@ -290,7 +290,7 @@ object SongUtil {
                     mediaId = singerSong.mediaId//004DrG5A2nm7q2
                     albumName = singerSong.albumName//夜来寒雨晓来风
                     isDownload = singerSong.isDownload
-                    listType = Consts.ONLINE_SINGER_SONG
+                    listType = if (songType==Consts.ONLINE_SINGER_SONG) Consts.ONLINE_SINGER_SONG else Constants.ST_ALL_SONG_LIST
                     position = pos
                 }
             }

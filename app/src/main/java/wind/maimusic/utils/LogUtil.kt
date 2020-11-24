@@ -36,4 +36,9 @@ object LogUtil {
             Log.e(TAG,msg)
         }
     }
+    fun e(tag:String,msg:String) {
+        if (isPrintLog) {
+            Log.e(tag,msg)
+        }
+    }
 }
